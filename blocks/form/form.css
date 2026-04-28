@@ -1,6 +1,6 @@
 :root {
     --background-color-primary: #fff;
-    --label-color: #666;
+    --label-color: #333;
     --border-color: #818a91;
     --form-error-color: #ff5f3f;
     --button-primary-color: #5F8DDA;
@@ -28,7 +28,7 @@
     --form-label-color: var(--label-color);
     --form-label-font-size: var(--form-font-size-s);
     --form-label-font-weight: 400;
-    --form-title-font-weight: 600;
+    --form-title-font-weight: 700;
     --form-fieldset-border: 0;
     --form-fieldset-marign: 0;
     --form-fieldset-columns: 1;
@@ -161,11 +161,11 @@ main .form textarea,
 main .form select {
     background-color: var(--form-input-background-color);
     border: var(--form-input-border-size) solid var(--form-input-border-color);
-    width: 100%;
-    height: 42px;
+    width: 100%; 
+    height: 42px; 
     color: var(--form-label-color);
-    padding: var(--form-input-padding);
-    font-size: var(--form-input-font-size);
+    padding: var(--form-input-padding); 
+    /*font-size: var(--form-input-font-size); */
     max-width: unset;
     margin-top: .5rem;
     margin-bottom: 1rem;
@@ -219,8 +219,8 @@ main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
 main .form label,
 main .form fieldset.checkbox-group-wrapper legend,
 main .form fieldset.radio-group-wrapper legend {
-    font-weight: var(--form-label-font-weight);
-    font-size: var(--form-label-font-size);
+    /*font-weight: var(--form-label-font-weight); */
+   /* font-size: var(--form-label-font-size);*/
     color: var(--form-label-color);
 }
 
@@ -254,7 +254,7 @@ main .form form .field-wrapper {
 }
 
 main .form form p {
-    font-size: var(--form-paragraph-font-size);
+    /*font-size: var(--form-paragraph-font-size); */
     font-style: var(--form-paragraph-font-style);
     color: var(--form-paragraph-color);
     margin: var(--form-paragraph-margin);
@@ -265,7 +265,7 @@ main .form form .checkbox-wrapper, main .form form .radio-wrapper {
     flex-wrap: wrap;
     align-items: center;
     margin: 0;
-    gap: 8px;
+    gap: 7px;
 }
 
 main .form form fieldset > .radio-wrapper,
