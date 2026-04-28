@@ -793,3 +793,325 @@ main div.form-wrapper {
 main .form form select[multiple] {
     height: calc(42px + 50px);
 }
+
+/*----------------------------------------------Generate OTP page-----------------------------------*/
+/* ============================= */
+/* 🔹 GLOBAL FONT                */
+/* ============================= */
+main .form form {
+  font-family: Roboto, Arial, sans-serif !important;
+  font-size: 14px !important;
+  color: #333 !important;
+}
+
+
+/* ============================= */
+/* 🔹 MAIN LAYOUT (FIXED)        */
+/* ============================= */
+.form-block > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Columns */
+.field-mobile-number,
+.field-dob {
+  flex: 1;
+  min-width: 220px;
+}
+
+.field-soi {
+  flex: 1.2;
+  min-width: 260px;
+}
+
+
+/* ============================= */
+/* 🔹 SECTION TITLE              */
+/* ============================= */
+legend.field-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2f3a4a;
+  margin-bottom: 12px;
+}
+
+
+/* ============================= */
+/* 🔹 INPUT FIELDS               */
+/* ============================= */
+.text-wrapper input,
+.date-wrapper input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.text-wrapper input::placeholder,
+.date-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+/* Focus */
+.text-wrapper input:focus,
+.date-wrapper input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+
+/* ============================= */
+/* 🔹 MOBILE FLAG +91            */
+/* ============================= */
+.field-mobile-number {
+  position: relative;
+}
+
+.field-mobile-number::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 14px;
+  background: url("https://flagcdn.com/w40/in.png") no-repeat center/cover;
+}
+
+.field-mobile-number::after {
+  content: "+91";
+  position: absolute;
+  left: 34px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #333;
+}
+
+/* Padding for flag */
+.field-mobile-number input {
+  padding-left: 68px;
+}
+
+/* OTP text */
+.field-description {
+  font-size: 13px !important;
+  color: #6b7280 !important;
+  margin-top: 4px;
+}
+
+
+/* ============================= */
+/* 🔹 RADIO BUTTONS              */
+/* ============================= */
+.radio-group-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radio-wrapper input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.radio-wrapper label {
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.radio-wrapper input[type="radio"]:checked + label {
+  font-weight: 500;
+  color: #111827;
+}
+
+
+/* ============================= */
+/* 🔹 SOURCE OF INCOME           */
+/* ============================= */
+.field-soi legend {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.field-soi .radio-wrapper {
+  margin-bottom: 10px;
+}
+
+
+/* ============================= */
+/* 🔹 YELLOW INFO BOX            */
+/* ============================= */
+[data-id="text-3eb5327b64"] p {
+  background: #fff8e1;
+  border: 1px solid #f0c36d;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  color: #5c4b00;
+  margin-top: 8px;
+}
+
+
+/* ============================= */
+/* 🔹 CHECKBOX                   */
+/* ============================= */
+.checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.checkbox-wrapper input {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.checkbox-wrapper input:checked {
+  accent-color: #2563eb;
+}
+
+.checkbox-wrapper label {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #374151;
+}
+
+
+/* ============================= */
+/* 🔹 TERMS & PRIVACY            */
+/* ============================= */
+.field-terms-privacy-text {
+  margin-top: 8px;
+}
+
+.field-terms-privacy-text p {
+  font-size: 13px;
+  color: #374151;
+}
+
+.field-terms-privacy-text u {
+  color: #1a73e8;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.field-terms-privacy-text u:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================= */
+/* 🔹 BUTTON                     */
+/* ============================= */
+.button-wrapper {
+  margin-top: 12px;
+}
+
+.button-wrapper button {
+  width: 200px;
+  height: 44px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #6a85f1, #4f6de6);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button-wrapper button:hover {
+  background: linear-gradient(90deg, #5a75e8, #3f5dd6);
+}
+
+.button-wrapper button:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+
+/* ============================= */
+/* 🔹 FOOTER TEXT                */
+/* ============================= */
+[data-id="text-09f95ba270"] {
+  border-top: 1px solid #d1d5db;
+  margin-top: 16px;
+  padding-top: 10px;
+}
+
+[data-id="text-09f95ba270"] p {
+  font-size: 12px;
+  text-align: center;
+  color: #000;
+}
+
+
+/* ============================= */
+/* 🔹 ESSENTIALS SECTION         */
+/* ============================= */
+.field-essentials-for-the-journey {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.field-essentials-for-the-journey .plain-text-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* TEXT */
+.field-essentials-for-the-journey p {
+  font-size: 13px;
+  color: #2563eb;
+  margin: 0;
+}
+
+/* ICON BASE */
+.plain-text-wrapper::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
+/* ICONS */
+.field-essential-mobile-phone::before {
+  background-image: url("/content/dam/s_hdfc_capstone/phone.svg");
+}
+
+.field-essential-pan-card::before {
+  background-image: url("/content/dam/s_hdfc_capstone/card.svg");
+}
+
+.field-essential-date-of-birth::before {
+  background-image: url("/content/dam/s_hdfc_capstone/date.svg");
+}
+
+.field-essential-cheque-book-bank-account-details::before {
+  background-image: url("/content/dam/s_hdfc_capstone/bank-cheque.svg");
+}
