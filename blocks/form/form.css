@@ -910,33 +910,26 @@ legend.field-label {
 /* ============================= */
 /* 🔹 RADIO BUTTONS              */
 /* ============================= */
-.radio-group-wrapper {
-  display: flex;
-  gap: 20px;
+/* 🔥 Center radio group + prevent wrapping */
+main .form form .radio-group-wrapper.horizontal {
+    display: flex;
+    justify-content: center;   /* center horizontally */
+    align-items: center;
+    flex-wrap: nowrap !important;   /* 🚫 stop wrapping */
+    gap: 30px;   /* adjust spacing */
 }
 
-.radio-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* 🔥 Keep radio + text in one line */
+main .form form .radio-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap !important;
+    gap: 6px;
 }
 
-.radio-wrapper input[type="radio"] {
-  width: 16px;
-  height: 16px;
-  accent-color: #2563eb;
-  cursor: pointer;
-}
-
-.radio-wrapper label {
-  font-size: 14px;
-  color: #374151;
-  cursor: pointer;
-}
-
-.radio-wrapper input[type="radio"]:checked + label {
-  font-weight: 500;
-  color: #111827;
+/* 🔥 Prevent label text from breaking */
+main .form form .radio-wrapper label {
+    white-space: nowrap;
 }
 
 
