@@ -1222,7 +1222,9 @@ input[name="attempts_text"] {
 }
 
 /* Force left alignment */
-.field-validate-otp.field-wrapper.col-4 {
-  display: flex !important;
-  justify-content: flex-start !important;
+/* Target ONLY Submit button */
+button[name="validate_otp"] {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  display: block;
 }
