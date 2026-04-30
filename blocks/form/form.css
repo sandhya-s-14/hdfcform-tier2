@@ -1220,3 +1220,9 @@ input[name="attempts_text"] {
   font-weight: 400;
   color: #000;
 }
+
+/* Force left alignment */
+.field-validate-otp.field-wrapper.col-4 {
+  display: flex !important;
+  justify-content: flex-start !important;
+}
