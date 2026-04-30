@@ -1139,23 +1139,19 @@ main .form form .radio-wrapper label {
 
 /*----------------------------------2ND PAGE--------------------------------------------*/
 /* Target only this specific button */
-.field-validate-otp .button-wrapper button {
-  all: unset; /* remove default button styles */
+/* Target only Edit mobile number button */
+.field-form-button button[name="form_button_18312989261776692327463"] {
+  all: unset;
 
-  color: #2563eb; /* blue link color */
+  color: #2563eb;           /* blue link */
   font-size: 14px;
-  font-weight: 500;
+  font-family: Roboto, Arial, sans-serif;
   cursor: pointer;
+
+  display: inline;
+}
+
+/* Hover like link */
+.field-form-button button[name="form_button_18312989261776692327463"]:hover {
   text-decoration: underline;
-  margin-left: -300px; /* space after text */
-}
-
-/* Make wrapper inline */
-.field-validate-otp .button-wrapper {
-  display: inline;
-}
-
-/* Make parent container inline */
-.field-validate-otp .field-mask-text {
-  display: inline;
 }
