@@ -1157,9 +1157,66 @@ button[name="form_button_18312989261776692327463"] {
   border: none !important;
   box-shadow: none !important;
 
-  margin-left: 6px;
+  margin-left: -300px;
 }
 
 button[name="form_button_18312989261776692327463"]:hover {
   text-decoration: underline;
+}
+
+/* Timer container */
+.field-timer {
+  display: flex;
+  align-items: center;
+  margin-top: -28px !important;
+  margin-left: 6px;
+}
+
+/* "Resend OTP in:" label */
+.field-timer .field-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280;
+  margin-right: 6px;
+}
+
+/* Timer value */
+input[name="timer"] {
+  border: none !important;
+  background: transparent !important;
+
+  width: auto !important;
+  display: inline;
+
+  padding: 0;
+  margin: 0;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* Attempts container */
+.field-attempts-text {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: -55px !important;
+  margin-right: 6px;
+}
+
+/* Attempts value */
+input[name="attempts_text"] {
+  border: none !important;
+  background: transparent !important;
+
+  width: auto !important;
+  display: inline;
+
+  padding: 0;
+  margin: 0;
+
+  font-size: 12px;
+  font-weight: 400;
+  color: #000;
 }
