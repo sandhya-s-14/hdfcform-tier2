@@ -936,28 +936,58 @@ main .form form .radio-wrapper label {
 /* ============================= */
 /* 🔹 SOURCE OF INCOME           */
 /* ============================= */
-.field-soi legend {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
-.field-soi .radio-wrapper {
-  margin-bottom: 10px;
-}
-
-
-/* ============================= */
-/* 🔹 YELLOW INFO BOX            */
-/* ============================= */
-[data-id="text-3eb5327b64"] p {
-  background: #fff8e1;
-  border: 1px solid #f0c36d;
+/* Target ONLY this panel using data-id */
+.panel-wrapper.field-soi[data-id^="panelcontainer"] {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
-  padding: 12px;
+  padding: 16px;
+}
+
+/* Title */
+.panel-wrapper.field-soi > legend.field-label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+/* Radio group layout */
+.panel-wrapper.field-soi .radio-group-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Radio label */
+.panel-wrapper.field-soi .radio-group-wrapper label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+/* Radio spacing */
+.panel-wrapper.field-soi input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Selected highlight */
+.panel-wrapper.field-soi input[type="radio"]:checked + span {
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+/* Info note box */
+.panel-wrapper.field-soi .field-income-verification-note {
+  background-color: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 6px;
+  padding: 10px 12px;
   font-size: 13px;
-  color: #5c4b00;
-  margin-top: 8px;
+  color: #92400e;
+  margin-top: 10px;
 }
 
 
