@@ -62,46 +62,49 @@ main .form fieldset.accordion {
 
 /*---------------------------------------REVIEW PAGE-------------------------------------------*/
 /* =========================
-   FONT
+   APPLY TO ALL PANELS
 ========================= */
-main .form form .field-loan-details,
-main .form form .field-personal-details {
+main .form form 
+.field-personal-loan-offer-panel,
+main .form form 
+.field-salary-account-details,
+main .form form 
+.field-office-address-panel,
+main .form form 
+.field-reference-details,
+main .form form 
+.field-verify-email-id-panel {
   font-family: Roboto, Arial, sans-serif;
-}
-
-
-/* =========================
-   CARD
-========================= */
-main .form form .field-loan-details,
-main .form form .field-personal-details {
   background: #f8faff;
   border: 1px solid #edf0f5;
   border-radius: 16px;
   overflow: hidden;
   padding-bottom: 16px;
+  margin-top: 20px;
 }
 
 
 /* =========================
-   SPACE BETWEEN SECTIONS
+   HEADER (ALL)
 ========================= */
-main .form form .field-personal-details {
-  margin-top: 24px !important;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-main .form form .field-loan-details > legend.field-label.accordion-legend,
-main .form form .field-personal-details > legend.field-label.accordion-legend {
+main .form form 
+.field-personal-loan-offer-panel > legend.field-label.accordion-legend,
+main .form form 
+.field-salary-account-details > legend.field-label.accordion-legend,
+main .form form 
+.field-office-address-panel > legend.field-label.accordion-legend,
+main .form form 
+.field-reference-details > legend.field-label.accordion-legend,
+main .form form 
+.field-verify-email-id-panel > legend.field-label.accordion-legend {
   background: #e7eefc;
-  padding: 18px 20px 18px 56px; /* extra space for bigger icon */
+  padding: 18px 20px 18px 50px;
   position: relative;
+
   font-size: 18px;
   font-weight: 600;
   color: #3f4a5a;
+
   margin: 0 0 10px;
   border-radius: 16px 16px 0 0;
   width: 100%;
@@ -109,56 +112,61 @@ main .form form .field-personal-details > legend.field-label.accordion-legend {
 
 
 /* =========================
-   ICONS (BIGGER)
+   FIELD BLOCK
 ========================= */
-main .form form .field-loan-details > legend.field-label.accordion-legend::before {
-    content: "";
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 82px;
-    background: url(https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/Loans.png) no-repeat center;
-    background-size: contain;
-}
-
-main .form form .field-personal-details > legend.field-label.accordion-legend::before {
-  content: "";
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 22px;   /* 🔥 increased */
-  height: 22px;  /* 🔥 increased */
-  background: url("https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/personal info.png") no-repeat center;
-  background-size: contain;
-}
-
-
-/* =========================
-   FIELD BLOCK (4 COLUMN)
-========================= */
-main .form form .field-loan-details > .text-wrapper,
-main .form form .field-personal-details > .text-wrapper,
-main .form form .field-loan-details > .date-wrapper,
-main .form form .field-personal-details > .date-wrapper {
+main .form form 
+.field-personal-loan-offer-panel > .text-wrapper,
+main .form form 
+.field-salary-account-details > .text-wrapper,
+main .form form 
+.field-office-address-panel > .text-wrapper,
+main .form form 
+.field-reference-details > .text-wrapper,
+main .form form 
+.field-verify-email-id-panel > .text-wrapper,
+main .form form 
+.field-personal-loan-offer-panel > .date-wrapper,
+main .form form 
+.field-salary-account-details > .date-wrapper,
+main .form form 
+.field-office-address-panel > .date-wrapper,
+main .form form 
+.field-reference-details > .date-wrapper,
+main .form form 
+.field-verify-email-id-panel > .date-wrapper {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  padding: 0 18px 0 16px;
+
+  padding: 0 16px;
   margin-top: 16px;
   box-sizing: border-box;
 }
 
 
 /* =========================
-   BLUE LINE (FULL HEIGHT STYLE)
+   BLUE LEFT LINE
 ========================= */
-main .form form .field-loan-details > .text-wrapper::before,
-main .form form .field-personal-details > .text-wrapper::before,
-main .form form .field-loan-details > .date-wrapper::before,
-main .form form .field-personal-details > .date-wrapper::before {
+main .form form 
+.field-personal-loan-offer-panel > .text-wrapper::before,
+main .form form 
+.field-salary-account-details > .text-wrapper::before,
+main .form form 
+.field-office-address-panel > .text-wrapper::before,
+main .form form 
+.field-reference-details > .text-wrapper::before,
+main .form form 
+.field-verify-email-id-panel > .text-wrapper::before,
+main .form form 
+.field-personal-loan-offer-panel > .date-wrapper::before,
+main .form form 
+.field-salary-account-details > .date-wrapper::before,
+main .form form 
+.field-office-address-panel > .date-wrapper::before,
+main .form form 
+.field-reference-details > .date-wrapper::before,
+main .form form 
+.field-verify-email-id-panel > .date-wrapper::before {
   content: "";
   position: absolute;
   left: 0;
@@ -173,78 +181,132 @@ main .form form .field-personal-details > .date-wrapper::before {
 /* =========================
    LABEL
 ========================= */
-main .form form .field-loan-details .field-label,
-main .form form .field-personal-details .field-label {
+main .form form 
+.field-personal-loan-offer-panel .field-label,
+main .form form 
+.field-salary-account-details .field-label,
+main .form form 
+.field-office-address-panel .field-label,
+main .form form 
+.field-reference-details .field-label,
+main .form form 
+.field-verify-email-id-panel .field-label {
   font-size: 12px;
   font-weight: 400;
   color: #7a8394;
   margin-bottom: 4px;
   display: block;
-  white-space: nowrap;
 }
 
 
 /* =========================
-   INPUT (EDITABLE)
+   INPUT
 ========================= */
-main .form form .field-loan-details input,
-main .form form .field-personal-details input,
-main .form form .field-loan-details textarea,
-main .form form .field-personal-details textarea {
+main .form form 
+.field-personal-loan-offer-panel input,
+main .form form 
+.field-salary-account-details input,
+main .form form 
+.field-office-address-panel input,
+main .form form 
+.field-reference-details input,
+main .form form 
+.field-verify-email-id-panel input {
   border: none;
   background: transparent;
+
   padding: 2px 0;
   margin: 0;
 
   font-size: 13px;
-  font-weight: 550;
+  font-weight: 500;
   color: #3f4a5a;
-
-  pointer-events: auto;
-  cursor: text;
 }
 
 
 /* =========================
-   FOCUS EFFECT
+   FOCUS
 ========================= */
-main .form form input:focus,
-main .form form textarea:focus {
+main .form form input:focus {
   border-bottom: 1px solid #5a8dee;
   outline: none;
 }
 
-
 /* =========================
-   STRUCTURE FIX
+   PERSONAL DETAILS ICON
 ========================= */
-/*
-main .form form .text-wrapper,
-main .form form .date-wrapper {
-  display: flex;
-  /* flex-direction: column;
-  gap: 2px;
-}
-/*
-
-/* =========================
-   FULL WIDTH FIELDS
-========================= */
-main .form form .field-personal-details .field-current-address,
-main .form form .field-personal-details .field-residence-type {
-  width: 100% !important;
+.field-personal-loan-offer-panel > legend.accordion-legend::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: url("/content/dam/icons/personal.png") no-repeat center;
+  background-size: contain;
 }
 
 
 /* =========================
-   DOTTED DIVIDER
+   SALARY ACCOUNT ICON
 ========================= */
-main .form form .field-personal-details .field-current-address {
-  border-top: 1px dashed #e4e8f0;
-  padding-top: 14px;
-  margin-top: 18px;
+.field-salary-account-details > legend.accordion-legend::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: url("/content/dam/icons/bank.png") no-repeat center;
+  background-size: contain;
 }
 
-main .form form .field-personal-details .field-residence-type {
-  margin-top: 10px;
+
+/* =========================
+   OFFICE ADDRESS ICON
+========================= */
+.field-office-address-panel > legend.accordion-legend::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: url("/content/dam/icons/location.png") no-repeat center;
+  background-size: contain;
+}
+
+
+/* =========================
+   REFERENCE DETAILS ICON
+========================= */
+.field-reference-details > legend.accordion-legend::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: url("/content/dam/icons/user.png") no-repeat center;
+  background-size: contain;
+}
+
+
+/* =========================
+   VERIFY EMAIL ICON
+========================= */
+.field-verify-email-id-panel > legend.accordion-legend::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: url("/content/dam/icons/email.png") no-repeat center;
+  background-size: contain;
 }
