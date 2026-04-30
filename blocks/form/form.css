@@ -1501,42 +1501,49 @@ main .form fieldset.field-loan-offer-based-on-declared-income > legend.field-lab
 }
 
 /*============================PERSONAL INFO=============================================*/
-/* Wrapper becomes card */
-.field-full-name-as-per-aadhaar {
-  background: #e9e6f5;
-  border-radius: 16px;
-  padding: 12px 16px;
-  position: relative;
+/* Card container */
+main .form form .field-full-name-as-per-aadhaar {
+  background: #e9e6f5 !important;
+  border-radius: 18px !important;
+  padding: 14px 20px 14px 28px !important;
+  position: relative !important;
 }
 
 /* Left accent line */
-.field-full-name-as-per-aadhaar::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 10px;
-  bottom: 10px;
-  width: 4px;
-  background: #7a6cf5;
-  border-radius: 4px;
+main .form form .field-full-name-as-per-aadhaar::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 12px !important;
+  top: 14px !important;
+  bottom: 14px !important;
+  width: 3px !important;
+  background: #6f7bf7 !important;
+  border-radius: 3px !important;
 }
 
-/* Label inside */
-.field-full-name-as-per-aadhaar label {
-  display: block;
-  font-size: 12px;
-  color: #6b6f85;
-  margin-left: 12px;
-  margin-bottom: 2px;
+/* Label */
+main .form form .field-full-name-as-per-aadhaar label {
+  display: block !important;
+  font-size: 13px !important;
+  color: #6b6f85 !important;
+  margin-bottom: 4px !important;
 }
 
-/* Input becomes text-like */
-.field-full-name-as-per-aadhaar input {
+/* Input → make it look like text */
+main .form form .field-full-name-as-per-aadhaar input {
   border: none !important;
   background: transparent !important;
-  font-size: 16px;
-  font-weight: 500;
-  color: #2d2f39;
-  padding-left: 12px;
-  outline: none;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #2d2f39 !important;
+  outline: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+/* Remove any AEM default input styling */
+main .form form input[type="text"] {
+  background: transparent !important;
+  border: none !important;
 }
