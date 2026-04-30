@@ -135,8 +135,8 @@ background-size: contain;
 ICONS
 ========================= */
 .field-loan-details > legend::before {
-width: 42px;
-height: 42px;
+width: 42px !important;
+height: 42px !important;
 background: url("https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/Loans.png") no-repeat center;
 }
 
@@ -145,23 +145,23 @@ background: url("https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_
 }
 
 .field-personal-loan-offer-panel > legend::before {
-background: url("/content/dam/icons/personal.png") no-repeat center;
+background: url("/content/dam/s_hdfc_capstone/bank-svgrepo-com.svg") no-repeat center;
 }
 
 .field-salary-account-details > legend::before {
-background: url("/content/dam/icons/bank.png") no-repeat center;
+background: url("/content/dam/s_hdfc_capstone/bank-svgrepo-com.svg") no-repeat center;
 }
 
 .field-office-address-panel > legend::before {
-background: url("/content/dam/icons/location.png") no-repeat center;
+background: url("/content/dam/s_hdfc_capstone/office-work-business-workplace-corporate-employee-job-svgrepo-com.svg") no-repeat center;
 }
 
 .field-reference-details > legend::before {
-background: url("/content/dam/icons/user.png") no-repeat center;
+background: url("/content/dam/s_hdfc_capstone/information-book-learning-svgrepo-com.svg") no-repeat center;
 }
 
 .field-verify-email-id-panel > legend::before {
-background: url("/content/dam/icons/email.png") no-repeat center;
+background: url("/content/dam/s_hdfc_capstone/verify-svgrepo-com.svg") no-repeat center;
 }
 
 /* =========================
