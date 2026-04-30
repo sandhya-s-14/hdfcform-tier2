@@ -73,7 +73,11 @@ main .form form
 main .form form
 .field-reference-details,
 main .form form
-.field-verify-email-id-panel {
+.field-verify-email-id-panel,
+main .form form
+.field-loan-details,
+main .form form
+.field-personal-details {
 font-family: Roboto, Arial, sans-serif;
 background: #f8faff;
 border: 1px solid #edf0f5;
@@ -95,7 +99,11 @@ main .form form
 main .form form
 .field-reference-details > legend.field-label.accordion-legend,
 main .form form
-.field-verify-email-id-panel > legend.field-label.accordion-legend {
+.field-verify-email-id-panel > legend.field-label.accordion-legend,
+main .form form
+.field-loan-details > legend.field-label.accordion-legend,
+main .form form
+.field-personal-details > legend.field-label.accordion-legend {
 background: #e7eefc;
 padding: 18px 20px 18px 56px;
 position: relative;
@@ -112,7 +120,7 @@ width: 100%;
 /* =========================
 ICON BASE
 ========================= */
-main .form form .panel-wrapper > legend.field-label.accordion-legend::before {
+main .form form legend.field-label.accordion-legend::before {
 content: "";
 position: absolute;
 left: 18px;
@@ -124,8 +132,18 @@ background-size: contain;
 }
 
 /* =========================
-ICONS (SECTION WISE)
+ICONS
 ========================= */
+.field-loan-details > legend::before {
+width: 42px;
+height: 42px;
+background: url("https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/Loans.png") no-repeat center;
+}
+
+.field-personal-details > legend::before {
+background: url("https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/personal info.png") no-repeat center;
+}
+
 .field-personal-loan-offer-panel > legend::before {
 background: url("/content/dam/icons/personal.png") no-repeat center;
 }
@@ -160,6 +178,10 @@ main .form form
 main .form form
 .field-verify-email-id-panel > .text-wrapper,
 main .form form
+.field-loan-details > .text-wrapper,
+main .form form
+.field-personal-details > .text-wrapper,
+main .form form
 .field-personal-loan-offer-panel > .date-wrapper,
 main .form form
 .field-salary-account-details > .date-wrapper,
@@ -168,7 +190,11 @@ main .form form
 main .form form
 .field-reference-details > .date-wrapper,
 main .form form
-.field-verify-email-id-panel > .date-wrapper {
+.field-verify-email-id-panel > .date-wrapper,
+main .form form
+.field-loan-details > .date-wrapper,
+main .form form
+.field-personal-details > .date-wrapper {
 position: relative;
 display: inline-block;
 vertical-align: top;
@@ -182,25 +208,9 @@ box-sizing: border-box;
 LEFT BLUE LINE
 ========================= */
 main .form form
-.field-personal-loan-offer-panel > .text-wrapper::before,
+.text-wrapper::before,
 main .form form
-.field-salary-account-details > .text-wrapper::before,
-main .form form
-.field-office-address-panel > .text-wrapper::before,
-main .form form
-.field-reference-details > .text-wrapper::before,
-main .form form
-.field-verify-email-id-panel > .text-wrapper::before,
-main .form form
-.field-personal-loan-offer-panel > .date-wrapper::before,
-main .form form
-.field-salary-account-details > .date-wrapper::before,
-main .form form
-.field-office-address-panel > .date-wrapper::before,
-main .form form
-.field-reference-details > .date-wrapper::before,
-main .form form
-.field-verify-email-id-panel > .date-wrapper::before {
+.date-wrapper::before {
 content: "";
 position: absolute;
 left: 0;
@@ -214,36 +224,19 @@ border-radius: 2px;
 /* =========================
 LABEL
 ========================= */
-main .form form
-.field-personal-loan-offer-panel .field-label,
-main .form form
-.field-salary-account-details .field-label,
-main .form form
-.field-office-address-panel .field-label,
-main .form form
-.field-reference-details .field-label,
-main .form form
-.field-verify-email-id-panel .field-label {
+main .form form .field-label {
 font-size: 12px;
 font-weight: 400;
 color: #7a8394;
 margin-bottom: 4px;
 display: block;
+white-space: nowrap;
 }
 
 /* =========================
 INPUT
 ========================= */
-main .form form
-.field-personal-loan-offer-panel input,
-main .form form
-.field-salary-account-details input,
-main .form form
-.field-office-address-panel input,
-main .form form
-.field-reference-details input,
-main .form form
-.field-verify-email-id-panel input,
+main .form form input,
 main .form form textarea {
 border: none;
 background: transparent;
@@ -254,6 +247,8 @@ margin: 0;
 font-size: 13px;
 font-weight: 550;
 color: #3f4a5a;
+
+cursor: text;
 }
 
 /* =========================
@@ -266,8 +261,10 @@ outline: none;
 }
 
 /* =========================
-FULL WIDTH (SPECIFIC CASES)
+FULL WIDTH (SPECIFIC)
 ========================= */
+.field-personal-details .field-current-address,
+.field-personal-details .field-residence-type,
 .field-personal-loan-offer-panel .field-current-address,
 .field-personal-loan-offer-panel .field-residence-type {
 width: 100% !important;
@@ -276,10 +273,13 @@ width: 100% !important;
 /* =========================
 DOTTED DIVIDER
 ========================= */
+.field-personal-details .field-current-address,
 .field-personal-loan-offer-panel .field-current-address {
 border-top: 1px dashed #e4e8f0;
 padding-top: 14px;
 margin-top: 18px;
 }
+
+
 
 
