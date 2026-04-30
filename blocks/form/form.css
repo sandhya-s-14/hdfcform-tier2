@@ -1139,19 +1139,29 @@ main .form form .radio-wrapper label {
 
 /*----------------------------------2ND PAGE--------------------------------------------*/
 /* Target only this specific button */
-/* Target only Edit mobile number button */
-.field-form-button button[name="form_button_18312989261776692327463"] {
-  all: unset;
+/* Only Edit mobile number button */
+button[name="form_button_18312989261776692327463"] {
+  all: unset !important;
 
-  color: #2563eb;           /* blue link */
+  color: #2563eb !important;   /* link color */
   font-size: 14px;
   font-family: Roboto, Arial, sans-serif;
   cursor: pointer;
 
-  display: inline;
+  display: inline !important;
+
+  /* override AEM button styles */
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  white-space: nowrap;
 }
 
 /* Hover like link */
-.field-form-button button[name="form_button_18312989261776692327463"]:hover {
+button[name="form_button_18312989261776692327463"]:hover {
   text-decoration: underline;
 }
