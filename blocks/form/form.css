@@ -1224,7 +1224,7 @@ input[name="attempts_text"] {
 /* Force left alignment */
 /* Target ONLY Submit button */
 button[name="validate_otp"] {
-  margin-left: 0 !important;
+  margin-left: -400px !important;
   margin-right: auto !important;
   display: block;
 }
