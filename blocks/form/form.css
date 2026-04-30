@@ -164,7 +164,7 @@ main .form select {
     width: 100%; 
     height: 42px; 
     color: var(--form-label-color);
-    padding: var(--form-input-padding); 
+   /* padding: var(--form-input-padding); */
     /*font-size: var(--form-input-font-size); */
     max-width: unset;
     margin-top: .5rem;
@@ -877,7 +877,7 @@ legend.field-label {
   content: "";
   position: absolute;
   left: 10px;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   width: 20px;
   height: 14px;
@@ -888,7 +888,7 @@ legend.field-label {
   content: "+91";
   position: absolute;
   left: 34px;
-  top: 50%;
+  top: 31%;
   transform: translateY(-50%);
   font-size: 14px;
   color: #333;
