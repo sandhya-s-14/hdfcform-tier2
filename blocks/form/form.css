@@ -1576,7 +1576,6 @@ main .form form .field-address-details > legend::before {
 
 /* ===== Address Block ===== */
 main .form form .field-address-as-per-aadhaar-records {
-  background: #f3f1fb !important;
   border-radius: 14px !important;
   padding: 16px 16px 16px 36px !important;
   position: relative !important;
@@ -1588,8 +1587,8 @@ main .form form .field-address-as-per-aadhaar-records {
 main .form form .field-address-as-per-aadhaar-records::before {
   content: "" !important;
   position: absolute !important;
-  left: 16px !important;
-  top: 16px !important;
+  left: 19px !important;
+  top: 26px !important;
   bottom: 16px !important;
   width: 3px !important;
   background: #6f7bf7 !important;
@@ -1620,16 +1619,22 @@ main .form form .field-address-choice-label {
   margin-bottom: 12px !important;
 }
 
-/* ===== Radio Group ===== */
-main .form form .field-aadhaar-address-type {
+/* ===== Radio Group Container (FIXED SELECTOR) ===== */
+main .form form .radio-group-wrapper.field-aadhaar-address-type {
   display: flex !important;
   align-items: center !important;
   gap: 28px !important;
   flex-wrap: wrap !important;
 }
 
-/* Radio Label */
-main .form form .field-aadhaar-address-type label {
+/* ===== Each radio option wrapper ===== */
+main .form form .radio-group-wrapper.field-aadhaar-address-type > div {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* ===== Label ===== */
+main .form form .radio-group-wrapper.field-aadhaar-address-type label {
   font-size: 14px !important;
   color: #4a4f65 !important;
   display: flex !important;
@@ -1638,8 +1643,8 @@ main .form form .field-aadhaar-address-type label {
   cursor: pointer !important;
 }
 
-/* Radio Button */
-main .form form input[type="radio"] {
+/* ===== Radio button ===== */
+main .form form .radio-group-wrapper.field-aadhaar-address-type input[type="radio"] {
   accent-color: #5a6dfc !important;
   cursor: pointer !important;
 }
