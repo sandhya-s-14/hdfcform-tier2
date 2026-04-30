@@ -1228,3 +1228,213 @@ button[name="validate_otp"] {
   margin-right: auto !important;
   display: block;
 }
+
+/*----------------------------Offerpage-------------------------------------------*/
+/* ---------- LEFT ---------- */
+main .form form .field-loan-offer-based-on-declared-income {
+  grid-column: span 8 !important;
+}
+
+/* ---------- RIGHT CARD SIZE ---------- */
+main .form form .field-avail-panel {
+    grid-column: span 4 !important;
+    max-width: 700px !important;
+    width: 100% !important;
+    margin-left: -100px !important;
+    max-height: 390px !important;
+    margin-top: 160px !important;
+}
+
+/* ---------- CARD ---------- */
+.field-avail-panel {
+  background: #fff3e3;
+  border-radius: 16px;
+  padding: 12px 14px 0;   /* ↓ compact height */
+  margin-top: 10px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------- HEADER ---------- */
+.field-avail-input {
+  position: relative;
+  padding-left: 10px;
+  margin-bottom: 4px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.field-avail-input label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field-avail-input input {
+  border: none !important;
+  background: transparent !important;
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 2px;
+  padding: 0;
+}
+
+/* ---------- DIVIDER ---------- */
+.field-avail-input::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+
+  /* dotted style like UI */
+  background: repeating-linear-gradient(
+    to right,
+    #d8cbb8,
+    #d8cbb8 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* ---------- GRID ---------- */
+.field-emi-amount,
+.field-roi {
+  width: 48%;
+  position: relative;
+  padding-left: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* TAX */
+.field-tax {
+  width: 100%;
+  position: relative;
+  padding-left: 10px;
+  margin-top: 4px;
+}
+
+/* ---------- ORANGE LINES ---------- */
+.field-emi-amount::before,
+.field-roi::before,
+.field-tax::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 3px;
+  height: 14px;
+  background: #f7941d;
+}
+
+/* ---------- LABEL + VALUE INLINE (IMPORTANT FIX) ---------- */
+/* ---------- COMMON VALUE STYLE ---------- */
+.field-emi-amount input,
+.field-roi input,
+.field-tax input {
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+
+  padding: 0;
+  margin-top: 3px;
+  width: 100%;
+
+  pointer-events: auto;
+  cursor: text;
+
+  /* 🔥 FIX FOR HIDDEN NUMBERS */
+  white-space: normal;       /* allow wrapping */
+  word-break: break-word;    /* break long numbers */
+  overflow: visible;
+}
+
+/* ---------- LABEL ---------- */
+.field-emi-amount label,
+.field-roi label,
+.field-tax label {
+  font-size: 11px;
+  color: #8a8a8a;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---------- LAYOUT ---------- */
+.field-emi-amount,
+.field-roi,
+.field-tax {
+  display: flex;
+  flex-direction: column;
+  position: relative;   /* 🔥 REQUIRED for orange line */
+  padding-left: 10px;
+}
+
+/* ---------- ORANGE LINE ---------- */
+.field-emi-amount::before,
+.field-roi::before,
+.field-tax::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 3px;
+  height: 16px;
+  background: #f7941d;
+}
+/* ---------- VALUES ---------- */
+.field-emi-amount input,
+.field-roi input,
+.field-tax input {
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+
+  margin-top: 2px;
+  padding: 0;
+  width: 100%;
+}
+
+/* ---------- FOOTER ---------- */
+.field-avail-panel .plain-text-wrapper {
+     background: #fba741;
+    color: #fff;
+    padding: 10px 15px 14px 30px;
+    margin: 12px -14px 0;
+    border-radius: 0 0 18px 18px;
+    font-size: 11px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.field-avail-panel .plain-text-wrapper::before {
+  content: "i";
+  position: absolute;
+
+  left: 12px;
+  top: 25%;                 /* ✅ keep this */
+  transform: translateY(-25%); /* ✅ balance alignment */
+
+  width: 16px;
+  height: 16px;
+
+  border: 1px solid #fff;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10px;
+  font-weight: bold;
+  color: #fff;
+}
