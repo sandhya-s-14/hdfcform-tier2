@@ -1136,3 +1136,27 @@ main .form form .radio-wrapper label {
 .field-essential-cheque-book-bank-account-details::before {
   background-image: url("/content/dam/s_hdfc_capstone/bank-cheque.svg");
 }
+
+/*----------------------------------2ND PAGE--------------------------------------------*/
+/* Target only this specific button */
+.field-validate-otp .button-wrapper button {
+  all: unset; /* remove default button styles */
+
+  color: #2563eb; /* blue link color */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+
+  margin-left: 6px; /* space after text */
+}
+
+/* Make wrapper inline */
+.field-validate-otp .button-wrapper {
+  display: inline;
+}
+
+/* Make parent container inline */
+.field-validate-otp .field-mask-text {
+  display: inline;
+}
