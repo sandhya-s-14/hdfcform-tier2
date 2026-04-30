@@ -58,3 +58,193 @@ main .form fieldset.accordion  fieldset.accordion-collapse {
 main .form fieldset.accordion {
     row-gap: 0;
 }
+
+
+/*---------------------------------------REVIEW PAGE-------------------------------------------*/
+/* =========================
+   FONT
+========================= */
+main .form form .field-loan-details,
+main .form form .field-personal-details {
+  font-family: Roboto, Arial, sans-serif;
+}
+
+
+/* =========================
+   CARD
+========================= */
+main .form form .field-loan-details,
+main .form form .field-personal-details {
+  background: #f8faff;
+  border: 1px solid #edf0f5;
+  border-radius: 16px;
+  overflow: hidden;
+  padding-bottom: 16px;
+}
+
+
+/* =========================
+   SPACE BETWEEN SECTIONS
+========================= */
+main .form form .field-personal-details {
+  margin-top: 24px !important;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+main .form form .field-loan-details > legend.field-label.accordion-legend,
+main .form form .field-personal-details > legend.field-label.accordion-legend {
+  background: #e7eefc;
+  padding: 18px 20px 18px 56px; /* extra space for bigger icon */
+  position: relative;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3f4a5a;
+  margin: 0 0 10px;
+  border-radius: 16px 16px 0 0;
+  width: 100%;
+}
+
+
+/* =========================
+   ICONS (BIGGER)
+========================= */
+main .form form .field-loan-details > legend.field-label.accordion-legend::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 82px;
+    background: url(https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/Loans.png) no-repeat center;
+    background-size: contain;
+}
+
+main .form form .field-personal-details > legend.field-label.accordion-legend::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;   /* 🔥 increased */
+  height: 22px;  /* 🔥 increased */
+  background: url("https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/personal info.png") no-repeat center;
+  background-size: contain;
+}
+
+
+/* =========================
+   FIELD BLOCK (4 COLUMN)
+========================= */
+main .form form .field-loan-details > .text-wrapper,
+main .form form .field-personal-details > .text-wrapper,
+main .form form .field-loan-details > .date-wrapper,
+main .form form .field-personal-details > .date-wrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 18px 0 16px;
+  margin-top: 16px;
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   BLUE LINE (FULL HEIGHT STYLE)
+========================= */
+main .form form .field-loan-details > .text-wrapper::before,
+main .form form .field-personal-details > .text-wrapper::before,
+main .form form .field-loan-details > .date-wrapper::before,
+main .form form .field-personal-details > .date-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 3px;
+  height: 42px;
+  background: #8eaaff;
+  border-radius: 2px;
+}
+
+
+/* =========================
+   LABEL
+========================= */
+main .form form .field-loan-details .field-label,
+main .form form .field-personal-details .field-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7a8394;
+  margin-bottom: 4px;
+  display: block;
+  white-space: nowrap;
+}
+
+
+/* =========================
+   INPUT (EDITABLE)
+========================= */
+main .form form .field-loan-details input,
+main .form form .field-personal-details input,
+main .form form .field-loan-details textarea,
+main .form form .field-personal-details textarea {
+  border: none;
+  background: transparent;
+  padding: 2px 0;
+  margin: 0;
+
+  font-size: 13px;
+  font-weight: 550;
+  color: #3f4a5a;
+
+  pointer-events: auto;
+  cursor: text;
+}
+
+
+/* =========================
+   FOCUS EFFECT
+========================= */
+main .form form input:focus,
+main .form form textarea:focus {
+  border-bottom: 1px solid #5a8dee;
+  outline: none;
+}
+
+
+/* =========================
+   STRUCTURE FIX
+========================= */
+/*
+main .form form .text-wrapper,
+main .form form .date-wrapper {
+  display: flex;
+  /* flex-direction: column;
+  gap: 2px;
+}
+/*
+
+/* =========================
+   FULL WIDTH FIELDS
+========================= */
+main .form form .field-personal-details .field-current-address,
+main .form form .field-personal-details .field-residence-type {
+  width: 100% !important;
+}
+
+
+/* =========================
+   DOTTED DIVIDER
+========================= */
+main .form form .field-personal-details .field-current-address {
+  border-top: 1px dashed #e4e8f0;
+  padding-top: 14px;
+  margin-top: 18px;
+}
+
+main .form form .field-personal-details .field-residence-type {
+  margin-top: 10px;
+}
