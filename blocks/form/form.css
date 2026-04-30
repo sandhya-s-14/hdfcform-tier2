@@ -1147,8 +1147,7 @@ main .form form .radio-wrapper label {
   font-weight: 500;
   cursor: pointer;
   text-decoration: underline;
-
-  margin-left: 6px; /* space after text */
+  margin-left: -300px; /* space after text */
 }
 
 /* Make wrapper inline */
