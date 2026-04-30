@@ -1568,10 +1568,14 @@ main .form form .field-address-details > legend {
   gap: 8px !important;
 }
 
-/* Icon */
+/* ✅ REPLACED emoji with proper icon */
 main .form form .field-address-details > legend::before {
-  content: "📍" !important;
-  font-size: 16px !important;
+  content: "" !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: inline-block !important;
+  background: url("data:image/svg+xml;utf8,<svg fill='%236f7bf7' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/></svg>") no-repeat center !important;
+  background-size: contain !important;
 }
 
 /* ===== Address Block ===== */
@@ -1583,19 +1587,19 @@ main .form form .field-address-as-per-aadhaar-records {
   max-width: 650px !important;
 }
 
-/* Accent Line */
+/* ✅ FIXED accent line alignment */
 main .form form .field-address-as-per-aadhaar-records::before {
   content: "" !important;
   position: absolute !important;
-  left: 19px !important;
-  top: 26px !important;
+  left: 16px !important;
+  top: 16px !important;
   bottom: 16px !important;
   width: 3px !important;
   background: #6f7bf7 !important;
   border-radius: 3px !important;
 }
 
-/* Address Label */
+/* ===== Address Label ===== */
 main .form form .field-address-as-per-aadhaar-records label {
   font-size: 13px !important;
   color: #6b6f85 !important;
@@ -1603,7 +1607,7 @@ main .form form .field-address-as-per-aadhaar-records label {
   display: block !important;
 }
 
-/* Address Value */
+/* ===== Address Value ===== */
 main .form form .field-address-as-per-aadhaar-records div,
 main .form form .field-address-as-per-aadhaar-records span {
   font-size: 15px !important;
@@ -1619,12 +1623,16 @@ main .form form .field-address-choice-label {
   margin-bottom: 12px !important;
 }
 
-/* ===== Radio Group Container (FIXED SELECTOR) ===== */
+/* ===== Radio Group Container ===== */
 main .form form .radio-group-wrapper.field-aadhaar-address-type {
   display: flex !important;
   align-items: center !important;
   gap: 28px !important;
   flex-wrap: wrap !important;
+
+  /* ✅ FIX instead of breaking layout */
+  margin-left: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* ===== Each radio option wrapper ===== */
