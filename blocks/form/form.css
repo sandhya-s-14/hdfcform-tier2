@@ -1614,7 +1614,6 @@ main .form form .field-full-name-as-per-aadhaar input {
     color: #2d2f39;
     text-wrap: nowrap;
 }
-
 /* ================= ICON FIX ================= */
 .field-address-details::after {
     content: "";
@@ -1658,4 +1657,182 @@ main .form form .field-full-name-as-per-aadhaar input {
     justify-content: flex-start !important;
     gap: 24px;
     margin-top: 12px;
+}
+
+/*----------------------------------------THANKYOU PAGE---------------------------------------------------------*/
+.field-loan-application-details {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 16px;
+    padding: 24px !important;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+/* ============================= */
+/* ===== MAIN LAYOUT ===== */
+/* ============================= */
+
+.field-loan-application-number {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+
+/* ===== ICON ===== */
+.field-loan-application-number::before {
+    content: "";
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #eef2ff url('https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/loan application.png') center/20px no-repeat;
+    flex-shrink: 0;
+}
+
+
+/* ============================= */
+/* ===== RIGHT SIDE COLUMN ===== */
+/* ============================= */
+
+/* THIS is the key fix */
+.field-loan-application-number {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 12px;
+}
+
+
+/* place icon */
+.field-loan-application-number::before {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+}
+
+/* label */
+.field-loan-application-number label {
+    grid-column: 2;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 4px;
+    margin-top: -10px;
+}
+
+/* value */
+.field-loan-application-number input {
+    grid-column: 2;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+
+/* remove input UI */
+.field-loan-application-number input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* override global form styles */
+main .form .field-loan-application-number input {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+.field-contact-note {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #d1d5db;
+}
+
+/* ============================= */
+/* ===== SECTION CONTAINER ===== */
+/* ============================= */
+
+.field-xpress-personal-loan-summary {
+    padding: 16px 0;
+}
+
+
+/* ============================= */
+/* ===== TITLE ===== */
+/* ============================= */
+
+.field-xpress-personal-loan-summary legend {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
+}
+
+
+/* ============================= */
+/* ===== LOAN AMOUNT BLOCK ===== */
+/* ============================= */
+
+#textinput-4c43fe36d2 {
+    border-left: 3px solid #6366f1;   /* blue line */
+    padding-left: 12px;
+}
+
+
+/* ===== LABEL ===== */
+.field-loan-amount label {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 4px;
+    display: block;
+}
+
+
+/* ===== VALUE (REMOVE INPUT LOOK) ===== */
+.field-loan-amount input {
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    width: auto !important;
+
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+}
+
+
+/* remove focus outline */
+.field-loan-amount input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.field-disbursement-note p {
+    background-color: #eef4ff;
+    color: #1e40af;
+
+    padding: 14px 16px;
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    margin-top: 16px;
+}
+
+/*=========================================================================*/
+#text-5d6be9e136 p {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+main .form .field-plain-text p p {
+    font-weight: 700 !important;
 }
