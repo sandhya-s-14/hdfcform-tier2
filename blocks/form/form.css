@@ -1598,35 +1598,47 @@ main .form form .field-full-name-as-per-aadhaar input {
 .field-address-details {
     background: #e9e6f5 !important;
     border-radius: 18px !important;
-    padding: 20px 20px 20px 48px !important;
+    padding: 48px 20px 20px 48px !important; /* top space for title */
     position: relative;
 }
 
-/* SINGLE LEFT BLUE LINE */
+/* ================= SMALL LEFT BLUE LINE ================= */
 .field-address-details::before {
     content: "";
     position: absolute;
-    left: 18px;           /* centered nicely */
-    top: 20px;
-    bottom: 20px;
+    left: 18px;
+    top: 36px;      /* start below header */
+    height: 60px;   /* smaller line */
     width: 3px;
     background: #6f7bf7;
     border-radius: 3px;
 }
 
-/* ❌ REMOVE INNER DEFAULT LINE */
+/* ================= HEADER TEXT ================= */
+.field-address-details::after {
+    content: "Address Details";
+    position: absolute;
+    top: 18px;
+    left: 48px;
+
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d2f39;
+}
+
+/* ================= ICON ================= */
+.field-address-details {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%232d2f39' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 20px 18px;
+    background-size: 18px;
+}
+
+/* ================= REMOVE EXTRA LINES ================= */
 .field-address-details .field-wrapper::before,
 .field-address-details .text-wrapper::before,
 .field-address-details .plain-text-wrapper::before {
     display: none !important;
-    content: none !important;
-}
-
-/* ================= CONTENT SPACING ================= */
-.field-address-details .field-wrapper,
-.field-address-details .text-wrapper,
-.field-address-details .plain-text-wrapper {
-    padding-left: 12px !important;
 }
 
 /* ================= LABEL ================= */
