@@ -312,7 +312,7 @@ margin-top: 18px;
     width: 20px;
     height: 20px;
 
-    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z'/></svg>") no-repeat center;
+    background: url("/content/dam/s_hdfc_capstone/card-account-details-outline.svg") no-repeat center;
     background-size: contain;
 }
 
@@ -545,27 +545,27 @@ margin-top: 18px;
 }
 
 .field-personal-details-customer > legend::before {
-    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z'/></svg>") no-repeat center;
+    background: url("/content/dam/s_hdfc_capstone/work.svg") no-repeat center;
     background-size: contain;
 }
 
 .field-employer-details > legend::before {
-    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M10 4h4v2h5v14H5V6h5zm0 0V2h4v2'/></svg>") no-repeat center;
+    background: url("/content/dam/s_hdfc_capstone/personal-information-filled.svg") no-repeat center;
     background-size: contain;
 }
 
 .field-income-details > legend::before {
-    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 3h12v2H6zm0 4h12v2H6zm0 4h12v2H6zm0 4h12v2H6z'/></svg>") no-repeat center;
+    background: url("/content/dam/s_hdfc_capstone/rupee.svg") no-repeat center;
     background-size: contain;
 }
 
 .field-work-email-id-panel > legend::before {
-    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M2 4h20v16H2V4zm10 7l10-7H2l10 7z'/></svg>") no-repeat center;
+    background: url("/content/dam/s_hdfc_capstone/work-item.svg") no-repeat center;
     background-size: contain;
 }
 
 .field-type-of-loan-panel > legend::before {
-    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 2h9l5 5v15H6z'/></svg>") no-repeat center;
+    background: url("/content/dam/s_hdfc_capstone/bank.svg") no-repeat center;
     background-size: contain;
 }
 
