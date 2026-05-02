@@ -302,7 +302,8 @@ margin-top: 18px;
 }
 .field-full-name-as-per-pan-panel > legend.field-label {
     font-weight: 700 !important;
-    color: #1f2937 !important;
+    color: #515356 !important;
+    font-size: 17px !important;
 }
 
 /* ================= ICON ================= */
