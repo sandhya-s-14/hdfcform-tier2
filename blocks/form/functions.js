@@ -231,12 +231,12 @@ function initOtp(globals) {
 function getBankLogo(bank) {
   const logos = {
     hdfc_bank: "/content/dam/s_hdfc_capstone/hdfc.png",
-    icici_bank: "https://logo.clearbit.com/icicibank.com",
-    axis_bank: "https://logo.clearbit.com/axisbank.com",
-    kotak: "https://logo.clearbit.com/kotak.com",
-    sbi: "https://logo.clearbit.com/sbi.co.in",
-    bank_of_baroda: "https://logo.clearbit.com/bankofbaroda.in",
-    idfc_first: "https://logo.clearbit.com/idfcfirstbank.com"
+    icici_bank: "/content/dam/s_hdfc_capstone/icici.png",
+    axis_bank: "/content/dam/s_hdfc_capstone/axis.png",
+    kotak: "/content/dam/s_hdfc_capstone/kotak.png",
+    sbi: "/content/dam/s_hdfc_capstone/sbi.png",
+    bank_of_baroda: "/content/dam/s_hdfc_capstone/bob.jpeg",
+    idfc_first: "/content/dam/s_hdfc_capstone/idfc.png"
   };
   return logos[bank] || "";
 }
@@ -281,10 +281,13 @@ function createOtherBankDropdown(select) {
   const dropdown = document.createElement('select');
   dropdown.className = 'bank-other-dropdown';
 
-  const defaultOption = document.createElement('option');
-  defaultOption.value = '';
-  defaultOption.text = 'Other Bank';
-  dropdown.appendChild(defaultOption);
+  const defaultValue = select.value || 'hdfc_bank';
+const defaultOption = Array.from(select.options).find(o => o.value === defaultValue);
+
+const option = document.createElement('option');
+option.value = defaultOption.value;
+option.text = defaultOption.text;
+dropdown.appendChild(option);
 
   Array.from(select.options).forEach(opt => {
     if (!opt.value) return;
@@ -325,26 +328,70 @@ function initBankSelection() {
   const row = document.createElement('div');
   row.className = 'bank-row';
 
-  Array.from(select.options).forEach(opt => {
-    if (!opt.value || opt.value === 'other_bank') return;
-    row.appendChild(createBankItem(opt, select));
-  });
+  const defaultValue = select.value || 'hdfc_bank';
+  const defaultOption = Array.from(select.options).find(o => o.value === defaultValue);
+
+  // ✅ Show ONLY HDFC initially
+  const defaultItem = createBankItem(defaultOption, select);
+  defaultItem.classList.add("active");
+  row.appendChild(defaultItem);
+
+  // ✅ "Other Bank" button
+  const otherBtn = document.createElement("div");
+  otherBtn.className = "bank-item other-btn";
+  otherBtn.innerHTML = `<span>Other Bank</span>`;
+  row.appendChild(otherBtn);
 
   left.appendChild(row);
 
-  const dropdown = createOtherBankDropdown(select);
+  // ✅ Dropdown (ONLY HDFC initially)
+  const dropdown = document.createElement("select");
+  dropdown.className = "bank-other-dropdown";
+
+  const defaultOpt = document.createElement("option");
+  defaultOpt.value = defaultOption.value;
+  defaultOpt.text = defaultOption.text;
+  dropdown.appendChild(defaultOpt);
+
+  // ✅ Dropdown change sync
+  dropdown.addEventListener("change", function () {
+    select.value = dropdown.value;
+    document.querySelectorAll('.bank-item').forEach(el => el.classList.remove('active'));
+  });
 
   const right = document.createElement("div");
-right.className = "bank-right";
+  right.className = "bank-right";
+  right.appendChild(dropdown);
 
-right.appendChild(dropdown);
-
-container.appendChild(left);
-container.appendChild(right);
+  container.appendChild(left);
+  container.appendChild(right);
 
   select.parentNode.appendChild(container);
 
-  setDefaultBank(select, container);
+  // ✅ Click "Other Bank"
+  otherBtn.addEventListener("click", function () {
+
+    row.innerHTML = "";
+
+    // show ALL banks
+    Array.from(select.options).forEach(opt => {
+      if (!opt.value) return;
+
+      const item = createBankItem(opt, select);
+      row.appendChild(item);
+    });
+
+    // update dropdown with ALL banks
+    dropdown.innerHTML = "";
+    Array.from(select.options).forEach(opt => {
+      if (!opt.value) return;
+
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.text = opt.text;
+      dropdown.appendChild(option);
+    });
+  });
 }
 
 /**
