@@ -331,33 +331,26 @@ function initBankSelection() {
   const defaultValue = select.value || 'hdfc_bank';
   const defaultOption = Array.from(select.options).find(o => o.value === defaultValue);
 
-  // ✅ Show ONLY HDFC initially
+  // ✅ SHOW ONLY HDFC ICON
   const defaultItem = createBankItem(defaultOption, select);
   defaultItem.classList.add("active");
   row.appendChild(defaultItem);
 
-  // ✅ "Other Bank" button
-  const otherBtn = document.createElement("div");
-  otherBtn.className = "bank-item other-btn";
-  otherBtn.innerHTML = `<span>Other Bank</span>`;
-  row.appendChild(otherBtn);
-
   left.appendChild(row);
 
-  // ✅ Dropdown (ONLY HDFC initially)
+  // ✅ DROPDOWN (HDFC + OTHER BANK ONLY)
   const dropdown = document.createElement("select");
   dropdown.className = "bank-other-dropdown";
 
-  const defaultOpt = document.createElement("option");
-  defaultOpt.value = defaultOption.value;
-  defaultOpt.text = defaultOption.text;
-  dropdown.appendChild(defaultOpt);
+  const hdfcOpt = document.createElement("option");
+  hdfcOpt.value = defaultOption.value;
+  hdfcOpt.text = defaultOption.text;
+  dropdown.appendChild(hdfcOpt);
 
-  // ✅ Dropdown change sync
-  dropdown.addEventListener("change", function () {
-    select.value = dropdown.value;
-    document.querySelectorAll('.bank-item').forEach(el => el.classList.remove('active'));
-  });
+  const otherOpt = document.createElement("option");
+  otherOpt.value = "other_bank";
+  otherOpt.text = "Other Bank";
+  dropdown.appendChild(otherOpt);
 
   const right = document.createElement("div");
   right.className = "bank-right";
@@ -368,29 +361,36 @@ function initBankSelection() {
 
   select.parentNode.appendChild(container);
 
-  // ✅ Click "Other Bank"
-  otherBtn.addEventListener("click", function () {
+  // ✅ WHEN USER SELECTS "OTHER BANK"
+  dropdown.addEventListener("change", function () {
 
-    row.innerHTML = "";
+    if (dropdown.value === "other_bank") {
 
-    // show ALL banks
-    Array.from(select.options).forEach(opt => {
-      if (!opt.value) return;
+      row.innerHTML = ""; // clear
 
-      const item = createBankItem(opt, select);
-      row.appendChild(item);
-    });
+      // show ALL bank icons
+      Array.from(select.options).forEach(opt => {
+        if (!opt.value) return;
 
-    // update dropdown with ALL banks
-    dropdown.innerHTML = "";
-    Array.from(select.options).forEach(opt => {
-      if (!opt.value) return;
+        const item = createBankItem(opt, select);
+        row.appendChild(item);
+      });
 
-      const option = document.createElement("option");
-      option.value = opt.value;
-      option.text = opt.text;
-      dropdown.appendChild(option);
-    });
+      // OPTIONAL: update dropdown to full list
+      dropdown.innerHTML = "";
+      Array.from(select.options).forEach(opt => {
+        if (!opt.value) return;
+
+        const option = document.createElement("option");
+        option.value = opt.value;
+        option.text = opt.text;
+        dropdown.appendChild(option);
+      });
+
+    } else {
+      // normal selection
+      select.value = dropdown.value;
+    }
   });
 }
 
