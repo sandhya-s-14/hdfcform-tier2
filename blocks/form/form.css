@@ -1594,43 +1594,72 @@ main .form form .field-full-name-as-per-aadhaar input {
 }
 
 /* ================= Address Details================= */
-/* ================= ADDRESS FIELD LIKE FULL NAME ================= */
-.field-address-as-per-aadhaar-records {
+/* ================= ADDRESS DETAILS CARD ================= */
+.field-address-details {
 
     background: #e9e7f3 !important;   /* light purple */
     border-radius: 16px !important;
 
-    padding: 18px 20px 18px 20px !important;
+    padding: 20px 20px 20px 56px !important;
 
     position: relative;
+    margin-bottom: 20px;
 }
 
-/* LEFT BLUE LINE */
-.field-address-as-per-aadhaar-records::before {
+/* ================= HEADER ================= */
+.field-address-details > legend {
+
+    display: flex !important;
+    align-items: center;
+
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+
+    margin-bottom: 10px !important;
+    padding: 0 !important;
+}
+
+/* ================= ICON ================= */
+.field-address-details > legend::before {
     content: "";
     position: absolute;
-    left: 12px;
-    top: 16px;
-    bottom: 16px;
+    left: 20px;
+    top: 22px;
 
-    width: 3px;
-    background: #2563eb;   /* blue line */
+    width: 20px;
+    height: 20px;
 
-    border-radius: 2px;
+    background: url("/content/dam/s_hdfc_capstone/location.svg") no-repeat center;
+    background-size: contain;
 }
 
-/* LABEL TEXT */
-.field-address-as-per-aadhaar-records label,
-.field-address-as-per-aadhaar-records .field-label {
+/* ================= REMOVE ARROW ================= */
+.field-address-details > legend::after {
+    content: none !important;
+}
+
+/* ================= INNER CONTENT ================= */
+.field-address-details .field-wrapper {
+    margin-bottom: 12px !important;
+}
+
+/* LABEL */
+.field-address-details label,
+.field-address-details .field-label {
     font-size: 14px !important;
     color: #6b7280 !important;
-    margin-bottom: 6px;
 }
 
-/* VALUE TEXT */
-.field-address-as-per-aadhaar-records p,
-.field-address-as-per-aadhaar-records span {
+/* VALUE */
+.field-address-details p,
+.field-address-details span {
     font-size: 14px !important;
     color: #111827 !important;
     font-weight: 500;
+}
+
+/* RADIO GROUP SPACING */
+.field-address-details .radio-group-wrapper {
+    margin-top: 10px;
 }
