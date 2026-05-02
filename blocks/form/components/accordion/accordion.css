@@ -568,3 +568,15 @@ margin-top: 18px;
     background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 2h9l5 5v15H6z'/></svg>") no-repeat center;
     background-size: contain;
 }
+
+/* MOVE VERIFY BUTTON LEFT */
+.field-work-email-id-panel .button-wrapper {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start !important;
+}
+
+/* adjust spacing */
+.field-work-email-id-panel .button-wrapper button {
+    margin-left: 10px !important;
+}
