@@ -1594,58 +1594,52 @@ main .form form .field-full-name-as-per-aadhaar input {
 }
 
 /* ================= Address Details================= */
-/* ================= FORCE ADDRESS LIKE FULL NAME ================= */
-
-/* REMOVE AEM FIELDSET STYLE */
+/* ================= ADDRESS CARD ================= */
 .field-address-details {
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* MAKE INNER CONTENT THE CARD */
-.field-address-details > div {
   background: #e9e6f5 !important;
   border-radius: 18px !important;
-  padding: 16px 20px 16px 32px !important;
+  padding: 18px 20px 18px 40px !important;
   position: relative !important;
+  margin-bottom: 16px;
 }
 
 /* LEFT BLUE LINE */
-.field-address-details > div::before {
-  content: "" !important;
-  position: absolute !important;
-  left: 14px !important;
-  top: 16px !important;
-  bottom: 16px !important;
-  width: 3px !important;
-  background: #6f7bf7 !important;
-  border-radius: 3px !important;
+.field-address-details::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  bottom: 18px;
+  width: 3px;
+  background: #6f7bf7;
+  border-radius: 3px;
 }
 
-/* REMOVE LEGEND COMPLETELY (this is key) */
+/* ================= HEADER ================= */
 .field-address-details > legend {
-  display: none !important;
+  display: flex !important;
+  align-items: center;
+
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #2d2f39 !important;
+
+  margin-bottom: 12px !important;
+  padding: 0 !important;
 }
 
-/* ADD TITLE INSIDE CARD */
-.field-address-details > div::after {
-  content: "Address Details";
-  display: block;
-  font-size: 18px;
-  font-weight: 600;
-  color: #2d2f39;
-  margin-bottom: 12px;
+/* REMOVE DEFAULT AEM BORDER */
+main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
+  border-bottom: none !important;
 }
 
-/* LABEL */
+/* ================= CONTENT ================= */
 .field-address-details label,
 .field-address-details .field-label {
   font-size: 13px !important;
   color: #6b6f85 !important;
 }
 
-/* VALUE */
 .field-address-details p,
 .field-address-details span {
   font-size: 15px !important;
@@ -1653,10 +1647,10 @@ main .form form .field-full-name-as-per-aadhaar input {
   color: #2d2f39 !important;
 }
 
-/* RADIO LEFT */
+/* RADIO LEFT ALIGN */
 .field-address-details .radio-group-wrapper {
   display: flex !important;
   justify-content: flex-start !important;
-  gap: 24px !important;
-  margin-top: 12px !important;
+  gap: 24px;
+  margin-top: 12px;
 }
