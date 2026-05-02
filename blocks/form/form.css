@@ -1854,6 +1854,9 @@ main .form .field-plain-text p p {
   font-weight: 600;
   color: #1f2937;
 }
+.field-select-bank-panel {
+  border: 1px solid #c7d2fe !important;
+}
 
 /* ===== ICON BEFORE TEXT ===== */
 .field-select-bank-panel > legend.field-label::before {
