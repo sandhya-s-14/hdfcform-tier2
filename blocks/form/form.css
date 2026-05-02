@@ -1594,7 +1594,7 @@ main .form form .field-full-name-as-per-aadhaar input {
 }
 
 /* ================= Address Details================= */
-/* ================= ADDRESS CARD ================= */
+/* ================= MAKE LEGEND PART OF CARD ================= */
 .field-address-details {
     background: #e9e7f3 !important;
     border-radius: 16px !important;
@@ -1602,68 +1602,61 @@ main .form form .field-full-name-as-per-aadhaar input {
     position: relative;
 }
 
-/* LEFT BLUE BORDER */
-.field-address-details::before {
-    content: "";
-    position: absolute;
-    left: 12px;
-    top: 16px;
-    bottom: 16px;
-    width: 3px;
-    background: #2563eb;
-    border-radius: 2px;
-}
-
-/* ================= HEADER FIX ================= */
+/* MOVE LEGEND INSIDE VISUALLY */
 .field-address-details > legend {
+    position: relative;
     display: flex !important;
-    align-items: center !important;
+    align-items: center;
     gap: 10px;
 
     font-size: 18px !important;
     font-weight: 600 !important;
     color: #1f2937 !important;
 
-    margin-bottom: 14px !important;
+    margin: 0 0 16px 0 !important;
     padding: 0 !important;
 }
 
-/* ICON FIX (aligned properly) */
+/* ICON (inside card aligned properly) */
 .field-address-details > legend::before {
     content: "";
     width: 20px;
     height: 20px;
 
-    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5 14.5 7.6 14.5 9 13.4 11.5 12 11.5z'/></svg>") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z'/></svg>") no-repeat center;
 
     background-size: contain;
 }
 
-/* REMOVE ARROW */
-.field-address-details > legend::after {
-    content: none !important;
+/* REMOVE AEM DEFAULT LEGEND GAP */
+main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
 }
 
-/* ================= TEXT ================= */
-.field-address-details label,
-.field-address-details .field-label {
-    font-size: 14px !important;
-    color: #6b7280 !important;
+/* ================= BLUE LINE FIX ================= */
+.field-address-details::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 20px;
+    bottom: 20px;
+
+    width: 3px;
+    background: #2563eb;
+    border-radius: 2px;
 }
 
-/* ================= RADIO ALIGN LEFT ================= */
+/* ================= CONTENT ALIGN ================= */
+.field-address-details .field-wrapper,
+.field-address-details .text-wrapper,
+.field-address-details .plain-text-wrapper {
+    margin-bottom: 14px !important;
+}
+
+/* ================= RADIO LEFT ================= */
 .field-address-details .radio-group-wrapper {
     display: flex !important;
-    justify-content: flex-start !important;  /* LEFT ALIGN */
+    justify-content: flex-start !important;
     gap: 24px;
-    margin-top: 10px;
-}
-
-/* RADIO ITEMS */
-.field-address-details .radio-group-wrapper label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    color: #374151;
 }
