@@ -577,6 +577,26 @@ margin-top: 18px;
 }
 
 /* adjust spacing */
-.field-work-email-id-panel .button-wrapper button {
-    margin-left: 10px !important;
+   .field-work-email-id-panel .button-wrapper button {
+    margin-left: -300px !important;
+    margin-bottom: -20px;
+}
+
+
+/* REMOVE GRID PUSH */
+.field-personal-details-customer .button-wrapper.col-2 {
+    width: auto !important;
+    flex: none !important;
+}
+
+/* ALIGN BUTTON LEFT */
+.field-personal-details-customer .button-wrapper {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start !important;
+}
+
+/* SMALL LEFT SPACING */
+.field-personal-details-customer .button-wrapper button {
+    margin-left: 8px !important;
 }
