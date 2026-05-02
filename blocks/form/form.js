@@ -615,13 +615,23 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
         tile.addEventListener("click", () => {
+
+            // set value
             select.value = option.value;
             select.dispatchEvent(new Event("change"));
 
+            // active state
             document.querySelectorAll(".bank-tile")
                 .forEach(t => t.classList.remove("active"));
 
             tile.classList.add("active");
+
+            // SHOW dropdown only for OTHER BANK
+            if (option.value === "other_bank") {
+                select.classList.add("show-dropdown");
+            } else {
+                select.classList.remove("show-dropdown");
+            }
         });
 
         container.appendChild(tile);
