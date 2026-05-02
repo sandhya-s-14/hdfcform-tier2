@@ -286,13 +286,19 @@ margin-top: 18px;
     display: flex !important;
     align-items: center;
     justify-content: space-between;
+
     background: #e7eefc !important;
     padding: 18px 20px 18px 56px !important;
+
     font-size: 18px !important;
     font-weight: 600 !important;
     color: #3f4a5a !important;
+
     margin: 0 0 10px !important;
     border-radius: 16px 16px 0 0 !important;
+
+    width: 100%;
+    position: relative;
 }
 
 /* ================= ICON ================= */
@@ -380,20 +386,12 @@ margin-top: 18px;
 
 /* ================= LABEL FIX ================= */
 .field-full-name-as-per-pan-panel label,
+.field-full-name-as-per-pan-panel .field-label,
 .field-full-name-as-per-pan-panel .cmp-adaptiveform-textinput__label {
 
     font-size: 14px !important;
     font-weight: 500 !important;
     color: #6b7280 !important;
-
-    display: block;
-    margin-bottom: 6px;
-}
-
-.field-full-name-as-per-pan-panel .field-label{
-    font-size: 18px !important;
-    font-weight: 500 !important;
-    color: #090a0a !important;
 
     display: block;
     margin-bottom: 6px;
