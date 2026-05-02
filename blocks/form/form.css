@@ -1613,13 +1613,6 @@ main .form form .field-full-name-as-per-aadhaar input {
     background: #6f7bf7;
     border-radius: 3px;
 }
-/* ================= ADDRESS CARD ================= */
-.field-address-details {
-    background: #e9e6f5 !important;
-    border-radius: 18px !important;
-    padding: 48px 20px 20px 48px !important;
-    position: relative;
-}
 
 /* ================= HEADER TEXT ================= */
 .field-address-details::before {
@@ -1641,8 +1634,8 @@ main .form form .field-full-name-as-per-aadhaar input {
     top: 18px;
     left: 20px;
 
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
 
     background: url("/content/dam/s_hdfc_capstone/location.svg") no-repeat center;
 
