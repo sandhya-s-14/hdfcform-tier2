@@ -334,8 +334,13 @@ function initBankSelection() {
 
   const dropdown = createOtherBankDropdown(select);
 
-  container.appendChild(left);
-  container.appendChild(dropdown);
+  const right = document.createElement("div");
+right.className = "bank-right";
+
+right.appendChild(dropdown);
+
+container.appendChild(left);
+container.appendChild(right);
 
   select.parentNode.appendChild(container);
 

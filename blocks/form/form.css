@@ -1920,3 +1920,37 @@ main .form .field-plain-text p p {
   background: #ccc;
   border-radius: 10px;
 }
+
+.bank-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* LEFT SIDE */
+.bank-left {
+  flex: 1;
+  overflow: hidden;
+}
+
+.bank-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+}
+
+/* RIGHT SIDE */
+.bank-right {
+  flex-shrink: 0;
+}
+
+/* DROPDOWN */
+.bank-other-dropdown {
+  display: block !important; /* 🔥 force visible */
+  min-width: 220px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
