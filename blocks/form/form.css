@@ -1548,4 +1548,47 @@ main .form form .field-full-name-as-per-aadhaar input {
 }
 */
 
-/* ===== Address Section Card ===== */
+/* =========================Customer Details ============================== */
+/* ================= CUSTOMER DETAILS ================= */
+.field-customer-details > legend {
+
+    /* clean look */
+    background: transparent !important;
+    padding: 0 !important;
+    margin-bottom: 12px !important;
+    border-radius: 0 !important;
+
+    /* layout */
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+
+    /* text */
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+
+    position: relative;
+}
+
+/* ICON */
+.field-customer-details > legend::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z'/></svg>") no-repeat center;
+
+    background-size: contain;
+}
+
+/* REMOVE ARROW */
+.field-customer-details > legend::after {
+    content: none !important;
+}
+
+/* REMOVE PANEL STYLE */
+.field-customer-details {
+    background: transparent !important;
+    border: none !important;
+}
