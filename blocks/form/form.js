@@ -581,3 +581,52 @@ export default async function decorate(block) {
     container.replaceWith(form);
   }
 }
+
+/*-----------------------------Bureau PAGE---------------------------------------------*/
+document.addEventListener("DOMContentLoaded", function () {
+
+    const select = document.querySelector(".field-salary-bank select");
+    if (!select) return;
+
+    const container = document.createElement("div");
+    container.className = "bank-tiles";
+
+    const icons = {
+        hdfc_bank: "/content/dam/s_hdfc_capstone/hdfc-logo.svg",
+        icici_bank: "/content/dam/s_hdfc_capstone/icici.png",
+        axis_bank: "/content/dam/s_hdfc_capstone/axis.png",
+        kotak: "/content/dam/s_hdfc_capstone/kotak.png",
+        sbi: "/content/dam/s_hdfc_capstone/sbi.png",
+        bank_of_baroda: "/content/dam/s_hdfc_capstone/bob.jpeg",
+        idfc_first: "/content/dam/s_hdfc_capstone/idfc.png",
+        other_bank: "/content/dam/s_hdfc_capstone/other.png"
+    };
+
+    [...select.options].forEach(option => {
+
+        if (!option.value) return;
+
+        const tile = document.createElement("div");
+        tile.className = "bank-tile";
+
+        tile.innerHTML = `
+            <img src="${icons[option.value] || icons.other_bank}">
+            <span>${option.text}</span>
+        `;
+
+        tile.addEventListener("click", () => {
+            select.value = option.value;
+            select.dispatchEvent(new Event("change"));
+
+            document.querySelectorAll(".bank-tile")
+                .forEach(t => t.classList.remove("active"));
+
+            tile.classList.add("active");
+        });
+
+        container.appendChild(tile);
+    });
+
+    select.parentElement.appendChild(container);
+
+});
