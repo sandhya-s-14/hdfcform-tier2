@@ -403,3 +403,136 @@ margin-top: 18px;
     margin-bottom: 16px !important;
 }
 
+/*======================employer details======================*/
+
+.field-employer-details > legend {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    background: #e7eefc !important;
+    padding: 18px 20px 18px 56px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #3f4a5a !important;
+    margin: 0 0 10px !important;
+    border-radius: 16px 16px 0 0 !important;
+    width: 100%;
+    position: relative;
+}
+
+.field-employer-details > legend::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 7h18v13H3zM16 3H8v4h8z'/></svg>") no-repeat center;
+    background-size: contain;
+}
+
+.field-employer-details > legend::after {
+    content: "⌄";
+    font-size: 20px;
+    color: #2563eb;
+}
+
+.field-income-details > legend {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    background: #e7eefc !important;
+    padding: 18px 20px 18px 56px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #3f4a5a !important;
+    margin: 0 0 10px !important;
+    border-radius: 16px 16px 0 0 !important;
+    width: 100%;
+    position: relative;
+}
+
+.field-income-details > legend::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 1v22M5 6h14M5 18h14'/></svg>") no-repeat center;
+    background-size: contain;
+}
+
+.field-income-details > legend::after {
+    content: "⌄";
+    font-size: 20px;
+    color: #2563eb;
+}
+
+.field-work-email-id-panel > legend {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    background: #e7eefc !important;
+    padding: 18px 20px 18px 56px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #3f4a5a !important;
+    margin: 0 0 10px !important;
+    border-radius: 16px 16px 0 0 !important;
+    width: 100%;
+    position: relative;
+}
+
+.field-work-email-id-panel > legend::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M2 4h20v16H2zM2 4l10 8 10-8'/></svg>") no-repeat center;
+    background-size: contain;
+}
+
+.field-work-email-id-panel > legend::after {
+    content: "⌄";
+    font-size: 20px;
+    color: #2563eb;
+}
+
+.field-type-of-loan-panel > legend {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    background: #e7eefc !important;
+    padding: 18px 20px 18px 56px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #3f4a5a !important;
+    margin: 0 0 10px !important;
+    border-radius: 16px 16px 0 0 !important;
+    width: 100%;
+    position: relative;
+}
+
+.field-type-of-loan-panel > legend::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l10 7-10 7-10-7z'/></svg>") no-repeat center;
+    background-size: contain;
+}
+
+.field-type-of-loan-panel > legend::after {
+    content: "⌄";
+    font-size: 20px;
+    color: #2563eb;
+}
