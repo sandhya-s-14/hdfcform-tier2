@@ -583,26 +583,111 @@ export default async function decorate(block) {
 }
 
 /*-----------------------------Bureau PAGE---------------------------------------------*/
-// ===== RADIO CARD CLICK =====
-const radioWrappers = document.querySelectorAll(".radio-wrapper");
+document.addEventListener("DOMContentLoaded", function () {
 
-radioWrappers.forEach((wrapper, index) => {
-  const radio = wrapper.querySelector("input[type='radio']");
+  const select = document.querySelector("select[name='salary_bank']");
+  if (!select) return;
 
-  // mark first as recommended (Account Aggregator)
-  if (index === 0) {
-    wrapper.classList.add("recommended");
+  // ===== HIDE ORIGINAL SELECT =====
+  select.style.display = "none";
+
+  // ===== LOGO MAP =====
+  const logos = {
+    hdfc_bank: "https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg",
+    icici_bank: "https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg",
+    axis_bank: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Axis_Bank_logo.svg",
+    kotak: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Kotak_Mahindra_Bank_logo.svg",
+    sbi: "https://upload.wikimedia.org/wikipedia/commons/c/cc/SBI-logo.svg",
+    bank_of_baroda: "https://upload.wikimedia.org/wikipedia/en/7/7b/Bank_of_Baroda_logo.svg",
+    idfc_first: "https://upload.wikimedia.org/wikipedia/commons/6/6b/IDFC_First_Bank_Logo.svg"
+  };
+
+  // ===== CREATE UI =====
+  const wrapper = document.createElement("div");
+  wrapper.className = "bank-ui-wrapper";
+
+  const topRow = document.createElement("div");
+  topRow.className = "bank-top";
+
+  const selectedCard = document.createElement("div");
+  selectedCard.className = "bank-selected";
+
+  const otherBtn = document.createElement("div");
+  otherBtn.className = "bank-other-btn";
+  otherBtn.innerText = "Other Bank";
+
+  const bankGrid = document.createElement("div");
+  bankGrid.className = "bank-grid";
+
+  const dropdownWrap = document.createElement("div");
+  dropdownWrap.className = "bank-dropdown";
+  dropdownWrap.appendChild(select);
+
+  // ===== SET DEFAULT =====
+  let defaultValue = select.value || "hdfc_bank";
+
+  function updateSelected(value) {
+    const option = [...select.options].find(o => o.value === value);
+    if (!option) return;
+
+    selectedCard.innerHTML = `
+      <img src="${logos[value] || ''}" alt="">
+      ${option.text}
+    `;
+
+    select.value = value;
   }
 
-  wrapper.addEventListener("click", () => {
+  updateSelected(defaultValue);
 
-    // remove active from all
-    radioWrappers.forEach(w => w.classList.remove("active"));
+  // ===== CREATE BANK CARDS =====
+  Array.from(select.options).forEach(opt => {
 
-    // add active
-    wrapper.classList.add("active");
+    if (opt.value === "hdfc_bank") return; // skip default
 
-    // check radio
-    if (radio) radio.checked = true;
+    const card = document.createElement("div");
+    card.className = "bank-card";
+    card.setAttribute("data-value", opt.value);
+    card.setAttribute("title", opt.text);
+
+    const img = document.createElement("img");
+    img.src = logos[opt.value] || "";
+    img.alt = opt.text;
+
+    card.appendChild(img);
+
+    // CLICK EVENT
+    card.addEventListener("click", () => {
+      updateSelected(opt.value);
+
+      // hide panels
+      bankGrid.classList.remove("active");
+      dropdownWrap.classList.remove("active");
+    });
+
+    bankGrid.appendChild(card);
   });
+
+  // ===== OTHER BUTTON CLICK =====
+  otherBtn.addEventListener("click", () => {
+    bankGrid.classList.toggle("active");
+    dropdownWrap.classList.toggle("active");
+  });
+
+  // ===== HANDLE DROPDOWN CHANGE =====
+  select.addEventListener("change", () => {
+    updateSelected(select.value);
+  });
+
+  // ===== BUILD UI =====
+  topRow.appendChild(selectedCard);
+  topRow.appendChild(otherBtn);
+
+  wrapper.appendChild(topRow);
+  wrapper.appendChild(bankGrid);
+  wrapper.appendChild(dropdownWrap);
+
+  // insert after select
+  select.parentNode.appendChild(wrapper);
+
 });

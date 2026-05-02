@@ -1854,7 +1854,7 @@ main .form .field-plain-text p p {
   border: none;
 }
 
-/* ===== BANK DROPDOWN → CARD LOOK ===== */
+/* ===== BANK DROPDOWN ===== */
 .field-salary-bank select {
   width: 100%;
   padding: 12px;
@@ -1864,43 +1864,45 @@ main .form .field-plain-text p p {
   font-size: 14px;
 }
 
-/* OPTIONAL: make dropdown look modern */
 .field-salary-bank select:focus {
   outline: none;
   border-color: #3b82f6;
 }
 
-/* ===== RADIO GROUP LAYOUT ===== */
+/* ===== RADIO GROUP ===== */
 .radio-group-wrapper {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
-/* ===== HIDE DEFAULT RADIO ===== */
+/* ===== HIDE RADIO ===== */
 .radio-wrapper input[type="radio"] {
   display: none;
 }
 
-/* ===== CARD STYLE ===== */
+/* ===== CARD ===== */
 .radio-wrapper {
   flex: 1;
+  min-width: 220px;
   background: #fff;
   border-radius: 12px;
   padding: 20px;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.25s ease;
   position: relative;
 }
 
-/* ===== TEXT STYLE ===== */
+/* ===== TEXT ===== */
 .radio-wrapper label {
   font-weight: 600;
   display: block;
   cursor: pointer;
+  padding-left: 30px;
 }
 
-/* ===== DESCRIPTION (auto inject space) ===== */
+/* ===== DESCRIPTION ===== */
 .radio-wrapper label::after {
   display: block;
   font-weight: normal;
@@ -1909,7 +1911,7 @@ main .form .field-plain-text p p {
   margin-top: 6px;
 }
 
-/* Add descriptions like Image 3 */
+/* Dynamic descriptions */
 input[value="account_aggregator"] + label::after {
   content: "Instant & secure, processed via RBI-regulated partner.";
 }
@@ -1922,7 +1924,7 @@ input[value="upload_bank_statement"] + label::after {
   content: "Upload bank statement of last 6 months.";
 }
 
-/* ===== SELECTED CARD ===== */
+/* ===== SELECTED ===== */
 .radio-wrapper.active {
   border-color: #3b82f6;
   background: #f0f7ff;
@@ -1936,8 +1938,9 @@ input[value="upload_bank_statement"] + label::after {
   border: 2px solid #bbb;
   border-radius: 50%;
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 20px;
+  left: 20px;
+  transition: 0.2s;
 }
 
 .radio-wrapper.active::before {
@@ -1945,7 +1948,12 @@ input[value="upload_bank_statement"] + label::after {
   background: #3b82f6;
 }
 
-/* ===== RECOMMENDED TAG ===== */
+/* ===== HOVER ===== */
+.radio-wrapper:hover {
+  border-color: #93c5fd;
+}
+
+/* ===== RECOMMENDED ===== */
 .radio-wrapper.recommended::after {
   content: "Recommended";
   position: absolute;
