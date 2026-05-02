@@ -1838,3 +1838,124 @@ main .form .field-plain-text p p {
 }
 
 /*==========================================BUREAU PAGE=========================*/
+/* ===== MAIN SECTION ===== */
+.field-e-verify-your-income {
+  background: #f6f8fc;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* ===== FIELDSET BOX ===== */
+.field-e-verify-your-income fieldset {
+  background: #eef2ff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: none;
+}
+
+/* ===== BANK DROPDOWN → CARD LOOK ===== */
+.field-salary-bank select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 14px;
+}
+
+/* OPTIONAL: make dropdown look modern */
+.field-salary-bank select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* ===== RADIO GROUP LAYOUT ===== */
+.radio-group-wrapper {
+  display: flex;
+  gap: 15px;
+}
+
+/* ===== HIDE DEFAULT RADIO ===== */
+.radio-wrapper input[type="radio"] {
+  display: none;
+}
+
+/* ===== CARD STYLE ===== */
+.radio-wrapper {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+}
+
+/* ===== TEXT STYLE ===== */
+.radio-wrapper label {
+  font-weight: 600;
+  display: block;
+  cursor: pointer;
+}
+
+/* ===== DESCRIPTION (auto inject space) ===== */
+.radio-wrapper label::after {
+  display: block;
+  font-weight: normal;
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+/* Add descriptions like Image 3 */
+input[value="account_aggregator"] + label::after {
+  content: "Instant & secure, processed via RBI-regulated partner.";
+}
+
+input[value="login_to_salary_account"] + label::after {
+  content: "Quick & hassle-free, processed via NetBanking.";
+}
+
+input[value="upload_bank_statement"] + label::after {
+  content: "Upload bank statement of last 6 months.";
+}
+
+/* ===== SELECTED CARD ===== */
+.radio-wrapper.active {
+  border-color: #3b82f6;
+  background: #f0f7ff;
+}
+
+/* ===== RADIO DOT ===== */
+.radio-wrapper::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.radio-wrapper.active::before {
+  border-color: #3b82f6;
+  background: #3b82f6;
+}
+
+/* ===== RECOMMENDED TAG ===== */
+.radio-wrapper.recommended::after {
+  content: "Recommended";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #16a34a;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 0 0 10px 10px;
+}

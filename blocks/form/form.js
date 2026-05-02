@@ -583,3 +583,26 @@ export default async function decorate(block) {
 }
 
 /*-----------------------------Bureau PAGE---------------------------------------------*/
+// ===== RADIO CARD CLICK =====
+const radioWrappers = document.querySelectorAll(".radio-wrapper");
+
+radioWrappers.forEach((wrapper, index) => {
+  const radio = wrapper.querySelector("input[type='radio']");
+
+  // mark first as recommended (Account Aggregator)
+  if (index === 0) {
+    wrapper.classList.add("recommended");
+  }
+
+  wrapper.addEventListener("click", () => {
+
+    // remove active from all
+    radioWrappers.forEach(w => w.classList.remove("active"));
+
+    // add active
+    wrapper.classList.add("active");
+
+    // check radio
+    if (radio) radio.checked = true;
+  });
+});
