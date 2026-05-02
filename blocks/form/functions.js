@@ -232,15 +232,15 @@ function initOtp(globals) {
  */
 function getBankLogo(bank) {
   const logos = {
-    hdfc_bank: "https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg",
-    icici_bank: "https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg",
-    axis_bank: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Axis_Bank_logo.svg",
-    kotak: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Kotak_Mahindra_Bank_logo.svg",
-    sbi: "https://upload.wikimedia.org/wikipedia/commons/c/cc/SBI-logo.svg",
-    bank_of_baroda: "https://upload.wikimedia.org/wikipedia/en/7/7b/Bank_of_Baroda_logo.svg",
-    idfc_first: "https://upload.wikimedia.org/wikipedia/commons/6/6b/IDFC_First_Bank_Logo.svg"
+    hdfc_bank: "https://logo.clearbit.com/hdfcbank.com",
+    icici_bank: "https://logo.clearbit.com/icicibank.com",
+    axis_bank: "https://logo.clearbit.com/axisbank.com",
+    kotak: "https://logo.clearbit.com/kotak.com",
+    sbi: "https://logo.clearbit.com/sbi.co.in",
+    bank_of_baroda: "https://logo.clearbit.com/bankofbaroda.in",
+    idfc_first: "https://logo.clearbit.com/idfcfirstbank.com"
   };
-  return logos[bank] || '';
+  return logos[bank] || "";
 }
 
 /**
