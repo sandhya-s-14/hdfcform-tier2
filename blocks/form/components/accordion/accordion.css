@@ -281,75 +281,125 @@ margin-top: 18px;
 }
 
 /*============================Customer details============================*/
-/* HEADER FIX */
+/* ================= HEADER ================= */
 .field-full-name-as-per-pan-panel > legend {
     display: flex !important;
     align-items: center;
     justify-content: space-between;
-    background: #e9eef6;
-    padding: 12px 16px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #1f2937;
+
+    background: #e7eefc !important;
+    padding: 18px 20px 18px 56px !important;
+
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: #3f4a5a !important;
+
+    margin: 0 0 10px !important;
+    border-radius: 16px 16px 0 0 !important;
+    width: 100%;
+
     position: relative;
 }
 
-/* Wrap text properly */
-.field-full-name-as-per-pan-panel > legend span {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* ICON FIX (no overlap) */
+/* ================= ICON ================= */
 .field-full-name-as-per-pan-panel > legend::before {
     content: "";
-    width: 18px;
-    height: 18px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+
     background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z'/></svg>") no-repeat center;
     background-size: contain;
-    margin-right: 8px;
 }
 
-/* ARROW FIX */
+/* ================= ARROW ================= */
 .field-full-name-as-per-pan-panel > legend::after {
     content: "⌄";
-    font-size: 18px;
+    font-size: 20px;
     color: #2563eb;
 }
 
-/* TARGET BOTH INPUT + TEXT OUTPUT */
+/* ================= LAYOUT ================= */
+.field-full-name-as-per-pan-panel .panel-wrapper {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+/* 2 column layout */
+.field-full-name-as-per-pan-panel .col-6 {
+    width: calc(50% - 8px) !important;
+}
+
+/* full width */
+.field-full-name-as-per-pan-panel .col-12 {
+    width: 100% !important;
+}
+
+/* ================= INPUT FIX ================= */
+/* Real input fields */
 .field-full-name-as-per-pan-panel input,
-.field-full-name-as-per-pan-panel .text,
-.field-full-name-as-per-pan-panel .cmp-text,
-.field-full-name-as-per-pan-panel div[data-cmp-hook-text] {
+.field-full-name-as-per-pan-panel textarea,
+.field-full-name-as-per-pan-panel select,
+.field-full-name-as-per-pan-panel .cmp-adaptiveform-textinput__widget {
 
-    display: block;
-    width: 100%;
-    height: 40px;
-    padding: 8px 10px;
+    display: block !important;
+    width: 100% !important;
+    height: 42px !important;
 
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
 
-    background-color: #ffffff;
-    color: #111827;
-    font-size: 14px;
+    background-color: #ffffff !important;
+    padding: 8px 12px !important;
+
+    font-size: 14px !important;
+    color: #111827 !important;
 
     box-sizing: border-box;
 }
 
-/* ADD SPACING BETWEEN LABEL AND FIELD */
-.field-full-name-as-per-pan-panel .field-wrapper,
-.field-full-name-as-per-pan-panel .text-wrapper {
-    margin-bottom: 16px;
+/* ================= FALLBACK (AEM TEXT MODE) ================= */
+.field-full-name-as-per-pan-panel p,
+.field-full-name-as-per-pan-panel span,
+.field-full-name-as-per-pan-panel .text,
+.field-full-name-as-per-pan-panel .cmp-text {
+
+    display: block !important;
+    width: 100% !important;
+    min-height: 42px;
+
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+
+    background: #ffffff !important;
+    padding: 8px 12px !important;
+
+    font-size: 14px !important;
+    color: #111827 !important;
 }
 
-/* FORCE LABEL FONT SIZE */
+/* ================= LABEL FIX ================= */
 .field-full-name-as-per-pan-panel label,
 .field-full-name-as-per-pan-panel .field-label,
 .field-full-name-as-per-pan-panel .cmp-adaptiveform-textinput__label {
-    
+
     font-size: 14px !important;
-    font-weight: 500;
+    font-weight: 500 !important;
+    color: #6b7280 !important;
+
+    display: block;
+    margin-bottom: 6px;
 }
+
+/* ================= SPACING ================= */
+.field-full-name-as-per-pan-panel .field-wrapper,
+.field-full-name-as-per-pan-panel .text-wrapper {
+    margin-bottom: 16px !important;
+}
+
