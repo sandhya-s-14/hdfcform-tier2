@@ -227,12 +227,10 @@ function initOtp(globals) {
 /*---------------------------------bureaupage----------------------------------------------*/
 /**
  * Returns bank logo based on value
- * @param {string} bank
- * @returns {string}
  */
 function getBankLogo(bank) {
   const logos = {
-    hdfc_bank: "https://logo.clearbit.com/hdfcbank.com",
+    hdfc_bank: "/content/dam/s_hdfc_capstone/hdfc.png",
     icici_bank: "https://logo.clearbit.com/icicibank.com",
     axis_bank: "https://logo.clearbit.com/axisbank.com",
     kotak: "https://logo.clearbit.com/kotak.com",
@@ -244,10 +242,7 @@ function getBankLogo(bank) {
 }
 
 /**
- * Creates a bank card element
- * @param {Object} option
- * @param {HTMLSelectElement} select
- * @returns {HTMLElement}
+ * Creates bank item
  */
 function createBankItem(option, select) {
   const item = document.createElement('div');
@@ -267,27 +262,20 @@ function createBankItem(option, select) {
 }
 
 /**
- * Updates selected bank UI + syncs select
- * @param {HTMLElement} selectedItem
- * @param {HTMLSelectElement} select
+ * Update selection
  */
 function updateActiveBank(selectedItem, select) {
-  const allItems = document.querySelectorAll('.bank-item');
-
-  allItems.forEach(function (el) {
+  document.querySelectorAll('.bank-item').forEach(el => {
     el.classList.remove('active');
   });
 
   selectedItem.classList.add('active');
-
   select.value = selectedItem.dataset.value;
   select.dispatchEvent(new Event('change'));
 }
 
 /**
- * Creates "Other Bank" dropdown
- * @param {HTMLSelectElement} select
- * @returns {HTMLElement}
+ * Create right-side dropdown
  */
 function createOtherBankDropdown(select) {
   const dropdown = document.createElement('select');
@@ -298,7 +286,7 @@ function createOtherBankDropdown(select) {
   defaultOption.text = 'Other Bank';
   dropdown.appendChild(defaultOption);
 
-  Array.from(select.options).forEach(function (opt) {
+  Array.from(select.options).forEach(opt => {
     if (!opt.value) return;
 
     const option = document.createElement('option');
@@ -310,24 +298,20 @@ function createOtherBankDropdown(select) {
   dropdown.addEventListener('change', function () {
     select.value = dropdown.value;
 
-    document.querySelectorAll('.bank-item')
-      .forEach(function (el) {
-        el.classList.remove('active');
-      });
+    document.querySelectorAll('.bank-item').forEach(el => {
+      el.classList.remove('active');
+    });
   });
 
   return dropdown;
 }
 
 /**
- * Initializes bank selection UI
+ * Init UI
  */
 function initBankSelection() {
   const select = document.querySelector("select[name='salary_bank']");
-
-  if (!select || select.dataset.initialized) {
-    return;
-  }
+  if (!select || select.dataset.initialized) return;
 
   select.dataset.initialized = 'true';
   select.style.display = 'none';
@@ -335,19 +319,22 @@ function initBankSelection() {
   const container = document.createElement('div');
   container.className = 'bank-container';
 
+  const left = document.createElement('div');
+  left.className = 'bank-left';
+
   const row = document.createElement('div');
   row.className = 'bank-row';
 
-  Array.from(select.options).forEach(function (opt) {
+  Array.from(select.options).forEach(opt => {
     if (!opt.value || opt.value === 'other_bank') return;
-
-    const item = createBankItem(opt, select);
-    row.appendChild(item);
+    row.appendChild(createBankItem(opt, select));
   });
+
+  left.appendChild(row);
 
   const dropdown = createOtherBankDropdown(select);
 
-  container.appendChild(row);
+  container.appendChild(left);
   container.appendChild(dropdown);
 
   select.parentNode.appendChild(container);
@@ -356,38 +343,27 @@ function initBankSelection() {
 }
 
 /**
- * Sets default selected bank
- * @param {HTMLSelectElement} select
- * @param {HTMLElement} container
+ * Default select
  */
 function setDefaultBank(select, container) {
-  const defaultValue = select.value || 'hdfc_bank';
-
-  const activeItem = container.querySelector(`[data-value="${defaultValue}"]`);
-
-  if (activeItem) {
-    activeItem.classList.add('active');
-  }
+  const value = select.value || 'hdfc_bank';
+  const active = container.querySelector(`[data-value="${value}"]`);
+  if (active) active.classList.add('active');
 }
 
 /**
- * AEM-safe initialization using MutationObserver
+ * AEM safe init
  */
 function observeBankField() {
-  const observer = new MutationObserver(function () {
-    const select = document.querySelector("select[name='salary_bank']");
-    if (select) {
+  const observer = new MutationObserver(() => {
+    if (document.querySelector("select[name='salary_bank']")) {
       initBankSelection();
     }
   });
 
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
-// INIT
 observeBankField();
 
 
