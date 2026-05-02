@@ -1854,8 +1854,17 @@ main .form .field-plain-text p p {
   font-weight: 600;
   color: #1f2937;
 }
+
+
+/* ❌ REMOVE HARD BORDER */
 .field-select-bank-panel {
-  border: 1px solid #c7d2fe !important;
+  border: none !important;              /* remove box border */
+  background: #eef2ff !important;       /* keep soft blue */
+  border-radius: 16px !important;
+  padding: 18px !important;
+
+  /* ✅ ADD SOFT SHADOW INSTEAD */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 /* ===== ICON BEFORE TEXT ===== */
