@@ -1594,69 +1594,63 @@ main .form form .field-full-name-as-per-aadhaar input {
 }
 
 /* ================= Address Details================= */
-/* ================= MAKE LEGEND PART OF CARD ================= */
+/* ================= ADDRESS CARD LIKE FULL NAME ================= */
+
+/* MAIN CARD */
 .field-address-details {
-    background: #e9e7f3 !important;
-    border-radius: 16px !important;
-    padding: 20px 20px 20px 56px !important;
-    position: relative;
+  background: #e9e6f5 !important;
+  border-radius: 18px !important;
+  padding: 16px 20px 16px 32px !important;
+  position: relative !important;
 }
 
-/* MOVE LEGEND INSIDE VISUALLY */
-.field-address-details > legend {
-    position: relative;
-    display: flex !important;
-    align-items: center;
-    gap: 10px;
-
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #1f2937 !important;
-
-    margin: 0 0 16px 0 !important;
-    padding: 0 !important;
-}
-
-/* ICON (inside card aligned properly) */
-.field-address-details > legend::before {
-    content: "";
-    width: 20px;
-    height: 20px;
-
-    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z'/></svg>") no-repeat center;
-
-    background-size: contain;
-}
-
-/* REMOVE AEM DEFAULT LEGEND GAP */
-main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
-    border-bottom: none !important;
-    margin-bottom: 0 !important;
-}
-
-/* ================= BLUE LINE FIX ================= */
+/* LEFT BLUE LINE */
 .field-address-details::before {
-    content: "";
-    position: absolute;
-    left: 16px;
-    top: 20px;
-    bottom: 20px;
-
-    width: 3px;
-    background: #2563eb;
-    border-radius: 2px;
+  content: "" !important;
+  position: absolute !important;
+  left: 14px !important;
+  top: 18px !important;
+  bottom: 18px !important;
+  width: 3px !important;
+  background: #6f7bf7 !important;
+  border-radius: 3px !important;
 }
 
-/* ================= CONTENT ALIGN ================= */
-.field-address-details .field-wrapper,
-.field-address-details .text-wrapper,
-.field-address-details .plain-text-wrapper {
-    margin-bottom: 14px !important;
+/* REMOVE ACCORDION HEADER LOOK */
+.field-address-details > legend {
+  all: unset !important;
+  display: block !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #2d2f39 !important;
+  margin-bottom: 12px !important;
 }
 
-/* ================= RADIO LEFT ================= */
+/* REMOVE ICON MISPLACEMENT */
+.field-address-details > legend::before,
+.field-address-details > legend::after {
+  content: none !important;
+}
+
+/* LABEL (Address as per Aadhaar) */
+.field-address-details .field-label,
+.field-address-details label {
+  font-size: 13px !important;
+  color: #6b6f85 !important;
+}
+
+/* VALUE TEXT */
+.field-address-details p,
+.field-address-details span {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #2d2f39 !important;
+}
+
+/* RADIO LEFT ALIGN */
 .field-address-details .radio-group-wrapper {
-    display: flex !important;
-    justify-content: flex-start !important;
-    gap: 24px;
+  display: flex !important;
+  justify-content: flex-start !important;
+  gap: 24px !important;
+  margin-top: 12px !important;
 }
