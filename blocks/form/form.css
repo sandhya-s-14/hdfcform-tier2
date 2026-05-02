@@ -1606,16 +1606,23 @@ main .form form .field-full-name-as-per-aadhaar input {
 .field-address-details::before {
     content: "";
     position: absolute;
-    left: 18px;
-    top: 36px;      /* start below header */
-    height: 60px;   /* smaller line */
-    width: 3px;
+    left: 35px;
+    top: 58px;
+    height: 60px;
+    width: 2px;
     background: #6f7bf7;
     border-radius: 3px;
 }
+/* ================= ADDRESS CARD ================= */
+.field-address-details {
+    background: #e9e6f5 !important;
+    border-radius: 18px !important;
+    padding: 48px 20px 20px 48px !important;
+    position: relative;
+}
 
 /* ================= HEADER TEXT ================= */
-.field-address-details::after {
+.field-address-details::before {
     content: "Address Details";
     position: absolute;
     top: 18px;
@@ -1626,12 +1633,19 @@ main .form form .field-full-name-as-per-aadhaar input {
     color: #2d2f39;
 }
 
-/* ================= ICON ================= */
-.field-address-details {
-    background-image: url("data:image/svg+xml;utf8,<svg fill='%232d2f39' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: 20px 18px;
-    background-size: 18px;
+/* ================= ICON FIX ================= */
+.field-address-details::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 20px;
+
+    width: 18px;
+    height: 18px;
+
+    background: url("data:image/svg+xml;utf8,<svg fill='%232d2f39' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z'/></svg>") no-repeat center;
+
+    background-size: contain;
 }
 
 /* ================= REMOVE EXTRA LINES ================= */
