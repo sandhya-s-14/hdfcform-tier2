@@ -1596,61 +1596,58 @@ main .form form .field-full-name-as-per-aadhaar input {
 /* ================= Address Details================= */
 /* ================= ADDRESS CARD ================= */
 .field-address-details {
-  background: #e9e6f5 !important;
-  border-radius: 18px !important;
-  padding: 18px 20px 18px 40px !important;
-  position: relative !important;
-  margin-bottom: 16px;
+    background: #e9e6f5 !important;
+    border-radius: 18px !important;
+    padding: 20px 20px 20px 48px !important;
+    position: relative;
 }
 
-/* LEFT BLUE LINE */
+/* SINGLE LEFT BLUE LINE */
 .field-address-details::before {
-  content: "";
-  position: absolute;
-  left: 14px;
-  top: 18px;
-  bottom: 18px;
-  width: 3px;
-  background: #6f7bf7;
-  border-radius: 3px;
+    content: "";
+    position: absolute;
+    left: 18px;           /* centered nicely */
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    background: #6f7bf7;
+    border-radius: 3px;
 }
 
-/* ================= HEADER ================= */
-.field-address-details > legend {
-  display: flex !important;
-  align-items: center;
-
-  font-size: 18px !important;
-  font-weight: 600 !important;
-  color: #2d2f39 !important;
-
-  margin-bottom: 12px !important;
-  padding: 0 !important;
+/* ❌ REMOVE INNER DEFAULT LINE */
+.field-address-details .field-wrapper::before,
+.field-address-details .text-wrapper::before,
+.field-address-details .plain-text-wrapper::before {
+    display: none !important;
+    content: none !important;
 }
 
-/* REMOVE DEFAULT AEM BORDER */
-main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
-  border-bottom: none !important;
+/* ================= CONTENT SPACING ================= */
+.field-address-details .field-wrapper,
+.field-address-details .text-wrapper,
+.field-address-details .plain-text-wrapper {
+    padding-left: 12px !important;
 }
 
-/* ================= CONTENT ================= */
+/* ================= LABEL ================= */
 .field-address-details label,
 .field-address-details .field-label {
-  font-size: 13px !important;
-  color: #6b6f85 !important;
+    font-size: 13px !important;
+    color: #6b6f85 !important;
 }
 
+/* ================= VALUE ================= */
 .field-address-details p,
 .field-address-details span {
-  font-size: 15px !important;
-  font-weight: 600 !important;
-  color: #2d2f39 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #2d2f39 !important;
 }
 
-/* RADIO LEFT ALIGN */
+/* ================= RADIO LEFT ================= */
 .field-address-details .radio-group-wrapper {
-  display: flex !important;
-  justify-content: flex-start !important;
-  gap: 24px;
-  margin-top: 12px;
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 24px;
+    margin-top: 12px;
 }
