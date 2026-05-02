@@ -370,7 +370,7 @@ function initBankSelection() {
 
       // show ALL bank icons
       Array.from(select.options).forEach(opt => {
-        if (!opt.value) return;
+         if (!opt.value || opt.value === "other_bank") return;
 
         const item = createBankItem(opt, select);
         row.appendChild(item);
@@ -379,8 +379,8 @@ function initBankSelection() {
       // OPTIONAL: update dropdown to full list
       dropdown.innerHTML = "";
       Array.from(select.options).forEach(opt => {
-        if (!opt.value) return;
-
+        if (!opt.value || opt.value === "other_bank") return;
+        
         const option = document.createElement("option");
         option.value = opt.value;
         option.text = opt.text;
