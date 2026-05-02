@@ -588,10 +588,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const select = document.querySelector("select[name='salary_bank']");
   if (!select) return;
 
-  // ===== HIDE ORIGINAL SELECT =====
+  // Hide original select
   select.style.display = "none";
 
-  // ===== LOGO MAP =====
+  // Logo map
   const logos = {
     hdfc_bank: "https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg",
     icici_bank: "https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg",
@@ -602,92 +602,85 @@ document.addEventListener("DOMContentLoaded", function () {
     idfc_first: "https://upload.wikimedia.org/wikipedia/commons/6/6b/IDFC_First_Bank_Logo.svg"
   };
 
-  // ===== CREATE UI =====
+  // Wrapper
   const wrapper = document.createElement("div");
-  wrapper.className = "bank-ui-wrapper";
+  wrapper.className = "bank-strip";
 
-  const topRow = document.createElement("div");
-  topRow.className = "bank-top";
+  // Bank row
+  const bankRow = document.createElement("div");
+  bankRow.className = "bank-row";
 
-  const selectedCard = document.createElement("div");
-  selectedCard.className = "bank-selected";
-
-  const otherBtn = document.createElement("div");
-  otherBtn.className = "bank-other-btn";
-  otherBtn.innerText = "Other Bank";
-
-  const bankGrid = document.createElement("div");
-  bankGrid.className = "bank-grid";
-
+  // Dropdown (only for other bank)
   const dropdownWrap = document.createElement("div");
   dropdownWrap.className = "bank-dropdown";
   dropdownWrap.appendChild(select);
 
-  // ===== SET DEFAULT =====
-  let defaultValue = select.value || "hdfc_bank";
-
-  function updateSelected(value) {
-    const option = [...select.options].find(o => o.value === value);
-    if (!option) return;
-
-    selectedCard.innerHTML = `
-      <img src="${logos[value] || ''}" alt="">
-      ${option.text}
-    `;
-
-    select.value = value;
-  }
-
-  updateSelected(defaultValue);
-
-  // ===== CREATE BANK CARDS =====
+  // Create bank cards
   Array.from(select.options).forEach(opt => {
 
-    if (opt.value === "hdfc_bank") return; // skip default
+    if (opt.value === "other_bank") return;
 
     const card = document.createElement("div");
-    card.className = "bank-card";
+    card.className = "bank-item";
     card.setAttribute("data-value", opt.value);
-    card.setAttribute("title", opt.text);
 
-    const img = document.createElement("img");
-    img.src = logos[opt.value] || "";
-    img.alt = opt.text;
+    card.innerHTML = `
+      <img src="${logos[opt.value] || ''}" />
+      <span>${opt.text}</span>
+    `;
 
-    card.appendChild(img);
-
-    // CLICK EVENT
+    // click
     card.addEventListener("click", () => {
-      updateSelected(opt.value);
 
-      // hide panels
-      bankGrid.classList.remove("active");
+      document.querySelectorAll(".bank-item")
+        .forEach(c => c.classList.remove("active"));
+
+      card.classList.add("active");
+
+      select.value = opt.value;
       dropdownWrap.classList.remove("active");
     });
 
-    bankGrid.appendChild(card);
+    bankRow.appendChild(card);
   });
 
-  // ===== OTHER BUTTON CLICK =====
-  otherBtn.addEventListener("click", () => {
-    bankGrid.classList.toggle("active");
-    dropdownWrap.classList.toggle("active");
+  // OTHER BANK DROPDOWN BUTTON
+  const otherDropdown = document.createElement("select");
+  otherDropdown.className = "other-bank-select";
+
+  Array.from(select.options).forEach(opt => {
+    if (opt.value === "other_bank") {
+      const o = document.createElement("option");
+      o.text = "Other Bank";
+      o.value = "";
+      otherDropdown.appendChild(o);
+    } else {
+      const o = document.createElement("option");
+      o.text = opt.text;
+      o.value = opt.value;
+      otherDropdown.appendChild(o);
+    }
   });
 
-  // ===== HANDLE DROPDOWN CHANGE =====
-  select.addEventListener("change", () => {
-    updateSelected(select.value);
+  // change
+  otherDropdown.addEventListener("change", () => {
+    select.value = otherDropdown.value;
+
+    document.querySelectorAll(".bank-item")
+      .forEach(c => c.classList.remove("active"));
   });
 
-  // ===== BUILD UI =====
-  topRow.appendChild(selectedCard);
-  topRow.appendChild(otherBtn);
+  dropdownWrap.appendChild(otherDropdown);
 
-  wrapper.appendChild(topRow);
-  wrapper.appendChild(bankGrid);
+  // Append
+  wrapper.appendChild(bankRow);
   wrapper.appendChild(dropdownWrap);
 
-  // insert after select
   select.parentNode.appendChild(wrapper);
+
+  // Default selection
+  const defaultVal = select.value || "hdfc_bank";
+  const defaultCard = wrapper.querySelector(`[data-value="${defaultVal}"]`);
+  if (defaultCard) defaultCard.classList.add("active");
 
 });
