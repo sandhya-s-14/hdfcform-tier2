@@ -1631,6 +1631,7 @@ main .form form .field-full-name-as-per-aadhaar input {
     font-size: 18px;
     font-weight: 600;
     color: #2d2f39;
+    text-wrap: nowrap;
 }
 
 /* ================= ICON FIX ================= */
@@ -1643,7 +1644,7 @@ main .form form .field-full-name-as-per-aadhaar input {
     width: 18px;
     height: 18px;
 
-    background: url("data:image/svg+xml;utf8,<svg fill='%232d2f39' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7z'/></svg>") no-repeat center;
+    background: url("/content/dam/s_hdfc_capstone/location.svg") no-repeat center;
 
     background-size: contain;
 }
