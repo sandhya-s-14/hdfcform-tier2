@@ -2019,31 +2019,31 @@ main .form .field-plain-text p p {
 
 /* ================= BANK ICON MAPPING ================= */
 [data-id="hdfc_bank"] label::before {
-    background-image: url("/content/dam/s_hdfc_capstone/hdfc.svg");
+    background-image: url("/content/dam/s_hdfc_capstone/hdfc-logo.svg");
 }
 
 [data-id="icici_bank"] label::before {
-    background-image: url("/content/dam/s_hdfc_capstone/icici.svg");
+    background-image: url("/content/dam/s_hdfc_capstone/icici.png");
 }
 
 [data-id="axis_bank"] label::before {
-    background-image: url("/content/dam/s_hdfc_capstone/axis.svg");
+    background-image: url("/content/dam/s_hdfc_capstone/axis.png");
 }
 
 [data-id="kotak"] label::before {
-    background-image: url("/content/dam/s_hdfc_capstone/kotak.svg");
+    background-image: url("/content/dam/s_hdfc_capstone/kotak.png");
 }
 
 [data-id="sbi"] label::before {
-    background-image: url("/content/dam/s_hdfc_capstone/sbi.svg");
+    background-image: url("/content/dam/s_hdfc_capstone/sbi.png");
 }
 
 [data-id="bank_of_baroda"] label::before {
-    background-image: url("/content/dam/s_hdfc_capstone/bob.svg");
+    background-image: url("/content/dam/s_hdfc_capstone/bob.jpeg");
 }
 
 [data-id="idfc_first"] label::before {
-    background-image: url("/content/dam/s_hdfc_capstone/idfc.svg");
+    background-image: url("/content/dam/s_hdfc_capstone/idfc.png");
 }
 
 /* ================= SELECTED ================= */
