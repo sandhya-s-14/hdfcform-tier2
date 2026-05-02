@@ -282,31 +282,40 @@ margin-top: 18px;
 
 /*============================Customer details============================*/
 /* =========================
-GLOBAL PANEL (ALL SECTIONS)
+1) FIX PANEL ROOT (CRITICAL)
 ========================= */
-main .form form fieldset.panel-wrapper {
-    font-family: Roboto, Arial, sans-serif;
+/* AEM adds display:flex — we must override it */
+main .form form fieldset.panel-wrapper,
+main .form form fieldset.field-wrapper.panel-wrapper {
+    display: block !important;
+    width: 100% !important;
+
     background: #f8faff;
     border: 1px solid #edf0f5;
     border-radius: 16px;
-    margin-top: 20px;
+
+    margin: 20px 0;
+    padding-bottom: 16px;
     overflow: hidden;
 }
 
 /* =========================
-PANEL HEADER
+2) PANEL HEADER
 ========================= */
 main .form form fieldset.panel-wrapper > legend.field-label.accordion-legend {
     background: #e7eefc;
     padding: 14px 18px;
+
     font-size: 15px;
     font-weight: 600;
     color: #3f4a5a;
+
     border-radius: 16px 16px 0 0;
+    margin: 0;
 }
 
 /* =========================
-REMOVE OLD BLUE LINE STYLE
+3) REMOVE OLD BLUE LINE UI
 ========================= */
 main .form form
 .text-wrapper::before,
@@ -318,21 +327,34 @@ main .form form
 }
 
 /* =========================
-FIELD WRAPPER (ALL TYPES)
+4) FIELD WRAPPER (GRID SAFE)
 ========================= */
-main .form form
-.text-wrapper,
-main .form form
-.drop-down-wrapper,
-main .form form
-.plain-text-wrapper {
+main .form form .field-wrapper,
+main .form form .text-wrapper,
+main .form form .drop-down-wrapper,
+main .form form .plain-text-wrapper {
+    display: inline-block;
+    vertical-align: top;
+
     padding: 0 12px;
     margin-top: 16px;
+
     box-sizing: border-box;
 }
 
 /* =========================
-LABEL (ALL FIELDS)
+5) COLUMN SYSTEM
+========================= */
+main .form form .col-6 {
+    width: 50%;
+}
+
+main .form form .col-12 {
+    width: 100%;
+}
+
+/* =========================
+6) LABEL
 ========================= */
 main .form form .field-label {
     font-size: 12px;
@@ -342,7 +364,7 @@ main .form form .field-label {
 }
 
 /* =========================
-INPUT / SELECT / TEXTAREA (MAIN UI)
+7) INPUT STYLE (FINAL UI)
 ========================= */
 main .form form input,
 main .form form select,
@@ -357,7 +379,6 @@ main .form form textarea {
     padding: 10px 14px;
 
     font-size: 13px;
-    font-weight: 500;
     color: #2f3a4a;
 
     box-sizing: border-box;
@@ -365,7 +386,7 @@ main .form form textarea {
 }
 
 /* =========================
-FOCUS STATE
+8) FOCUS STATE
 ========================= */
 main .form form input:focus,
 main .form form select:focus,
@@ -376,7 +397,7 @@ main .form form textarea:focus {
 }
 
 /* =========================
-PLACEHOLDER STYLE
+9) PLACEHOLDER
 ========================= */
 main .form form input::placeholder,
 main .form form textarea::placeholder {
@@ -384,7 +405,7 @@ main .form form textarea::placeholder {
 }
 
 /* =========================
-READONLY / DISABLED
+10) READONLY / DISABLED
 ========================= */
 main .form form input[readonly],
 main .form form input:disabled {
@@ -393,7 +414,7 @@ main .form form input:disabled {
 }
 
 /* =========================
-DROPDOWN CUSTOM ARROW
+11) DROPDOWN ARROW
 ========================= */
 main .form form select {
     appearance: none;
@@ -405,18 +426,7 @@ main .form form select {
 }
 
 /* =========================
-LAYOUT (GRID)
-========================= */
-main .form form .col-6 {
-    width: 50%;
-}
-
-main .form form .col-12 {
-    width: 100%;
-}
-
-/* =========================
-FULL NAME PANEL LAYOUT
+12) FULL NAME PANEL (ONLY THIS SPECIAL)
 ========================= */
 .field-full-name-as-per-pan-panel .field-pan-first-name,
 .field-full-name-as-per-pan-panel .field-pan-middle-name {
@@ -428,15 +438,21 @@ FULL NAME PANEL LAYOUT
 }
 
 /* =========================
-OPTIONAL: FLEX FIX (IMPORTANT FOR AEM)
+13) ENSURE EACH PANEL STAYS SEPARATE
 ========================= */
-main .form form fieldset.panel-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+.field-personal-details,
+.field-employer-details,
+.field-income-details,
+.field-work-email-id-panel,
+.field-type-of-loan-panel,
+.field-full-name-as-per-pan-panel {
+    display: block !important;
+    width: 100%;
+    clear: both;
 }
 
 /* =========================
-FORCE OVERRIDE (AEM ISSUE FIX)
+14) FORCE OVERRIDE (AEM SAFE)
 ========================= */
 main .form form input,
 main .form form select,
