@@ -318,3 +318,38 @@ margin-top: 18px;
     color: #2563eb;
 }
 
+/* TARGET BOTH INPUT + TEXT OUTPUT */
+.field-full-name-as-per-pan-panel input,
+.field-full-name-as-per-pan-panel .text,
+.field-full-name-as-per-pan-panel .cmp-text,
+.field-full-name-as-per-pan-panel div[data-cmp-hook-text] {
+
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 8px 10px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    background-color: #ffffff;
+    color: #111827;
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+/* ADD SPACING BETWEEN LABEL AND FIELD */
+.field-full-name-as-per-pan-panel .field-wrapper,
+.field-full-name-as-per-pan-panel .text-wrapper {
+    margin-bottom: 16px;
+}
+
+/* FORCE LABEL FONT SIZE */
+.field-full-name-as-per-pan-panel label,
+.field-full-name-as-per-pan-panel .field-label,
+.field-full-name-as-per-pan-panel .cmp-adaptiveform-textinput__label {
+    
+    font-size: 14px !important;
+    font-weight: 500;
+}
