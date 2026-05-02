@@ -1838,41 +1838,47 @@ main .form .field-plain-text p p {
 }
 
 /*==========================================BUREAU PAGE=========================*/
-/* ===== FULL PANEL ===== */
-.field-select-bank-panel {
-  background: #dbe4ff !important;   /* flat light blue */
-  border-radius: 16px !important;
-  padding: 16px !important;
-  border: none !important;
+/* ===== HIDE DEFAULT LEGEND TEXT ===== */
+.field-select-bank-panel > legend.field-label {
+  font-size: 0 !important;   /* hides text */
+  position: relative;
+  padding: 0 !important;
+  margin-bottom: 16px !important;
 }
 
-/* ===== HEADER ===== */
+/* ===== CUSTOM HEADER TEXT ===== */
+.field-select-bank-panel > legend.field-label::after {
+  content: "Select bank where you receive your salary";
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+.field-select-bank-panel {
+  border: 1px solid #c7d2fe !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* ===== ICON BEFORE TEXT ===== */
+.field-select-bank-panel > legend.field-label::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  margin-right: 10px;
+  background: url("/content/dam/s_hdfc_capstone/bank.svg") no-repeat center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+/* ===== HEADER CONTAINER STYLE ===== */
 .field-select-bank-panel > legend.field-label {
   display: flex !important;
   align-items: center;
   gap: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1f2937;
-
-  background: #cfd9f7;  /* slightly darker strip */
-  padding: 12px 16px;
+  background: #eef2ff;
+  padding: 14px 16px !important;
   border-radius: 12px;
-}
-
-/* ICON */
-.field-select-bank-panel > legend.field-label::before {
-  content: "";
-  width: 18px;
-  height: 18px;
-  background: url("/content/dam/s_hdfc_capstone/bank.svg") no-repeat center;
-  background-size: contain;
-}
-
-/* ===== INNER CONTENT (NO CARD, NO SHADOW) ===== */
-.field-select-bank-panel .field-salary-bank {
-  background: transparent !important;  /* remove white box */
-  padding: 16px 10px 10px 10px;
 }
 
 /* ===== BANK LABEL ===== */
