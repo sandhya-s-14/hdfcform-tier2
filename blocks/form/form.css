@@ -1556,6 +1556,7 @@ main .form form .field-full-name-as-per-aadhaar input {
     background: transparent !important;
     padding: 0 !important;
     margin-bottom: 12px !important;
+    margin-left: 10px;
     border-radius: 0 !important;
 
     /* layout */
