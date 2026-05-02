@@ -586,20 +586,26 @@ export default async function decorate(block) {
 document.addEventListener("DOMContentLoaded", function () {
 
     const select = document.querySelector(".field-salary-bank select");
-    if (!select) return;
+    if (!select) {
+        console.log("Bank dropdown not found ❌");
+        return;
+    }
 
     const container = document.createElement("div");
     container.className = "bank-tiles";
 
+    const base = "/content/dam/s_hdfc_capstone";
+
+    // IMPORTANT: use rendition path for AEM
     const icons = {
-        hdfc_bank: "/content/dam/s_hdfc_capstone/hdfc-logo.svg",
-        icici_bank: "/content/dam/s_hdfc_capstone/icici.png",
-        axis_bank: "/content/dam/s_hdfc_capstone/axis.png",
-        kotak: "/content/dam/s_hdfc_capstone/kotak.png",
-        sbi: "/content/dam/s_hdfc_capstone/sbi.png",
-        bank_of_baroda: "/content/dam/s_hdfc_capstone/bob.jpeg",
-        idfc_first: "/content/dam/s_hdfc_capstone/idfc.png",
-        other_bank: "/content/dam/s_hdfc_capstone/other.png"
+        hdfc_bank: `${base}/hdfc-logo.svg/_jcr_content/renditions/original`,
+        icici_bank: `${base}/icici.png/_jcr_content/renditions/original`,
+        axis_bank: `${base}/axis.png/_jcr_content/renditions/original`,
+        kotak: `${base}/kotak.png/_jcr_content/renditions/original`,
+        sbi: `${base}/sbi.png/_jcr_content/renditions/original`,
+        bank_of_baroda: `${base}/bob.jpeg/_jcr_content/renditions/original`,
+        idfc_first: `${base}/idfc.png/_jcr_content/renditions/original`,
+        other_bank: `${base}/other.png/_jcr_content/renditions/original`
     };
 
     [...select.options].forEach(option => {
@@ -609,18 +615,20 @@ document.addEventListener("DOMContentLoaded", function () {
         const tile = document.createElement("div");
         tile.className = "bank-tile";
 
+        const imgSrc = icons[option.value] || icons.other_bank;
+
         tile.innerHTML = `
-            <img src="${icons[option.value] || icons.other_bank}">
+            <img src="${imgSrc}" onerror="this.style.display='none'">
             <span>${option.text}</span>
         `;
 
         tile.addEventListener("click", () => {
 
-            // set value
+            // SET VALUE
             select.value = option.value;
             select.dispatchEvent(new Event("change"));
 
-            // active state
+            // ACTIVE STATE
             document.querySelectorAll(".bank-tile")
                 .forEach(t => t.classList.remove("active"));
 

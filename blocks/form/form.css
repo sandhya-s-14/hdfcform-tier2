@@ -1867,7 +1867,7 @@ main .form .field-plain-text p p {
     margin-bottom: 12px !important;
 }
 
-/* ================= HIDE DROPDOWN SAFELY ================= */
+/* ================= SAFE HIDE DROPDOWN ================= */
 .field-salary-bank {
     position: relative;
 }
@@ -1876,6 +1876,14 @@ main .form .field-plain-text p p {
     opacity: 0;
     position: absolute;
     pointer-events: none;
+}
+
+/* SHOW when OTHER selected */
+.field-salary-bank select.show-dropdown {
+    opacity: 1 !important;
+    position: relative !important;
+    pointer-events: auto !important;
+    margin-top: 12px;
 }
 
 /* ================= BANK TILE CONTAINER ================= */
@@ -1918,18 +1926,10 @@ main .form .field-plain-text p p {
     color: #374151;
 }
 
-/* ACTIVE */
+/* ACTIVE TILE */
 .bank-tile.active {
     border: 2px solid #4f6df5;
     background: #eef2ff;
-}
-
-/* ================= OTHER BANK DROPDOWN ================= */
-.field-salary-bank select.show-dropdown {
-    opacity: 1 !important;
-    position: relative !important;
-    pointer-events: auto !important;
-    margin-top: 12px;
 }
 
 /* ================= METHOD SECTION ================= */
@@ -1973,7 +1973,7 @@ main .form .field-plain-text p p {
     font-weight: 600 !important;
 }
 
-/* ACTIVE */
+/* ACTIVE CARD */
 .field-e-verify-method input:checked + label {
     border: 2px solid #4f6df5;
     background: #eef2ff;
