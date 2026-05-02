@@ -1838,15 +1838,56 @@ main .form .field-plain-text p p {
 }
 
 /*==========================================BUREAU PAGE=========================*/
+/* ===== MAIN PANEL (OUTER CARD) ===== */
+.field-select-bank-panel {
+  background: #eaf0ff;              /* light blue */
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
 
-/* ===== BANK CONTAINER ===== */
+/* ===== HEADER (TITLE WITH ICON) ===== */
+.field-select-bank-panel > legend.field-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+/* ===== ICON ===== */
+.field-select-bank-panel > legend.field-label::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background: url("/content/dam/s_hdfc_capstone/bank.svg") no-repeat center;
+  background-size: contain;
+}
+
+/* ===== INNER WHITE CARD ===== */
+.field-select-bank-panel .field-salary-bank {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+}
+
+/* ===== LABEL (Bank *) ===== */
+.field-salary-bank .field-label {
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* ===== BANK CONTAINER (ICONS + DROPDOWN) ===== */
 .bank-container {
   display: flex;
   align-items: center;
-  gap: 20px;                 /* spacing between icons & dropdown */
+  gap: 20px;
 }
 
-/* ===== LEFT SIDE (ICONS) ===== */
+/* ===== LEFT ICON AREA ===== */
 .bank-left {
   flex: 1;
   overflow: hidden;
@@ -1874,7 +1915,7 @@ main .form .field-plain-text p p {
   transition: 0.2s;
 }
 
-/* ===== LOGO ===== */
+/* ===== ICON ===== */
 .bank-item img {
   width: 32px;
   height: 32px;
@@ -1893,27 +1934,25 @@ main .form .field-plain-text p p {
   border-color: #93c5fd;
 }
 
-/* ===== ACTIVE ===== */
+/* ===== ACTIVE SELECTED ===== */
 .bank-item.active {
   border: 2px solid #2563eb;
   background: #eff6ff;
   box-shadow: 0 0 0 2px #dbeafe;
 }
 
-/* ===== RIGHT SIDE (DROPDOWN) ===== */
+/* ===== DROPDOWN RIGHT ===== */
 .bank-right {
-  margin-left: 40px; /* 🔥 controls how much left/right */
+  margin-left: 40px;
 }
 
 /* ===== DROPDOWN ===== */
 .bank-other-dropdown {
-  display: block;
   min-width: 200px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #d1d5db;
   background: #fff;
-  cursor: pointer;
 }
 
 /* ===== SCROLLBAR ===== */
