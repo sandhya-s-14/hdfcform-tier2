@@ -1594,72 +1594,76 @@ main .form form .field-full-name-as-per-aadhaar input {
 }
 
 /* ================= Address Details================= */
-/* ================= ADDRESS DETAILS CARD ================= */
+/* ================= ADDRESS CARD ================= */
 .field-address-details {
-
-    background: #e9e7f3 !important;   /* light purple */
+    background: #e9e7f3 !important;
     border-radius: 16px !important;
-
     padding: 20px 20px 20px 56px !important;
-
     position: relative;
-    margin-bottom: 20px;
 }
 
-/* ================= HEADER ================= */
-.field-address-details > legend {
+/* LEFT BLUE BORDER */
+.field-address-details::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    bottom: 16px;
+    width: 3px;
+    background: #2563eb;
+    border-radius: 2px;
+}
 
+/* ================= HEADER FIX ================= */
+.field-address-details > legend {
     display: flex !important;
-    align-items: center;
+    align-items: center !important;
+    gap: 10px;
 
     font-size: 18px !important;
     font-weight: 600 !important;
     color: #1f2937 !important;
 
-    margin-bottom: 10px !important;
+    margin-bottom: 14px !important;
     padding: 0 !important;
 }
 
-/* ================= ICON ================= */
+/* ICON FIX (aligned properly) */
 .field-address-details > legend::before {
     content: "";
-    position: absolute;
-    left: 20px;
-    top: 22px;
-
     width: 20px;
     height: 20px;
 
-    background: url("/content/dam/s_hdfc_capstone/location.svg") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2C8 2 5 5 5 9c0 5.5 7 13 7 13s7-7.5 7-13c0-4-3-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5 14.5 7.6 14.5 9 13.4 11.5 12 11.5z'/></svg>") no-repeat center;
+
     background-size: contain;
 }
 
-/* ================= REMOVE ARROW ================= */
+/* REMOVE ARROW */
 .field-address-details > legend::after {
     content: none !important;
 }
 
-/* ================= INNER CONTENT ================= */
-.field-address-details .field-wrapper {
-    margin-bottom: 12px !important;
-}
-
-/* LABEL */
+/* ================= TEXT ================= */
 .field-address-details label,
 .field-address-details .field-label {
     font-size: 14px !important;
     color: #6b7280 !important;
 }
 
-/* VALUE */
-.field-address-details p,
-.field-address-details span {
-    font-size: 14px !important;
-    color: #111827 !important;
-    font-weight: 500;
+/* ================= RADIO ALIGN LEFT ================= */
+.field-address-details .radio-group-wrapper {
+    display: flex !important;
+    justify-content: flex-start !important;  /* LEFT ALIGN */
+    gap: 24px;
+    margin-top: 10px;
 }
 
-/* RADIO GROUP SPACING */
-.field-address-details .radio-group-wrapper {
-    margin-top: 10px;
+/* RADIO ITEMS */
+.field-address-details .radio-group-wrapper label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #374151;
 }
