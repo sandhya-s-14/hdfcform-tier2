@@ -1602,18 +1602,6 @@ main .form form .field-full-name-as-per-aadhaar input {
     position: relative;
 }
 
-/* ================= SMALL LEFT BLUE LINE ================= */
-.field-address-details::before {
-    content: "";
-    position: absolute;
-    left: 35px;
-    top: 58px;
-    height: 60px;
-    width: 2px;
-    background: #6f7bf7;
-    border-radius: 3px;
-}
-
 /* ================= HEADER TEXT ================= */
 .field-address-details::before {
     content: "Address Details";
