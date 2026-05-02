@@ -1541,10 +1541,11 @@ main .form form .field-full-name-as-per-aadhaar input {
   pointer-events: none !important;
 }
 
-/* Remove any AEM default input styling */
-main .form form input[type="text"] {
+/*/* Remove any AEM default input styling */
+/*main .form form input[type="text"] {
   background: transparent !important;
   border: none !important;
 }
+*/
 
 /* ===== Address Section Card ===== */
