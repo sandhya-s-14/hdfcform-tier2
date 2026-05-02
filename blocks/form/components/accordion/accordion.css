@@ -301,6 +301,12 @@ margin-top: 18px;
     position: relative;
 }
 
+.field-full-name-as-per-pan-panel > legend {
+    font-size: 18px !important;
+    font-weight: 700 !important;   /* stronger than variable */
+    color: #1f2937 !important;     /* darker like Personal Details */
+}
+
 /* ================= ICON ================= */
 .field-full-name-as-per-pan-panel > legend::before {
     content: "";
@@ -404,7 +410,6 @@ margin-top: 18px;
 
 /*======================Details=====================*/
 /* ================= HEADER ================= */
-.field-full-name-as-per-pan-panel > legend,
 .field-personal-details-customer > legend,
 .field-employer-details > legend,
 .field-income-details > legend,
