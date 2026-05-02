@@ -598,5 +598,6 @@ margin-top: 18px;
 
 /* SMALL LEFT SPACING */
 .field-personal-details-customer .button-wrapper button {
-    margin-left: 8px !important;
+    margin-left: -300px !important;
+    margin-bottom: -10px;
 }
