@@ -1592,3 +1592,45 @@ main .form form .field-full-name-as-per-aadhaar input {
     background: transparent !important;
     border: none !important;
 }
+
+/* ================= Address Details================= */
+/* ================= ADDRESS FIELD LIKE FULL NAME ================= */
+.field-address-as-per-aadhaar-records {
+
+    background: #e9e7f3 !important;   /* light purple */
+    border-radius: 16px !important;
+
+    padding: 18px 20px 18px 20px !important;
+
+    position: relative;
+}
+
+/* LEFT BLUE LINE */
+.field-address-as-per-aadhaar-records::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    bottom: 16px;
+
+    width: 3px;
+    background: #2563eb;   /* blue line */
+
+    border-radius: 2px;
+}
+
+/* LABEL TEXT */
+.field-address-as-per-aadhaar-records label,
+.field-address-as-per-aadhaar-records .field-label {
+    font-size: 14px !important;
+    color: #6b7280 !important;
+    margin-bottom: 6px;
+}
+
+/* VALUE TEXT */
+.field-address-as-per-aadhaar-records p,
+.field-address-as-per-aadhaar-records span {
+    font-size: 14px !important;
+    color: #111827 !important;
+    font-weight: 500;
+}
