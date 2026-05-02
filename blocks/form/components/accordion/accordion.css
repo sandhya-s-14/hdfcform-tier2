@@ -403,136 +403,168 @@ margin-top: 18px;
     margin-bottom: 16px !important;
 }
 
-/*======================employer details======================*/
+/*======================Details=====================*/
+/* ================= HEADER ================= */
+.field-full-name-as-per-pan-panel > legend,
+.field-personal-details-customer > legend,
+.field-employer-details > legend,
+.field-income-details > legend,
+.field-work-email-id-panel > legend,
+.field-type-of-loan-panel > legend {
 
-.field-employer-details > legend {
     display: flex !important;
     align-items: center;
     justify-content: space-between;
+
     background: #e7eefc !important;
     padding: 18px 20px 18px 56px !important;
+
     font-size: 18px !important;
     font-weight: 600 !important;
     color: #3f4a5a !important;
+
     margin: 0 0 10px !important;
     border-radius: 16px 16px 0 0 !important;
     width: 100%;
+
     position: relative;
+}
+
+/* ================= ARROW ================= */
+.field-full-name-as-per-pan-panel > legend::after,
+.field-personal-details-customer > legend::after,
+.field-employer-details > legend::after,
+.field-income-details > legend::after,
+.field-work-email-id-panel > legend::after,
+.field-type-of-loan-panel > legend::after {
+
+    content: "⌄";
+    font-size: 20px;
+    color: #2563eb;
+}
+
+/* ================= LAYOUT ================= */
+.field-full-name-as-per-pan-panel .panel-wrapper,
+.field-personal-details-customer .panel-wrapper,
+.field-employer-details .panel-wrapper,
+.field-income-details .panel-wrapper,
+.field-work-email-id-panel .panel-wrapper,
+.field-type-of-loan-panel .panel-wrapper {
+
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+}
+
+/* 2 column */
+.field-full-name-as-per-pan-panel .col-6,
+.field-personal-details-customer .col-6,
+.field-employer-details .col-6,
+.field-income-details .col-6,
+.field-work-email-id-panel .col-6,
+.field-type-of-loan-panel .col-6 {
+
+    width: calc(50% - 8px) !important;
+}
+
+/* full width */
+.field-full-name-as-per-pan-panel .col-12,
+.field-personal-details-customer .col-12,
+.field-employer-details .col-12,
+.field-income-details .col-12,
+.field-work-email-id-panel .col-12,
+.field-type-of-loan-panel .col-12 {
+
+    width: 100% !important;
+}
+
+/* ================= INPUT ================= */
+.field-full-name-as-per-pan-panel input,
+.field-personal-details-customer input,
+.field-employer-details input,
+.field-income-details input,
+.field-work-email-id-panel input,
+.field-type-of-loan-panel input,
+
+.field-full-name-as-per-pan-panel select,
+.field-personal-details-customer select,
+.field-employer-details select,
+.field-income-details select,
+.field-work-email-id-panel select,
+.field-type-of-loan-panel select,
+
+.field-full-name-as-per-pan-panel textarea,
+.field-personal-details-customer textarea,
+.field-employer-details textarea,
+.field-income-details textarea,
+.field-work-email-id-panel textarea,
+.field-type-of-loan-panel textarea {
+
+    display: block !important;
+    width: 100% !important;
+    height: 42px !important;
+
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+
+    background-color: #ffffff !important;
+    padding: 8px 12px !important;
+
+    font-size: 14px !important;
+    color: #111827 !important;
+
+    box-sizing: border-box;
+}
+
+/* ================= LABEL ================= */
+.field-full-name-as-per-pan-panel label,
+.field-personal-details-customer label,
+.field-employer-details label,
+.field-income-details label,
+.field-work-email-id-panel label,
+.field-type-of-loan-panel label {
+
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #6b7280 !important;
+
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* ================= SPACING ================= */
+.field-full-name-as-per-pan-panel .field-wrapper,
+.field-personal-details-customer .field-wrapper,
+.field-employer-details .field-wrapper,
+.field-income-details .field-wrapper,
+.field-work-email-id-panel .field-wrapper,
+.field-type-of-loan-panel .field-wrapper {
+
+    margin-bottom: 16px !important;
+}
+
+.field-personal-details-customer > legend::before {
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z'/></svg>") no-repeat center;
+    background-size: contain;
 }
 
 .field-employer-details > legend::before {
-    content: "";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 7h18v13H3zM16 3H8v4h8z'/></svg>") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M10 4h4v2h5v14H5V6h5zm0 0V2h4v2'/></svg>") no-repeat center;
     background-size: contain;
-}
-
-.field-employer-details > legend::after {
-    content: "⌄";
-    font-size: 20px;
-    color: #2563eb;
-}
-
-.field-income-details > legend {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    background: #e7eefc !important;
-    padding: 18px 20px 18px 56px !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #3f4a5a !important;
-    margin: 0 0 10px !important;
-    border-radius: 16px 16px 0 0 !important;
-    width: 100%;
-    position: relative;
 }
 
 .field-income-details > legend::before {
-    content: "";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 1v22M5 6h14M5 18h14'/></svg>") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 3h12v2H6zm0 4h12v2H6zm0 4h12v2H6zm0 4h12v2H6z'/></svg>") no-repeat center;
     background-size: contain;
-}
-
-.field-income-details > legend::after {
-    content: "⌄";
-    font-size: 20px;
-    color: #2563eb;
-}
-
-.field-work-email-id-panel > legend {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    background: #e7eefc !important;
-    padding: 18px 20px 18px 56px !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #3f4a5a !important;
-    margin: 0 0 10px !important;
-    border-radius: 16px 16px 0 0 !important;
-    width: 100%;
-    position: relative;
 }
 
 .field-work-email-id-panel > legend::before {
-    content: "";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M2 4h20v16H2zM2 4l10 8 10-8'/></svg>") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M2 4h20v16H2V4zm10 7l10-7H2l10 7z'/></svg>") no-repeat center;
     background-size: contain;
-}
-
-.field-work-email-id-panel > legend::after {
-    content: "⌄";
-    font-size: 20px;
-    color: #2563eb;
-}
-
-.field-type-of-loan-panel > legend {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    background: #e7eefc !important;
-    padding: 18px 20px 18px 56px !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: #3f4a5a !important;
-    margin: 0 0 10px !important;
-    border-radius: 16px 16px 0 0 !important;
-    width: 100%;
-    position: relative;
 }
 
 .field-type-of-loan-panel > legend::before {
-    content: "";
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    background: url("data:image/svg+xml;utf8,<svg fill='black' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2l10 7-10 7-10-7z'/></svg>") no-repeat center;
+    background: url("data:image/svg+xml;utf8,<svg fill='%233f4a5a' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 2h9l5 5v15H6z'/></svg>") no-repeat center;
     background-size: contain;
-}
-
-.field-type-of-loan-panel > legend::after {
-    content: "⌄";
-    font-size: 20px;
-    color: #2563eb;
 }
