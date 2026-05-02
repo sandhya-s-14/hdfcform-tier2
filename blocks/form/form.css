@@ -1873,17 +1873,23 @@ main .form .field-plain-text p p {
 
 /* ===== HEADER CONTAINER STYLE ===== */
 .field-select-bank-panel > legend.field-label {
-  display: flex !important;
-  align-items: center;
-  gap: 10px;
-  background: #eef2ff;
-  padding: 14px 16px !important;
-  border-radius: 12px;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    background: #eef2ff;
+    padding: 14px 16px !important;
+    border-radius: 12px;
+    /* margin-bottom: 10px !important; */
+    bottom: -25px;
 }
 
 /* ===== BANK LABEL ===== */
-.field-salary-bank .field-label {
-  margin-bottom: 10px;
+.field-select-bank-panel {
+    border: 1px solid #c7d2fe !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
 }
 /* ===== BANK CONTAINER (ICONS + DROPDOWN) ===== */
 .bank-container {
@@ -1902,6 +1908,7 @@ main .form .field-plain-text p p {
   display: flex;
   gap: 14px;
   overflow-x: auto;
+  padding-left: 10px;
 }
 
 /* ===== BANK CARD ===== */
