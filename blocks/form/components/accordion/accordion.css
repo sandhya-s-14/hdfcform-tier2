@@ -282,221 +282,166 @@ margin-top: 18px;
 
 /*============================Customer details============================*/
 /* =========================
-NEW PANELS (EMPLOYER / INCOME / LOAN TYPE / WORK EMAIL)
+GLOBAL PANEL (ALL SECTIONS)
 ========================= */
-main .form form
-.field-employer-details,
-main .form form
-.field-income-details,
-main .form form
-.field-work-email-id-panel,
-main .form form
-.field-type-of-loan-panel {
+main .form form fieldset.panel-wrapper {
     font-family: Roboto, Arial, sans-serif;
     background: #f8faff;
     border: 1px solid #edf0f5;
     border-radius: 16px;
-    overflow: hidden;
-    padding-bottom: 16px;
     margin-top: 20px;
-}
-
-main .form form
-.field-employer-details > legend.field-label.accordion-legend,
-main .form form
-.field-income-details > legend.field-label.accordion-legend,
-main .form form
-.field-work-email-id-panel > legend.field-label.accordion-legend,
-main .form form
-.field-type-of-loan-panel > legend.field-label.accordion-legend {
-    background: #e7eefc;
-    padding: 18px 20px 18px 56px;
-    position: relative;
-
-    font-size: 18px;
-    font-weight: 600;
-    color: #3f4a5a;
-
-    margin: 0 0 10px;
-    border-radius: 16px 16px 0 0;
-    width: 100%;
-}
-
-.field-employer-details > legend::before {
-    background: url("/content/dam/s_hdfc_capstone/office-work-business.svg") no-repeat center;
-}
-
-.field-income-details > legend::before {
-    background: url("/content/dam/s_hdfc_capstone/income-salary.svg") no-repeat center;
-}
-
-.field-work-email-id-panel > legend::before {
-    background: url("/content/dam/s_hdfc_capstone/email-svgrepo-com.svg") no-repeat center;
-}
-
-.field-type-of-loan-panel > legend::before {
-    background: url("/content/dam/s_hdfc_capstone/Loans.png") no-repeat center;
+    overflow: hidden;
 }
 
 /* =========================
-FIELD BLOCK (UPDATED FOR DROPDOWN + TEXT)
+PANEL HEADER
 ========================= */
-main .form form
-.field-employer-details > .text-wrapper,
-main .form form
-.field-employer-details > .drop-down-wrapper,
-main .form form
-.field-employer-details > .plain-text-wrapper,
-
-main .form form
-.field-income-details > .text-wrapper,
-main .form form
-.field-income-details > .drop-down-wrapper,
-main .form form
-.field-income-details > .plain-text-wrapper,
-
-main .form form
-.field-type-of-loan-panel > .drop-down-wrapper,
-
-main .form form
-.field-work-email-id-panel > .text-wrapper {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-
-    padding: 0 18px 0 16px;
-    margin-top: 16px;
-    box-sizing: border-box;
+main .form form fieldset.panel-wrapper > legend.field-label.accordion-legend {
+    background: #e7eefc;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #3f4a5a;
+    border-radius: 16px 16px 0 0;
 }
 
+/* =========================
+REMOVE OLD BLUE LINE STYLE
+========================= */
 main .form form
 .text-wrapper::before,
 main .form form
 .drop-down-wrapper::before,
 main .form form
 .plain-text-wrapper::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 6px;
-    width: 3px;
-    height: 42px;
-    background: #8eaaff;
-    border-radius: 2px;
-}
-
-main .form form select {
-    border: none;
-    background: transparent;
-
-    padding: 2px 0;
-    margin: 0;
-
-    font-size: 13px;
-    font-weight: 550;
-    color: #3f4a5a;
-
-    cursor: pointer;
-}
-
-main .form form select:focus {
-    outline: none;
-    border-bottom: 1px solid #5a8dee;
-}
-
-.field-employer-details .col-12,
-.field-income-details .col-12 {
-    width: 100% !important;
+    display: none !important;
 }
 
 /* =========================
-FULL NAME PANEL
+FIELD WRAPPER (ALL TYPES)
 ========================= */
 main .form form
-.field-full-name-as-per-pan-panel {
-    font-family: Roboto, Arial, sans-serif;
-    background: #f8faff;
-    border: 1px solid #edf0f5;
-    border-radius: 16px;
-    overflow: hidden;
-    padding-bottom: 16px;
-    margin-top: 20px;
-}
-
+.text-wrapper,
 main .form form
-.field-full-name-as-per-pan-panel > legend.field-label.accordion-legend {
-    background: #e7eefc;
-    padding: 18px 20px 18px 56px;
-    position: relative;
-
-    font-size: 18px;
-    font-weight: 600;
-    color: #3f4a5a;
-
-    margin: 0 0 10px;
-    border-radius: 16px 16px 0 0;
-    width: 100%;
-}
-
-.field-full-name-as-per-pan-panel > legend::before {
-    background: url("/content/dam/s_hdfc_capstone/personal info.png") no-repeat center;
-}
-
+.drop-down-wrapper,
 main .form form
-.field-full-name-as-per-pan-panel > .text-wrapper {
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-
-    padding: 0 18px 0 16px;
+.plain-text-wrapper {
+    padding: 0 12px;
     margin-top: 16px;
     box-sizing: border-box;
 }
 
-main .form form
-.field-full-name-as-per-pan-panel .text-wrapper::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 6px;
-    width: 3px;
-    height: 42px;
-    background: #8eaaff;
-    border-radius: 2px;
-}
-
-main .form form
-.field-full-name-as-per-pan-panel .field-label {
+/* =========================
+LABEL (ALL FIELDS)
+========================= */
+main .form form .field-label {
     font-size: 12px;
-    color: #7a8394;
-    margin-bottom: 4px;
+    color: #8b93a6;
+    margin-bottom: 6px;
     display: block;
 }
 
-main .form form
-.field-full-name-as-per-pan-panel input {
-    border: none;
-    background: transparent;
+/* =========================
+INPUT / SELECT / TEXTAREA (MAIN UI)
+========================= */
+main .form form input,
+main .form form select,
+main .form form textarea {
+    width: 100%;
+    height: 42px;
+
+    background: #ffffff;
+    border: 1px solid #e3e7ef;
+    border-radius: 10px;
+
+    padding: 10px 14px;
 
     font-size: 13px;
-    font-weight: 550;
-    color: #3f4a5a;
+    font-weight: 500;
+    color: #2f3a4a;
+
+    box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
-main .form form
-.field-full-name-as-per-pan-panel input:focus {
+/* =========================
+FOCUS STATE
+========================= */
+main .form form input:focus,
+main .form form select:focus,
+main .form form textarea:focus {
+    border: 1px solid #5a8dee;
+    box-shadow: 0 0 0 3px rgba(90, 141, 238, 0.12);
     outline: none;
-    border-bottom: 1px solid #5a8dee;
 }
 
-/* first & middle side by side */
+/* =========================
+PLACEHOLDER STYLE
+========================= */
+main .form form input::placeholder,
+main .form form textarea::placeholder {
+    color: #a0a7b5;
+}
+
+/* =========================
+READONLY / DISABLED
+========================= */
+main .form form input[readonly],
+main .form form input:disabled {
+    background: #f3f6fb;
+    color: #6b7280;
+}
+
+/* =========================
+DROPDOWN CUSTOM ARROW
+========================= */
+main .form form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%236b7280' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5H5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 35px;
+}
+
+/* =========================
+LAYOUT (GRID)
+========================= */
+main .form form .col-6 {
+    width: 50%;
+}
+
+main .form form .col-12 {
+    width: 100%;
+}
+
+/* =========================
+FULL NAME PANEL LAYOUT
+========================= */
 .field-full-name-as-per-pan-panel .field-pan-first-name,
 .field-full-name-as-per-pan-panel .field-pan-middle-name {
     width: 50%;
 }
 
-/* last name full width */
 .field-full-name-as-per-pan-panel .field-pan-last-name {
     width: 100%;
+}
+
+/* =========================
+OPTIONAL: FLEX FIX (IMPORTANT FOR AEM)
+========================= */
+main .form form fieldset.panel-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* =========================
+FORCE OVERRIDE (AEM ISSUE FIX)
+========================= */
+main .form form input,
+main .form form select,
+main .form form textarea {
+    border: 1px solid #e3e7ef !important;
+    background: #ffffff !important;
 }
 
