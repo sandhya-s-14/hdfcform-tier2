@@ -300,11 +300,9 @@ margin-top: 18px;
     width: 100%;
     position: relative;
 }
-
-.field-full-name-as-per-pan-panel > legend {
-    font-size: 18px !important;
-    font-weight: 700 !important;   /* stronger than variable */
-    color: #1f2937 !important;     /* darker like Personal Details */
+.field-full-name-as-per-pan-panel > legend.field-label {
+    font-weight: 700 !important;
+    color: #1f2937 !important;
 }
 
 /* ================= ICON ================= */
