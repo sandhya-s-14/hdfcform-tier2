@@ -279,3 +279,132 @@ border-top: 1px dashed #e4e8f0;
 padding-top: 14px;
 margin-top: 18px;
 }
+
+/*============================Customer details============================*/
+/* =========================
+NEW PANELS (EMPLOYER / INCOME / LOAN TYPE / WORK EMAIL)
+========================= */
+main .form form
+.field-employer-details,
+main .form form
+.field-income-details,
+main .form form
+.field-work-email-id-panel,
+main .form form
+.field-type-of-loan-panel {
+    font-family: Roboto, Arial, sans-serif;
+    background: #f8faff;
+    border: 1px solid #edf0f5;
+    border-radius: 16px;
+    overflow: hidden;
+    padding-bottom: 16px;
+    margin-top: 20px;
+}
+
+main .form form
+.field-employer-details > legend.field-label.accordion-legend,
+main .form form
+.field-income-details > legend.field-label.accordion-legend,
+main .form form
+.field-work-email-id-panel > legend.field-label.accordion-legend,
+main .form form
+.field-type-of-loan-panel > legend.field-label.accordion-legend {
+    background: #e7eefc;
+    padding: 18px 20px 18px 56px;
+    position: relative;
+
+    font-size: 18px;
+    font-weight: 600;
+    color: #3f4a5a;
+
+    margin: 0 0 10px;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+}
+
+.field-employer-details > legend::before {
+    background: url("/content/dam/s_hdfc_capstone/office-work-business.svg") no-repeat center;
+}
+
+.field-income-details > legend::before {
+    background: url("/content/dam/s_hdfc_capstone/income-salary.svg") no-repeat center;
+}
+
+.field-work-email-id-panel > legend::before {
+    background: url("/content/dam/s_hdfc_capstone/email-svgrepo-com.svg") no-repeat center;
+}
+
+.field-type-of-loan-panel > legend::before {
+    background: url("/content/dam/s_hdfc_capstone/Loans.png") no-repeat center;
+}
+
+/* =========================
+FIELD BLOCK (UPDATED FOR DROPDOWN + TEXT)
+========================= */
+main .form form
+.field-employer-details > .text-wrapper,
+main .form form
+.field-employer-details > .drop-down-wrapper,
+main .form form
+.field-employer-details > .plain-text-wrapper,
+
+main .form form
+.field-income-details > .text-wrapper,
+main .form form
+.field-income-details > .drop-down-wrapper,
+main .form form
+.field-income-details > .plain-text-wrapper,
+
+main .form form
+.field-type-of-loan-panel > .drop-down-wrapper,
+
+main .form form
+.field-work-email-id-panel > .text-wrapper {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+
+    padding: 0 18px 0 16px;
+    margin-top: 16px;
+    box-sizing: border-box;
+}
+
+main .form form
+.text-wrapper::before,
+main .form form
+.drop-down-wrapper::before,
+main .form form
+.plain-text-wrapper::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 3px;
+    height: 42px;
+    background: #8eaaff;
+    border-radius: 2px;
+}
+
+main .form form select {
+    border: none;
+    background: transparent;
+
+    padding: 2px 0;
+    margin: 0;
+
+    font-size: 13px;
+    font-weight: 550;
+    color: #3f4a5a;
+
+    cursor: pointer;
+}
+
+main .form form select:focus {
+    outline: none;
+    border-bottom: 1px solid #5a8dee;
+}
+
+.field-employer-details .col-12,
+.field-income-details .col-12 {
+    width: 100% !important;
+}
