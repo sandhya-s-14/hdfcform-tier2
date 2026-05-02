@@ -290,7 +290,7 @@ option.text = defaultOption.text;
 dropdown.appendChild(option);
 
   Array.from(select.options).forEach(opt => {
-    if (!opt.value) return;
+    if (!opt.value || opt.value === "other_bank") return;
 
     const option = document.createElement('option');
     option.value = opt.value;

@@ -1838,28 +1838,27 @@ main .form .field-plain-text p p {
 }
 
 /*==========================================BUREAU PAGE=========================*/
+
 /* ===== BANK CONTAINER ===== */
 .bank-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* key */
-  gap: 20px;
+  gap: 20px;                 /* spacing between icons & dropdown */
 }
 
-/* LEFT SIDE */
+/* ===== LEFT SIDE (ICONS) ===== */
 .bank-left {
   flex: 1;
   overflow: hidden;
 }
 
-/* ICON ROW */
 .bank-row {
   display: flex;
   gap: 14px;
   overflow-x: auto;
 }
 
-/* BANK CARD */
+/* ===== BANK CARD ===== */
 .bank-item {
   min-width: 80px;
   height: 80px;
@@ -1875,7 +1874,7 @@ main .form .field-plain-text p p {
   transition: 0.2s;
 }
 
-/* LOGO */
+/* ===== LOGO ===== */
 .bank-item img {
   width: 32px;
   height: 32px;
@@ -1883,35 +1882,41 @@ main .form .field-plain-text p p {
   margin-bottom: 6px;
 }
 
-/* TEXT */
+/* ===== TEXT ===== */
 .bank-item span {
   font-size: 11px;
   text-align: center;
 }
 
-/* HOVER */
+/* ===== HOVER ===== */
 .bank-item:hover {
   border-color: #93c5fd;
 }
 
-/* ACTIVE */
+/* ===== ACTIVE ===== */
 .bank-item.active {
   border: 2px solid #2563eb;
   background: #eff6ff;
   box-shadow: 0 0 0 2px #dbeafe;
 }
 
-/* RIGHT DROPDOWN */
+/* ===== RIGHT SIDE (DROPDOWN) ===== */
+.bank-right {
+  margin-left: 40px; /* 🔥 controls how much left/right */
+}
+
+/* ===== DROPDOWN ===== */
 .bank-other-dropdown {
+  display: block;
   min-width: 200px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #d1d5db;
   background: #fff;
-  flex-shrink: 0;
+  cursor: pointer;
 }
 
-/* SCROLL BAR CLEAN */
+/* ===== SCROLLBAR ===== */
 .bank-row::-webkit-scrollbar {
   height: 6px;
 }
@@ -1919,38 +1924,4 @@ main .form .field-plain-text p p {
 .bank-row::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
-}
-
-.bank-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-/* LEFT SIDE */
-.bank-left {
-  flex: 1;
-  overflow: hidden;
-}
-
-.bank-row {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-}
-
-/* RIGHT SIDE */
-.bank-right {
-  flex-shrink: 0;
-}
-
-/* DROPDOWN */
-.bank-other-dropdown {
-  display: block !important; /* 🔥 force visible */
-  min-width: 220px;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  background: #fff;
 }
