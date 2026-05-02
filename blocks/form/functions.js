@@ -223,7 +223,176 @@ function initOtp(globals) {
   startOtpTimer(globals);
 }
 // eslint-disable-next-line import/prefer-default-export
+
+/*---------------------------------bureaupage----------------------------------------------*/
+/**
+ * Returns bank logo based on value
+ * @param {string} bank
+ * @returns {string}
+ */
+function getBankLogo(bank) {
+  const logos = {
+    hdfc_bank: "https://upload.wikimedia.org/wikipedia/commons/2/28/HDFC_Bank_Logo.svg",
+    icici_bank: "https://upload.wikimedia.org/wikipedia/commons/1/12/ICICI_Bank_Logo.svg",
+    axis_bank: "https://upload.wikimedia.org/wikipedia/commons/7/7f/Axis_Bank_logo.svg",
+    kotak: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Kotak_Mahindra_Bank_logo.svg",
+    sbi: "https://upload.wikimedia.org/wikipedia/commons/c/cc/SBI-logo.svg",
+    bank_of_baroda: "https://upload.wikimedia.org/wikipedia/en/7/7b/Bank_of_Baroda_logo.svg",
+    idfc_first: "https://upload.wikimedia.org/wikipedia/commons/6/6b/IDFC_First_Bank_Logo.svg"
+  };
+  return logos[bank] || '';
+}
+
+/**
+ * Creates a bank card element
+ * @param {Object} option
+ * @param {HTMLSelectElement} select
+ * @returns {HTMLElement}
+ */
+function createBankItem(option, select) {
+  const item = document.createElement('div');
+  item.className = 'bank-item';
+  item.dataset.value = option.value;
+
+  item.innerHTML = `
+    <img src="${getBankLogo(option.value)}" alt="${option.text}">
+    <span>${option.text}</span>
+  `;
+
+  item.addEventListener('click', function () {
+    updateActiveBank(item, select);
+  });
+
+  return item;
+}
+
+/**
+ * Updates selected bank UI + syncs select
+ * @param {HTMLElement} selectedItem
+ * @param {HTMLSelectElement} select
+ */
+function updateActiveBank(selectedItem, select) {
+  const allItems = document.querySelectorAll('.bank-item');
+
+  allItems.forEach(function (el) {
+    el.classList.remove('active');
+  });
+
+  selectedItem.classList.add('active');
+
+  select.value = selectedItem.dataset.value;
+  select.dispatchEvent(new Event('change'));
+}
+
+/**
+ * Creates "Other Bank" dropdown
+ * @param {HTMLSelectElement} select
+ * @returns {HTMLElement}
+ */
+function createOtherBankDropdown(select) {
+  const dropdown = document.createElement('select');
+  dropdown.className = 'bank-other-dropdown';
+
+  const defaultOption = document.createElement('option');
+  defaultOption.value = '';
+  defaultOption.text = 'Other Bank';
+  dropdown.appendChild(defaultOption);
+
+  Array.from(select.options).forEach(function (opt) {
+    if (!opt.value) return;
+
+    const option = document.createElement('option');
+    option.value = opt.value;
+    option.text = opt.text;
+    dropdown.appendChild(option);
+  });
+
+  dropdown.addEventListener('change', function () {
+    select.value = dropdown.value;
+
+    document.querySelectorAll('.bank-item')
+      .forEach(function (el) {
+        el.classList.remove('active');
+      });
+  });
+
+  return dropdown;
+}
+
+/**
+ * Initializes bank selection UI
+ */
+function initBankSelection() {
+  const select = document.querySelector("select[name='salary_bank']");
+
+  if (!select || select.dataset.initialized) {
+    return;
+  }
+
+  select.dataset.initialized = 'true';
+  select.style.display = 'none';
+
+  const container = document.createElement('div');
+  container.className = 'bank-container';
+
+  const row = document.createElement('div');
+  row.className = 'bank-row';
+
+  Array.from(select.options).forEach(function (opt) {
+    if (!opt.value || opt.value === 'other_bank') return;
+
+    const item = createBankItem(opt, select);
+    row.appendChild(item);
+  });
+
+  const dropdown = createOtherBankDropdown(select);
+
+  container.appendChild(row);
+  container.appendChild(dropdown);
+
+  select.parentNode.appendChild(container);
+
+  setDefaultBank(select, container);
+}
+
+/**
+ * Sets default selected bank
+ * @param {HTMLSelectElement} select
+ * @param {HTMLElement} container
+ */
+function setDefaultBank(select, container) {
+  const defaultValue = select.value || 'hdfc_bank';
+
+  const activeItem = container.querySelector(`[data-value="${defaultValue}"]`);
+
+  if (activeItem) {
+    activeItem.classList.add('active');
+  }
+}
+
+/**
+ * AEM-safe initialization using MutationObserver
+ */
+function observeBankField() {
+  const observer = new MutationObserver(function () {
+    const select = document.querySelector("select[name='salary_bank']");
+    if (select) {
+      initBankSelection();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+}
+
+// INIT
+observeBankField();
+
+
 export {
   getFullName, days, submitFormArrayToString,
-   maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp
+   maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,getBankLogo,
+   createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField
 };
