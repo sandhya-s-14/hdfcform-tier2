@@ -1888,8 +1888,8 @@ main .form .field-plain-text p p {
     border: 1px solid #c7d2fe !important;
     border-radius: 12px !important;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
-    padding-bottom: 10px !important;
-    padding-top: 10px !important;
+    padding-bottom: 25px !important;
+    padding-top: 25px !important;
 }
 /* ===== BANK CONTAINER (ICONS + DROPDOWN) ===== */
 .bank-container {
@@ -1908,7 +1908,7 @@ main .form .field-plain-text p p {
   display: flex;
   gap: 14px;
   overflow-x: auto;
-  padding-left: 10px;
+  padding-left: 25px;
 }
 
 /* ===== BANK CARD ===== */
