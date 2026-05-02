@@ -1977,14 +1977,142 @@ main .form .field-plain-text p p {
     display: inline-block;
 }
 
+/* ================= BANK TILE CONTAINER ================= */
+.field-select-bank-panel .radio-group-wrapper {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
 
-/* ================= BUTTON ================= */
-.button-wrapper button {
-    background: linear-gradient(90deg, #5a73e8, #4f6df5);
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 10px;
-    font-weight: 600;
+/* ================= HIDE RADIO ================= */
+.field-select-bank-panel input[type="radio"] {
+    display: none;
+}
+
+/* ================= TILE ================= */
+.field-select-bank-panel .radio-wrapper label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 90px;
+    height: 70px;
+
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
     cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* ================= ICON ================= */
+.field-select-bank-panel .radio-wrapper label::before {
+    content: "";
+    width: 28px;
+    height: 28px;
+    margin-bottom: 6px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* ================= BANK ICON MAPPING ================= */
+[data-id="hdfc_bank"] label::before {
+    background-image: url("/content/dam/s_hdfc_capstone/hdfc.svg");
+}
+
+[data-id="icici_bank"] label::before {
+    background-image: url("/content/dam/s_hdfc_capstone/icici.svg");
+}
+
+[data-id="axis_bank"] label::before {
+    background-image: url("/content/dam/s_hdfc_capstone/axis.svg");
+}
+
+[data-id="kotak"] label::before {
+    background-image: url("/content/dam/s_hdfc_capstone/kotak.svg");
+}
+
+[data-id="sbi"] label::before {
+    background-image: url("/content/dam/s_hdfc_capstone/sbi.svg");
+}
+
+[data-id="bank_of_baroda"] label::before {
+    background-image: url("/content/dam/s_hdfc_capstone/bob.svg");
+}
+
+[data-id="idfc_first"] label::before {
+    background-image: url("/content/dam/s_hdfc_capstone/idfc.svg");
+}
+
+/* ================= SELECTED ================= */
+.field-select-bank-panel input:checked + label {
+    border: 2px solid #4f6df5;
+    background: #eef2ff;
+}
+
+/* ================= TEXT ================= */
+.field-select-bank-panel label {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ================= METHOD CARD LAYOUT ================= */
+.field-e-verify-method .radio-group-wrapper {
+    display: flex;
+    gap: 16px;
+}
+
+/* HIDE RADIO */
+.field-e-verify-method input {
+    display: none;
+}
+
+/* CARD */
+.field-e-verify-method label {
+    display: block;
+    flex: 1;
+
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+
+    padding: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* TITLE */
+.field-e-verify-method label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* DESCRIPTION */
+.field-e-verify-method label span {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 6px;
+}
+
+/* ACTIVE */
+.field-e-verify-method input:checked + label {
+    border: 2px solid #4f6df5;
+    background: #eef2ff;
+}
+
+/* GREEN RECOMMENDED */
+.field-e-verify-method input:checked + label::after {
+    content: "Recommended";
+    display: block;
+    margin-top: 10px;
+    background: #16a34a;
+    color: #fff;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    width: fit-content;
 }
