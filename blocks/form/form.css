@@ -872,59 +872,53 @@ legend.field-label {
 /* ============================= */
 /* 🔹 MOBILE FIELD FIX           */
 /* ============================= */
-.text-wrapper.field-mobile-no {
-  position: relative;
+
+/* Add flag inside input */
+.field-mobile-no input {
+  padding-left: 75px !important;
+
+  background-image: url("https://flagcdn.com/w20/in.png");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 20px 14px;
 }
 
-/* 🇮🇳 Flag */
-.text-wrapper.field-mobile-no::before {
-  content: "";
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 14px;
-  background: url("https://flagcdn.com/w40/in.png") no-repeat center/cover;
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* +91 */
+/* Add +91 using ::after safely */
 .text-wrapper.field-mobile-no::after {
   content: "+91";
   position: absolute;
-  left: 40px;
+  left: 36px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
   color: #374151;
-  z-index: 5;
   pointer-events: none;
 }
 
-/* Input fix */
-.text-wrapper.field-mobile-no input {
-  padding-left: 80px !important;
+/* Ensure wrapper is relative */
+.text-wrapper.field-mobile-no {
   position: relative;
-  z-index: 1;
 }
 
-/* OTP text stays below */
-.text-wrapper.field-mobile-no .field-description {
-  margin-top: 6px;
+/* OTP text */
+.field-mobile-no .field-description {
   font-size: 13px !important;
   color: #6b7280 !important;
+  margin-top: 6px;
 }
 
-
-/* ============================= */
-/* 🔥 REMOVE BLUE LINE ONLY      */
-/* ============================= */
-.field-wrapper:focus-within {
+/* Kill AEM blue focus line */
+.field-wrapper:focus-within,
+.text-wrapper:focus-within,
+.panel-wrapper:focus-within {
   border-left: none !important;
   box-shadow: none !important;
   outline: none !important;
+}
+
+/* Some AEM themes use this */
+.field-wrapper::before {
+  display: none !important;
 }
 
 
