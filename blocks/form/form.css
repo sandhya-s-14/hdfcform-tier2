@@ -888,7 +888,7 @@ legend.field-label {
   content: "+91";
   position: absolute;
   left: 34px;
-  top: 18%;
+  top: 13%;
   transform: translateY(-50%);
   font-size: 14px;
   color: #333;
@@ -896,7 +896,7 @@ legend.field-label {
 
 /* Padding for flag */
 .field-mobile-no input {
-  padding-left: 68px;
+  padding-left: 68px !important;
 }
 
 /* OTP text */
@@ -904,6 +904,22 @@ legend.field-label {
   font-size: 13px !important;
   color: #6b7280 !important;
   margin-top: 4px;
+}
+
+/* 🔥 Remove AEM blue left line */
+.field-mobile-no::before {
+  display: none !important;
+}
+
+/* If it's coming from wrapper */
+.field-mobile-no {
+  border-left: none !important;
+}
+
+/* Remove focus left border */
+.field-mobile-no:focus-within {
+  border-left: none !important;
+  box-shadow: none !important;
 }
 
 
