@@ -875,12 +875,11 @@ legend.field-label {
 
 /* Add flag inside input */
 .field-mobile-no input {
-  padding-left: 75px !important;
-
-  background-image: url("https://flagcdn.com/w20/in.png");
-  background-repeat: no-repeat;
-  background-position: 12px center;
-  background-size: 20px 14px;
+    padding-left: 75px !important;
+    background-image: url(https://flagcdn.com/w20/in.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 12px center !important;
+    background-size: 20px 14px !important;
 }
 
 /* Add +91 using ::after safely */
@@ -888,7 +887,7 @@ legend.field-label {
   content: "+91";
   position: absolute;
   left: 36px;
-  top: 50%;
+  top: 13%;
   transform: translateY(-50%);
   font-size: 14px;
   color: #374151;
@@ -1003,6 +1002,33 @@ main .form form .radio-wrapper label {
   margin-top: 10px;
 }
 
+/* ============================= */
+/* 🔹 MARKETING CONSENT CHECKBOX */
+/* ============================= */
+
+.checkbox-wrapper.field-consent-marketing-offers {
+  display: flex;
+  align-items: flex-start !important; /* align checkbox to top */
+  gap: 10px;
+}
+
+/* Checkbox */
+.field-consent-marketing-offers input[type="checkbox"] {
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+/* Label text wrapping */
+.field-consent-marketing-offers label {
+  display: block;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #374151;
+
+  /* 🔥 important for wrapping */
+  white-space: normal !important;
+  word-break: break-word;
+}
 
 /* ============================= */
 /* 🔹 CHECKBOX                   */
