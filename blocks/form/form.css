@@ -1978,6 +1978,58 @@ main .form .field-plain-text p p {
 }
 
 /*---------------------------------e-verify panel-------------------------------------------*/
+/* ===== HIDE DEFAULT LEGEND TEXT ===== */
+.field-e-verify-method-panel > legend.field-label {
+  font-size: 0 !important;
+  position: relative;
+  padding: 0 !important;
+  margin-bottom: 16px !important;
+}
+
+/* ===== CUSTOM HEADER TEXT ===== */
+.field-e-verify-method-panel > legend.field-label::after {
+  content: "e-Verify your income using any one of the methods";
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* ===== PANEL BORDER ===== */
+.field-e-verify-method-panel {
+  border: 1px solid #c7d2fe !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+}
+
+/* ===== ICON BEFORE TEXT ===== */
+.field-e-verify-method-panel > legend.field-label::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  margin-right: 10px;
+  background: url("/content/dam/s_hdfc_capstone/verify.svg") no-repeat center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+/* ===== HEADER STRIP ===== */
+.field-e-verify-method-panel > legend.field-label {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  background: #eef2ff;
+  padding: 14px 16px !important;
+  border-radius: 12px;
+  bottom: -25px;
+}
+
+/* ===== OPTIONAL: SPACE BELOW HEADER ===== */
+.field-e-verify-method-panel .radio-group-wrapper {
+  margin-top: 10px;
+}
 /* ===== PANEL SCOPE ===== */
 .field-e-verify-method-panel .radio-group-wrapper {
   display: flex !important;
