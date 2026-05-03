@@ -1719,24 +1719,17 @@ main .form form .field-full-name-as-per-aadhaar input {
 
 
 /* ===== ICON ===== */
-.field-loan-application-number::before {
-    content: "";
-    display: block;
-
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-
-    background: url("/content/dam/s_hdfc_capstone/loan application.png") center / 20px no-repeat;
-
-    position: relative;
-    z-index: 2;
-}
-
 main .form form .text-wrapper.field-loan-application-number::before {
-    background: none !important;
-    width: 0 !important;
-    height: 0 !important;
+    content: "" !important;
+
+    width: 54px !important;
+    height: 54px !important;
+
+    border-radius: 50% !important;
+
+    background: url("/content/dam/s_hdfc_capstone/loan application.png") center / 20px no-repeat !important;
+
+    position: static !important; /* remove absolute line behavior */
 }
 
 /* ============================= */
