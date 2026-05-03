@@ -1724,8 +1724,13 @@ main .form form .field-full-name-as-per-aadhaar input {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: url("/content/dam/s_hdfc_capstone/Loans.png") center / 20px no-repeat;
+    background: url("/content/dam/s_hdfc_capstone/loan application.pngtq-icon-2") center / 20px no-repeat;
     flex-shrink: 0;
+}
+
+main .form form .text-wrapper.field-loan-application-number::before,
+main .form form .date-wrapper.field-loan-application-number::before {
+    display: none !important;
 }
 
 /* ============================= */
