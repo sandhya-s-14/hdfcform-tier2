@@ -1721,16 +1721,22 @@ main .form form .field-full-name-as-per-aadhaar input {
 /* ===== ICON ===== */
 .field-loan-application-number::before {
     content: "";
+    display: block;
+
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: url("/content/dam/s_hdfc_capstone/loan application.pngtq-icon-2") center / 20px no-repeat;
-    flex-shrink: 0;
+
+    background: url("/content/dam/s_hdfc_capstone/loan application.png") center / 20px no-repeat;
+
+    position: relative;
+    z-index: 2;
 }
 
-main .form form .text-wrapper.field-loan-application-number::before,
-main .form form .date-wrapper.field-loan-application-number::before {
-    display: none !important;
+main .form form .text-wrapper.field-loan-application-number::before {
+    background: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 /* ============================= */
