@@ -815,7 +815,7 @@ main .form form {
 }
 
 /* Columns */
-.field-mobile-number,
+.field-mobile-no,
 .field-dob {
   flex: 1;
   min-width: 220px;
@@ -843,19 +843,19 @@ legend.field-label {
 /* ============================= */
 .text-wrapper input,
 .date-wrapper input {
-  width: 100%;
-  height: 44px;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 0 14px;
-  font-size: 14px;
-  outline: none;
-  transition: 0.2s ease;
+  width: 100% !important;
+  height: 44px !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 10px !important;
+  padding: 0 14px !important;
+  font-size: 14px !important;
+  outline: none !important;
+  transition: 0.2s ease !important;
 }
 
 .text-wrapper input::placeholder,
 .date-wrapper input::placeholder {
-  color: #9ca3af;
+  color: #9ca3af !important;
 }
 
 /* Focus */
@@ -869,11 +869,11 @@ legend.field-label {
 /* ============================= */
 /* 🔹 MOBILE FLAG +91            */
 /* ============================= */
-.field-mobile-number {
+.field-mobile-no {
   position: relative;
 }
 
-.field-mobile-number::before {
+.field-mobile-no::before {
   content: "";
   position: absolute;
   left: 10px;
@@ -884,7 +884,7 @@ legend.field-label {
   background: url("https://flagcdn.com/w40/in.png") no-repeat center/cover;
 }
 
-.field-mobile-number::after {
+.field-mobile-no::after {
   content: "+91";
   position: absolute;
   left: 34px;
@@ -895,7 +895,7 @@ legend.field-label {
 }
 
 /* Padding for flag */
-.field-mobile-number input {
+.field-mobile-no input {
   padding-left: 68px;
 }
 
