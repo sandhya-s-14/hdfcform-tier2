@@ -906,17 +906,15 @@ legend.field-label {
   margin-top: 6px;
 }
 
-/* Kill AEM blue focus line */
-.field-wrapper:focus-within,
-.text-wrapper:focus-within,
-.panel-wrapper:focus-within {
+/* Remove blue line ONLY for mobile field */
+.field-mobile-no.field-wrapper:focus-within {
   border-left: none !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
-/* Some AEM themes use this */
-.field-wrapper::before {
+/* Remove pseudo ONLY for this field */
+.field-mobile-no.field-wrapper::before {
   display: none !important;
 }
 
