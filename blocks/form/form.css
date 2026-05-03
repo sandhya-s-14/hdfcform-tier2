@@ -1976,3 +1976,103 @@ main .form .field-plain-text p p {
   background: #ccc;
   border-radius: 10px;
 }
+
+/*---------------------------------e-verify panel-------------------------------------------*/
+/* ===== PANEL SCOPE ===== */
+.field-e-verify-method-panel .radio-group-wrapper {
+  display: flex !important;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ===== CARD ===== */
+.field-e-verify-method-panel .radio-wrapper {
+  flex: 1;
+  min-width: 260px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 18px 18px 18px 44px;
+  border: 2px solid #e5e7eb;
+  cursor: pointer;
+  position: relative;
+  transition: 0.25s;
+}
+
+/* ===== HIDE RADIO ===== */
+.field-e-verify-method-panel .radio-wrapper input[type="radio"] {
+  display: none;
+}
+
+/* ===== LABEL ===== */
+.field-e-verify-method-panel .radio-wrapper .field-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937;
+  display: block;
+}
+
+/* ===== RADIO DOT ===== */
+.field-e-verify-method-panel .radio-wrapper::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 16px;
+}
+
+/* ===== DESCRIPTION ===== */
+.field-e-verify-method-panel .radio-wrapper .field-label::after {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+  font-weight: normal;
+}
+
+/* descriptions */
+.field-e-verify-method-panel input[value="account_aggregator"] + .field-label::after {
+  content: "Instant & secure, processed via RBI-regulated partner.";
+}
+
+.field-e-verify-method-panel input[value="login_to_salary_account"] + .field-label::after {
+  content: "Quick & hassle-free, processed via NetBanking.";
+}
+
+.field-e-verify-method-panel input[value="upload_bank_statement"] + .field-label::after {
+  content: "Upload bank statement of last 6 months.";
+}
+
+/* ===== SELECTED ===== */
+.field-e-verify-method-panel .radio-wrapper:has(input[type="radio"]:checked) {
+  border-color: #2563eb;
+  background: #f0f7ff;
+}
+
+/* ===== ACTIVE DOT ===== */
+.field-e-verify-method-panel .radio-wrapper:has(input[type="radio"]:checked)::before {
+  border-color: #2563eb;
+  background: #2563eb;
+}
+
+/* ===== HOVER ===== */
+.field-e-verify-method-panel .radio-wrapper:hover {
+  border-color: #93c5fd;
+}
+
+/* ===== RECOMMENDED (FIRST CARD ONLY) ===== */
+.field-e-verify-method-panel .radio-wrapper:first-child::after {
+  content: "Recommended";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #16a34a;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px;
+  border-radius: 0 0 12px 12px;
+}
