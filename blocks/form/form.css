@@ -870,9 +870,9 @@ legend.field-label {
 /* 🔹 MOBILE FLAG +91            */
 /* ============================= */
 /* ============================= */
-/* 🔹 MOBILE FIELD               */
+/* 🔹 MOBILE FIELD FIX           */
 /* ============================= */
-.field-mobile-no {
+.text-wrapper.field-mobile-no {
   position: relative;
 }
 
@@ -880,45 +880,47 @@ legend.field-label {
 .text-wrapper.field-mobile-no::before {
   content: "";
   position: absolute;
-  left: 12px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
   width: 20px;
   height: 14px;
   background: url("https://flagcdn.com/w40/in.png") no-repeat center/cover;
-  z-index: 2;
+  z-index: 5;
+  pointer-events: none;
 }
 
 /* +91 */
 .text-wrapper.field-mobile-no::after {
   content: "+91";
   position: absolute;
-  left: 38px;
+  left: 40px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
   color: #374151;
-  z-index: 2;
+  z-index: 5;
+  pointer-events: none;
 }
 
-/* Input spacing */
-.field-mobile-no input {
-  padding-left: 72px !important;
+/* Input fix */
+.text-wrapper.field-mobile-no input {
+  padding-left: 80px !important;
+  position: relative;
+  z-index: 1;
 }
 
-/* OTP text */
-.field-mobile-no .field-description {
+/* OTP text stays below */
+.text-wrapper.field-mobile-no .field-description {
+  margin-top: 6px;
   font-size: 13px !important;
   color: #6b7280 !important;
-  margin-top: 4px;
 }
 
 
 /* ============================= */
 /* 🔥 REMOVE BLUE LINE ONLY      */
 /* ============================= */
-
-/* Remove ONLY focus style (not pseudo) */
 .field-wrapper:focus-within {
   border-left: none !important;
   box-shadow: none !important;
