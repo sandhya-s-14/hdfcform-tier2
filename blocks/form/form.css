@@ -906,11 +906,6 @@ legend.field-label {
   margin-top: 4px;
 }
 
-/* 🔥 Remove AEM blue left line */
-.field-mobile-no::before {
-  display: none !important;
-}
-
 /* If it's coming from wrapper */
 .field-mobile-no {
   border-left: none !important;
