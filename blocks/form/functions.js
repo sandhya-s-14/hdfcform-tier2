@@ -426,10 +426,77 @@ function observeBankField() {
 
 observeBankField();
 
+/*======================EMI FUNCTION==================================================*/
+function updateOfferEMI(globals) {
+  const form = globals.form;
+
+  // 👉 Get fields using your paths
+  const loanField =
+    form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
+
+  const tenureField =
+    form.offer_page.loan_offer_based_on_declared_income.loan_tenture_slider;
+
+  const emiField =
+    form.offer_page.avail_panel.emi_input.emi_amount;
+
+  const roiField =
+    form.offer_page.avail_panel.emi_input.roi;
+
+  const taxField =
+    form.offer_page.avail_panel.emi_input.tax;
+
+  const availField =
+    form.offer_page.avail_panel.avail_input;
+
+  // 👉 Safety check
+  if (!loanField || !tenureField) return;
+
+  // 👉 Get values
+  const loan = parseInt(loanField.value) || 0;
+  const tenure = parseInt(tenureField.value) || 0;
+
+  const interestRate = 12; // 🔥 you can change later
+  const r = interestRate / 12 / 100;
+
+  let emi = 0;
+
+  if (loan > 0 && tenure > 0) {
+    emi =
+      (loan * r * Math.pow(1 + r, tenure)) /
+      (Math.pow(1 + r, tenure) - 1);
+
+    emi = Math.round(emi);
+  }
+
+  // 👉 Extra calculations
+  const totalAmount = emi * tenure;
+  const totalInterest = totalAmount - loan;
+  const tax = Math.round(totalInterest * 0.18); // 18%
+
+  // 👉 Update UI using AEM method
+  globals.functions.setProperty(emiField, {
+    value: emi,
+  });
+
+  globals.functions.setProperty(roiField, {
+    value: interestRate + "%",
+  });
+
+  globals.functions.setProperty(taxField, {
+    value: tax,
+  });
+
+  globals.functions.setProperty(availField, {
+    value: loan,
+  });
+}
+
 
 export {
   getFullName, days, submitFormArrayToString,
    maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
    debugForm,getBankLogo,
-   createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField
+   createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField,
+   updateOfferEMI
 };
