@@ -1724,10 +1724,9 @@ main .form form .field-full-name-as-per-aadhaar input {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: url('https://author-p96753-e1523920.adobeaemcloud.com/content/dam/s_hdfc_capstone/loan application.png') center/20px no-repeat;
+    background: url("/content/dam/s_hdfc_capstone/Loans.png") center / 20px no-repeat;
     flex-shrink: 0;
 }
-
 
 /* ============================= */
 /* ===== RIGHT SIDE COLUMN ===== */
