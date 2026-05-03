@@ -869,49 +869,69 @@ legend.field-label {
 /* ============================= */
 /* 🔹 MOBILE FLAG +91            */
 /* ============================= */
+/* ============================= */
+/* 🔹 MOBILE FIELD               */
+/* ============================= */
 .field-mobile-no {
   position: relative;
 }
 
+/* 🇮🇳 Flag */
 .field-mobile-no::before {
   content: "";
   position: absolute;
-  left: 10px;
-  top: 18%;
+  left: 12px;
+  top: 50%;
   transform: translateY(-50%);
   width: 20px;
   height: 14px;
   background: url("https://flagcdn.com/w40/in.png") no-repeat center/cover;
+  z-index: 1;
 }
 
+/* +91 */
 .field-mobile-no::after {
   content: "+91";
   position: absolute;
-  left: 34px;
-  top: 13%;
+  left: 38px;
+  top: 50%;
   transform: translateY(-50%);
   font-size: 14px;
-  color: #333;
+  color: #374151;
+  z-index: 1;
 }
 
-/* Padding for flag */
+/* Input padding */
 .field-mobile-no input {
-  padding-left: 68px !important;
+  padding-left: 72px !important;
 }
 
 /* OTP text */
-.field-description {
+.field-mobile-no .field-description {
   font-size: 13px !important;
   color: #6b7280 !important;
   margin-top: 4px;
 }
 
-/* If it's coming from wrapper */
-.field-mobile-no {
+
+/* ============================= */
+/* 🔥 REMOVE BLUE FOCUS LINE     */
+/* ============================= */
+
+/* AEM applies on wrapper */
+.field-wrapper:focus-within {
   border-left: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
-/* Remove focus left border */
+/* Remove pseudo highlight if any */
+.field-wrapper::before {
+  content: none !important;
+  background: none !important;
+}
+
+/* Extra safety */
 .field-mobile-no:focus-within {
   border-left: none !important;
   box-shadow: none !important;
