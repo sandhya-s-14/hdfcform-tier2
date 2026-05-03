@@ -944,6 +944,7 @@ main .form form .radio-wrapper {
 /* 🔥 Prevent label text from breaking */
 main .form form .radio-wrapper label {
     white-space: nowrap;
+    color: #374151;
 }
 
 
@@ -1023,7 +1024,7 @@ main .form form .radio-wrapper label {
   display: block;
   font-size: 13px;
   line-height: 1.5;
-  color: #374151;
+  color: #374151 !important;
 
   /* 🔥 important for wrapping */
   white-space: normal !important;
@@ -1055,7 +1056,7 @@ main .form form .radio-wrapper label {
   flex: 1;
   font-size: 13px;
   line-height: 1.5;
-  color: #374151;
+  color: #374151 !important;
 }
 
 
