@@ -1721,15 +1721,21 @@ main .form form .field-full-name-as-per-aadhaar input {
 /* ===== ICON ===== */
 main .form form .text-wrapper.field-loan-application-number::before {
     content: "" !important;
+    display: inline-block;
 
-    width: 54px !important;
-    height: 54px !important;
+    width: 60px;
+    height: 60px;
 
-    border-radius: 50% !important;
+    border-radius: 50%;
 
-    background: url("/content/dam/s_hdfc_capstone/loan application.png") center / 20px no-repeat !important;
+    background: url("/content/dam/s_hdfc_capstone/loan application.png") center / 45px no-repeat;
 
-    position: static !important; /* remove absolute line behavior */
+    position: relative;   /* better than static */
+    top: 0;
+    left: 0;
+
+    margin: 0 12px 0 0;  /* clean spacing instead of negative margins */
+    vertical-align: top;
 }
 
 /* ============================= */
@@ -1753,10 +1759,10 @@ main .form form .text-wrapper.field-loan-application-number::before {
 /* label */
 .field-loan-application-number label {
     grid-column: 2;
-    font-size: 14px;
-    color: #6b7280;
-    margin-bottom: 4px;
-    margin-top: -10px;
+    font-size: 14px !important;
+    color: #1b1b1d !important;
+    margin-bottom: 4px !important;
+    margin-top: -10px !important;
 }
 
 /* value */
@@ -1788,6 +1794,7 @@ main .form .field-loan-application-number input {
     width: auto !important;
     height: auto !important;
     margin: 0 !important;
+    font-size: 17px !important;
 }
 
 .field-contact-note {
