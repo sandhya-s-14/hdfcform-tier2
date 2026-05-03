@@ -224,6 +224,14 @@ function initOtp(globals) {
 }
 // eslint-disable-next-line import/prefer-default-export
 
+/* ================= DEBUG ================= */
+
+function debugForm(globals) {
+  window.myForm = globals.form;
+  console.log("myForm", window.myForm);
+  return "";
+}
+
 /*---------------------------------bureaupage----------------------------------------------*/
 /**
  * Returns bank logo based on value
@@ -380,7 +388,7 @@ function initBankSelection() {
       dropdown.innerHTML = "";
       Array.from(select.options).forEach(opt => {
         if (!opt.value || opt.value === "other_bank") return;
-        
+
         const option = document.createElement("option");
         option.value = opt.value;
         option.text = opt.text;
@@ -421,6 +429,7 @@ observeBankField();
 
 export {
   getFullName, days, submitFormArrayToString,
-   maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,getBankLogo,
+   maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
+   debugForm,getBankLogo,
    createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField
 };
