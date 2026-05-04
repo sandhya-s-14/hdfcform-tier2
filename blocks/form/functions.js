@@ -506,17 +506,16 @@ function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
-    console.log("FORM DATA:", data); // 🔍 DEBUG
+    console.log("FORM DATA:", data);
 
     const payload = {
-      mobile: data.mobile ? String(data.mobile).trim() : "",
-      pan: data.pan || data.pan_number || data.panNumber || null,
-      dob: data.dob || data.date_of_birth || null
+      mobile: data.mobile_no || "",
+      pan: data.pan_firstpage || null,
+      dob: data.dob_firstpage || null
     };
 
-    console.log("FINAL PAYLOAD:", payload); // 🔍 DEBUG
+    console.log("FINAL PAYLOAD:", payload);
 
-    // ✅ FRONTEND VALIDATION
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
       alert("Enter Mobile and PAN or DOB");
       return;
@@ -530,20 +529,12 @@ function generateOTP(globals) {
       },
       body: JSON.stringify(payload)
     })
-      .then((res) => {
-        console.log("STATUS:", res.status);
-        return res.json();
-      })
-      .then((result) => {
+      .then(res => res.json())
+      .then(result => {
         console.log("API RESPONSE:", result);
-
-        if (result.message) {
-          alert(result.message);
-        } else {
-          alert("OTP Generated");
-        }
+        alert(result.message || "OTP Generated");
       })
-      .catch((err) => {
+      .catch(err => {
         console.error("Generate OTP Error:", err);
         alert("API Error ❌");
       });
@@ -560,16 +551,16 @@ function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
-    console.log("FORM DATA:", data); // 🔍 DEBUG
+    console.log("FORM DATA:", data);
 
     const payload = {
-      mobile: data.mobile ? String(data.mobile).trim() : "",
-      otp: data.otp ? String(data.otp).trim() : "",
-      pan: data.pan || data.pan_number || data.panNumber || null,
-      dob: data.dob || data.date_of_birth || null
+      mobile: data.mobile_no || "",
+      otp: data.otp || "",
+      pan: data.pan_firstpage || null,
+      dob: data.dob_firstpage || null
     };
 
-    console.log("FINAL PAYLOAD:", payload); // 🔍 DEBUG
+    console.log("FINAL PAYLOAD:", payload);
 
     if (!payload.mobile || !payload.otp) {
       alert("Enter Mobile and OTP");
@@ -584,11 +575,8 @@ function validateOTP(globals) {
       },
       body: JSON.stringify(payload)
     })
-      .then((res) => {
-        console.log("STATUS:", res.status);
-        return res.json();
-      })
-      .then((result) => {
+      .then(res => res.json())
+      .then(result => {
         console.log("VALIDATE RESPONSE:", result);
 
         if (result.message === "OTP validated successfully") {
@@ -597,7 +585,7 @@ function validateOTP(globals) {
           alert(result.message || "Invalid OTP ❌");
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.error("Validate OTP Error:", err);
         alert("API Error ❌");
       });
