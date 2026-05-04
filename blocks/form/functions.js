@@ -534,7 +534,7 @@ function generateOTP(globals) {
         const resendBtn = form.validate_otp.resend_otp;
         const attemptsField = form.validate_otp.attempts_text;
 
-        // ✅ INIT ONLY ON FIRST TIME
+        // ✅ INIT only once
         if (window.otpTryCount === undefined) {
           window.otpTryCount = 0;
         }
@@ -639,10 +639,8 @@ function validateOTP(globals) {
         const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
 
-        // ✅ SUCCESS
+        // ✅ SUCCESS → NO ALERT
         if (result.message === "OTP validated successfully") {
-
-          alert("OTP Verified ✅");
 
           globals.functions.setProperty(form.validate_otp, {
             _active: false
@@ -667,6 +665,21 @@ function validateOTP(globals) {
               : "No attempts left"
         });
 
+        // 🔥 STOP TIMER
+        if (window.otpIntervalRef) {
+          clearInterval(window.otpIntervalRef);
+        }
+
+        // 🔥 ENABLE RESEND IMMEDIATELY
+        globals.functions.setProperty(timerField, {
+          value: "Resend available"
+        });
+
+        globals.functions.setProperty(resendBtn, {
+          enabled: true
+        });
+
+        // 🔒 LOCK
         if (window.otpTryCount >= 3) {
 
           globals.functions.setProperty(resendBtn, {
@@ -715,13 +728,13 @@ function handleResendOtp(globals) {
         : "No attempts left"
   });
 
-  // 🔒 LOCK if exceeded
+  // 🔒 LOCK
   if (window.otpTryCount >= 3) {
     alert("Max attempts reached ❌");
     return;
   }
 
-  // ✅ Call API again
+  // ✅ Generate again
   generateOTP(globals);
 }
 
