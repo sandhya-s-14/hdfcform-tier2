@@ -562,7 +562,7 @@ function generateOTP(globals) {
       })
       .catch(err => {
         console.error("Generate OTP Error:", err);
-        alert("API Error ❌");
+        alert("API Error");
       });
 
   } catch (e) {
@@ -690,16 +690,16 @@ function validateOTP(globals) {
             value: "Locked for 15 minutes"
           });
 
-          alert("Maximum attempts reached ❌");
+          alert("Maximum attempts reached .Please try again after 15 minutes.");
 
         } else {
-          alert("Invalid OTP ❌");
+          alert("Invalid OTP. Please try again.");
         }
 
       })
       .catch(err => {
         console.error(err);
-        alert("API Error ❌");
+        alert("API Error");
       });
 
   } catch (e) {
@@ -730,7 +730,7 @@ function handleResendOtp(globals) {
 
   // 🔒 LOCK
   if (window.otpTryCount >= 3) {
-    alert("Max attempts reached ❌");
+    alert("Max attempts reached. Please try again after 15 minutes.");
     return;
   }
 
