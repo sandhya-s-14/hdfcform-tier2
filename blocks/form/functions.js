@@ -470,5 +470,5 @@ export {
    maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
    debugForm,getBankLogo,
    createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField,
-   updateOfferEMI
+   updateOfferAll
 };
