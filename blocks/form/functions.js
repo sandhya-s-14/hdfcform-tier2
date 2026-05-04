@@ -428,115 +428,83 @@ observeBankField();
 
 /*======================================EMI CALCULATION=================================*/
 /**
- * EMI Calculation (WORKS WITH YOUR RANGE.JS)
  * @param {scope} globals
  */
-function updateOfferEMI(globals) {
-  try {
-    if (!globals || !globals.form) {
-      console.warn("Globals not available");
-      return "";
-    }
+function getLoanAmount(globals) {
+  const data = globals.functions.exportData();
 
-    const form = globals.form;
-
-    /* =========================
-       ✅ FIELD REFERENCES (IMPORTANT FIX)
-    ========================= */
-
-    const availInput =
-      form.offer_page?.avail_panel?.avail_input;
-
-    const emiAmountField =
-      form.offer_page?.avail_panel?.emi_input?.emi_amount;
-
-    const roiField =
-      form.offer_page?.avail_panel?.emi_input?.roi;
-
-    const taxField =
-      form.offer_page?.avail_panel?.emi_input?.tax;
-
-    /* =========================
-       ✅ GET VALUES FROM HIDDEN INPUT
-    ========================= */
-
-    const loanAmount = Number(
-      document.querySelector('input[type="hidden"][name="loan_amount_slider"]')?.value
-    ) || 0;
-
-    const tenure = Number(
-      document.querySelector('input[type="hidden"][name="loan_tenture_slider"]')?.value
-    ) || 0;
-
-    console.log("Loan:", loanAmount, "Tenure:", tenure);
-
-    if (!loanAmount || !tenure) return "";
-
-    /* =========================
-       ✅ EMI CALCULATION
-    ========================= */
-
-    const annualRate = 12;
-    const monthlyRate = annualRate / (12 * 100);
-
-    const emi =
-      (loanAmount *
-        monthlyRate *
-        Math.pow(1 + monthlyRate, tenure)) /
-      (Math.pow(1 + monthlyRate, tenure) - 1);
-
-    const emiRounded = Math.round(emi);
-
-    const total = emiRounded * tenure;
-    const interest = total - loanAmount;
-    const tax = Math.round(interest * 0.18);
-
-    const formatINR = (val) =>
-      "₹" + val.toLocaleString("en-IN");
-
-    /* =========================
-       ✅ SAFE UI UPDATE (NO SILENT FAIL)
-    ========================= */
-
-    if (availInput) {
-      globals.functions.setProperty(availInput, {
-        value: formatINR(loanAmount)
-      });
-    } else {
-      console.warn("avail_input path not found");
-    }
-
-    if (emiAmountField) {
-      globals.functions.setProperty(emiAmountField, {
-        value: formatINR(emiRounded)
-      });
-    } else {
-      console.warn("emi_amount path not found");
-    }
-
-    if (roiField) {
-      globals.functions.setProperty(roiField, {
-        value: `${annualRate}%`
-      });
-    }
-
-    if (taxField) {
-      globals.functions.setProperty(taxField, {
-        value: formatINR(tax)
-      });
-    }
-
-    return "EMI calculated";
-
-  } catch (e) {
-    console.error("EMI ERROR:", e);
-  }
+  return Number(data.loan_amount_slider) || 0;
 }
+
+/**
+ * @param {scope} globals
+ */
+function getTenure(globals) {
+  const data = globals.functions.exportData();
+
+  return Number(data.loan_tenture_slider) || 0;
+}
+
+/**
+ * @param {scope} globals
+ */
+function updateLoanDisplay(globals) {
+  const loanAmount = getLoanAmount(globals);
+
+  return loanAmount
+    ? "₹" + loanAmount.toLocaleString("en-IN")
+    : "";
+}
+
+/**
+ * @param {scope} globals
+ */
+function updateLoanDetails(globals) {
+  const loanAmount = getLoanAmount(globals);
+  const tenure = getTenure(globals);
+
+  if (!loanAmount || !tenure) return "";
+
+  const annualRate = 12;
+  const monthlyRate = annualRate / (12 * 100);
+
+  const emi =
+    (loanAmount *
+      monthlyRate *
+      Math.pow(1 + monthlyRate, tenure)) /
+    (Math.pow(1 + monthlyRate, tenure) - 1);
+
+  const emiRounded = Math.round(emi);
+
+  return "₹" + emiRounded.toLocaleString("en-IN");
+}
+
+/**
+ * @param {scope} globals
+ */
+function getRate() {
+  return "12%";
+}
+
+/**
+ * @param {scope} globals
+ */
+function getTax(globals) {
+  const loanAmount = getLoanAmount(globals);
+
+  if (!loanAmount) return "";
+
+  const interestEstimate = loanAmount * 0.18;
+  const tax = Math.round(interestEstimate);
+
+  return "₹" + tax.toLocaleString("en-IN");
+}
+
 
 export {
   getFullName, days, submitFormArrayToString,
    maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
    debugForm,getBankLogo,
    createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField,
-   updateOfferEMI
+   getLoanAmount,getTenure,updateLoanDisplay,updateLoanDetails,getRate,getTax
 };
