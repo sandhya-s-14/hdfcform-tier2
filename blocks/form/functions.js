@@ -430,27 +430,38 @@ observeBankField();
 /**
  * EMI Calculation (WORKS WITH YOUR RANGE.JS)
  */
-function updateOfferEMI() {
+function updateOfferEMI(globals) {
   try {
-    /* =========================
-       GET VALUES FROM SLIDER
-    ========================= */
+    // ✅ SAFE CHECK (important for your setup)
+    if (!globals || typeof globals !== "object") {
+      console.warn("Invalid globals:", globals);
+      return;
+    }
+
+    const form = globals.form;
+    if (!form) {
+      console.warn("Form not found in globals");
+      return;
+    }
+
+    // ✅ GET VALUES FROM HIDDEN INPUT (STRICT SELECTOR)
     const loanAmount = Number(
-      document.querySelector('input[name="loan_amount_slider"]')?._actualValue
+      document.querySelector('input[type="hidden"][name="loan_amount_slider"]')?.value
     ) || 0;
 
     const tenure = Number(
-      document.querySelector('input[name="loan_tenture_slider"]')?._actualValue
+      document.querySelector('input[type="hidden"][name="loan_tenture_slider"]')?.value
     ) || 0;
+
+    console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
 
     if (!loanAmount || !tenure) return;
 
-    /* =========================
-       EMI CALCULATION
-    ========================= */
+    // ✅ INTEREST
     const annualRate = 12;
     const monthlyRate = annualRate / (12 * 100);
 
+    // ✅ EMI
     const emi =
       (loanAmount *
         monthlyRate *
@@ -458,37 +469,31 @@ function updateOfferEMI() {
       (Math.pow(1 + monthlyRate, tenure) - 1);
 
     const emiRounded = Math.round(emi);
+
     const total = emiRounded * tenure;
     const interest = total - loanAmount;
     const tax = Math.round(interest * 0.18);
 
-    /* =========================
-       UPDATE UI (DIRECT DOM)
-    ========================= */
+    // ✅ UPDATE UI
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.avail_input,
+      { value: "₹" + loanAmount.toLocaleString("en-IN") }
+    );
 
-    // Available Loan
-    const loanField = document.querySelector('[data-id="avail_input"] input');
-    if (loanField) {
-      loanField.value = "₹" + loanAmount.toLocaleString("en-IN");
-    }
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.emi_input.emi_amount,
+      { value: "₹" + emiRounded.toLocaleString("en-IN") }
+    );
 
-    // EMI
-    const emiField = document.querySelector('[data-id="emi_amount"] input');
-    if (emiField) {
-      emiField.value = "₹" + emiRounded.toLocaleString("en-IN");
-    }
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.emi_input.roi,
+      { value: annualRate + "%" }
+    );
 
-    // ROI
-    const roiField = document.querySelector('[data-id="roi"] input');
-    if (roiField) {
-      roiField.value = annualRate + "%";
-    }
-
-    // Tax
-    const taxField = document.querySelector('[data-id="tax"] input');
-    if (taxField) {
-      taxField.value = "₹" + tax.toLocaleString("en-IN");
-    }
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.emi_input.tax,
+      { value: "₹" + tax.toLocaleString("en-IN") }
+    );
 
   } catch (e) {
     console.error("EMI ERROR:", e);
