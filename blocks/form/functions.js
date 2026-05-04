@@ -427,40 +427,48 @@ function observeBankField() {
 observeBankField();
 
 /*======================EMI FUNCTION==================================================*/
-function updateOfferAll(globals) {
-  const form = globals.form;
+function updateOfferEMI(globals) {
+  var form = globals.form;
 
-  // 👉 IMPORTANT: Use .value directly (hidden field)
-  const loan = parseInt(
-    form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider.value
-  ) || 0;
+  try {
+    var loan = parseInt(
+      form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider.value
+    ) || 0;
 
-  const tenure = parseInt(
-    form.offer_page.loan_offer_based_on_declared_income.loan_tenture_slider.value
-  ) || 0;
+    var tenure = parseInt(
+      form.offer_page.loan_offer_based_on_declared_income.loan_tenture_slider.value
+    ) || 0;
 
-  const emiField = form.offer_page.avail_panel.emi_input.emi_amount;
-  const roiField = form.offer_page.avail_panel.emi_input.roi;
-  const taxField = form.offer_page.avail_panel.emi_input.tax;
-  const availField = form.offer_page.avail_panel.avail_input;
+    var emiField = form.offer_page.avail_panel.emi_input.emi_amount;
+    var roiField = form.offer_page.avail_panel.emi_input.roi;
+    var taxField = form.offer_page.avail_panel.emi_input.tax;
+    var availField = form.offer_page.avail_panel.avail_input;
 
-  const rate = 12 / 12 / 100;
+    var rate = 12 / 12 / 100;
 
-  if (loan > 0 && tenure > 0) {
-    const emi = Math.round(
-      (loan * rate * Math.pow(1 + rate, tenure)) /
-      (Math.pow(1 + rate, tenure) - 1)
-    );
+    if (loan > 0 && tenure > 0) {
+      var emi = Math.round(
+        (loan * rate * Math.pow(1 + rate, tenure)) /
+        (Math.pow(1 + rate, tenure) - 1)
+      );
 
-    const total = emi * tenure;
-    const interest = total - loan;
-    const tax = Math.round(interest * 0.18);
+      var total = emi * tenure;
+      var interest = total - loan;
+      var tax = Math.round(interest * 0.18);
 
-    // ✅ Update all fields
-    globals.functions.setProperty(emiField, { value: emi });
-    globals.functions.setProperty(roiField, { value: "12%" });
-    globals.functions.setProperty(taxField, { value: tax });
-    globals.functions.setProperty(availField, { value: loan });
+      // ✅ Update fields
+      globals.functions.setProperty(emiField, { value: emi });
+      globals.functions.setProperty(roiField, { value: "12%" });
+      globals.functions.setProperty(taxField, { value: tax });
+      globals.functions.setProperty(availField, { value: loan });
+
+    } else {
+      globals.functions.setProperty(emiField, { value: 0 });
+      globals.functions.setProperty(taxField, { value: 0 });
+    }
+
+  } catch (e) {
+    console.log("EMI ERROR:", e);
   }
 }
 
@@ -470,5 +478,5 @@ export {
    maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
    debugForm,getBankLogo,
    createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField,
-   updateOfferAll
+   updateOfferEMI
 };
