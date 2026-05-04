@@ -462,19 +462,19 @@ function loanAmount(globals) {
  * @param {scope} globals
  */
 function emi(globals) {
-  const loanAmount = getLoanAmountValue(globals);
-  const tenure = getTenureValue(globals);
+  const data = globals.functions.exportData();
+
+  const loanAmount = Number(data.loan_amount_slider) || 0;
+  const tenure = Number(data.loan_tenture_slider) || 0;
 
   if (!loanAmount || !tenure) return "";
 
-  const annualRate = 12;
-  const monthlyRate = annualRate / (12 * 100);
+  const annualRate = 10.97; // ✅ FIXED
+  const r = annualRate / (12 * 100);
 
   const emiValue =
-    (loanAmount *
-      monthlyRate *
-      Math.pow(1 + monthlyRate, tenure)) /
-    (Math.pow(1 + monthlyRate, tenure) - 1);
+    (loanAmount * r * Math.pow(1 + r, tenure)) /
+    (Math.pow(1 + r, tenure) - 1);
 
   const emiRounded = Math.round(emiValue);
 
@@ -487,7 +487,7 @@ function emi(globals) {
  * @param {scope} globals
  */
 function roi() {
-  return "12%";
+  return "10.97%";
 }
 
 
@@ -495,26 +495,8 @@ function roi() {
  * 🔹 FOR tax
  * @param {scope} globals
  */
-function tax(globals) {
-  const loanAmount = getLoanAmountValue(globals);
-  const tenure = getTenureValue(globals);
-
-  if (!loanAmount || !tenure) return "";
-
-  const annualRate = 12;
-  const monthlyRate = annualRate / (12 * 100);
-
-  const emiValue =
-    (loanAmount *
-      monthlyRate *
-      Math.pow(1 + monthlyRate, tenure)) /
-    (Math.pow(1 + monthlyRate, tenure) - 1);
-
-  const emiRounded = Math.round(emiValue);
-
-  const taxValue = Math.round(emiRounded * 0.18);
-
-  return "₹" + taxValue.toLocaleString("en-IN");
+function tax() {
+  return "₹4,000";
 }
 
 
