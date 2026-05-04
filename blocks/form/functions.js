@@ -589,6 +589,9 @@ function generateOTP(globals) {
 /**
  * @param {scope} globals
  */
+/**
+ * @param {scope} globals
+ */
 function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
@@ -600,27 +603,22 @@ function validateOTP(globals) {
       dob: data.dob_firstpage || null
     };
 
-    console.log("VALIDATE PAYLOAD:", payload);
-
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-otp", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"   // ✅ FIXED
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(payload)
     })
-      .then(res => {
-        console.log("STATUS:", res.status);
-        return res.json();
-      })
+      .then(res => res.json())
       .then(result => {
-
-        console.log("VALIDATE RESPONSE:", result);
 
         const form = globals.form;
         const attemptsField = form.validate_otp.attempts_text;
         const timerField = form.validate_otp.timer;
         const resendBtn = form.validate_otp.resend_otp;
+
+        console.log("VALIDATE RESPONSE:", result);
 
         // ✅ SUCCESS
         if (result.message === "OTP validated successfully") {
@@ -628,14 +626,14 @@ function validateOTP(globals) {
           return;
         }
 
-        // ✅ Attempts handling
+        // ❌ WRONG OTP → show attempts
         if (result.attemptsLeft !== undefined) {
           globals.functions.setProperty(attemptsField, {
             value: result.attemptsLeft + " attempts left"
           });
         }
 
-        // 🔒 Lock handling
+        // 🔒 LOCK CASE
         if (result.lockUntil) {
           globals.functions.setProperty(timerField, {
             value: "Locked for 15 min"
@@ -654,12 +652,12 @@ function validateOTP(globals) {
 
       })
       .catch(err => {
-        console.error("Validate OTP Error:", err);
+        console.error(err);
         alert("API Error ❌");
       });
 
   } catch (e) {
-    console.error("JS Error:", e);
+    console.error(e);
   }
 }
 
