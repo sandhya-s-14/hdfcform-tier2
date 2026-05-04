@@ -506,15 +506,11 @@ function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
-    console.log("FORM DATA:", data);
-
     const payload = {
       mobile: data.mobile_no || "",
       pan: data.pan_firstpage || null,
       dob: data.dob_firstpage || null
     };
-
-    console.log("FINAL PAYLOAD:", payload);
 
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
       alert("Enter Mobile and PAN or DOB");
@@ -531,31 +527,58 @@ function generateOTP(globals) {
     })
       .then(res => res.json())
       .then(result => {
-        console.log("API RESPONSE:", result);
 
+        const form = globals.form;
+        const resendBtn = form.validate_otp.resend_otp;
+        const timerField = form.validate_otp.timer;
+        const otpField = form.validate_otp.enter_otp;
+
+        // ✅ Autofill OTP (demo)
         const otp = result?.data?.otp;
-
         if (otp) {
-          // ✅ AUTO FILL OTP FIELD (CORRECT PATH)
-          globals.functions.setProperty(
-            globals.form.validate_otp.enter_otp,
-            { value: String(otp) }
-          );
+          globals.functions.setProperty(otpField, {
+            value: String(otp)
+          });
         }
 
-        // ✅ Better UX (no annoying alert)
-        console.log(result.message || "OTP Generated");
+        // ✅ Disable resend initially
+        globals.functions.setProperty(resendBtn, { enabled: false });
+
+        // ✅ Timer from API
+        const resendAfter = result?.data?.resendAfter;
+
+        if (resendAfter) {
+          const interval = setInterval(() => {
+            const remaining = Math.floor((resendAfter - Date.now()) / 1000);
+
+            if (remaining > 0) {
+              globals.functions.setProperty(timerField, {
+                value: remaining + " sec"
+              });
+            } else {
+              clearInterval(interval);
+
+              globals.functions.setProperty(timerField, {
+                value: "Resend available"
+              });
+
+              globals.functions.setProperty(resendBtn, {
+                enabled: true
+              });
+            }
+          }, 1000);
+        }
+
       })
       .catch(err => {
-        console.error("Generate OTP Error:", err);
+        console.error(err);
         alert("API Error ❌");
       });
 
   } catch (e) {
-    console.error("Error:", e);
+    console.error(e);
   }
 }
-
 
 /**
  * @param {scope} globals
@@ -564,16 +587,12 @@ function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
-    console.log("FORM DATA:", data);
-
     const payload = {
       mobile: data.mobile_no || "",
-      otp: data.enter_otp || "",   // ✅ FIXED (IMPORTANT)
+      otp: data.enter_otp || "",
       pan: data.pan_firstpage || null,
       dob: data.dob_firstpage || null
     };
-
-    console.log("FINAL PAYLOAD:", payload);
 
     if (!payload.mobile || !payload.otp) {
       alert("Enter Mobile and OTP");
@@ -590,25 +609,48 @@ function validateOTP(globals) {
     })
       .then(res => res.json())
       .then(result => {
-        console.log("VALIDATE RESPONSE:", result);
 
+        const form = globals.form;
+        const attemptsField = form.validate_otp.attempts_text;
+        const resendBtn = form.validate_otp.resend_otp;
+        const timerField = form.validate_otp.timer;
+
+        // ✅ SUCCESS
         if (result.message === "OTP validated successfully") {
           alert("OTP Verified ✅");
-
-          // 🔥 OPTIONAL: move to next step
-          // globals.functions.setProperty(globals.form.next_panel, { visible: true });
-
-        } else {
-          alert(result.message || "Invalid OTP ❌");
+          return;
         }
+
+        // ❌ INVALID OTP → show attempts
+        if (result.attemptsLeft !== undefined) {
+          globals.functions.setProperty(attemptsField, {
+            value: result.attemptsLeft + " attempts left"
+          });
+        }
+
+        // 🔒 LOCK CASE
+        if (result.lockUntil) {
+          globals.functions.setProperty(timerField, {
+            value: "Locked for 15 minutes"
+          });
+
+          globals.functions.setProperty(resendBtn, {
+            enabled: false
+          });
+
+          globals.functions.setProperty(attemptsField, {
+            value: "No attempts left"
+          });
+        }
+
       })
       .catch(err => {
-        console.error("Validate OTP Error:", err);
+        console.error(err);
         alert("API Error ❌");
       });
 
   } catch (e) {
-    console.error("Error:", e);
+    console.error(e);
   }
 }
 
