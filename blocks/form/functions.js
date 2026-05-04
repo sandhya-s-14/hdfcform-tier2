@@ -506,11 +506,21 @@ function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
+    console.log("FORM DATA:", data); // 🔍 DEBUG
+
     const payload = {
-      mobile: data.mobile,
-      pan: data.pan || null,
-      dob: data.dob || null
+      mobile: data.mobile ? String(data.mobile).trim() : "",
+      pan: data.pan || data.pan_number || data.panNumber || null,
+      dob: data.dob || data.date_of_birth || null
     };
+
+    console.log("FINAL PAYLOAD:", payload); // 🔍 DEBUG
+
+    // ✅ FRONTEND VALIDATION
+    if (!payload.mobile || (!payload.pan && !payload.dob)) {
+      alert("Enter Mobile and PAN or DOB");
+      return;
+    }
 
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-otp", {
       method: "POST",
@@ -520,9 +530,12 @@ function generateOTP(globals) {
       },
       body: JSON.stringify(payload)
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log("STATUS:", res.status);
+        return res.json();
+      })
       .then((result) => {
-        console.log("OTP Generated:", result);
+        console.log("API RESPONSE:", result);
 
         if (result.message) {
           alert(result.message);
@@ -547,12 +560,21 @@ function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
+    console.log("FORM DATA:", data); // 🔍 DEBUG
+
     const payload = {
-      mobile: data.mobile,
-      otp: data.otp,
-      pan: data.pan || null,
-      dob: data.dob || null
+      mobile: data.mobile ? String(data.mobile).trim() : "",
+      otp: data.otp ? String(data.otp).trim() : "",
+      pan: data.pan || data.pan_number || data.panNumber || null,
+      dob: data.dob || data.date_of_birth || null
     };
+
+    console.log("FINAL PAYLOAD:", payload); // 🔍 DEBUG
+
+    if (!payload.mobile || !payload.otp) {
+      alert("Enter Mobile and OTP");
+      return;
+    }
 
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-otp", {
       method: "POST",
@@ -562,9 +584,12 @@ function validateOTP(globals) {
       },
       body: JSON.stringify(payload)
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log("STATUS:", res.status);
+        return res.json();
+      })
       .then((result) => {
-        console.log("Validate Response:", result);
+        console.log("VALIDATE RESPONSE:", result);
 
         if (result.message === "OTP validated successfully") {
           alert("OTP Verified ✅");
