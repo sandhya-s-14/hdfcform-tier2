@@ -532,7 +532,19 @@ function generateOTP(globals) {
       .then(res => res.json())
       .then(result => {
         console.log("API RESPONSE:", result);
-        alert(result.message || "OTP Generated");
+
+        const otp = result?.data?.otp;
+
+        if (otp) {
+          // ✅ AUTO FILL OTP FIELD (CORRECT PATH)
+          globals.functions.setProperty(
+            globals.form.validate_otp.enter_otp,
+            { value: String(otp) }
+          );
+        }
+
+        // ✅ Better UX (no annoying alert)
+        console.log(result.message || "OTP Generated");
       })
       .catch(err => {
         console.error("Generate OTP Error:", err);
@@ -543,6 +555,7 @@ function generateOTP(globals) {
     console.error("Error:", e);
   }
 }
+
 
 /**
  * @param {scope} globals
@@ -555,7 +568,7 @@ function validateOTP(globals) {
 
     const payload = {
       mobile: data.mobile_no || "",
-      otp: data.otp || "",
+      otp: data.enter_otp || "",   // ✅ FIXED (IMPORTANT)
       pan: data.pan_firstpage || null,
       dob: data.dob_firstpage || null
     };
@@ -581,6 +594,10 @@ function validateOTP(globals) {
 
         if (result.message === "OTP validated successfully") {
           alert("OTP Verified ✅");
+
+          // 🔥 OPTIONAL: move to next step
+          // globals.functions.setProperty(globals.form.next_panel, { visible: true });
+
         } else {
           alert(result.message || "Invalid OTP ❌");
         }
