@@ -604,7 +604,6 @@ function runOtpCountdown(globals) {
   }, 1000);
 }
 
-
 /**
  * @param {scope} globals
  */
@@ -634,6 +633,7 @@ function validateOTP(globals) {
         const attemptsField = form.validate_otp.attempts_text;
         const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
+        const submitBtn = form.validate_otp.submit;
 
         // ✅ SUCCESS
         if (result.message === "OTP validated successfully") {
@@ -641,7 +641,7 @@ function validateOTP(globals) {
           return;
         }
 
-        // ❌ WRONG OTP → count locally
+        // ❌ WRONG OTP → decrease attempts
         window.otpTryCount = (window.otpTryCount || 0) + 1;
 
         const remaining = 3 - window.otpTryCount;
@@ -651,6 +651,11 @@ function validateOTP(globals) {
             remaining > 0
               ? remaining + " attempts left"
               : "No attempts left"
+        });
+
+        // ❗ BLOCK SUBMIT
+        globals.functions.setProperty(submitBtn, {
+          enabled: remaining > 0
         });
 
         // 🔒 LOCK AFTER 3 ATTEMPTS
@@ -669,10 +674,6 @@ function validateOTP(globals) {
           alert("Invalid OTP ❌");
         }
 
-      })
-      .catch(err => {
-        console.error("Validate Error:", err);
-        alert("API Error ❌");
       });
 
   } catch (e) {
@@ -680,13 +681,23 @@ function validateOTP(globals) {
   }
 }
 
-
 /**
  * @param {scope} globals
  */
 function handleResendOtp(globals) {
   console.log("🔁 Resend clicked");
 
+  // ✅ RESET attempts
+  window.otpTryCount = 0;
+
+  const form = globals.form;
+  const attemptsField = form.validate_otp.attempts_text;
+
+  globals.functions.setProperty(attemptsField, {
+    value: "3 attempts left"
+  });
+
+  // ✅ Generate new OTP
   generateOTP(globals);
 }
 
