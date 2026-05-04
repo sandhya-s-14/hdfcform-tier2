@@ -449,11 +449,12 @@ function getTenureValue(globals) {
  * @param {scope} globals
  */
 function loanAmount(globals) {
-  const loanAmount = getLoanAmountValue(globals);
+  const data = globals.functions.exportData();
 
-  return loanAmount
-    ? "₹" + loanAmount.toLocaleString("en-IN")
-    : "";
+  const val =
+    Number(data.loan_amount_slider) || 1500000; // ✅ default
+
+  return "₹" + val.toLocaleString("en-IN");
 }
 
 
@@ -464,21 +465,20 @@ function loanAmount(globals) {
 function emi(globals) {
   const data = globals.functions.exportData();
 
-  const loanAmount = Number(data.loan_amount_slider) || 0;
-  const tenure = Number(data.loan_tenture_slider) || 0;
+  const loanAmount =
+    Number(data.loan_amount_slider) || 1500000; // ✅ default
 
-  if (!loanAmount || !tenure) return "";
+  const tenure =
+    Number(data.loan_tenture_slider) || 84; // ✅ default
 
-  const annualRate = 10.97; // ✅ FIXED
+  const annualRate = 10.97;
   const r = annualRate / (12 * 100);
 
   const emiValue =
     (loanAmount * r * Math.pow(1 + r, tenure)) /
     (Math.pow(1 + r, tenure) - 1);
 
-  const emiRounded = Math.round(emiValue);
-
-  return "₹" + emiRounded.toLocaleString("en-IN");
+  return "₹" + Math.round(emiValue).toLocaleString("en-IN");
 }
 
 
