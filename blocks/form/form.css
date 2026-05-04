@@ -1214,10 +1214,10 @@ button[name="form_button_18312989261776692327463"]:hover {
 
 /* "Resend OTP in:" label */
 .field-timer .field-label {
-  font-size: 14px;
-  font-weight: 400;
-  color: #6b7280;
-  margin-right: 6px;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #6b7280 !important;
+    margin-right: 6px !important;
 }
 
 /* Timer value */
@@ -1238,11 +1238,10 @@ input[name="timer"] {
 
 /* Attempts container */
 .field-attempts-text {
-  display: flex;
-  justify-content: flex-end;
-
-  margin-top: -75px !important;
-  margin-right: 6px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -60px !important;
+    margin-right: -80px !important;
 }
 
 /* Attempts value */
