@@ -68,11 +68,8 @@ export default function decorate(fieldDiv) {
   input.max = stepsArray.length - 1;
   input.step = 0.01;
 
-  /* ✅ DEFAULT VALUE = MAX (15L / 84 months) */
-  const defaultValue = Number(input.getAttribute("value"));
-  input.value = defaultValue || stepsArray.length - 1;
+  input.value = stepsArray.length - 1;
 
-  /* ===== Store original descriptor ===== */
   const originalDescriptor = Object.getOwnPropertyDescriptor(
     HTMLInputElement.prototype,
     "value"
@@ -84,33 +81,12 @@ export default function decorate(fieldDiv) {
       return this._actualValue ?? originalDescriptor.get.call(this);
     },
     set(val) {
-      const num = Number(val);
-
-      const minStep = stepsArray[0];
-      const maxStep = stepsArray[stepsArray.length - 1];
-
-      if (num >= minStep && num <= maxStep) {
-        let closestIndex = 0;
-        let minDiff = Infinity;
-
-        stepsArray.forEach((step, i) => {
-          const diff = Math.abs(step - num);
-          if (diff < minDiff) {
-            minDiff = diff;
-            closestIndex = i;
-          }
-        });
-
-        originalDescriptor.set.call(this, closestIndex);
-        this._index = closestIndex;
-      } else {
-        originalDescriptor.set.call(this, val);
-        this._index = num;
-      }
+      originalDescriptor.set.call(this, val);
+      this._index = Number(val);
     }
   });
 
-  /* ===== Hidden input (for AEM) ===== */
+  /* ===== Hidden input ===== */
   const hidden = document.createElement("input");
   hidden.type = "hidden";
   hidden.name = originalName;
@@ -136,11 +112,11 @@ export default function decorate(fieldDiv) {
     const span = document.createElement("span");
 
     span.innerText =
-      type === "loan"
+      (type === "loan"
         ? val === 50000
           ? "50K"
           : val / 100000 + "L"
-        : val + "m";
+        : val + "m") + " ";
 
     span.style.left = `${(i / (stepsArray.length - 1)) * 100}%`;
 
@@ -167,16 +143,15 @@ export default function decorate(fieldDiv) {
       valueBox.innerText =
         type === "loan" ? formatINR(actualValue) : formatMonths(actualValue);
 
-      valueBox.style.left = percent + "%";
+      valueBox.style.left = `calc(${percent}% - 20px)`;
     }
 
     // store actual value
     input._actualValue = actualValue;
     hidden.value = actualValue;
 
-    // 🔥 Sync with AEM
-    input.value = actualValue;
-    input.dispatchEvent(new Event("change", { bubbles: true }));
+    // ✅ Correct AEM trigger
+    hidden.dispatchEvent(new Event("change", { bubbles: true }));
 
     // lock slider
     originalDescriptor.set.call(input, index);
@@ -187,24 +162,12 @@ export default function decorate(fieldDiv) {
   wrapper.appendChild(hidden);
   wrapper.appendChild(labels);
 
-  /* ===== Events ===== */
   input.addEventListener("input", updateUI);
-
   enableTrackClick(wrapper, input);
 
-  /* ===== Initial render ===== */
-  // ✅ ensure default index
-input.value = stepsArray.length - 1;
-
-// 🔥 force full calculation once
-requestAnimationFrame(() => {
-  updateUI();
-
-  // now trigger rule with correct value
-  setTimeout(() => {
-    input.dispatchEvent(new Event("change", { bubbles: true }));
-  }, 100);
-}); // ⬅️ important delay
+  requestAnimationFrame(() => {
+    updateUI();
+  });
 
   return fieldDiv;
 }

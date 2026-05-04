@@ -432,26 +432,22 @@ observeBankField();
  */
 function updateOfferEMI(globals) {
   try {
-    const form = globals.form;
+    const form = globals?.form;
+    if (!form) return;
 
-    // ✅ GET VALUES FROM HIDDEN INPUT (CORRECT)
     const loanAmount = Number(
-      document.querySelector('[name="loan_amount_slider"]')?.value
+      document.querySelector('input[name="loan_amount_slider"]')?.value
     ) || 0;
 
     const tenure = Number(
-      document.querySelector('[name="loan_tenture_slider"]')?.value
+      document.querySelector('input[name="loan_tenture_slider"]')?.value
     ) || 0;
-
-    console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
 
     if (!loanAmount || !tenure) return;
 
-    // ✅ INTEREST
     const annualRate = 12;
     const monthlyRate = annualRate / (12 * 100);
 
-    // ✅ EMI
     const emi =
       (loanAmount *
         monthlyRate *
@@ -459,12 +455,10 @@ function updateOfferEMI(globals) {
       (Math.pow(1 + monthlyRate, tenure) - 1);
 
     const emiRounded = Math.round(emi);
-
     const total = emiRounded * tenure;
     const interest = total - loanAmount;
     const tax = Math.round(interest * 0.18);
 
-    // ✅ UPDATE UI
     globals.functions.setProperty(
       form.offer_page.avail_panel.avail_input,
       { value: "₹" + loanAmount.toLocaleString("en-IN") }
