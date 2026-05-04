@@ -481,7 +481,6 @@ function emi(globals) {
   return "₹" + Math.round(emiValue).toLocaleString("en-IN");
 }
 
-
 /**
  * 🔹 FOR roi
  * @param {scope} globals
@@ -499,11 +498,93 @@ function tax() {
   return "₹4,000";
 }
 
+/*=====================================GENERATE OTP=======================================*/
+/**
+ * @param {scope} globals
+ */
+function generateOTP(globals) {
+  try {
+    const data = globals.functions.exportData();
+
+    const payload = {
+      mobile: data.mobile,
+      pan: data.pan || null,
+      dob: data.dob || null
+    };
+
+    fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("OTP Generated:", result);
+
+        if (result.message) {
+          alert(result.message);
+        } else {
+          alert("OTP Generated");
+        }
+      })
+      .catch((err) => {
+        console.error("Generate OTP Error:", err);
+        alert("API Error ❌");
+      });
+
+  } catch (e) {
+    console.error("Error:", e);
+  }
+}
+
+/**
+ * @param {scope} globals
+ */
+function validateOTP(globals) {
+  try {
+    const data = globals.functions.exportData();
+
+    const payload = {
+      mobile: data.mobile,
+      otp: data.otp,
+      pan: data.pan || null,
+      dob: data.dob || null
+    };
+
+    fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("Validate Response:", result);
+
+        if (result.message === "OTP validated successfully") {
+          alert("OTP Verified ✅");
+        } else {
+          alert(result.message || "Invalid OTP ❌");
+        }
+      })
+      .catch((err) => {
+        console.error("Validate OTP Error:", err);
+        alert("API Error ❌");
+      });
+
+  } catch (e) {
+    console.error("Error:", e);
+  }
+}
 
 export {
   getFullName, days, submitFormArrayToString,
    maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
    debugForm,getBankLogo,
    createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField,
-   getLoanAmountValue,getTenureValue,loanAmount,emi,roi,tax
+   getLoanAmountValue,getTenureValue,loanAmount,emi,roi,tax,generateOTP
+   ,validateOTP
 };
