@@ -607,7 +607,6 @@ function runOtpCountdown(globals) {
   }, 1000);
 }
 
-
 /* ================= VALIDATE OTP ================= */
 /**
  * @param {scope} globals
@@ -639,9 +638,17 @@ function validateOTP(globals) {
         const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
 
-        // ✅ SUCCESS → NO ALERT
-        if (result.message === "OTP validated successfully") {
+        console.log("API RESPONSE:", result);
 
+        // ✅ FIXED SUCCESS CHECK (important)
+        if (result?.message?.toLowerCase().includes("validated")) {
+
+          // stop timer
+          if (window.otpIntervalRef) {
+            clearInterval(window.otpIntervalRef);
+          }
+
+          // move to next panel
           globals.functions.setProperty(form.validate_otp, {
             _active: false
           });
@@ -653,7 +660,7 @@ function validateOTP(globals) {
           return;
         }
 
-        // ❌ WRONG OTP → decrease attempts
+        // ❌ WRONG OTP
         window.otpTryCount = (window.otpTryCount || 0) + 1;
 
         const remaining = 3 - window.otpTryCount;
@@ -665,12 +672,12 @@ function validateOTP(globals) {
               : "No attempts left"
         });
 
-        // 🔥 STOP TIMER
+        // stop timer
         if (window.otpIntervalRef) {
           clearInterval(window.otpIntervalRef);
         }
 
-        // 🔥 ENABLE RESEND IMMEDIATELY
+        // enable resend
         globals.functions.setProperty(timerField, {
           value: "Resend available"
         });
@@ -679,7 +686,6 @@ function validateOTP(globals) {
           enabled: true
         });
 
-        // 🔒 LOCK
         if (window.otpTryCount >= 3) {
 
           globals.functions.setProperty(resendBtn, {
@@ -690,7 +696,7 @@ function validateOTP(globals) {
             value: "Locked for 15 minutes"
           });
 
-          alert("Maximum attempts reached .Please try again after 15 minutes.");
+          alert("Maximum attempts reached. Please try again after 15 minutes.");
 
         } else {
           alert("Invalid OTP. Please try again.");
