@@ -499,9 +499,8 @@ function tax() {
 }
 
 /*=====================================GENERATE OTP=======================================*/
-/**
- * @param {scope} globals
- */
+/* ================= GENERATE OTP ================= */
+
 function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
@@ -512,65 +511,46 @@ function generateOTP(globals) {
       dob: data.dob_firstpage || null
     };
 
-    console.log("PAYLOAD:", payload);
+    if (!payload.mobile || (!payload.pan && !payload.dob)) {
+      alert("Enter Mobile and PAN or DOB");
+      return;
+    }
 
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-otp", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"   // ✅ FIXED (removed ngrok header)
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(payload)
     })
-      .then(res => {
-        console.log("STATUS:", res.status);
-        return res.json();
-      })
+      .then(res => res.json())
       .then(result => {
 
-        console.log("API RESPONSE:", result);
-
         const form = globals.form;
-        const timerField = form.validate_otp.timer;
-        const resendBtn = form.validate_otp.resend_otp;
-        const otpField = form.validate_otp.enter_otp;
 
-        // ✅ Autofill OTP (for testing)
+        const otpField = form.validate_otp.enter_otp;
+        const resendBtn = form.validate_otp.resend_otp;
+        const attemptsField = form.validate_otp.attempts_text;
+
+        // ✅ RESET attempts
+        window.otpTryCount = 0;
+
+        globals.functions.setProperty(attemptsField, {
+          value: "3 attempts left"
+        });
+
+        // ✅ Autofill OTP (testing)
         if (result?.data?.otp) {
           globals.functions.setProperty(otpField, {
             value: String(result.data.otp)
           });
         }
 
-        // ✅ Disable resend button
+        // ✅ Disable resend
         globals.functions.setProperty(resendBtn, { enabled: false });
 
-        // ✅ Timer fallback (important)
-        const resendAfter = result?.data?.resendAfter || (Date.now() + 30000);
-
-        // clear old timer if exists
-        if (window.otpTimer) {
-          clearInterval(window.otpTimer);
-        }
-
-        window.otpTimer = setInterval(() => {
-          const remaining = Math.floor((resendAfter - Date.now()) / 1000);
-
-          if (remaining > 0) {
-            globals.functions.setProperty(timerField, {
-              value: remaining + " sec"
-            });
-          } else {
-            clearInterval(window.otpTimer);
-
-            globals.functions.setProperty(timerField, {
-              value: "Resend available"
-            });
-
-            globals.functions.setProperty(resendBtn, {
-              enabled: true
-            });
-          }
-        }, 1000);
+        // ✅ Start timer
+        runOtpCountdown(globals);
 
         alert(result.message || "OTP Generated");
 
@@ -581,17 +561,49 @@ function generateOTP(globals) {
       });
 
   } catch (e) {
-    console.error("JS Error:", e);
+    console.error(e);
   }
 }
 
 
-/**
- * @param {scope} globals
- */
-/**
- * @param {scope} globals
- */
+/* ================= TIMER ================= */
+
+function runOtpCountdown(globals) {
+  const form = globals.form;
+
+  const timerField = form.validate_otp.timer;
+  const resendBtn = form.validate_otp.resend_otp;
+
+  let seconds = 30;
+
+  if (window.otpIntervalRef) {
+    clearInterval(window.otpIntervalRef);
+  }
+
+  window.otpIntervalRef = setInterval(() => {
+    seconds--;
+
+    if (seconds > 0) {
+      globals.functions.setProperty(timerField, {
+        value: seconds + " sec"
+      });
+    } else {
+      clearInterval(window.otpIntervalRef);
+
+      globals.functions.setProperty(timerField, {
+        value: "Resend available"
+      });
+
+      globals.functions.setProperty(resendBtn, {
+        enabled: true
+      });
+    }
+  }, 1000);
+}
+
+
+/* ================= VALIDATE OTP ================= */
+
 function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
@@ -614,11 +626,10 @@ function validateOTP(globals) {
       .then(result => {
 
         const form = globals.form;
-        const attemptsField = form.validate_otp.attempts_text;
-        const timerField = form.validate_otp.timer;
-        const resendBtn = form.validate_otp.resend_otp;
 
-        console.log("VALIDATE RESPONSE:", result);
+        const attemptsField = form.validate_otp.attempts_text;
+        const resendBtn = form.validate_otp.resend_otp;
+        const timerField = form.validate_otp.timer;
 
         // ✅ SUCCESS
         if (result.message === "OTP validated successfully") {
@@ -626,33 +637,37 @@ function validateOTP(globals) {
           return;
         }
 
-        // ❌ WRONG OTP → show attempts
-        if (result.attemptsLeft !== undefined) {
-          globals.functions.setProperty(attemptsField, {
-            value: result.attemptsLeft + " attempts left"
-          });
-        }
+        // ❌ WRONG OTP → count locally
+        window.otpTryCount = (window.otpTryCount || 0) + 1;
 
-        // 🔒 LOCK CASE
-        if (result.lockUntil) {
-          globals.functions.setProperty(timerField, {
-            value: "Locked for 15 min"
-          });
+        const remaining = 3 - window.otpTryCount;
+
+        globals.functions.setProperty(attemptsField, {
+          value:
+            remaining > 0
+              ? remaining + " attempts left"
+              : "No attempts left"
+        });
+
+        // 🔒 LOCK AFTER 3 ATTEMPTS
+        if (window.otpTryCount >= 3) {
 
           globals.functions.setProperty(resendBtn, {
             enabled: false
           });
 
-          globals.functions.setProperty(attemptsField, {
-            value: "No attempts left"
+          globals.functions.setProperty(timerField, {
+            value: "Locked for 15 minutes"
           });
-        }
 
-        alert(result.message || "Invalid OTP ❌");
+          alert("Maximum attempts reached ❌");
+        } else {
+          alert("Invalid OTP ❌");
+        }
 
       })
       .catch(err => {
-        console.error(err);
+        console.error("Validate Error:", err);
         alert("API Error ❌");
       });
 
@@ -661,11 +676,20 @@ function validateOTP(globals) {
   }
 }
 
+
+/* ================= RESEND OTP ================= */
+
+function handleResendOtp(globals) {
+  console.log("🔁 Resend clicked");
+
+  generateOTP(globals); // resets everything
+}
+
 export {
   getFullName, days, submitFormArrayToString,
    maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
    debugForm,getBankLogo,
    createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField,
    getLoanAmountValue,getTenureValue,loanAmount,emi,roi,tax,generateOTP
-   ,validateOTP
+   ,validateOTP,handleResendOtp,runOtpCountdown
 };
