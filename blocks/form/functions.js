@@ -431,19 +431,48 @@ observeBankField();
  * EMI Calculation (WORKS WITH YOUR RANGE.JS)
  */
 function updateOfferEMI(globals) {
+  console.log("Globals:", globals);
+
   try {
-    const form = globals?.form;
-    if (!form) return;
+    // ✅ Ensure proper AEM context
+    if (!globals || typeof globals !== "object") {
+      console.warn("Invalid globals received:", globals);
+      return;
+    }
+
+    const form = globals.form;
+    if (!form) {
+      console.warn("Form not available in globals");
+      return;
+    }
+
+    /* =========================
+       GET VALUES (IMPORTANT FIX)
+    ========================= */
+
+    const loanInput = document.querySelector(
+      'input[name="loan_amount_slider"]'
+    );
+
+    const tenureInput = document.querySelector(
+      'input[name="loan_tenture_slider"]'
+    );
 
     const loanAmount = Number(
-      document.querySelector('input[name="loan_amount_slider"]')?.value
+      loanInput?._actualValue || loanInput?.value
     ) || 0;
 
     const tenure = Number(
-      document.querySelector('input[name="loan_tenture_slider"]')?.value
+      tenureInput?._actualValue || tenureInput?.value
     ) || 0;
 
+    console.log("Loan:", loanAmount, "Tenure:", tenure);
+
     if (!loanAmount || !tenure) return;
+
+    /* =========================
+       EMI CALCULATION
+    ========================= */
 
     const annualRate = 12;
     const monthlyRate = annualRate / (12 * 100);
@@ -455,9 +484,14 @@ function updateOfferEMI(globals) {
       (Math.pow(1 + monthlyRate, tenure) - 1);
 
     const emiRounded = Math.round(emi);
+
     const total = emiRounded * tenure;
     const interest = total - loanAmount;
     const tax = Math.round(interest * 0.18);
+
+    /* =========================
+       UPDATE AEM UI
+    ========================= */
 
     globals.functions.setProperty(
       form.offer_page.avail_panel.avail_input,
