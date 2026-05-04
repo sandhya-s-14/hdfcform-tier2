@@ -427,69 +427,41 @@ function observeBankField() {
 observeBankField();
 
 /*======================EMI FUNCTION==================================================*/
-function updateOfferEMI(globals) {
+function updateOfferAll(globals) {
   const form = globals.form;
 
-  // 👉 Get fields using your paths
-  const loanField =
-    form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
+  // 👉 IMPORTANT: Use .value directly (hidden field)
+  const loan = parseInt(
+    form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider.value
+  ) || 0;
 
-  const tenureField =
-    form.offer_page.loan_offer_based_on_declared_income.loan_tenture_slider;
+  const tenure = parseInt(
+    form.offer_page.loan_offer_based_on_declared_income.loan_tenture_slider.value
+  ) || 0;
 
-  const emiField =
-    form.offer_page.avail_panel.emi_input.emi_amount;
+  const emiField = form.offer_page.avail_panel.emi_input.emi_amount;
+  const roiField = form.offer_page.avail_panel.emi_input.roi;
+  const taxField = form.offer_page.avail_panel.emi_input.tax;
+  const availField = form.offer_page.avail_panel.avail_input;
 
-  const roiField =
-    form.offer_page.avail_panel.emi_input.roi;
-
-  const taxField =
-    form.offer_page.avail_panel.emi_input.tax;
-
-  const availField =
-    form.offer_page.avail_panel.avail_input;
-
-  // 👉 Safety check
-  if (!loanField || !tenureField) return;
-
-  // 👉 Get values
-  const loan = parseInt(loanField.value) || 0;
-  const tenure = parseInt(tenureField.value) || 0;
-
-  const interestRate = 12; // 🔥 you can change later
-  const r = interestRate / 12 / 100;
-
-  let emi = 0;
+  const rate = 12 / 12 / 100;
 
   if (loan > 0 && tenure > 0) {
-    emi =
-      (loan * r * Math.pow(1 + r, tenure)) /
-      (Math.pow(1 + r, tenure) - 1);
+    const emi = Math.round(
+      (loan * rate * Math.pow(1 + rate, tenure)) /
+      (Math.pow(1 + rate, tenure) - 1)
+    );
 
-    emi = Math.round(emi);
+    const total = emi * tenure;
+    const interest = total - loan;
+    const tax = Math.round(interest * 0.18);
+
+    // ✅ Update all fields
+    globals.functions.setProperty(emiField, { value: emi });
+    globals.functions.setProperty(roiField, { value: "12%" });
+    globals.functions.setProperty(taxField, { value: tax });
+    globals.functions.setProperty(availField, { value: loan });
   }
-
-  // 👉 Extra calculations
-  const totalAmount = emi * tenure;
-  const totalInterest = totalAmount - loan;
-  const tax = Math.round(totalInterest * 0.18); // 18%
-
-  // 👉 Update UI using AEM method
-  globals.functions.setProperty(emiField, {
-    value: emi,
-  });
-
-  globals.functions.setProperty(roiField, {
-    value: interestRate + "%",
-  });
-
-  globals.functions.setProperty(taxField, {
-    value: tax,
-  });
-
-  globals.functions.setProperty(availField, {
-    value: loan,
-  });
 }
 
 
