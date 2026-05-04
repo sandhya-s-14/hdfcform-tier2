@@ -633,11 +633,23 @@ function validateOTP(globals) {
         const attemptsField = form.validate_otp.attempts_text;
         const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
-        const submitBtn = form.validate_otp.submit;
 
-        // ✅ SUCCESS
+        console.log("VALIDATE RESPONSE:", result);
+
+        // ✅ SUCCESS → GO NEXT PAGE
         if (result.message === "OTP validated successfully") {
+
           alert("OTP Verified ✅");
+
+          // 👉 MOVE TO CUSTOMER DETAILS PAGE
+          globals.functions.setProperty(form.validate_otp, {
+            _active: false
+          });
+
+          globals.functions.setProperty(form.customer_details, {
+            _active: true
+          });
+
           return;
         }
 
@@ -653,11 +665,6 @@ function validateOTP(globals) {
               : "No attempts left"
         });
 
-        // ❗ BLOCK SUBMIT
-        globals.functions.setProperty(submitBtn, {
-          enabled: remaining > 0
-        });
-
         // 🔒 LOCK AFTER 3 ATTEMPTS
         if (window.otpTryCount >= 3) {
 
@@ -670,10 +677,15 @@ function validateOTP(globals) {
           });
 
           alert("Maximum attempts reached ❌");
+
         } else {
           alert("Invalid OTP ❌");
         }
 
+      })
+      .catch(err => {
+        console.error("Validate Error:", err);
+        alert("API Error ❌");
       });
 
   } catch (e) {
