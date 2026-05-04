@@ -426,7 +426,7 @@ function observeBankField() {
 
 observeBankField();
 
-/*======================EMI FUNCTION==================================================*/
+/*======================================EMI CALCULATION=================================*/
 /**
  * EMI Calculation (WORKS WITH YOUR RANGE.JS)
  * @param {scope} globals
@@ -434,13 +434,32 @@ observeBankField();
 function updateOfferEMI(globals) {
   try {
     if (!globals || !globals.form) {
-      console.warn("Globals/form not available");
-      return;
+      console.warn("Globals not available");
+      return "";
     }
 
     const form = globals.form;
 
-    // ✅ GET VALUES FROM HIDDEN INPUT (STRICT)
+    /* =========================
+       ✅ FIELD REFERENCES (IMPORTANT FIX)
+    ========================= */
+
+    const availInput =
+      form.offer_page?.avail_panel?.avail_input;
+
+    const emiAmountField =
+      form.offer_page?.avail_panel?.emi_input?.emi_amount;
+
+    const roiField =
+      form.offer_page?.avail_panel?.emi_input?.roi;
+
+    const taxField =
+      form.offer_page?.avail_panel?.emi_input?.tax;
+
+    /* =========================
+       ✅ GET VALUES FROM HIDDEN INPUT
+    ========================= */
+
     const loanAmount = Number(
       document.querySelector('input[type="hidden"][name="loan_amount_slider"]')?.value
     ) || 0;
@@ -449,12 +468,14 @@ function updateOfferEMI(globals) {
       document.querySelector('input[type="hidden"][name="loan_tenture_slider"]')?.value
     ) || 0;
 
-    console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
-    console.log("FORM STRUCTURE:", form); // 🔥 IMPORTANT
+    console.log("Loan:", loanAmount, "Tenure:", tenure);
 
-    if (!loanAmount || !tenure) return;
+    if (!loanAmount || !tenure) return "";
 
-    // ✅ EMI CALCULATION
+    /* =========================
+       ✅ EMI CALCULATION
+    ========================= */
+
     const annualRate = 12;
     const monthlyRate = annualRate / (12 * 100);
 
@@ -465,42 +486,47 @@ function updateOfferEMI(globals) {
       (Math.pow(1 + monthlyRate, tenure) - 1);
 
     const emiRounded = Math.round(emi);
+
     const total = emiRounded * tenure;
     const interest = total - loanAmount;
     const tax = Math.round(interest * 0.18);
 
+    const formatINR = (val) =>
+      "₹" + val.toLocaleString("en-IN");
+
     /* =========================
-       🔥 SAFE UI UPDATE
-       ========================= */
+       ✅ SAFE UI UPDATE (NO SILENT FAIL)
+    ========================= */
 
-    // 👉 TRY WITHOUT offer_page (most common fix)
-    if (form.avail_panel?.avail_input) {
-      globals.functions.setProperty(
-        form.avail_panel.avail_input,
-        { value: "₹" + loanAmount.toLocaleString("en-IN") }
-      );
+    if (availInput) {
+      globals.functions.setProperty(availInput, {
+        value: formatINR(loanAmount)
+      });
+    } else {
+      console.warn("avail_input path not found");
     }
 
-    if (form.avail_panel?.emi_input?.emi_amount) {
-      globals.functions.setProperty(
-        form.avail_panel.emi_input.emi_amount,
-        { value: "₹" + emiRounded.toLocaleString("en-IN") }
-      );
+    if (emiAmountField) {
+      globals.functions.setProperty(emiAmountField, {
+        value: formatINR(emiRounded)
+      });
+    } else {
+      console.warn("emi_amount path not found");
     }
 
-    if (form.avail_panel?.emi_input?.roi) {
-      globals.functions.setProperty(
-        form.avail_panel.emi_input.roi,
-        { value: annualRate + "%" }
-      );
+    if (roiField) {
+      globals.functions.setProperty(roiField, {
+        value: `${annualRate}%`
+      });
     }
 
-    if (form.avail_panel?.emi_input?.tax) {
-      globals.functions.setProperty(
-        form.avail_panel.emi_input.tax,
-        { value: "₹" + tax.toLocaleString("en-IN") }
-      );
+    if (taxField) {
+      globals.functions.setProperty(taxField, {
+        value: formatINR(tax)
+      });
     }
+
+    return "EMI calculated";
 
   } catch (e) {
     console.error("EMI ERROR:", e);
