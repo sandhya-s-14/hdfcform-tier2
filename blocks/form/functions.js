@@ -500,7 +500,9 @@ function tax() {
 
 /*=====================================GENERATE OTP=======================================*/
 /* ================= GENERATE OTP ================= */
-
+/**
+ * @param {scope} globals
+ */
 function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
@@ -566,8 +568,9 @@ function generateOTP(globals) {
 }
 
 
-/* ================= TIMER ================= */
-
+/**
+ * @param {scope} globals
+ */
 function runOtpCountdown(globals) {
   const form = globals.form;
 
@@ -602,8 +605,9 @@ function runOtpCountdown(globals) {
 }
 
 
-/* ================= VALIDATE OTP ================= */
-
+/**
+ * @param {scope} globals
+ */
 function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
@@ -677,12 +681,13 @@ function validateOTP(globals) {
 }
 
 
-/* ================= RESEND OTP ================= */
-
+/**
+ * @param {scope} globals
+ */
 function handleResendOtp(globals) {
   console.log("🔁 Resend clicked");
 
-  generateOTP(globals); // resets everything
+  generateOTP(globals);
 }
 
 export {
