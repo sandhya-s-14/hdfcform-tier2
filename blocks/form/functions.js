@@ -499,9 +499,6 @@ function tax() {
 }
 
 /*=====================================GENERATE OTP=======================================*/
-/**
- * @param {scope} globals
- */
 function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
@@ -511,11 +508,6 @@ function generateOTP(globals) {
       pan: data.pan_firstpage || null,
       dob: data.dob_firstpage || null
     };
-
-    if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      alert("Enter Mobile and PAN or DOB");
-      return;
-    }
 
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-otp", {
       method: "POST",
@@ -528,51 +520,46 @@ function generateOTP(globals) {
       .then(res => res.json())
       .then(result => {
 
+        console.log("API:", result);
+
         const form = globals.form;
-        const resendBtn = form.validate_otp.resend_otp;
+
         const timerField = form.validate_otp.timer;
+        const resendBtn = form.validate_otp.resend_otp;
         const otpField = form.validate_otp.enter_otp;
 
-        // ✅ Autofill OTP (demo)
-        const otp = result?.data?.otp;
-        if (otp) {
+        // ✅ Autofill OTP
+        if (result?.data?.otp) {
           globals.functions.setProperty(otpField, {
-            value: String(otp)
+            value: String(result.data.otp)
           });
         }
 
-        // ✅ Disable resend initially
+        // ✅ Disable resend
         globals.functions.setProperty(resendBtn, { enabled: false });
 
-        // ✅ Timer from API
-        const resendAfter = result?.data?.resendAfter;
+        const resendAfter = result?.data?.resendAfter || (Date.now() + 30000);
 
-        if (resendAfter) {
-          const interval = setInterval(() => {
-            const remaining = Math.floor((resendAfter - Date.now()) / 1000);
+        const interval = setInterval(() => {
+          const remaining = Math.floor((resendAfter - Date.now()) / 1000);
 
-            if (remaining > 0) {
-              globals.functions.setProperty(timerField, {
-                value: remaining + " sec"
-              });
-            } else {
-              clearInterval(interval);
+          if (remaining > 0) {
+            globals.functions.setProperty(timerField, {
+              value: remaining + " sec"
+            });
+          } else {
+            clearInterval(interval);
 
-              globals.functions.setProperty(timerField, {
-                value: "Resend available"
-              });
+            globals.functions.setProperty(timerField, {
+              value: "Resend available"
+            });
 
-              globals.functions.setProperty(resendBtn, {
-                enabled: true
-              });
-            }
-          }, 1000);
-        }
+            globals.functions.setProperty(resendBtn, {
+              enabled: true
+            });
+          }
+        }, 1000);
 
-      })
-      .catch(err => {
-        console.error(err);
-        alert("API Error ❌");
       });
 
   } catch (e) {
@@ -580,24 +567,16 @@ function generateOTP(globals) {
   }
 }
 
-/**
- * @param {scope} globals
- */
 function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
     const payload = {
-      mobile: data.mobile_no || "",
-      otp: data.enter_otp || "",
-      pan: data.pan_firstpage || null,
-      dob: data.dob_firstpage || null
+      mobile: data.mobile_no,
+      otp: data.enter_otp,
+      pan: data.pan_firstpage,
+      dob: data.dob_firstpage
     };
-
-    if (!payload.mobile || !payload.otp) {
-      alert("Enter Mobile and OTP");
-      return;
-    }
 
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-otp", {
       method: "POST",
@@ -610,28 +589,29 @@ function validateOTP(globals) {
       .then(res => res.json())
       .then(result => {
 
+        console.log("VALIDATE:", result);
+
         const form = globals.form;
         const attemptsField = form.validate_otp.attempts_text;
-        const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
+        const resendBtn = form.validate_otp.resend_otp;
 
-        // ✅ SUCCESS
         if (result.message === "OTP validated successfully") {
           alert("OTP Verified ✅");
           return;
         }
 
-        // ❌ INVALID OTP → show attempts
+        // ✅ Attempts
         if (result.attemptsLeft !== undefined) {
           globals.functions.setProperty(attemptsField, {
             value: result.attemptsLeft + " attempts left"
           });
         }
 
-        // 🔒 LOCK CASE
+        // 🔒 Lock case
         if (result.lockUntil) {
           globals.functions.setProperty(timerField, {
-            value: "Locked for 15 minutes"
+            value: "Locked for 15 min"
           });
 
           globals.functions.setProperty(resendBtn, {
@@ -643,10 +623,6 @@ function validateOTP(globals) {
           });
         }
 
-      })
-      .catch(err => {
-        console.error(err);
-        alert("API Error ❌");
       });
 
   } catch (e) {
