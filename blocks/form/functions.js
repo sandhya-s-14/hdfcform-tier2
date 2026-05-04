@@ -428,19 +428,19 @@ observeBankField();
 
 /*======================EMI FUNCTION==================================================*/
 /**
- * EMI Calculation (YOUR FORM VERSION)
+ * EMI Calculation (WORKS WITH YOUR RANGE.JS)
  */
 function updateOfferEMI(globals) {
   try {
     const form = globals.form;
 
-    // ✅ GET VALUES FROM YOUR SLIDER (IMPORTANT)
+    // ✅ GET VALUES FROM HIDDEN INPUT (CORRECT)
     const loanAmount = Number(
-      document.querySelector('[name="loan_amount_slider"]')?.dataset?.actualValue
+      document.querySelector('[name="loan_amount_slider"]')?.value
     ) || 0;
 
     const tenure = Number(
-      document.querySelector('[name="loan_tenture_slider"]')?.dataset?.actualValue
+      document.querySelector('[name="loan_tenture_slider"]')?.value
     ) || 0;
 
     console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
@@ -451,7 +451,7 @@ function updateOfferEMI(globals) {
     const annualRate = 12;
     const monthlyRate = annualRate / (12 * 100);
 
-    // ✅ EMI FORMULA
+    // ✅ EMI
     const emi =
       (loanAmount *
         monthlyRate *
@@ -464,33 +464,25 @@ function updateOfferEMI(globals) {
     const interest = total - loanAmount;
     const tax = Math.round(interest * 0.18);
 
-    // ✅ UPDATE UI (YOUR PATH)
+    // ✅ UPDATE UI
     globals.functions.setProperty(
       form.offer_page.avail_panel.avail_input,
-      {
-        value: "₹" + loanAmount.toLocaleString("en-IN"),
-      }
+      { value: "₹" + loanAmount.toLocaleString("en-IN") }
     );
 
     globals.functions.setProperty(
       form.offer_page.avail_panel.emi_input.emi_amount,
-      {
-        value: "₹" + emiRounded.toLocaleString("en-IN"),
-      }
+      { value: "₹" + emiRounded.toLocaleString("en-IN") }
     );
 
     globals.functions.setProperty(
       form.offer_page.avail_panel.emi_input.roi,
-      {
-        value: annualRate + "%",
-      }
+      { value: annualRate + "%" }
     );
 
     globals.functions.setProperty(
       form.offer_page.avail_panel.emi_input.tax,
-      {
-        value: "₹" + tax.toLocaleString("en-IN"),
-      }
+      { value: "₹" + tax.toLocaleString("en-IN") }
     );
 
   } catch (e) {
