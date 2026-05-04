@@ -515,7 +515,8 @@ function generateOTP(globals) {
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-otp", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true"
       },
       body: JSON.stringify(payload)
     })
@@ -556,7 +557,8 @@ function validateOTP(globals) {
     fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-otp", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true"
       },
       body: JSON.stringify(payload)
     })
