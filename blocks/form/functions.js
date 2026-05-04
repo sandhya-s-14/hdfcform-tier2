@@ -433,20 +433,15 @@ observeBankField();
  */
 function updateOfferEMI(globals) {
   try {
-    if (!globals || !globals.form) {
-      console.warn("Globals not available");
-      return;
-    }
-
     const form = globals.form;
 
-    // ✅ GET VALUES FROM HIDDEN INPUT
+    // ✅ GET VALUES FROM HIDDEN INPUT (CORRECT)
     const loanAmount = Number(
-      document.querySelector('input[type="hidden"][name="loan_amount_slider"]')?.value
+      document.querySelector('[name="loan_amount_slider"]')?.value
     ) || 0;
 
     const tenure = Number(
-      document.querySelector('input[type="hidden"][name="loan_tenture_slider"]')?.value
+      document.querySelector('[name="loan_tenture_slider"]')?.value
     ) || 0;
 
     console.log("✅ Loan:", loanAmount, "Tenure:", tenure);
@@ -465,46 +460,31 @@ function updateOfferEMI(globals) {
       (Math.pow(1 + monthlyRate, tenure) - 1);
 
     const emiRounded = Math.round(emi);
+
     const total = emiRounded * tenure;
     const interest = total - loanAmount;
     const tax = Math.round(interest * 0.18);
 
-    /* =========================
-       🔥 FIXED PART (IMPORTANT)
-       ========================= */
+    // ✅ UPDATE UI
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.avail_input,
+      { value: "₹" + loanAmount.toLocaleString("en-IN") }
+    );
 
-    // 👉 Check if path exists before setting
-    if (form.offer_page?.avail_panel?.avail_input) {
-      globals.functions.setProperty(
-        form.offer_page.avail_panel.avail_input,
-        { value: "₹" + loanAmount.toLocaleString("en-IN") }
-      );
-    } else {
-      console.warn("Path not found: avail_input");
-    }
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.emi_input.emi_amount,
+      { value: "₹" + emiRounded.toLocaleString("en-IN") }
+    );
 
-    if (form.offer_page?.avail_panel?.emi_input?.emi_amount) {
-      globals.functions.setProperty(
-        form.offer_page.avail_panel.emi_input.emi_amount,
-        { value: "₹" + emiRounded.toLocaleString("en-IN") }
-      );
-    } else {
-      console.warn("Path not found: emi_amount");
-    }
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.emi_input.roi,
+      { value: annualRate + "%" }
+    );
 
-    if (form.offer_page?.avail_panel?.emi_input?.roi) {
-      globals.functions.setProperty(
-        form.offer_page.avail_panel.emi_input.roi,
-        { value: annualRate + "%" }
-      );
-    }
-
-    if (form.offer_page?.avail_panel?.emi_input?.tax) {
-      globals.functions.setProperty(
-        form.offer_page.avail_panel.emi_input.tax,
-        { value: "₹" + tax.toLocaleString("en-IN") }
-      );
-    }
+    globals.functions.setProperty(
+      form.offer_page.avail_panel.emi_input.tax,
+      { value: "₹" + tax.toLocaleString("en-IN") }
+    );
 
   } catch (e) {
     console.error("EMI ERROR:", e);
