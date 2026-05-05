@@ -654,11 +654,11 @@ function validateOTP(globals) {
 
           // move to next panel
           globals.functions.setProperty(form.validate_otp, {
-            _active: false,
+            visible: false,
           });
 
           globals.functions.setProperty(form.customer_details, {
-            _active: true,
+            visible: true,
           });
 
           return;
