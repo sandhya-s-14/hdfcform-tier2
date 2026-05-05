@@ -134,7 +134,19 @@ export default function decorate(fieldDiv) {
 
     const actualValue = stepsArray[index];
 
-    const percent = (index / (stepsArray.length - 1)) * 100;
+    let percent;
+
+    if (type === 'loan' && window.maxEligibleLoan) {
+      const maxIndex = stepsArray.findIndex(
+        (val) => val >= window.maxEligibleLoan,
+      );
+
+      const effectiveMax = maxIndex !== -1 ? maxIndex : stepsArray.length - 1;
+
+      percent = (index / effectiveMax) * 100;
+    } else {
+      percent = (index / (stepsArray.length - 1)) * 100;
+    }
 
     wrapper.style.setProperty('--percent', percent);
 
