@@ -180,10 +180,11 @@ export default function decorate(fieldDiv) {
 
   /* ✅ INITIAL LOAD */
   requestAnimationFrame(() => {
-  /* 🔥 FORCE DEFAULT TENURE */
-    if (type === 'tenure') {
-      const defaultIndex = stepsArray.length - 1; // 84 months
+    const current = Number(originalDescriptor.get.call(input));
 
+    /* ✅ ONLY SET DEFAULT IF AEM HAS NOT SET ANYTHING */
+    if (type === 'tenure' && (!current || current === 0)) {
+      const defaultIndex = stepsArray.length - 1; // 84
       originalDescriptor.set.call(input, defaultIndex);
     }
 
