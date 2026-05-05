@@ -625,23 +625,34 @@ function validateOTP(globals) {
         const attemptsField = form.validate_otp.attempts_text;
         const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
-        const validateBox = form.validate_otp.validate_box;
+
+        const addressField = form.customer_details.address_details.address_as_per_aadhaar_records;
+
+        const addressTypeField = form.customer_details.address_details.aadhaar_address_type;
 
         console.log('API RESPONSE:', result);
 
         /* ================= SUCCESS ================= */
-        if (result?.message && result.message.toLowerCase().includes('validated')) {
-          // ✅ set validate box value (important for UI)
-          globals.functions.setProperty(validateBox, {
-            value: 'OTP validated successfully',
-          });
-
-          // ✅ stop timer
+        if (result?.message?.toLowerCase().includes('validated')) {
+          // stop timer
           if (window.otpIntervalRef) {
             clearInterval(window.otpIntervalRef);
           }
 
-          // ✅ move to next panel (correct way)
+          // ✅ SET ADDRESS
+          if (result?.data?.address) {
+            globals.functions.setProperty(addressField, {
+              value: result.data.address,
+              readOnly: true,
+            });
+
+            // auto select BOTH
+            globals.functions.setProperty(addressTypeField, {
+              value: 'Both',
+            });
+          }
+
+          // move to next panel
           globals.functions.setProperty(form.validate_otp, {
             _active: false,
           });
@@ -653,31 +664,25 @@ function validateOTP(globals) {
           return;
         }
 
-        /* ================= FAILURE ================= */
+        /* ================= INVALID OTP ================= */
 
-        // ❌ increment attempts
         window.otpTryCount = (window.otpTryCount || 0) + 1;
 
         const remaining = 3 - window.otpTryCount;
 
-        // ✅ update attempts text
         globals.functions.setProperty(attemptsField, {
-          value: remaining > 0
-            ? `${remaining} attempts left`
-            : 'No attempts left',
+          value:
+            remaining > 0
+              ? `${remaining} attempts left`
+              : 'No attempts left',
         });
 
-        // ✅ update validate box
-        globals.functions.setProperty(validateBox, {
-          value: 'Invalid OTP',
-        });
-
-        // ✅ stop timer immediately
+        // stop timer immediately
         if (window.otpIntervalRef) {
           clearInterval(window.otpIntervalRef);
         }
 
-        // ✅ enable resend immediately
+        // enable resend
         globals.functions.setProperty(timerField, {
           value: 'Resend available',
         });
@@ -686,7 +691,6 @@ function validateOTP(globals) {
           enabled: true,
         });
 
-        /* ================= LOCK CONDITION ================= */
         if (window.otpTryCount >= 3) {
           globals.functions.setProperty(resendBtn, {
             enabled: false,
@@ -696,11 +700,7 @@ function validateOTP(globals) {
             value: 'Locked for 15 minutes',
           });
 
-          globals.functions.setProperty(validateBox, {
-            value: 'Maximum attempts reached',
-          });
-
-          alert('Maximum attempts reached. Try again after 15 minutes.');
+          alert('Maximum attempts reached. Try after 15 minutes.');
         } else {
           alert('Invalid OTP. Please try again.');
         }
