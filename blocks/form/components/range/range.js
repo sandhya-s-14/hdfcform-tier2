@@ -117,29 +117,21 @@ export default function decorate(fieldDiv) {
 
   /* ===== UPDATED LOGIC ===== */
   function updateUI() {
-    let index = Number(originalDescriptor.get.call(input));
+    const index = Number(originalDescriptor.get.call(input));
 
-    let rawValue = getActualValue(index, stepsArray);
-    let actualValue = normalizeValue(rawValue, type);
+    const rawValue = getActualValue(index, stepsArray);
+    const actualValue = normalizeValue(rawValue, type);
 
-    /* 🔥 FIX: LIMIT SLIDER PROPERLY */
+    /* 🔥 STRICT LIMIT WITHOUT SNAP BACK */
     if (type === 'loan' && window.maxEligibleLoan) {
-    // find max allowed index based on eligibility
-      let maxIndex = stepsArray.findIndex((val) => val >= window.maxEligibleLoan);
+      const maxIndex = stepsArray.findIndex(
+        (val) => val >= window.maxEligibleLoan,
+      );
 
-      if (maxIndex === -1) {
-        maxIndex = stepsArray.length - 1;
-      }
-
-      // 🔥 restrict slider movement itself
+      // ❗ Only block if user tries to exceed max
       if (index > maxIndex) {
-        index = maxIndex;
-        originalDescriptor.set.call(input, index);
+        return; // 🚫 STOP movement (don't reset index)
       }
-
-      // recalculate value after restricting
-      rawValue = getActualValue(index, stepsArray);
-      actualValue = normalizeValue(rawValue, type);
     }
 
     const percent = (index / (stepsArray.length - 1)) * 100;
