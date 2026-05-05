@@ -116,25 +116,39 @@ export default function decorate(fieldDiv) {
   });
 
   function updateUI() {
-    let index = Math.floor(Number(originalDescriptor.get.call(input)));
+    let index = Number(originalDescriptor.get.call(input));
 
-    /* 🔥 LIMIT ONLY (NO UI DISTORTION) */
-    if (type === 'loan' && window.maxEligibleLoan) {
-      const maxIndex = stepsArray.findIndex(
-        (val) => val >= window.maxEligibleLoan,
-      );
+    /* 🔥 LOAN → SNAP + LIMIT */
+    if (type === 'loan') {
+      index = Math.floor(index);
 
-      if (maxIndex !== -1 && index > maxIndex) {
-        index = maxIndex;
+      if (window.maxEligibleLoan) {
+        const maxIndex = stepsArray.findIndex(
+          (val) => val >= window.maxEligibleLoan,
+        );
+
+        if (maxIndex !== -1 && index > maxIndex) {
+          index = maxIndex;
+        }
       }
     }
 
-    /* 🔥 FORCE INDEX */
+    /* 🔥 APPLY INDEX BACK */
     originalDescriptor.set.call(input, index);
 
-    const actualValue = stepsArray[index];
+    /* 🔥 VALUE CALCULATION */
+    let actualValue;
 
-    /* ✅ ALWAYS FULL RANGE PERCENT */
+    if (type === 'loan') {
+    // ✅ discrete
+      actualValue = stepsArray[index];
+    } else {
+    // ✅ smooth interpolation
+      const rawValue = getActualValue(index, stepsArray);
+      actualValue = normalizeValue(rawValue, type);
+    }
+
+    /* ✅ FULL RANGE UI */
     const percent = (index / (stepsArray.length - 1)) * 100;
 
     wrapper.style.setProperty('--percent', percent);
