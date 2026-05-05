@@ -1,3 +1,8 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
+/* eslint-disable no-alert */
+/* eslint-disable no-unused-vars */
 /**
  * Get Full Name
  * @name getFullName Concats first name and last name
@@ -56,12 +61,11 @@ function maskMobileNumber(mobileNumber) {
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
 
-
 /*-----------------------------------------------------------------------------------*/
 /* ================= OTP TIMER ================= */
 
 function startOtpTimer(globals) {
-  const form = globals.form;
+  const { form } = globals;
   const timerField = form.validate_otp.timer;
   const resendBtn = form.validate_otp.resend_otp;
   const validateBtn = form.validate_otp.validate_otp;
@@ -79,21 +83,21 @@ function startOtpTimer(globals) {
 
   // ✅ Initial value
   globals.functions.setProperty(timerField, {
-    value: seconds + " secs",
+    value: `${seconds} secs`,
   });
 
   window.otpTimerInterval = setInterval(() => {
-    seconds--;
+    seconds -= 1;
 
     if (seconds > 0) {
       globals.functions.setProperty(timerField, {
-        value: seconds + " secs",
+        value: `${seconds} secs`,
       });
     }
 
     if (seconds === 0) {
       globals.functions.setProperty(timerField, {
-        value: "1 sec",   // singular case
+        value: '1 sec', // singular case
       });
     }
 
@@ -101,7 +105,7 @@ function startOtpTimer(globals) {
       clearInterval(window.otpTimerInterval);
 
       globals.functions.setProperty(timerField, {
-        value: "Time expired",
+        value: 'Time expired',
       });
 
       globals.functions.setProperty(validateBtn, {
@@ -122,9 +126,9 @@ function startOtpTimer(globals) {
 /* ================= RESEND OTP ================= */
 
 function resendOtp(globals) {
-  console.log("🔥 resendOtp");
+  console.log('🔥 resendOtp');
 
-  const form = globals.form;
+  const { form } = globals;
   const resendBtn = form.validate_otp.resend_otp;
   const timerField = form.validate_otp.timer;
   const attemptsField = form.validate_otp.attempts_text;
@@ -135,16 +139,16 @@ function resendOtp(globals) {
   if (attempts >= 3) {
     window.otpLockUntil = window.otpLockUntil || (Date.now() + 15 * 60 * 1000);
 
-    alert("You have exceeded maximum OTP attempts. Please try again after 15 minutes.");
+    alert('You have exceeded maximum OTP attempts. Please try again after 15 minutes.');
 
     globals.functions.setProperty(timerField, {
-      value: "Maximum attempts reached",
+      value: 'Maximum attempts reached',
     });
 
     globals.functions.setProperty(resendBtn, { enabled: false });
 
     globals.functions.setProperty(attemptsField, {
-      value: "No attempts left",
+      value: 'No attempts left',
     });
 
     // ✅ FORCE PANEL SWITCH
@@ -158,7 +162,7 @@ function resendOtp(globals) {
   }
 
   // ✅ Increment attempts
-  attempts++;
+  attempts += 1;
   window.otpAttempts = attempts;
 
   const remaining = 3 - attempts;
@@ -167,31 +171,31 @@ function resendOtp(globals) {
     value:
       remaining > 0
         ? `${remaining} attempts left`
-        : "No attempts left",
+        : 'No attempts left',
   });
 
   globals.functions.setProperty(resendBtn, { enabled: false });
 
-  console.log("📩 OTP resent");
+  console.log('📩 OTP resent');
 
   // ❗ Hit limit now
- if (attempts >= 3) {
-  window.otpLockUntil = Date.now() + 15 * 60 * 1000;
+  if (attempts >= 3) {
+    window.otpLockUntil = Date.now() + 15 * 60 * 1000;
 
-  alert("You have exceeded maximum OTP attempts. Please try again after 15 minutes.");
+    alert('You have exceeded maximum OTP attempts. Please try again after 15 minutes.');
 
-  // ❌ hide OTP panel
-  globals.functions.setProperty(globals.form.validate_otp, {
-    visible: false
-  });
+    // ❌ hide OTP panel
+    globals.functions.setProperty(globals.form.validate_otp, {
+      visible: false,
+    });
 
-  // ✅ show Generate OTP panel
-  globals.functions.setProperty(globals.form.generate_otp, {
-    visible: true
-  });
+    // ✅ show Generate OTP panel
+    globals.functions.setProperty(globals.form.generate_otp, {
+      visible: true,
+    });
 
-  return;
-}
+    return;
+  }
 
   startOtpTimer(globals);
 }
@@ -208,17 +212,17 @@ function stopOtpTimer() {
 /* ================= INIT OTP ================= */
 
 function initOtp(globals) {
-  const form = globals.form;
+  const { form } = globals;
   const attemptsField = form.validate_otp.attempts_text;
 
   window.otpAttempts = 0;
 
   globals.functions.setProperty(attemptsField, {
-    value: "3 attempts left",
+    value: '3 attempts left',
     readOnly: true,
   });
 
-  console.log("✅ OTP initialized");
+  console.log('✅ OTP initialized');
 
   startOtpTimer(globals);
 }
@@ -228,25 +232,25 @@ function initOtp(globals) {
 
 function debugForm(globals) {
   window.myForm = globals.form;
-  console.log("myForm", window.myForm);
-  return "";
+  console.log('myForm', window.myForm);
+  return '';
 }
 
-/*---------------------------------bureaupage----------------------------------------------*/
+/* ---------------------------------bureaupage----------------------------------------------*/
 /**
  * Returns bank logo based on value
  */
 function getBankLogo(bank) {
   const logos = {
-    hdfc_bank: "/content/dam/s_hdfc_capstone/hdfc.png",
-    icici_bank: "/content/dam/s_hdfc_capstone/icici.png",
-    axis_bank: "/content/dam/s_hdfc_capstone/axis.png",
-    kotak: "/content/dam/s_hdfc_capstone/kotak.png",
-    sbi: "/content/dam/s_hdfc_capstone/sbi.png",
-    bank_of_baroda: "/content/dam/s_hdfc_capstone/bob.jpeg",
-    idfc_first: "/content/dam/s_hdfc_capstone/idfc.png"
+    hdfc_bank: '/content/dam/s_hdfc_capstone/hdfc.png',
+    icici_bank: '/content/dam/s_hdfc_capstone/icici.png',
+    axis_bank: '/content/dam/s_hdfc_capstone/axis.png',
+    kotak: '/content/dam/s_hdfc_capstone/kotak.png',
+    sbi: '/content/dam/s_hdfc_capstone/sbi.png',
+    bank_of_baroda: '/content/dam/s_hdfc_capstone/bob.jpeg',
+    idfc_first: '/content/dam/s_hdfc_capstone/idfc.png',
   };
-  return logos[bank] || "";
+  return logos[bank] || '';
 }
 
 /**
@@ -262,7 +266,7 @@ function createBankItem(option, select) {
     <span>${option.text}</span>
   `;
 
-  item.addEventListener('click', function () {
+  item.addEventListener('click', () => {
     updateActiveBank(item, select);
   });
 
@@ -273,7 +277,7 @@ function createBankItem(option, select) {
  * Update selection
  */
 function updateActiveBank(selectedItem, select) {
-  document.querySelectorAll('.bank-item').forEach(el => {
+  document.querySelectorAll('.bank-item').forEach((el) => {
     el.classList.remove('active');
   });
 
@@ -290,15 +294,15 @@ function createOtherBankDropdown(select) {
   dropdown.className = 'bank-other-dropdown';
 
   const defaultValue = select.value || 'hdfc_bank';
-const defaultOption = Array.from(select.options).find(o => o.value === defaultValue);
+  const defaultOption = Array.from(select.options).find((o) => o.value === defaultValue);
 
-const option = document.createElement('option');
-option.value = defaultOption.value;
-option.text = defaultOption.text;
-dropdown.appendChild(option);
+  const option = document.createElement('option');
+  option.value = defaultOption.value;
+  option.text = defaultOption.text;
+  dropdown.appendChild(option);
 
-  Array.from(select.options).forEach(opt => {
-    if (!opt.value || opt.value === "other_bank") return;
+  Array.from(select.options).forEach((opt) => {
+    if (!opt.value || opt.value === 'other_bank') return;
 
     const option = document.createElement('option');
     option.value = opt.value;
@@ -306,10 +310,10 @@ dropdown.appendChild(option);
     dropdown.appendChild(option);
   });
 
-  dropdown.addEventListener('change', function () {
+  dropdown.addEventListener('change', () => {
     select.value = dropdown.value;
 
-    document.querySelectorAll('.bank-item').forEach(el => {
+    document.querySelectorAll('.bank-item').forEach((el) => {
       el.classList.remove('active');
     });
   });
@@ -337,31 +341,31 @@ function initBankSelection() {
   row.className = 'bank-row';
 
   const defaultValue = select.value || 'hdfc_bank';
-  const defaultOption = Array.from(select.options).find(o => o.value === defaultValue);
+  const defaultOption = Array.from(select.options).find((o) => o.value === defaultValue);
 
   // ✅ SHOW ONLY HDFC ICON
   const defaultItem = createBankItem(defaultOption, select);
-  defaultItem.classList.add("active");
+  defaultItem.classList.add('active');
   row.appendChild(defaultItem);
 
   left.appendChild(row);
 
   // ✅ DROPDOWN (HDFC + OTHER BANK ONLY)
-  const dropdown = document.createElement("select");
-  dropdown.className = "bank-other-dropdown";
+  const dropdown = document.createElement('select');
+  dropdown.className = 'bank-other-dropdown';
 
-  const hdfcOpt = document.createElement("option");
+  const hdfcOpt = document.createElement('option');
   hdfcOpt.value = defaultOption.value;
   hdfcOpt.text = defaultOption.text;
   dropdown.appendChild(hdfcOpt);
 
-  const otherOpt = document.createElement("option");
-  otherOpt.value = "other_bank";
-  otherOpt.text = "Other Bank";
+  const otherOpt = document.createElement('option');
+  otherOpt.value = 'other_bank';
+  otherOpt.text = 'Other Bank';
   dropdown.appendChild(otherOpt);
 
-  const right = document.createElement("div");
-  right.className = "bank-right";
+  const right = document.createElement('div');
+  right.className = 'bank-right';
   right.appendChild(dropdown);
 
   container.appendChild(left);
@@ -370,31 +374,28 @@ function initBankSelection() {
   select.parentNode.appendChild(container);
 
   // ✅ WHEN USER SELECTS "OTHER BANK"
-  dropdown.addEventListener("change", function () {
-
-    if (dropdown.value === "other_bank") {
-
-      row.innerHTML = ""; // clear
+  dropdown.addEventListener('change', () => {
+    if (dropdown.value === 'other_bank') {
+      row.innerHTML = ''; // clear
 
       // show ALL bank icons
-      Array.from(select.options).forEach(opt => {
-         if (!opt.value || opt.value === "other_bank") return;
+      Array.from(select.options).forEach((opt) => {
+        if (!opt.value || opt.value === 'other_bank') return;
 
         const item = createBankItem(opt, select);
         row.appendChild(item);
       });
 
       // OPTIONAL: update dropdown to full list
-      dropdown.innerHTML = "";
-      Array.from(select.options).forEach(opt => {
-        if (!opt.value || opt.value === "other_bank") return;
+      dropdown.innerHTML = '';
+      Array.from(select.options).forEach((opt) => {
+        if (!opt.value || opt.value === 'other_bank') return;
 
-        const option = document.createElement("option");
+        const option = document.createElement('option');
         option.value = opt.value;
         option.text = opt.text;
         dropdown.appendChild(option);
       });
-
     } else {
       // normal selection
       select.value = dropdown.value;
@@ -426,7 +427,7 @@ function observeBankField() {
 
 observeBankField();
 
-/*======================================EMI CALCULATION=================================*/
+/*= =====================================EMI CALCULATION================================= */
 /**
  * @param {scope} globals
  */
@@ -443,7 +444,6 @@ function getTenureValue(globals) {
   return Number(data.loan_tenture_slider) || 0;
 }
 
-
 /**
  * 🔹 FOR avail_input (Loan Amount display)
  * @param {scope} globals
@@ -451,12 +451,10 @@ function getTenureValue(globals) {
 function loanAmount(globals) {
   const data = globals.functions.exportData();
 
-  const val =
-    Number(data.loan_amount_slider) || 1500000; // ✅ default
+  const val = Number(data.loan_amount_slider) || 1500000; // ✅ default
 
-  return "₹" + val.toLocaleString("en-IN");
+  return `₹${val.toLocaleString('en-IN')}`;
 }
-
 
 /**
  * 🔹 FOR emi_amount
@@ -465,20 +463,17 @@ function loanAmount(globals) {
 function emi(globals) {
   const data = globals.functions.exportData();
 
-  const loanAmount =
-    Number(data.loan_amount_slider) || 1500000; // ✅ default
+  const loanAmount = Number(data.loan_amount_slider) || 1500000; // ✅ default
 
-  const tenure =
-    Number(data.loan_tenture_slider) || 84; // ✅ default
+  const tenure = Number(data.loan_tenture_slider) || 84; // ✅ default
 
   const annualRate = 10.97;
   const r = annualRate / (12 * 100);
 
-  const emiValue =
-    (loanAmount * r * Math.pow(1 + r, tenure)) /
-    (Math.pow(1 + r, tenure) - 1);
+  const emiValue = (loanAmount * r * (1 + r) ** tenure)
+    / ((1 + r) ** tenure - 1);
 
-  return "₹" + Math.round(emiValue).toLocaleString("en-IN");
+  return `₹${Math.round(emiValue).toLocaleString('en-IN')}`;
 }
 
 /**
@@ -486,19 +481,18 @@ function emi(globals) {
  * @param {scope} globals
  */
 function roi() {
-  return "10.97%";
+  return '10.97%';
 }
-
 
 /**
  * 🔹 FOR tax
  * @param {scope} globals
  */
 function tax() {
-  return "₹4,000";
+  return '₹4,000';
 }
 
-/*=====================================GENERATE OTP=======================================*/
+/*= ====================================GENERATE OTP======================================= */
 /* ================= GENERATE OTP ================= */
 /**
  * @param {scope} globals
@@ -508,27 +502,26 @@ function generateOTP(globals) {
     const data = globals.functions.exportData();
 
     const payload = {
-      mobile: data.mobile_no || "",
+      mobile: data.mobile_no || '',
       pan: data.pan_firstpage || null,
-      dob: data.dob_firstpage || null
+      dob: data.dob_firstpage || null,
     };
 
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      alert("Enter Mobile and PAN or DOB");
+      alert('Enter Mobile and PAN or DOB');
       return;
     }
 
-    fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-otp", {
-      method: "POST",
+    fetch('https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-otp', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     })
-      .then(res => res.json())
-      .then(result => {
-
-        const form = globals.form;
+      .then((res) => res.json())
+      .then((result) => {
+        const { form } = globals;
 
         const otpField = form.validate_otp.enter_otp;
         const resendBtn = form.validate_otp.resend_otp;
@@ -544,39 +537,35 @@ function generateOTP(globals) {
         globals.functions.setProperty(attemptsField, {
           value:
             remaining > 0
-              ? remaining + " attempts left"
-              : "No attempts left"
+              ? `${remaining} attempts left`
+              : 'No attempts left',
         });
 
         // Autofill OTP (testing)
         if (result?.data?.otp) {
           globals.functions.setProperty(otpField, {
-            value: String(result.data.otp)
+            value: String(result.data.otp),
           });
         }
 
         globals.functions.setProperty(resendBtn, { enabled: false });
 
         runOtpCountdown(globals);
-
       })
-      .catch(err => {
-        console.error("Generate OTP Error:", err);
-        alert("API Error");
+      .catch((err) => {
+        console.error('Generate OTP Error:', err);
+        alert('API Error');
       });
-
   } catch (e) {
     console.error(e);
   }
 }
-
 
 /* ================= TIMER ================= */
 /**
  * @param {scope} globals
  */
 function runOtpCountdown(globals) {
-
   const timerField = globals.form.validate_otp.timer;
   const resendBtn = globals.form.validate_otp.resend_otp;
 
@@ -587,21 +576,21 @@ function runOtpCountdown(globals) {
   }
 
   window.otpIntervalRef = setInterval(() => {
-    seconds--;
+    seconds -= 1;
 
     if (seconds > 0) {
       globals.functions.setProperty(timerField, {
-        value: seconds + " sec"
+        value: `${seconds} sec`,
       });
     } else {
       clearInterval(window.otpIntervalRef);
 
       globals.functions.setProperty(timerField, {
-        value: "Resend available"
+        value: 'Resend available',
       });
 
       globals.functions.setProperty(resendBtn, {
-        enabled: true
+        enabled: true,
       });
     }
   }, 1000);
@@ -616,37 +605,35 @@ function validateOTP(globals) {
     const data = globals.functions.exportData();
 
     const payload = {
-      mobile: data.mobile_no || "",
-      otp: data.enter_otp || "",
+      mobile: data.mobile_no || '',
+      otp: data.enter_otp || '',
       pan: data.pan_firstpage || null,
-      dob: data.dob_firstpage || null
+      dob: data.dob_firstpage || null,
     };
 
-    fetch("https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-otp", {
-      method: "POST",
+    fetch('https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-otp', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     })
-      .then(res => res.json())
-      .then(result => {
-
-        const form = globals.form;
+      .then((res) => res.json())
+      .then((result) => {
+        const { form } = globals;
 
         const attemptsField = form.validate_otp.attempts_text;
         const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
         const validateBox = form.validate_otp.validate_box;
 
-        console.log("API RESPONSE:", result);
+        console.log('API RESPONSE:', result);
 
         /* ================= SUCCESS ================= */
-        if (result?.message && result.message.toLowerCase().includes("validated")) {
-
+        if (result?.message && result.message.toLowerCase().includes('validated')) {
           // ✅ set validate box value (important for UI)
           globals.functions.setProperty(validateBox, {
-            value: "OTP validated successfully"
+            value: 'OTP validated successfully',
           });
 
           // ✅ stop timer
@@ -656,11 +643,11 @@ function validateOTP(globals) {
 
           // ✅ move to next panel (correct way)
           globals.functions.setProperty(form.validate_otp, {
-            _active: false
+            _active: false,
           });
 
           globals.functions.setProperty(form.customer_details, {
-            _active: true
+            _active: true,
           });
 
           return;
@@ -676,13 +663,13 @@ function validateOTP(globals) {
         // ✅ update attempts text
         globals.functions.setProperty(attemptsField, {
           value: remaining > 0
-            ? remaining + " attempts left"
-            : "No attempts left"
+            ? `${remaining} attempts left`
+            : 'No attempts left',
         });
 
         // ✅ update validate box
         globals.functions.setProperty(validateBox, {
-          value: "Invalid OTP"
+          value: 'Invalid OTP',
         });
 
         // ✅ stop timer immediately
@@ -692,51 +679,46 @@ function validateOTP(globals) {
 
         // ✅ enable resend immediately
         globals.functions.setProperty(timerField, {
-          value: "Resend available"
+          value: 'Resend available',
         });
 
         globals.functions.setProperty(resendBtn, {
-          enabled: true
+          enabled: true,
         });
 
         /* ================= LOCK CONDITION ================= */
         if (window.otpTryCount >= 3) {
-
           globals.functions.setProperty(resendBtn, {
-            enabled: false
+            enabled: false,
           });
 
           globals.functions.setProperty(timerField, {
-            value: "Locked for 15 minutes"
+            value: 'Locked for 15 minutes',
           });
 
           globals.functions.setProperty(validateBox, {
-            value: "Maximum attempts reached"
+            value: 'Maximum attempts reached',
           });
 
-          alert("Maximum attempts reached. Try again after 15 minutes.");
+          alert('Maximum attempts reached. Try again after 15 minutes.');
         } else {
-          alert("Invalid OTP. Please try again.");
+          alert('Invalid OTP. Please try again.');
         }
-
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-        alert("API Error ❌");
+        alert('API Error ❌');
       });
-
   } catch (e) {
     console.error(e);
   }
 }
-
 
 /* ================= RESEND OTP ================= */
 /**
  * @param {scope} globals
  */
 function handleResendOtp(globals) {
-
   // ❗ DECREASE attempts on resend
   window.otpTryCount = (window.otpTryCount || 0) + 1;
 
@@ -747,13 +729,13 @@ function handleResendOtp(globals) {
   globals.functions.setProperty(attemptsField, {
     value:
       remaining > 0
-        ? remaining + " attempts left"
-        : "No attempts left"
+        ? `${remaining} attempts left`
+        : 'No attempts left',
   });
 
   // 🔒 LOCK
   if (window.otpTryCount >= 3) {
-    alert("Max attempts reached. Please try again after 15 minutes.");
+    alert('Max attempts reached. Please try again after 15 minutes.');
     return;
   }
 
@@ -763,9 +745,9 @@ function handleResendOtp(globals) {
 
 export {
   getFullName, days, submitFormArrayToString,
-   maskMobileNumber,startOtpTimer,resendOtp,stopOtpTimer,initOtp,
-   debugForm,getBankLogo,
-   createBankItem,updateActiveBank,createOtherBankDropdown,initBankSelection,observeBankField,
-   getLoanAmountValue,getTenureValue,loanAmount,emi,roi,tax,generateOTP
-   ,validateOTP,handleResendOtp,runOtpCountdown
+  maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
+  debugForm, getBankLogo,
+  createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
+  getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
+  , validateOTP, handleResendOtp, runOtpCountdown,
 };

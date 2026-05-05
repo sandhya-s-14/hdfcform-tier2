@@ -4,11 +4,11 @@ const TENURE_STEPS = [12, 24, 36, 48, 60, 72, 84];
 
 /* ===== Formatters ===== */
 function formatINR(value) {
-  return "₹" + Number(value).toLocaleString("en-IN");
+  return `₹${Number(value).toLocaleString('en-IN')}`;
 }
 
 function formatMonths(value) {
-  return Math.round(value) + " months";
+  return `${Math.round(value)} months`;
 }
 
 /* ===== Get interpolated value ===== */
@@ -28,14 +28,14 @@ function getActualValue(index, stepsArray) {
 
 /* ===== Normalize ===== */
 function normalizeValue(value, type) {
-  return type === "loan"
+  return type === 'loan'
     ? Math.round(value / 1000) * 1000
     : Math.round(value);
 }
 
 /* ===== Click on track ===== */
 function enableTrackClick(wrapper, input) {
-  wrapper.addEventListener("click", (e) => {
+  wrapper.addEventListener('click', (e) => {
     if (e.target === input) return;
 
     const rect = input.getBoundingClientRect();
@@ -45,25 +45,25 @@ function enableTrackClick(wrapper, input) {
     const value = clamped * (input.max - input.min);
 
     input.value = value;
-    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.dispatchEvent(new Event('input', { bubbles: true }));
   });
 }
 
 /* ===== Main ===== */
 export default function decorate(fieldDiv) {
-  const input = fieldDiv.querySelector("input");
+  const input = fieldDiv.querySelector('input');
   if (!input) return fieldDiv;
 
-  const originalName = input.getAttribute("name");
+  const originalName = input.getAttribute('name');
 
-  const originalMax = Number(input.getAttribute("max"));
+  const originalMax = Number(input.getAttribute('max'));
   const isLoan = originalMax > 100000;
 
-  const type = isLoan ? "loan" : "tenure";
+  const type = isLoan ? 'loan' : 'tenure';
   const stepsArray = isLoan ? LOAN_STEPS : TENURE_STEPS;
 
   /* ===== Slider Setup ===== */
-  input.type = "range";
+  input.type = 'range';
   input.min = 0;
   input.max = stepsArray.length - 1;
   input.step = 0.01;
@@ -72,57 +72,56 @@ export default function decorate(fieldDiv) {
 
   const originalDescriptor = Object.getOwnPropertyDescriptor(
     HTMLInputElement.prototype,
-    "value"
+    'value',
   );
 
   /* ===== SAFE OVERRIDE ===== */
-  Object.defineProperty(input, "value", {
+  Object.defineProperty(input, 'value', {
     get() {
       return this._actualValue ?? originalDescriptor.get.call(this);
     },
     set(val) {
       originalDescriptor.set.call(this, val);
       this._index = Number(val);
-    }
+    },
   });
 
   /* ===== Hidden input ===== */
-  const hidden = document.createElement("input");
-  hidden.type = "hidden";
+  const hidden = document.createElement('input');
+  hidden.type = 'hidden';
   hidden.name = originalName;
 
-  input.removeAttribute("name");
+  input.removeAttribute('name');
 
   /* ===== Wrapper ===== */
-  const wrapper = document.createElement("div");
-  wrapper.className = "range-widget-wrapper decorated";
+  const wrapper = document.createElement('div');
+  wrapper.className = 'range-widget-wrapper decorated';
 
   input.after(wrapper);
 
   /* ===== Value Box ===== */
-  const valueBox = document.createElement("div");
-  valueBox.className = "loan-value-box";
+  const valueBox = document.createElement('div');
+  valueBox.className = 'loan-value-box';
   wrapper.appendChild(valueBox);
 
   /* ===== Labels ===== */
-  const labels = document.createElement("div");
-  labels.className = "range-labels";
+  const labels = document.createElement('div');
+  labels.className = 'range-labels';
 
   stepsArray.forEach((val, i) => {
-    const span = document.createElement("span");
+    const span = document.createElement('span');
 
-    span.innerText =
-      (type === "loan"
-        ? val === 50000
-          ? "50K"
-          : val / 100000 + "L"
-        : val + "m") + " ";
+    span.innerText = `${type === 'loan'
+      ? val === 50000
+        ? '50K'
+        : `${val / 100000}L`
+      : `${val}m`} `;
 
     span.style.left = `${(i / (stepsArray.length - 1)) * 100}%`;
 
-    span.addEventListener("click", () => {
+    span.addEventListener('click', () => {
       input.value = i;
-      input.dispatchEvent(new Event("input", { bubbles: true }));
+      input.dispatchEvent(new Event('input', { bubbles: true }));
     });
 
     labels.appendChild(span);
@@ -137,11 +136,10 @@ export default function decorate(fieldDiv) {
 
     const percent = (index / (stepsArray.length - 1)) * 100;
 
-    wrapper.style.setProperty("--percent", percent);
+    wrapper.style.setProperty('--percent', percent);
 
     if (valueBox) {
-      valueBox.innerText =
-        type === "loan" ? formatINR(actualValue) : formatMonths(actualValue);
+      valueBox.innerText = type === 'loan' ? formatINR(actualValue) : formatMonths(actualValue);
 
       valueBox.style.left = `calc(${percent}% - 20px)`;
     }
@@ -151,7 +149,7 @@ export default function decorate(fieldDiv) {
     hidden.value = actualValue;
 
     // ✅ Correct AEM trigger
-    hidden.dispatchEvent(new Event("change", { bubbles: true }));
+    hidden.dispatchEvent(new Event('change', { bubbles: true }));
 
     // lock slider
     originalDescriptor.set.call(input, index);
@@ -162,7 +160,7 @@ export default function decorate(fieldDiv) {
   wrapper.appendChild(hidden);
   wrapper.appendChild(labels);
 
-  input.addEventListener("input", updateUI);
+  input.addEventListener('input', updateUI);
   enableTrackClick(wrapper, input);
 
   requestAnimationFrame(() => {
