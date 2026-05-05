@@ -778,17 +778,20 @@ function updateLoanFromIncome(globals) {
 
     /* ✅ MOVE SLIDER ONLY ONCE */
     setTimeout(() => {
-      const sliders = document.querySelectorAll('input[type="range"]');
+      const loanSliderEl = globals.form.offer_page
+        .loan_offer_based_on_declared_income
+        .loan_amount_slider
+        ?.element?.querySelector('input[type="range"]');
 
-      sliders.forEach((slider) => {
-        const steps = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+      if (!loanSliderEl) return;
 
-        let index = steps.findIndex((val) => val >= eligibleLoan);
-        if (index === -1) index = steps.length - 1;
+      const steps = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
 
-        slider.value = index;
-        slider.dispatchEvent(new Event('input', { bubbles: true }));
-      });
+      let index = steps.findIndex((val) => val >= eligibleLoan);
+      if (index === -1) index = steps.length - 1;
+
+      loanSliderEl.value = index;
+      loanSliderEl.dispatchEvent(new Event('input', { bubbles: true }));
     }, 200);
   }
 
