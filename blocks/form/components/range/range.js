@@ -63,7 +63,6 @@ export default function decorate(fieldDiv) {
   input.min = 0;
   input.max = stepsArray.length - 1;
   input.step = 0.01;
-  input.value = stepsArray.length - 1;
 
   const originalDescriptor = Object.getOwnPropertyDescriptor(
     HTMLInputElement.prototype,
@@ -115,32 +114,23 @@ export default function decorate(fieldDiv) {
     labels.appendChild(span);
   });
 
-  /* ===== UPDATED LOGIC ===== */
   function updateUI() {
     let index = Number(originalDescriptor.get.call(input));
 
-    /* 🔥 GET MAX INDEX */
-    let maxIndex = null;
-
+    /* 🔥 LIMIT ONLY TOP */
     if (type === 'loan' && window.maxEligibleLoan) {
-      maxIndex = stepsArray.findIndex(
+      const maxIndex = stepsArray.findIndex(
         (val) => val >= window.maxEligibleLoan,
       );
 
-      if (maxIndex === -1) {
-        maxIndex = stepsArray.length - 1;
+      if (maxIndex !== -1 && index > maxIndex) {
+        index = maxIndex;
       }
     }
 
-    /* 🔥 CLAMP INDEX */
-    if (maxIndex !== null && index > maxIndex) {
-      index = maxIndex;
-    }
-
-    /* 🔥 VERY IMPORTANT: FORCE INDEX BACK */
+    /* 🔥 FORCE INDEX */
     originalDescriptor.set.call(input, index);
 
-    /* ✅ CALCULATE VALUE */
     const rawValue = getActualValue(index, stepsArray);
     const actualValue = normalizeValue(rawValue, type);
 
@@ -148,13 +138,11 @@ export default function decorate(fieldDiv) {
 
     wrapper.style.setProperty('--percent', percent);
 
-    if (valueBox) {
-      valueBox.innerText = type === 'loan'
-        ? formatINR(actualValue)
-        : formatMonths(actualValue);
+    valueBox.innerText = type === 'loan'
+      ? formatINR(actualValue)
+      : formatMonths(actualValue);
 
-      valueBox.style.left = `calc(${percent}% - 20px)`;
-    }
+    valueBox.style.left = `calc(${percent}% - 20px)`;
 
     input._actualValue = actualValue;
     hidden.value = actualValue;

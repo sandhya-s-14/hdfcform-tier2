@@ -760,21 +760,16 @@ function updateLoanFromIncome(globals) {
   const income = Number(data.monthly_net_income_salary || 0);
   if (!income) return;
 
-  /* ===== CALCULATE ELIGIBILITY ===== */
   let eligibleLoan = income * 20;
   eligibleLoan = Math.min(eligibleLoan, 1500000);
 
-  /* ===== STORE GLOBAL LIMIT ===== */
+  /* 🔥 STORE GLOBAL LIMIT ONLY */
   window.maxEligibleLoan = eligibleLoan;
 
-  /* ===== UPDATE AEM FIELD ===== */
-  const loanSlider = globals.form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
+  /* ❌ DO NOT SET VALUE VIA AEM (THIS WAS BREAKING IT) */
+  // globals.functions.setProperty(loanSlider, { value: eligibleLoan });
 
-  globals.functions.setProperty(loanSlider, {
-    value: eligibleLoan,
-  });
-
-  /* ===== FORCE SLIDER UI UPDATE ===== */
+  /* ✅ ONLY MOVE SLIDER UI */
   setTimeout(() => {
     const slider = document.querySelector('[type="range"]');
 
@@ -785,12 +780,11 @@ function updateLoanFromIncome(globals) {
       if (index === -1) index = steps.length - 1;
 
       slider.value = index;
-
       slider.dispatchEvent(new Event('input', { bubbles: true }));
     }
-  }, 200);
+  }, 150);
 
-  /* ===== UPDATE OFFER TEXT ===== */
+  /* ✅ UPDATE TEXT */
   const offerText = globals.form.offer_page.loan_offer_based_on_declared_income.loan_offer_banner_text;
 
   globals.functions.setProperty(offerText, {
