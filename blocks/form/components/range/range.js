@@ -25,7 +25,8 @@ function getActualValue(index, stepsArray) {
 
   if (lower === upper) return stepsArray[lower];
 
-  return stepsArray[lower] + (stepsArray[upper] - stepsArray[lower]) * (index - lower);
+  return stepsArray[lower]
+    + (stepsArray[upper] - stepsArray[lower]) * (index - lower);
 }
 
 /* ===== Normalize ===== */
@@ -64,6 +65,13 @@ export default function decorate(fieldDiv) {
   input.min = 0;
   input.max = stepsArray.length - 1;
   input.step = 0.01;
+
+  /* ✅ DEFAULT VALUES */
+  if (type === 'tenure') {
+    input.value = stepsArray.length - 1; // 👉 84 months
+  } else {
+    input.value = stepsArray.length - 1; // temporary, will be overridden by eligibility
+  }
 
   const originalDescriptor = Object.getOwnPropertyDescriptor(
     HTMLInputElement.prototype,
@@ -133,22 +141,20 @@ export default function decorate(fieldDiv) {
       }
     }
 
-    /* 🔥 APPLY INDEX BACK */
+    /* 🔥 APPLY INDEX */
     originalDescriptor.set.call(input, index);
 
-    /* 🔥 VALUE CALCULATION */
+    /* 🔥 VALUE */
     let actualValue;
 
     if (type === 'loan') {
-    // ✅ discrete
       actualValue = stepsArray[index];
     } else {
-    // ✅ smooth interpolation
       const rawValue = getActualValue(index, stepsArray);
       actualValue = normalizeValue(rawValue, type);
     }
 
-    /* ✅ FULL RANGE UI */
+    /* ✅ UI POSITION */
     const percent = (index / (stepsArray.length - 1)) * 100;
 
     wrapper.style.setProperty('--percent', percent);
@@ -164,6 +170,7 @@ export default function decorate(fieldDiv) {
 
     hidden.dispatchEvent(new Event('change', { bubbles: true }));
   }
+
   wrapper.appendChild(input);
   wrapper.appendChild(hidden);
   wrapper.appendChild(labels);
@@ -171,6 +178,7 @@ export default function decorate(fieldDiv) {
   input.addEventListener('input', updateUI);
   enableTrackClick(wrapper, input);
 
+  /* ✅ INITIAL LOAD */
   requestAnimationFrame(updateUI);
 
   return fieldDiv;
