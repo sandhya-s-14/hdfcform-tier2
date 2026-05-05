@@ -763,31 +763,36 @@ function updateLoanFromIncome(globals) {
   let eligibleLoan = income * 20;
   eligibleLoan = Math.min(eligibleLoan, 1500000);
 
+  /* ✅ STORE LIMIT ONLY */
   window.maxEligibleLoan = eligibleLoan;
 
-  const steps = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+  /* ❌ DO NOT RESET VALUE ALWAYS */
+  const currentLoan = Number(data.loan_amount_slider || 0);
 
-  let maxIndex = steps.findIndex((v) => v >= eligibleLoan);
-  if (maxIndex === -1) maxIndex = steps.length - 1;
+  if (!currentLoan || currentLoan > eligibleLoan) {
+    const loanSlider = globals.form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
 
-  window.maxEligibleIndex = maxIndex;
+    globals.functions.setProperty(loanSlider, {
+      value: eligibleLoan,
+    });
 
-  /* 🔥 CONTROL SLIDER ONCE */
-  setTimeout(() => {
-    const slider = document.querySelector('[type="range"]');
+    /* ✅ MOVE SLIDER ONLY ONCE */
+    setTimeout(() => {
+      const sliders = document.querySelectorAll('input[type="range"]');
 
-    if (slider) {
-      window.isAutoSettingSlider = true;
+      sliders.forEach((slider) => {
+        const steps = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
 
-      slider.value = maxIndex;
-      slider.dispatchEvent(new Event('input', { bubbles: true }));
+        let index = steps.findIndex((val) => val >= eligibleLoan);
+        if (index === -1) index = steps.length - 1;
 
-      setTimeout(() => {
-        window.isAutoSettingSlider = false;
-      }, 50);
-    }
-  }, 100);
+        slider.value = index;
+        slider.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    }, 200);
+  }
 
+  /* ✅ ONLY UPDATE TEXT */
   const offerText = globals.form.offer_page.loan_offer_based_on_declared_income.loan_offer_banner_text;
 
   globals.functions.setProperty(offerText, {
