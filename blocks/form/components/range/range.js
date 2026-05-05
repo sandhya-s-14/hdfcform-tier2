@@ -115,40 +115,39 @@ export default function decorate(fieldDiv) {
   });
 
   function updateUI() {
-    let index = Number(originalDescriptor.get.call(input));
+    let index = Math.round(Number(originalDescriptor.get.call(input)));
 
-    /* 🔥 IGNORE AUTO SET */
-    if (window.isAutoSettingSlider) {
-      originalDescriptor.set.call(input, index);
-      return;
-    }
+    /* 🔥 LIMIT INDEX ONLY */
+    if (type === 'loan' && window.maxEligibleLoan) {
+      const maxIndex = stepsArray.findIndex(
+        (val) => val >= window.maxEligibleLoan,
+      );
 
-    /* 🔥 HARD LIMIT */
-    if (type === 'loan' && window.maxEligibleIndex !== undefined) {
-      if (index > window.maxEligibleIndex) {
-        index = window.maxEligibleIndex;
+      if (maxIndex !== -1 && index > maxIndex) {
+        index = maxIndex;
       }
     }
 
     /* 🔥 FORCE INDEX */
     originalDescriptor.set.call(input, index);
 
-    const rawValue = getActualValue(index, stepsArray);
-    const actualValue = normalizeValue(rawValue, type);
+    /* 🔥 NO INTERPOLATION — DIRECT STEP VALUE */
+    const actualValue = stepsArray[index];
 
     const percent = (index / (stepsArray.length - 1)) * 100;
 
     wrapper.style.setProperty('--percent', percent);
 
-    valueBox.innerText = type === 'loan' ? formatINR(actualValue) : formatMonths(actualValue);
+    valueBox.innerText = type === 'loan'
+      ? formatINR(actualValue)
+      : formatMonths(actualValue);
 
     valueBox.style.left = `calc(${percent}% - 20px)`;
 
     input._actualValue = actualValue;
     hidden.value = actualValue;
 
-  /* ❌ REMOVE THIS — THIS WAS TRIGGERING SNAP */
-  // hidden.dispatchEvent(new Event('change', { bubbles: true }));
+    hidden.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   wrapper.appendChild(input);
