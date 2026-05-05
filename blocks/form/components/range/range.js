@@ -119,18 +119,28 @@ export default function decorate(fieldDiv) {
   function updateUI() {
     let index = Number(originalDescriptor.get.call(input));
 
-    /* 🔥 ONLY LIMIT UPPER BOUND */
+    /* 🔥 GET MAX INDEX */
+    let maxIndex = null;
+
     if (type === 'loan' && window.maxEligibleLoan) {
-      const maxIndex = stepsArray.findIndex(
+      maxIndex = stepsArray.findIndex(
         (val) => val >= window.maxEligibleLoan,
       );
 
-      if (maxIndex !== -1 && index > maxIndex) {
-        index = maxIndex; // clamp only
+      if (maxIndex === -1) {
+        maxIndex = stepsArray.length - 1;
       }
     }
 
-    /* ✅ NORMAL FLOW */
+    /* 🔥 CLAMP INDEX */
+    if (maxIndex !== null && index > maxIndex) {
+      index = maxIndex;
+    }
+
+    /* 🔥 VERY IMPORTANT: FORCE INDEX BACK */
+    originalDescriptor.set.call(input, index);
+
+    /* ✅ CALCULATE VALUE */
     const rawValue = getActualValue(index, stepsArray);
     const actualValue = normalizeValue(rawValue, type);
 
@@ -150,9 +160,6 @@ export default function decorate(fieldDiv) {
     hidden.value = actualValue;
 
     hidden.dispatchEvent(new Event('change', { bubbles: true }));
-
-    /* 🔥 THIS IS CRITICAL */
-    originalDescriptor.set.call(input, index);
   }
 
   wrapper.appendChild(input);
