@@ -778,10 +778,18 @@ function updateLoanFromIncome(globals) {
 
     /* ✅ MOVE SLIDER ONLY ONCE */
     setTimeout(() => {
-      const loanSliderEl = globals.form.offer_page
-        .loan_offer_based_on_declared_income
-        .loan_amount_slider
-        ?.element?.querySelector('input[type="range"]');
+      const allSliders = document.querySelectorAll('input[type="range"]');
+
+      let loanSliderEl = null;
+
+      /* 🔥 find ONLY loan slider (not tenure) */
+      allSliders.forEach((slider) => {
+        const labels = slider.parentElement?.querySelector('.range-labels');
+
+        if (labels && labels.innerText.includes('L')) {
+          loanSliderEl = slider; // this is loan
+        }
+      });
 
       if (!loanSliderEl) return;
 
