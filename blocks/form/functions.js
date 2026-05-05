@@ -757,52 +757,46 @@ function handleResendOtp(globals) {
 function updateLoanFromIncome(globals) {
   const data = globals.functions.exportData();
 
-  /* ================= GET INCOME ================= */
-
   const income = Number(data.monthly_net_income_salary || 0);
-
   if (!income) return;
 
-  /* ================= CALCULATE ================= */
-
+  /* ===== CALCULATE ELIGIBILITY ===== */
   let eligibleLoan = income * 20;
-
-  // cap at 15L
   eligibleLoan = Math.min(eligibleLoan, 1500000);
 
-  // minimum safeguard (optional)
-  if (eligibleLoan < 50000) {
-    eligibleLoan = 50000;
-  }
-
-  /* ================= PASS TO SLIDER SYSTEM ================= */
-
-  // 🔥 THIS is what range.js uses
+  /* ===== STORE GLOBAL LIMIT ===== */
   window.maxEligibleLoan = eligibleLoan;
 
-  /* ================= FORCE SLIDER REBUILD ================= */
-
-  setTimeout(() => {
-    window.dispatchEvent(new Event('resize'));
-  }, 100);
-
-  /* ================= SET SLIDER VALUE (AEM binding) ================= */
-
+  /* ===== UPDATE AEM FIELD ===== */
   const loanSlider = globals.form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
 
   globals.functions.setProperty(loanSlider, {
     value: eligibleLoan,
   });
 
-  /* ================= UPDATE OFFER TEXT ================= */
+  /* ===== FORCE SLIDER UI UPDATE ===== */
+  setTimeout(() => {
+    const slider = document.querySelector('[type="range"]');
 
+    if (slider) {
+      const steps = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+
+      let index = steps.findIndex((val) => val >= eligibleLoan);
+      if (index === -1) index = steps.length - 1;
+
+      slider.value = index;
+
+      slider.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }, 200);
+
+  /* ===== UPDATE OFFER TEXT ===== */
   const offerText = globals.form.offer_page.loan_offer_based_on_declared_income.loan_offer_banner_text;
 
   globals.functions.setProperty(offerText, {
     value: `You're eligible for ₹${eligibleLoan.toLocaleString('en-IN')}`,
   });
 }
-
 export {
   getFullName, days, submitFormArrayToString,
   maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
