@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
 
@@ -115,9 +116,9 @@ export default function decorate(fieldDiv) {
   });
 
   function updateUI() {
-    let index = Math.round(Number(originalDescriptor.get.call(input)));
+    let index = Math.floor(Number(originalDescriptor.get.call(input)));
 
-    /* 🔥 LIMIT INDEX ONLY */
+    /* 🔥 LIMIT */
     if (type === 'loan' && window.maxEligibleLoan) {
       const maxIndex = stepsArray.findIndex(
         (val) => val >= window.maxEligibleLoan,
@@ -131,7 +132,6 @@ export default function decorate(fieldDiv) {
     /* 🔥 FORCE INDEX */
     originalDescriptor.set.call(input, index);
 
-    /* 🔥 NO INTERPOLATION — DIRECT STEP VALUE */
     const actualValue = stepsArray[index];
 
     const percent = (index / (stepsArray.length - 1)) * 100;
