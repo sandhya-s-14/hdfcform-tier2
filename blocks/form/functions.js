@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
 /* eslint-disable no-shadow */
@@ -644,14 +645,12 @@ function validateOTP(globals) {
           // ✅ SET NAME (FIXED)
           globals.functions.setProperty(nameField, {
             value: 'Sandhya S',
-            readOnly: true,
           });
 
           // ✅ SET ADDRESS
           if (result?.data?.address) {
             globals.functions.setProperty(addressField, {
               value: result.data.address,
-              readOnly: true,
             });
           }
 
@@ -749,6 +748,45 @@ function handleResendOtp(globals) {
 
   // ✅ Generate again
   generateOTP(globals);
+}
+
+/*= =====================================UPDATELOANOFFER=================================== */
+/**
+ * @param {scope} globals
+ */
+function updateLoanFromIncome(globals) {
+  const data = globals.functions.exportData();
+
+  /* ================= GET INCOME ================= */
+
+  const income = Number(
+    data.monthly_net_income_salary || 0,
+  );
+
+  if (!income) return;
+
+  /* ================= CALCULATE LOAN ================= */
+
+  let eligibleLoan = income * 20;
+
+  // cap at 15L
+  eligibleLoan = Math.min(eligibleLoan, 1500000);
+
+  /* ================= SET LOAN SLIDER ================= */
+
+  const loanSlider = globals.form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
+
+  globals.functions.setProperty(loanSlider, {
+    value: eligibleLoan,
+  });
+
+  /* ================= UPDATE OFFER TEXT ================= */
+
+  const offerText = globals.form.offer_page.loan_offer_based_on_declared_income.loan_offer_banner_text;
+
+  globals.functions.setProperty(offerText, {
+    value: `You're eligible for ₹${eligibleLoan.toLocaleString('en-IN')}`,
+  });
 }
 
 export {
