@@ -795,5 +795,5 @@ export {
   debugForm, getBankLogo,
   createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
   getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
-  , validateOTP, handleResendOtp, runOtpCountdown,
+  , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome,
 };
