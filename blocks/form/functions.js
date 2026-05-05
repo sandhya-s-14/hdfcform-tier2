@@ -626,20 +626,16 @@ function validateOTP(globals) {
         const resendBtn = form.validate_otp.resend_otp;
         const timerField = form.validate_otp.timer;
 
-        const addressField =
-          form.customer_details.address_details.address_as_per_aadhaar_records;
+        const addressField = form.customer_details.address_details.address_as_per_aadhaar_records;
 
-        const addressTypeField =
-          form.customer_details.address_details.aadhaar_address_type;
+        const addressTypeField = form.customer_details.address_details.aadhaar_address_type;
 
-        const nameField =
-          form.customer_details.full_name_as_per_aadhaar;
+        const nameField = form.customer_details.full_name_as_per_aadhaar;
 
         console.log('API RESPONSE:', result);
 
         /* ================= SUCCESS ================= */
         if (result?.message?.toLowerCase().includes('validated')) {
-
           // ✅ stop timer
           if (window.otpIntervalRef) {
             clearInterval(window.otpIntervalRef);
@@ -647,7 +643,7 @@ function validateOTP(globals) {
 
           // ✅ SET NAME (FIXED)
           globals.functions.setProperty(nameField, {
-            value: "Sandhya S",
+            value: 'Sandhya S',
             readOnly: true,
           });
 
@@ -661,7 +657,7 @@ function validateOTP(globals) {
 
           // ✅ FIX RADIO VALUE (IMPORTANT)
           globals.functions.setProperty(addressTypeField, {
-            value: "both", // ⚠️ must match AEM value, not label
+            value: 'both', // ⚠️ must match AEM value, not label
           });
 
           // ✅ MOVE TO NEXT PANEL
