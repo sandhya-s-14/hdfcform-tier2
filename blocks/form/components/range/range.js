@@ -117,14 +117,16 @@ export default function decorate(fieldDiv) {
   function updateUI() {
     let index = Number(originalDescriptor.get.call(input));
 
-    /* 🔥 LIMIT ONLY TOP */
-    if (type === 'loan' && window.maxEligibleLoan) {
-      const maxIndex = stepsArray.findIndex(
-        (val) => val >= window.maxEligibleLoan,
-      );
+    /* 🔥 IGNORE AUTO SET */
+    if (window.isAutoSettingSlider) {
+      originalDescriptor.set.call(input, index);
+      return;
+    }
 
-      if (maxIndex !== -1 && index > maxIndex) {
-        index = maxIndex;
+    /* 🔥 HARD LIMIT */
+    if (type === 'loan' && window.maxEligibleIndex !== undefined) {
+      if (index > window.maxEligibleIndex) {
+        index = window.maxEligibleIndex;
       }
     }
 
@@ -138,16 +140,15 @@ export default function decorate(fieldDiv) {
 
     wrapper.style.setProperty('--percent', percent);
 
-    valueBox.innerText = type === 'loan'
-      ? formatINR(actualValue)
-      : formatMonths(actualValue);
+    valueBox.innerText = type === 'loan' ? formatINR(actualValue) : formatMonths(actualValue);
 
     valueBox.style.left = `calc(${percent}% - 20px)`;
 
     input._actualValue = actualValue;
     hidden.value = actualValue;
 
-    hidden.dispatchEvent(new Event('change', { bubbles: true }));
+  /* ❌ REMOVE THIS — THIS WAS TRIGGERING SNAP */
+  // hidden.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   wrapper.appendChild(input);
