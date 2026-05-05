@@ -117,22 +117,29 @@ export default function decorate(fieldDiv) {
 
   /* ===== UPDATED LOGIC ===== */
   function updateUI() {
-    const index = Number(originalDescriptor.get.call(input));
+    let index = Number(originalDescriptor.get.call(input));
 
-    const rawValue = getActualValue(index, stepsArray);
-    const actualValue = normalizeValue(rawValue, type);
+    /* 🔥 FIND MAX INDEX */
+    let maxIndex = stepsArray.length - 1;
 
-    /* 🔥 STRICT LIMIT WITHOUT SNAP BACK */
     if (type === 'loan' && window.maxEligibleLoan) {
-      const maxIndex = stepsArray.findIndex(
+      const foundIndex = stepsArray.findIndex(
         (val) => val >= window.maxEligibleLoan,
       );
 
-      // ❗ Only block if user tries to exceed max
-      if (index > maxIndex) {
-        return; // 🚫 STOP movement (don't reset index)
+      if (foundIndex !== -1) {
+        maxIndex = foundIndex;
       }
     }
+
+    /* 🔥 CLAMP ONLY UPPER LIMIT */
+    if (index > maxIndex) {
+      index = maxIndex;
+    }
+
+    /* 🔥 CONTINUE NORMAL FLOW */
+    const rawValue = getActualValue(index, stepsArray);
+    const actualValue = normalizeValue(rawValue, type);
 
     const percent = (index / (stepsArray.length - 1)) * 100;
 
@@ -150,6 +157,9 @@ export default function decorate(fieldDiv) {
     hidden.value = actualValue;
 
     hidden.dispatchEvent(new Event('change', { bubbles: true }));
+
+    /* 🔥 IMPORTANT: update slider position properly */
+    originalDescriptor.set.call(input, index);
   }
 
   wrapper.appendChild(input);
