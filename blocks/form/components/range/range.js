@@ -118,7 +118,7 @@ export default function decorate(fieldDiv) {
   function updateUI() {
     let index = Math.floor(Number(originalDescriptor.get.call(input)));
 
-    /* 🔥 LIMIT */
+    /* 🔥 LIMIT ONLY (NO UI DISTORTION) */
     if (type === 'loan' && window.maxEligibleLoan) {
       const maxIndex = stepsArray.findIndex(
         (val) => val >= window.maxEligibleLoan,
@@ -134,19 +134,8 @@ export default function decorate(fieldDiv) {
 
     const actualValue = stepsArray[index];
 
-    let percent;
-
-    if (type === 'loan' && window.maxEligibleLoan) {
-      const maxIndex = stepsArray.findIndex(
-        (val) => val >= window.maxEligibleLoan,
-      );
-
-      const effectiveMax = maxIndex !== -1 ? maxIndex : stepsArray.length - 1;
-
-      percent = (index / effectiveMax) * 100;
-    } else {
-      percent = (index / (stepsArray.length - 1)) * 100;
-    }
+    /* ✅ ALWAYS FULL RANGE PERCENT */
+    const percent = (index / (stepsArray.length - 1)) * 100;
 
     wrapper.style.setProperty('--percent', percent);
 
@@ -161,7 +150,6 @@ export default function decorate(fieldDiv) {
 
     hidden.dispatchEvent(new Event('change', { bubbles: true }));
   }
-
   wrapper.appendChild(input);
   wrapper.appendChild(hidden);
   wrapper.appendChild(labels);
