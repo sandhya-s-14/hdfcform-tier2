@@ -757,30 +757,38 @@ function handleResendOtp(globals) {
 function updateLoanFromIncome(globals) {
   const data = globals.functions.exportData();
 
-  /* ================= GET INCOME ================= */
-
-  const income = Number(
-    data.monthly_net_income_salary || 0,
-  );
+  const income = Number(data.monthly_net_income_salary || 0);
 
   if (!income) return;
 
-  /* ================= CALCULATE LOAN ================= */
+  /* ================= CALCULATE ================= */
 
   let eligibleLoan = income * 20;
-
-  // cap at 15L
   eligibleLoan = Math.min(eligibleLoan, 1500000);
 
-  /* ================= SET LOAN SLIDER ================= */
+  /* ================= SET SLIDER ================= */
 
   const loanSlider = globals.form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
 
   globals.functions.setProperty(loanSlider, {
     value: eligibleLoan,
+    maximum: eligibleLoan, // 🔥 THIS IS KEY
   });
 
-  /* ================= UPDATE OFFER TEXT ================= */
+  /* ================= FORCE UI UPDATE ================= */
+
+  setTimeout(() => {
+    const slider = document.querySelector('[name="loan_amount_slider"]');
+
+    if (slider) {
+      slider.max = eligibleLoan; // 🔥 restrict UI also
+      slider.value = eligibleLoan;
+
+      slider.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  }, 100);
+
+  /* ================= OFFER TEXT ================= */
 
   const offerText = globals.form.offer_page.loan_offer_based_on_declared_income.loan_offer_banner_text;
 
