@@ -117,27 +117,42 @@ export default function decorate(fieldDiv) {
 
   /* ===== UPDATED LOGIC ===== */
   function updateUI() {
-    const index = Number(originalDescriptor.get.call(input));
+    let index = Number(originalDescriptor.get.call(input));
 
-    const rawValue = getActualValue(index, stepsArray);
+    let rawValue = getActualValue(index, stepsArray);
     let actualValue = normalizeValue(rawValue, type);
 
-    /* 🔥 LIMIT ONLY (NO JUMP) */
+    /* 🔥 FIX: LIMIT SLIDER PROPERLY */
     if (type === 'loan' && window.maxEligibleLoan) {
-      if (actualValue > window.maxEligibleLoan) {
-        actualValue = window.maxEligibleLoan;
+    // find max allowed index based on eligibility
+      let maxIndex = stepsArray.findIndex((val) => val >= window.maxEligibleLoan);
+
+      if (maxIndex === -1) {
+        maxIndex = stepsArray.length - 1;
       }
+
+      // 🔥 restrict slider movement itself
+      if (index > maxIndex) {
+        index = maxIndex;
+        originalDescriptor.set.call(input, index);
+      }
+
+      // recalculate value after restricting
+      rawValue = getActualValue(index, stepsArray);
+      actualValue = normalizeValue(rawValue, type);
     }
 
     const percent = (index / (stepsArray.length - 1)) * 100;
 
     wrapper.style.setProperty('--percent', percent);
 
-    valueBox.innerText = type === 'loan'
-      ? formatINR(actualValue)
-      : formatMonths(actualValue);
+    if (valueBox) {
+      valueBox.innerText = type === 'loan'
+        ? formatINR(actualValue)
+        : formatMonths(actualValue);
 
-    valueBox.style.left = `calc(${percent}% - 20px)`;
+      valueBox.style.left = `calc(${percent}% - 20px)`;
+    }
 
     input._actualValue = actualValue;
     hidden.value = actualValue;
