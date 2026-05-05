@@ -67,22 +67,7 @@ export default function decorate(fieldDiv) {
 
   const type = isLoan ? 'loan' : 'tenure';
 
-  /* ===== 🔥 DYNAMIC STEPS ===== */
-  let stepsArray;
-
-  if (isLoan) {
-    const maxLoan = window.maxEligibleLoan || 1500000;
-
-    // filter steps
-    stepsArray = LOAN_STEPS.filter((val) => val <= maxLoan);
-
-    // ensure exact cap exists
-    if (!stepsArray.includes(maxLoan)) {
-      stepsArray.push(maxLoan);
-    }
-  } else {
-    stepsArray = TENURE_STEPS;
-  }
+  const stepsArray = isLoan ? LOAN_STEPS : TENURE_STEPS;
 
   /* ===== Slider Setup ===== */
   input.type = 'range';
@@ -149,12 +134,30 @@ export default function decorate(fieldDiv) {
     labels.appendChild(span);
   });
 
-  /* ===== Update UI ===== */
+  /* ===== 🔥 UPDATED UI LOGIC ===== */
   function updateUI() {
-    const index = Number(originalDescriptor.get.call(input));
+    let index = Number(originalDescriptor.get.call(input));
 
     const rawValue = getActualValue(index, stepsArray);
-    const actualValue = normalizeValue(rawValue, type);
+    let actualValue = normalizeValue(rawValue, type);
+
+    /* 🔥 APPLY LOAN LIMIT */
+    if (type === 'loan' && window.maxEligibleLoan) {
+      if (actualValue > window.maxEligibleLoan) {
+        let closestIndex = stepsArray.findIndex(
+          (val) => val >= window.maxEligibleLoan,
+        );
+
+        if (closestIndex === -1) {
+          closestIndex = stepsArray.length - 1;
+        }
+
+        index = closestIndex;
+        actualValue = stepsArray[closestIndex];
+
+        originalDescriptor.set.call(input, index);
+      }
+    }
 
     const percent = (index / (stepsArray.length - 1)) * 100;
 
@@ -172,8 +175,6 @@ export default function decorate(fieldDiv) {
     hidden.value = actualValue;
 
     hidden.dispatchEvent(new Event('change', { bubbles: true }));
-
-    originalDescriptor.set.call(input, index);
   }
 
   /* ===== Append ===== */
