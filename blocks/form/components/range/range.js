@@ -1,5 +1,9 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
+
+/* ===== GLOBAL MAX (dynamic from income) ===== */
+window.maxEligibleLoan = 1500000;
+
 /* ===== Step Values ===== */
 const LOAN_STEPS = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
 const TENURE_STEPS = [12, 24, 36, 48, 60, 72, 84];
@@ -62,7 +66,23 @@ export default function decorate(fieldDiv) {
   const isLoan = originalMax > 100000;
 
   const type = isLoan ? 'loan' : 'tenure';
-  const stepsArray = isLoan ? LOAN_STEPS : TENURE_STEPS;
+
+  /* ===== 🔥 DYNAMIC STEPS ===== */
+  let stepsArray;
+
+  if (isLoan) {
+    const maxLoan = window.maxEligibleLoan || 1500000;
+
+    // filter steps
+    stepsArray = LOAN_STEPS.filter((val) => val <= maxLoan);
+
+    // ensure exact cap exists
+    if (!stepsArray.includes(maxLoan)) {
+      stepsArray.push(maxLoan);
+    }
+  } else {
+    stepsArray = TENURE_STEPS;
+  }
 
   /* ===== Slider Setup ===== */
   input.type = 'range';
@@ -141,19 +161,18 @@ export default function decorate(fieldDiv) {
     wrapper.style.setProperty('--percent', percent);
 
     if (valueBox) {
-      valueBox.innerText = type === 'loan' ? formatINR(actualValue) : formatMonths(actualValue);
+      valueBox.innerText = type === 'loan'
+        ? formatINR(actualValue)
+        : formatMonths(actualValue);
 
       valueBox.style.left = `calc(${percent}% - 20px)`;
     }
 
-    // store actual value
     input._actualValue = actualValue;
     hidden.value = actualValue;
 
-    // ✅ Correct AEM trigger
     hidden.dispatchEvent(new Event('change', { bubbles: true }));
 
-    // lock slider
     originalDescriptor.set.call(input, index);
   }
 
