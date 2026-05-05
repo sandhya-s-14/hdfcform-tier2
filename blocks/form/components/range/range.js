@@ -179,7 +179,16 @@ export default function decorate(fieldDiv) {
   enableTrackClick(wrapper, input);
 
   /* ✅ INITIAL LOAD */
-  requestAnimationFrame(updateUI);
+  requestAnimationFrame(() => {
+  /* 🔥 FORCE DEFAULT TENURE */
+    if (type === 'tenure') {
+      const defaultIndex = stepsArray.length - 1; // 84 months
+
+      originalDescriptor.set.call(input, defaultIndex);
+    }
+
+    updateUI();
+  });
 
   return fieldDiv;
 }
