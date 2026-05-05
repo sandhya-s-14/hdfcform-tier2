@@ -126,7 +126,7 @@ export default function decorate(fieldDiv) {
   function updateUI() {
     let index = Number(originalDescriptor.get.call(input));
 
-    /* 🔥 LOAN → SNAP + LIMIT */
+    /* 🔥 LOAN ONLY → SNAP + LIMIT */
     if (type === 'loan') {
       index = Math.floor(index);
 
@@ -139,22 +139,24 @@ export default function decorate(fieldDiv) {
           index = maxIndex;
         }
       }
-    }
 
-    /* 🔥 APPLY INDEX */
-    originalDescriptor.set.call(input, index);
+      /* ✅ ONLY LOAN FORCES POSITION */
+      originalDescriptor.set.call(input, index);
+    }
 
     /* 🔥 VALUE */
     let actualValue;
 
     if (type === 'loan') {
+    /* discrete */
       actualValue = stepsArray[index];
     } else {
+    /* ✅ smooth tenure */
       const rawValue = getActualValue(index, stepsArray);
       actualValue = normalizeValue(rawValue, type);
     }
 
-    /* ✅ UI POSITION */
+    /* ✅ UI POSITION (ALWAYS FULL RANGE) */
     const percent = (index / (stepsArray.length - 1)) * 100;
 
     wrapper.style.setProperty('--percent', percent);
