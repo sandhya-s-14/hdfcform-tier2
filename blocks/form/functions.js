@@ -1010,7 +1010,6 @@ function populateReviewDetails(globals) {
 }
 
 /*= =========================SUBMIT API===================================================== */
-
 /**
  * @param {scope} globals
  */
@@ -1039,12 +1038,9 @@ function submitLoanApplication(globals) {
       console.log('API RESPONSE', result);
 
       if (result.success) {
-        /* STORE RESPONSE */
-        window.finalLoanResponse = result;
-
         alert('Application Submitted Successfully');
 
-        /* SHOW THANK YOU PAGE */
+        /* ================= SHOW THANK YOU PAGE ================= */
 
         globals.functions.setProperty(
           globals.form.review_page,
@@ -1054,9 +1050,22 @@ function submitLoanApplication(globals) {
         );
 
         globals.functions.setProperty(
-          globals.form.thank_you_page,
+          globals.form.thankyou_page,
           {
             visible: true,
+          },
+        );
+
+        /* ================= APPLICATION NUMBER ================= */
+
+        globals.functions.setProperty(
+          globals.form.thankyou_page
+            .kyc_verification_summary
+            .loan_application_details
+            .loan_application_number,
+          {
+            value:
+              result.applicationId || '',
           },
         );
       } else {
@@ -1065,7 +1074,7 @@ function submitLoanApplication(globals) {
     })
 
     .catch((error) => {
-      console.error(error);
+      console.error('FULL ERROR', error);
 
       alert('API Error');
     });
