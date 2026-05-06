@@ -842,7 +842,9 @@ function populateReviewDetails(globals) {
     review.loan_details.tenure,
     {
       value:
-      `${data.loan_tenture_slider || ''} months`,
+      `${globals.form.offer_page
+        .loan_offer_based_on_declared_income
+        .loan_tenture_slider.value || ''} months`,
     },
   );
 
