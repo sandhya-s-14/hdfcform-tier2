@@ -1009,6 +1009,68 @@ function populateReviewDetails(globals) {
   );
 }
 
+/*= =========================SUBMIT API===================================================== */
+
+/**
+ * @param {scope} globals
+ */
+function submitLoanApplication(globals) {
+  /* COMPLETE FORM DATA */
+  const data = globals.functions.exportData();
+
+  console.log('FINAL SUBMIT DATA', data);
+
+  fetch(
+    'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/create-loan-application',
+    {
+      method: 'POST',
+
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify(data),
+    },
+  )
+
+    .then((response) => response.json())
+
+    .then((result) => {
+      console.log('API RESPONSE', result);
+
+      if (result.success) {
+        /* STORE RESPONSE */
+        window.finalLoanResponse = result;
+
+        alert('Application Submitted Successfully');
+
+        /* SHOW THANK YOU PAGE */
+
+        globals.functions.setProperty(
+          globals.form.review_page,
+          {
+            visible: false,
+          },
+        );
+
+        globals.functions.setProperty(
+          globals.form.thank_you_page,
+          {
+            visible: true,
+          },
+        );
+      } else {
+        alert('Submission Failed');
+      }
+    })
+
+    .catch((error) => {
+      console.error(error);
+
+      alert('API Error');
+    });
+}
+
 export {
   getFullName, days, submitFormArrayToString,
   maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
@@ -1016,4 +1078,5 @@ export {
   createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
   getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
   , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome, populateReviewDetails,
+  submitLoanApplication,
 };
