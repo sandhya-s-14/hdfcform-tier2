@@ -14,12 +14,9 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 .number-wrapper .range-widget-wrapper.decorated {
   position: relative;
 
-  height: 18px;
+  padding: 10px 0;
 
   margin-top: 28px;
-
-  display: flex;
-  align-items: center;
 
   --percent: 0;
 }
@@ -46,7 +43,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   content: "";
   position: absolute;
 
-  top: 7px;
+  top: 50%;
   left: 0;
 
   width: 100%;
@@ -55,6 +52,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   background: #d6d6d6;
   border-radius: 999px;
 
+  transform: translateY(-50%);
   z-index: 0;
 }
 
@@ -63,7 +61,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   content: "";
   position: absolute;
 
-  top: 7px;
+  top: 50%;
   left: 0;
 
   width: calc(var(--percent) * 1%);
@@ -72,6 +70,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   background: #f57c00;
   border-radius: 999px;
 
+  transform: translateY(-50%);
   z-index: 1;
 }
 
@@ -111,7 +110,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 
   cursor: pointer;
 
-  margin-top: -7px;
+  margin-top: -7px !important;
 }
 
 /* ===== FIREFOX ===== */
