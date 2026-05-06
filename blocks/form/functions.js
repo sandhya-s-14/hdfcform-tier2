@@ -1017,8 +1017,6 @@ function submitLoanApplication(globals) {
   /* COMPLETE FORM DATA */
   const data = globals.functions.exportData();
 
-  console.log('FINAL SUBMIT DATA', data);
-
   fetch(
     'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/create-loan-application',
     {
@@ -1035,12 +1033,8 @@ function submitLoanApplication(globals) {
     .then((response) => response.json())
 
     .then((result) => {
-      console.log('API RESPONSE', result);
-
       if (result.success) {
-        alert('Application Submitted Successfully');
-
-        /* ================= SHOW THANK YOU PAGE ================= */
+        /* ================= HIDE REVIEW PAGE ================= */
 
         globals.functions.setProperty(
           globals.form.review_page,
@@ -1048,6 +1042,8 @@ function submitLoanApplication(globals) {
             visible: false,
           },
         );
+
+        /* ================= SHOW THANK YOU PAGE ================= */
 
         globals.functions.setProperty(
           globals.form.thankyou_page,
@@ -1068,15 +1064,11 @@ function submitLoanApplication(globals) {
               result.applicationId || '',
           },
         );
-      } else {
-        alert('Submission Failed');
       }
     })
 
     .catch((error) => {
       console.error('FULL ERROR', error);
-
-      alert('API Error');
     });
 }
 
