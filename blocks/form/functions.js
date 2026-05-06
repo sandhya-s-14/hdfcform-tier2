@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-whitespace-before-property */
 /* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
@@ -838,13 +840,17 @@ function populateReviewDetails(globals) {
     },
   );
 
+  const tenureSteps = [12, 24, 36, 48, 60, 84];
+
+  const tenureIndex = globals.form.offer_page .loan_offer_based_on_declared_income .loan_tenture_slider
+    ._jsonModel.index;
+
+  const tenureValue = tenureSteps[tenureIndex] || 84;
+
   globals.functions.setProperty(
     review.loan_details.tenure,
     {
-      value:
-      `${globals.form.offer_page
-        .loan_offer_based_on_declared_income
-        .loan_tenture_slider.value || ''} months`,
+      value: `${tenureValue} months`,
     },
   );
 
