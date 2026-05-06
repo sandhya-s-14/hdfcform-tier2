@@ -840,17 +840,15 @@ function populateReviewDetails(globals) {
     },
   );
 
-  const tenureSteps = [12, 24, 36, 48, 60, 84];
-
-  const tenureIndex = globals.form.offer_page .loan_offer_based_on_declared_income .loan_tenture_slider
-    ._jsonModel.index;
-
-  const tenureValue = tenureSteps[tenureIndex] || 84;
+  const tenureValue = globals.form.offer_page
+    .loan_offer_based_on_declared_income
+    .loan_tenture_slider
+    ._data.$_value;
 
   globals.functions.setProperty(
     review.loan_details.tenure,
     {
-      value: `${tenureValue} months`,
+      value: `${tenureValue || 84} months`,
     },
   );
 
