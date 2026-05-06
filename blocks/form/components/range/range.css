@@ -87,40 +87,38 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 }
 
 /* ===== PERFECT BLUE THUMB ===== */
-/* ===== FIX THUMB ALIGNMENT ===== */
+/* ===== EXACT THUMB CENTER FIX ===== */
 .number-wrapper input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance: none !important;
+  appearance: none !important;
 
-  width: 18px;
-  height: 18px;
+  width: 18px !important;
+  height: 18px !important;
 
-  border-radius: 50%;
-  background: #2447d5;
+  border-radius: 50% !important;
+  background: #2447d5 !important;
 
-  border: none;
-  box-shadow: none;
+  border: none !important;
+  box-shadow: none !important;
 
-  cursor: pointer;
+  cursor: pointer !important;
 
-  margin-top: -7px !important; /* MAIN FIX */
+  margin-top: -6.8px !important; /* EXACT ALIGNMENT */
 }
 
 /* ===== FIREFOX ===== */
 .number-wrapper input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 18px !important;
+  height: 18px !important;
 
-  border-radius: 50%;
-  background: #2447d5;
+  border-radius: 50% !important;
+  background: #2447d5 !important;
 
-  border: none;
-  box-shadow: none;
-
-  cursor: pointer;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* ===== TRACK HEIGHT ===== */
+/* ===== TRACK ===== */
 .number-wrapper input[type="range"]::-webkit-slider-runnable-track {
   height: 4px !important;
 }
