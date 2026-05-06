@@ -1,10 +1,10 @@
-/* =========================================
+/* =====================================================
    RANGE WRAPPER
-========================================= */
+===================================================== */
 .field-offer-panel .range-widget-wrapper {
   position: relative !important;
-  padding-top: 52px !important;
-  padding-bottom: 42px !important;
+  padding-top: 42px !important;
+  padding-bottom: 46px !important;
   overflow: visible !important;
 
   --progress: calc(
@@ -12,9 +12,9 @@
   );
 }
 
-/* =========================================
+/* =====================================================
    RANGE INPUT
-========================================= */
+===================================================== */
 .field-offer-panel .range-widget-wrapper input[type="range"] {
   -webkit-appearance: none !important;
   appearance: none !important;
@@ -34,9 +34,9 @@
   cursor: pointer !important;
 }
 
-/* =========================================
+/* =====================================================
    TRACK
-========================================= */
+===================================================== */
 .field-offer-panel
   .range-widget-wrapper
   input[type="range"]::-webkit-slider-runnable-track {
@@ -53,37 +53,37 @@
   ) !important;
 }
 
-/* =========================================
-   THUMB FIX
-========================================= */
+/* =====================================================
+   THUMB
+===================================================== */
 .field-offer-panel
   .range-widget-wrapper
   input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none !important;
   appearance: none !important;
 
-  width: 20px !important;
-  height: 20px !important;
+  width: 18px !important;
+  height: 18px !important;
 
-  margin-top: -7px !important;
+  margin-top: -6px !important;
 
   border-radius: 50% !important;
 
-  background: #2563eb !important;
+  background: #2447d5 !important;
 
-  border: 3px solid #ffffff !important;
+  border: none !important;
 
-  box-shadow: 0 0 0 2px #2563eb !important;
+  box-shadow: none !important;
+
+  cursor: pointer !important;
 
   position: relative !important;
   z-index: 5 !important;
-
-  cursor: pointer !important;
 }
 
-/* =========================================
+/* =====================================================
    FIREFOX
-========================================= */
+===================================================== */
 .field-offer-panel
   .range-widget-wrapper
   input[type="range"]::-moz-range-track {
@@ -103,68 +103,83 @@
 .field-offer-panel
   .range-widget-wrapper
   input[type="range"]::-moz-range-thumb {
-  width: 20px !important;
-  height: 20px !important;
+  width: 18px !important;
+  height: 18px !important;
 
   border-radius: 50% !important;
 
-  background: #2563eb !important;
+  background: #2447d5 !important;
 
-  border: 3px solid #ffffff !important;
-
-  box-shadow: 0 0 0 2px #2563eb !important;
+  border: none !important;
 
   cursor: pointer !important;
 }
 
-/* =========================================
+/* =====================================================
    VALUE BOX
-========================================= */
+===================================================== */
 .field-offer-panel .range-widget-wrapper .range-bubble {
   position: absolute !important;
 
-  top: 0 !important;
-  left: var(--progress) !important;
+  top: -2px !important;
+  right: 0 !important;
 
-  transform: translateX(-50%) !important;
+  min-width: 132px !important;
+  height: 56px !important;
 
-  min-width: 110px !important;
-  height: 46px !important;
-
-  padding: 0 20px !important;
+  padding: 0 22px !important;
 
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 
-  background: #ffffff !important;
+  background: #f7f7f7 !important;
 
-  border: 1px solid #d9dee7 !important;
+  border: 1px solid #d7dbe2 !important;
   border-radius: 14px !important;
 
-  color: #14213d !important;
-  font-size: 16px !important;
+  color: #1f2b3d !important;
+  font-size: 18px !important;
   font-weight: 700 !important;
 
   white-space: nowrap !important;
 
-  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.06) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
 
   z-index: 10 !important;
 }
 
-/* =========================================
+/* =====================================================
    LABELS
-========================================= */
+===================================================== */
 .field-offer-panel .range-widget-wrapper .custom-range-tick {
   position: absolute !important;
 
-  top: 82px !important;
+  top: 78px !important;
 
   transform: translateX(-50%) !important;
 
-  font-size: 13px !important;
-  color: #98a2b3 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+
+  color: #8d96a8 !important;
 
   white-space: nowrap !important;
+
+  z-index: 5 !important;
+}
+
+/* FIRST LABEL */
+.field-offer-panel
+  .range-widget-wrapper
+  .custom-range-tick:first-child {
+  transform: translateX(0) !important;
+}
+
+/* LAST LABEL */
+.field-offer-panel
+  .range-widget-wrapper
+  .custom-range-tick:last-child {
+  transform: translateX(-100%) !important;
 }
