@@ -961,8 +961,7 @@ function populateReviewDetails(globals) {
   globals.functions.setProperty(
     review.office_address_panel.current_employer_address,
     {
-      value:
-        data.employment_company_name || '',
+      value: 'Adobe Systems India Pvt. Ltd. Salarpuria Sattva Knowledge Court,Bellandur,Bengaluru,Karnataka - 560103',
     },
   );
 
@@ -985,18 +984,18 @@ function populateReviewDetails(globals) {
   /* ================= EMAIL DETAILS ================= */
 
   globals.functions.setProperty(
-    review.verify_email_id_panel.primary_email_verification,
+    review.verify_email_id_panel.primary_email_id,
     {
       value:
-        data.personal_email_id || '',
+      data.personal_email_id || '',
     },
   );
 
   globals.functions.setProperty(
-    review.verify_email_id_panel.work_email_verification,
+    review.verify_email_id_panel.work_email_id,
     {
       value:
-        data.work_email_id || '',
+      data.work_email_id || '',
     },
   );
 }
