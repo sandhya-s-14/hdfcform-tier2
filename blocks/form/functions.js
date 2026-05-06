@@ -841,7 +841,8 @@ function populateReviewDetails(globals) {
   globals.functions.setProperty(
     review.loan_details.tenure,
     {
-      value: `${data.tenure_slider || ''} months`,
+      value:
+      `${data.loan_tenture_slider || ''} months`,
     },
   );
 
@@ -984,7 +985,9 @@ function populateReviewDetails(globals) {
   /* ================= EMAIL DETAILS ================= */
 
   globals.functions.setProperty(
-    review.verify_email_id_panel.primary_email_id,
+    review.verify_email_id_panel
+      .primary_email_verification
+      .primary_email_id,
     {
       value:
       data.personal_email_id || '',
