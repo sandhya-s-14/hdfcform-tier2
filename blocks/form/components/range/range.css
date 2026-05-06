@@ -87,6 +87,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 }
 
 /* ===== PERFECT BLUE THUMB ===== */
+/* ===== FIX THUMB ALIGNMENT ===== */
 .number-wrapper input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -95,7 +96,6 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   height: 18px;
 
   border-radius: 50%;
-
   background: #2447d5;
 
   border: none;
@@ -103,7 +103,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 
   cursor: pointer;
 
-  margin-top: -7px; /* PERFECT CENTER */
+  margin-top: -7px !important; /* MAIN FIX */
 }
 
 /* ===== FIREFOX ===== */
@@ -112,13 +112,21 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   height: 18px;
 
   border-radius: 50%;
-
   background: #2447d5;
 
   border: none;
   box-shadow: none;
 
   cursor: pointer;
+}
+
+/* ===== TRACK HEIGHT ===== */
+.number-wrapper input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px !important;
+}
+
+.number-wrapper input[type="range"]::-moz-range-track {
+  height: 4px !important;
 }
 
 /* ===== LABELS ===== */
