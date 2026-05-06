@@ -810,6 +810,110 @@ function updateLoanFromIncome(globals) {
     value: `You're eligible for ₹${eligibleLoan.toLocaleString('en-IN')}`,
   });
 }
+
+/*= ============================Customer details -fill======================================= */
+/**
+ * @param {scope} globals
+ */
+function populateReviewDetails(globals) {
+  const data = globals.functions.exportData();
+
+  const review = globals.form.review_page.review_accordian;
+
+  /* ================= PERSONAL DETAILS ================= */
+
+  globals.functions.setProperty(
+    review.personal_details.full_name,
+    {
+      value:
+        `${data.pan_first_name || ''} ${data.pan_last_name || ''}`,
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.mobile_no,
+    {
+      value: data.mobile_no || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.date_of_birth,
+    {
+      value: data.dob_firstpage || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.pan,
+    {
+      value: data.pan_firstpage || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.current_address,
+    {
+      value:
+        data.address_as_per_aadhaar_records || '',
+    },
+  );
+
+  /* ================= LOAN DETAILS ================= */
+
+  globals.functions.setProperty(
+    review.loan_details.loan_amount,
+    {
+      value: data.loan_amount_slider || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.emi_amount,
+    {
+      value: data.emi_amount || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.tenure,
+    {
+      value: data.tenure_slider || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.employer_name,
+    {
+      value:
+        data.enter_employer_company_name || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.type_of_loan,
+    {
+      value: data.select_loan_type || '',
+    },
+  );
+
+  /* ================= EMAIL ================= */
+
+  globals.functions.setProperty(
+    review.verify_email_id_panel.primary_email_verification,
+    {
+      value: data.personal_email_id || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.verify_email_id_panel.work_email_verification,
+    {
+      value: data.work_email_id || '',
+    },
+  );
+}
+
 export {
   getFullName, days, submitFormArrayToString,
   maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
