@@ -2,7 +2,9 @@
 main .form .range-widget-wrapper.decorated input[type="range"] {
   background: transparent !important;
   background-image: none !important;
-  height: 4px !important;
+
+  height: 18px !important;
+
   margin: 0;
   padding: 0;
   border: none;
@@ -11,8 +13,14 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 /* ===== WRAPPER ===== */
 .number-wrapper .range-widget-wrapper.decorated {
   position: relative;
-  padding: 10px 0;
+
+  height: 18px;
+
   margin-top: 28px;
+
+  display: flex;
+  align-items: center;
+
   --percent: 0;
 }
 
@@ -22,10 +30,10 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   appearance: none;
 
   width: 100%;
-
-  height: 18px; /* FIX */
+  height: 18px;
 
   background: transparent;
+
   position: relative;
   z-index: 2;
 
@@ -38,7 +46,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   content: "";
   position: absolute;
 
-  top: 50%;
+  top: 7px;
   left: 0;
 
   width: 100%;
@@ -47,7 +55,6 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   background: #d6d6d6;
   border-radius: 999px;
 
-  transform: translateY(-50%);
   z-index: 0;
 }
 
@@ -56,7 +63,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   content: "";
   position: absolute;
 
-  top: 50%;
+  top: 7px;
   left: 0;
 
   width: calc(var(--percent) * 1%);
@@ -65,7 +72,6 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   background: #f57c00;
   border-radius: 999px;
 
-  transform: translateY(-50%);
   z-index: 1;
 }
 
@@ -83,54 +89,50 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 .number-wrapper input[type="range"]::-ms-track {
   height: 4px;
   background: transparent !important;
+
   border-color: transparent;
   color: transparent;
 }
 
 /* ===== PERFECT BLUE THUMB ===== */
-/* ===== THUMB ===== */
 .number-wrapper input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none !important;
-  appearance: none !important;
+  -webkit-appearance: none;
+  appearance: none;
 
-  width: 18px !important;
-  height: 18px !important;
+  width: 18px;
+  height: 18px;
 
-  border-radius: 50% !important;
-  background: #2447d5 !important;
+  border-radius: 50%;
 
-  border: none !important;
-  box-shadow: none !important;
+  background: #2447d5;
 
-  cursor: pointer !important;
+  border: none;
+  box-shadow: none;
 
-  margin-top: -7px !important;
+  cursor: pointer;
+
+  margin-top: -7px;
 }
 
 /* ===== FIREFOX ===== */
 .number-wrapper input[type="range"]::-moz-range-thumb {
-  width: 18px !important;
-  height: 18px !important;
+  width: 18px;
+  height: 18px;
 
-  border-radius: 50% !important;
-  background: #2447d5 !important;
+  border-radius: 50%;
 
-  border: none !important;
-  box-shadow: none !important;
-}
+  background: #2447d5;
 
-/* ===== TRACK ===== */
-.number-wrapper input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px !important;
-}
+  border: none;
+  box-shadow: none;
 
-.number-wrapper input[type="range"]::-moz-range-track {
-  height: 4px !important;
+  cursor: pointer;
 }
 
 /* ===== LABELS ===== */
 .range-labels {
   position: relative;
+
   width: 100%;
   margin-top: 14px;
   height: 20px;
