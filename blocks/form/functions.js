@@ -1269,6 +1269,8 @@ function verifyPersonalEmail(globals) {
             );
 
             if (btn) {
+              btn.innerText = '✔ Verified';
+
               btn.style.backgroundColor = '#28a745';
 
               btn.style.color = '#ffffff';
@@ -1276,6 +1278,16 @@ function verifyPersonalEmail(globals) {
               btn.style.minWidth = '140px';
 
               btn.style.border = 'none';
+
+              btn.style.fontSize = '16px';
+
+              btn.style.fontWeight = '600';
+
+              btn.style.display = 'flex';
+
+              btn.style.alignItems = 'center';
+
+              btn.style.justifyContent = 'center';
             }
           }, 100);
         }
