@@ -280,6 +280,43 @@ padding-top: 14px;
 margin-top: 18px;
 }
 
+/* =========================
+REMOVE REVIEW INPUT BOX
+========================= */
+
+main .form form
+.field-loan-details input,
+
+main .form form
+.field-personal-details input,
+
+main .form form
+.field-salary-account-details input,
+
+main .form form
+.field-office-address-panel input,
+
+main .form form
+.field-reference-details input,
+
+main .form form
+.field-verify-email-id-panel input {
+
+border: none !important;
+
+box-shadow: none !important;
+
+background: transparent !important;
+
+outline: none !important;
+
+padding: 0 !important;
+
+height: auto !important;
+
+border-radius: 0 !important;
+}
+
 /*============================Customer details===================================================================*/
 /* ================= HEADER ================= */
 .field-full-name-as-per-pan-panel > legend {
