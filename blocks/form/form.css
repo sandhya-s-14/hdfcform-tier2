@@ -2179,3 +2179,13 @@ main .form .field-plain-text p p {
   padding: 6px;
   border-radius: 0 0 12px 12px;
 }
+
+
+/*-----------------------verify button-------------------------*/
+.field-personal-email-verify button {
+
+  background-color: #28a745 !important;
+
+  color: white !important;
+
+}

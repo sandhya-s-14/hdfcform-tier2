@@ -1257,19 +1257,9 @@ function verifyPersonalEmail(globals) {
 
               label: '✔ Verified',
 
-              enabled: false,
+              enabled: true,
 
               visible: true,
-
-              properties: {
-
-                'afs:style': `
-                  background-color: #28a745;
-                  color: white;
-                  border-radius: 8px;
-                `,
-
-              },
 
             },
 
