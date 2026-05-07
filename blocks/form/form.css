@@ -2423,15 +2423,18 @@ main .form .field-plain-text p p {
 }
 
 /* ================= REMOVE LIGHT INPUT BORDER IN REVIEW PAGE ================= */
-/* ================= FORCE REMOVE ALL FIELD BORDERS ================= */
+/* ================= REMOVE REVIEW PAGE INPUT BOX ================= */
 
-/* ================= REMOVE REVIEW ACCORDION FIELD BORDER ================= */
-
-.review_page fieldset.accordion > fieldset {
+.review_page .text-wrapper input,
+.review_page .date-wrapper input {
 
     border: none !important;
 
+    background: transparent !important;
+
     box-shadow: none !important;
 
-    background: transparent !important;
+    padding: 0 !important;
+
+    height: auto !important;
 }
