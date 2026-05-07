@@ -861,8 +861,6 @@ function getCustomerDetails(globals) {
         );
 
         if (response.success) {
-          const { data } = response;
-
           setTimeout(() => {
             const review = form.review_page
               .review_accordian;
@@ -873,7 +871,7 @@ function getCustomerDetails(globals) {
               review.loan_details.loan_amount,
               {
                 value:
-                data.loan_amount,
+                  response.loan_amount,
               },
             );
 
@@ -882,67 +880,82 @@ function getCustomerDetails(globals) {
                 .work_email_id,
               {
                 value:
-                data.work_email_id,
+                  response.work_email_id,
               },
             );
 
             /* ================= INPUT TYPE FIELDS ================= */
 
-            review.loan_details.emi_amount.value = data.emi_amount;
+            review.loan_details
+              .emi_amount.value = response.emi_amount;
 
-            review.loan_details.tenure.value = data.tenure;
+            review.loan_details
+              .tenure.value = response.tenure;
 
-            review.loan_details.processing_fee.value = data.processing_fee;
+            review.loan_details
+              .processing_fee.value = response.processing_fee;
 
-            review.loan_details.roi.value = data.roi;
+            review.loan_details
+              .roi.value = response.roi;
 
-            review.loan_details.employer_name.value = data.employer_name;
+            review.loan_details
+              .employer_name.value = response.employer_name;
 
-            review.loan_details.schedule_of_charges.value = data.schedule_of_charges;
+            review.loan_details
+              .schedule_of_charges.value = response.schedule_of_charges;
 
-            review.loan_details.type_of_loan.value = data.type_of_loan;
+            review.loan_details
+              .type_of_loan.value = response.type_of_loan;
 
             /* ================= PERSONAL DETAILS ================= */
 
-            review.personal_details.full_name.value = data.full_name;
+            review.personal_details
+              .full_name.value = response.full_name;
 
-            review.personal_details.mobile_no.value = data.mobile_no;
+            review.personal_details
+              .mobile_no.value = response.mobile_no;
 
-            review.personal_details.date_of_birth.value = data.date_of_birth;
+            review.personal_details
+              .date_of_birth.value = response.date_of_birth;
 
-            review.personal_details.pan.value = data.pan;
+            review.personal_details
+              .pan.value = response.pan;
 
-            review.personal_details.current_address.value = data.current_address;
+            review.personal_details
+              .current_address.value = response.current_address;
 
-            review.personal_details.residence_type.value = data.residence_type;
+            review.personal_details
+              .residence_type.value = response.residence_type;
 
             /* ================= SALARY ACCOUNT DETAILS ================= */
 
             review.salary_account_details
-              .salary_account_number.value = data.salary_account_number;
+              .salary_account_number.value = response.salary_account_number;
 
-            review.salary_account_details.ifsc.value = data.ifsc;
+            review.salary_account_details
+              .ifsc.value = response.ifsc;
 
-            review.salary_account_details.bank_name.value = data.bank_name;
+            review.salary_account_details
+              .bank_name.value = response.bank_name;
 
             /* ================= OFFICE ADDRESS ================= */
 
             review.office_address_panel
-              .current_employer_address.value = data.current_employer_address;
+              .current_employer_address.value = response.current_employer_address;
 
             /* ================= REFERENCE DETAILS ================= */
 
             review.reference_details
-              .ref_full_name.value = data.ref_full_name;
+              .ref_full_name.value = response.ref_full_name;
 
             review.reference_details
-              .ref_mobile_number.value = data.ref_mobile_number;
+              .ref_mobile_number.value = response.ref_mobile_number;
 
             /* ================= PRIMARY EMAIL ================= */
 
             review.verify_email_id_panel
               .primary_email_verification
-              .primary_email_id.value = data.primary_email_id;
+              .primary_email_id.value = response.primary_email_id;
 
             console.log(
               '✅ REVIEW DETAILS POPULATED SUCCESSFULLY',
