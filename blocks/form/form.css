@@ -2425,9 +2425,9 @@ main .form .field-plain-text p p {
 /* ================= REMOVE LIGHT INPUT BORDER IN REVIEW PAGE ================= */
 /* ================= FORCE REMOVE ALL FIELD BORDERS ================= */
 
-.review_page .field-wrapper,
-.review_page .text-wrapper,
-.review_page input {
+/* ================= REMOVE REVIEW ACCORDION FIELD BORDER ================= */
+
+.review_page fieldset.accordion > fieldset {
 
     border: none !important;
 
