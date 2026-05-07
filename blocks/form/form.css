@@ -2423,28 +2423,11 @@ main .form .field-plain-text p p {
 }
 
 /* ================= REMOVE LIGHT INPUT BORDER IN REVIEW PAGE ================= */
+/* ================= FORCE REMOVE ALL FIELD BORDERS ================= */
 
+.review_page .field-wrapper,
+.review_page .text-wrapper,
 .review_page input {
-
-    border: none !important;
-
-    background: transparent !important;
-
-    box-shadow: none !important;
-
-    outline: none !important;
-}
-
-/* ================= REMOVE FIELD WRAPPER BORDER ================= */
-
-.review_page .field-wrapper {
-
-    border: none !important;
-
-    box-shadow: none !important;
-}
-
-.review_page .text-wrapper {
 
     border: none !important;
 
