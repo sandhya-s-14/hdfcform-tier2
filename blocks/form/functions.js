@@ -821,248 +821,427 @@ function updateLoanFromIncome(globals) {
 function getCustomerDetails(globals) {
   const { form } = globals;
 
+  const payload = globals.functions.exportData();
+
   console.log(
-    '🔥 getCustomerDetails triggered',
+    'CUSTOMER DETAILS PAYLOAD:',
+    payload,
   );
 
-  try {
-    /* ================= EXPORT DATA ================= */
+  fetch(
+    'http://localhost:4000/api/hdfc-tier2/customer-details',
+    {
 
-    const payload = globals.functions.exportData();
+      method: 'POST',
 
-    console.log(
-      '📤 Request Payload:',
-      payload,
-    );
-
-    /* ================= API CALL ================= */
-
-    fetch(
-      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/customer-details',
-      {
-
-        method: 'POST',
-
-        headers: {
-          'Content-Type': 'application/json',
-        },
-
-        body: JSON.stringify(payload),
-
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
 
-      .then((response) => response.json())
+      body: JSON.stringify(payload),
 
-      .then((result) => {
-        console.log(
-          '📥 API Response:',
-          result,
-        );
+    },
+  )
 
-        const { data } = result;
+    .then((res) => res.json())
 
-        const review = form.review_page
-          .review_accordian;
+    .then((response) => {
+      console.log(
+        'CUSTOMER DETAILS RESPONSE:',
+        response,
+      );
+
+      if (response.success) {
+        const { data } = response;
 
         /* ================= LOAN DETAILS ================= */
 
         globals.functions.setProperty(
-          review.loan_details.loan_amount,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .loan_amount,
+
           {
-            value: data.loan_amount,
+
+            value:
+              data.loan_amount,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.loan_details.emi_amount,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .emi_amount,
+
           {
-            value: data.emi_amount,
+
+            value:
+              data.emi_amount,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.loan_details.tenure,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .tenure,
+
           {
-            value: data.tenure,
+
+            value:
+              data.tenure,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.loan_details.processing_fee,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .processing_fee,
+
           {
-            value: data.processing_fee,
+
+            value:
+              data.processing_fee,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.loan_details.roi,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .roi,
+
           {
-            value: data.roi,
+
+            value:
+              data.roi,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.loan_details.employer_name,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .employer_name,
+
           {
-            value: data.employer_name,
+
+            value:
+              data.employer_name,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.loan_details.schedule_of_charges,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .schedule_of_charges,
+
           {
-            value: data.schedule_of_charges,
+
+            value:
+              data.schedule_of_charges,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.loan_details.type_of_loan,
+
+          form.review_page
+            .review_accordian
+            .loan_details
+            .type_of_loan,
+
           {
-            value: data.type_of_loan,
+
+            value:
+              data.type_of_loan,
+
           },
+
         );
 
         /* ================= PERSONAL DETAILS ================= */
 
         globals.functions.setProperty(
-          review.personal_details.full_name,
+
+          form.review_page
+            .review_accordian
+            .personal_details
+            .full_name,
+
           {
-            value: data.full_name,
+
+            value:
+              data.full_name,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.personal_details.mobile_no,
+
+          form.review_page
+            .review_accordian
+            .personal_details
+            .mobile_no,
+
           {
-            value: data.mobile_no,
+
+            value:
+              data.mobile_no,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.personal_details.date_of_birth,
+
+          form.review_page
+            .review_accordian
+            .personal_details
+            .date_of_birth,
+
           {
-            value: data.date_of_birth,
+
+            value:
+              data.date_of_birth,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.personal_details.pan,
+
+          form.review_page
+            .review_accordian
+            .personal_details
+            .pan,
+
           {
-            value: data.pan,
+
+            value:
+              data.pan,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.personal_details.current_address,
+
+          form.review_page
+            .review_accordian
+            .personal_details
+            .current_address,
+
           {
-            value: data.current_address,
+
+            value:
+              data.current_address,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.personal_details.residence_type,
+
+          form.review_page
+            .review_accordian
+            .personal_details
+            .residence_type,
+
           {
-            value: data.residence_type,
+
+            value:
+              data.residence_type,
+
           },
+
         );
 
         /* ================= SALARY ACCOUNT DETAILS ================= */
 
         globals.functions.setProperty(
-          review.salary_account_details
+
+          form.review_page
+            .review_accordian
+            .salary_account_details
             .salary_account_number,
+
           {
+
             value:
-            data.salary_account_number,
+              data.salary_account_number,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.salary_account_details.ifsc,
+
+          form.review_page
+            .review_accordian
+            .salary_account_details
+            .ifsc,
+
           {
-            value: data.ifsc,
+
+            value:
+              data.ifsc,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.salary_account_details.bank_name,
+
+          form.review_page
+            .review_accordian
+            .salary_account_details
+            .bank_name,
+
           {
-            value: data.bank_name,
+
+            value:
+              data.bank_name,
+
           },
+
         );
 
         /* ================= OFFICE ADDRESS ================= */
 
         globals.functions.setProperty(
-          review.office_address_panel
+
+          form.review_page
+            .review_accordian
+            .office_address_panel
             .current_employer_address,
+
           {
+
             value:
-            data.current_employer_address,
+              data.current_employer_address,
+
           },
+
         );
 
         /* ================= REFERENCE DETAILS ================= */
 
         globals.functions.setProperty(
-          review.reference_details
+
+          form.review_page
+            .review_accordian
+            .reference_details
             .ref_full_name,
+
           {
-            value: data.ref_full_name,
+
+            value:
+              data.ref_full_name,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.reference_details
+
+          form.review_page
+            .review_accordian
+            .reference_details
             .ref_mobile_number,
+
           {
+
             value:
-            data.ref_mobile_number,
+              data.ref_mobile_number,
+
           },
+
         );
 
         /* ================= EMAIL DETAILS ================= */
 
         globals.functions.setProperty(
-          review.verify_email_id_panel
+
+          form.review_page
+            .review_accordian
+            .verify_email_id_panel
             .primary_email_verification
             .primary_email_id,
+
           {
+
             value:
-            data.primary_email_id,
+              data.primary_email_id,
+
           },
+
         );
 
         globals.functions.setProperty(
-          review.verify_email_id_panel
+
+          form.review_page
+            .review_accordian
+            .verify_email_id_panel
             .work_email_id,
+
           {
+
             value:
-            data.work_email_id,
+              data.work_email_id,
+
           },
+
         );
 
         console.log(
           '✅ REVIEW DETAILS POPULATED',
         );
-      })
+      }
 
-      .catch((error) => {
-        console.error(
-          '❌ API ERROR:',
-          error,
+      else {
+        console.log(
+          'CUSTOMER DETAILS ERROR:',
+          response.message,
         );
-      });
-  }
+      }
+    })
 
-  catch (err) {
-    console.error(
-      '❌ FUNCTION ERROR:',
-      err,
-    );
-  }
+    .catch((err) => {
+      console.log(
+        'API ERROR:',
+        err,
+      );
+    });
+
+  return 'Fetching customer details...';
 }
+
 /*= =========================SUBMIT API===================================================== */
 /**
  * @param {scope} globals
