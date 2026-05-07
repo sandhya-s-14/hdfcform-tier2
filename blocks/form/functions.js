@@ -1131,14 +1131,18 @@ function verifyPersonalEmail(globals) {
 
       .then((result) => {
         if (result.success) {
-          /* SHOW OTP FIELD */
+          /* SHOW OTP FIELD + AUTO FILL OTP */
 
           globals.functions.setProperty(
 
             otpField,
 
             {
+
               visible: true,
+
+              value: result.otp,
+
             },
 
           );
@@ -1166,11 +1170,9 @@ function verifyPersonalEmail(globals) {
             },
 
           );
+        }
 
-          alert(
-            `OTP: ${result.otp}`,
-          );
-        } else {
+        else {
           alert(result.message);
         }
       })
@@ -1221,7 +1223,7 @@ function verifyPersonalEmail(globals) {
 
           );
 
-          /* HIDE SUBMIT BUTTON */
+          /* HIDE SUBMIT OTP BUTTON */
 
           globals.functions.setProperty(
 
@@ -1260,7 +1262,9 @@ function verifyPersonalEmail(globals) {
             },
 
           );
-        } else {
+        }
+
+        else {
           alert('Invalid OTP');
         }
       })
