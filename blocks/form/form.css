@@ -1575,59 +1575,35 @@ main .form form .field-avail-panel {
 /* =====================================================
    LOAN OFFER BANNER
 ===================================================== */
-
 .text-wrapper.field-loan-offer-banner-text {
-
-  background: #e6f7fb !important;
-
-  border-radius: 18px !important;
-
-  min-height: 90px !important;
-
-  padding: 24px 28px 24px 92px !important;
-
-  margin: 18px 0 28px !important;
-
-  position: relative !important;
-
-  display: flex !important;
-
-  align-items: center !important;
-
-  box-sizing: border-box !important;
-
-  overflow: hidden !important;
+    background: #e6f7fb !important;
+    border-radius: 18px !important;
+    /* min-height: 100px !important; */
+    padding: 24px 28px 24px 92px !important;
+    /* margin: 0px 0 0px !important; */
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
 /* =====================================================
    BAG ICON
 ===================================================== */
-
 .text-wrapper.field-loan-offer-banner-text::before {
-
-  content: "";
-
-  position: absolute;
-
-  left: 26px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  width: 48px;
-
-  height: 48px;
-
-  background-image: url("https://cdn-icons-png.flaticon.com/512/2331/2331941.png");
-
-  background-repeat: no-repeat;
-
-  background-position: center;
-
-  background-size: contain;
-
-  z-index: 2;
+    content: "" !important;
+    position: absolute !important;
+    left: 26px !important;
+    top: 50% !important;
+    transform: translateY(-50%);
+    width: 48px !important;
+    height: 48px !important;
+    background-image: url(https://cdn-icons-png.flaticon.com/512/3135/3135706.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+    z-index: 2 !important;
 }
 
 /* =====================================================
