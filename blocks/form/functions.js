@@ -1271,7 +1271,9 @@ function verifyPersonalEmail(globals) {
             if (btn) {
               btn.innerText = '✔ Verified';
 
-              btn.style.backgroundColor = '#28a745';
+              btn.style.background = '#28a745';
+
+              btn.style.backgroundImage = 'none';
 
               btn.style.color = '#ffffff';
 
