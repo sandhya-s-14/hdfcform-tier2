@@ -852,8 +852,6 @@ function getCustomerDetails(globals) {
       },
     )
 
-      .then((res) => res.json())
-
       .then((response) => {
         console.log(
           '📥 Customer Details Response =>',
@@ -861,6 +859,7 @@ function getCustomerDetails(globals) {
         );
 
         if (response.success) {
+          const data = response;
           setTimeout(() => {
             const review = form.review_page
               .review_accordian;
