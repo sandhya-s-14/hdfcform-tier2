@@ -2423,16 +2423,20 @@ main .form .field-plain-text p p {
 }
 
 /* ================= REMOVE LIGHT INPUT BORDER IN REVIEW PAGE ================= */
-/* ================= REMOVE REVIEW PAGE INPUT BOX ================= */
+/* ================= FORCE REMOVE REVIEW INPUT BORDER ================= */
 
-.review_page .text-wrapper input,
-.review_page .date-wrapper input {
+.review_page .review_accordian .text-wrapper input,
+.review_page .review_accordian .date-wrapper input {
 
-    border: none !important;
+    border: 0 !important;
+
+    border-radius: 0 !important;
 
     background: transparent !important;
 
     box-shadow: none !important;
+
+    outline: none !important;
 
     padding: 0 !important;
 
