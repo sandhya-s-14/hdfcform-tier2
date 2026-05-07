@@ -2421,3 +2421,25 @@ main .form .field-plain-text p p {
     display: inline-block;
     line-height: 1.5;
 }
+
+/* ================= REMOVE LIGHT INPUT BORDER IN REVIEW PAGE ================= */
+
+.review_page input {
+
+    border: none !important;
+
+    background: transparent !important;
+
+    box-shadow: none !important;
+
+    outline: none !important;
+}
+
+/* ================= REMOVE FIELD WRAPPER BORDER ================= */
+
+.review_page .field-wrapper {
+
+    border: none !important;
+
+    box-shadow: none !important;
+}
