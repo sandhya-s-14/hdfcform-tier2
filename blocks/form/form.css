@@ -1595,6 +1595,8 @@ main .form form .field-avail-panel {
   align-items: center !important;
 
   box-sizing: border-box !important;
+
+  overflow: hidden !important;
 }
 
 /* =====================================================
@@ -1624,16 +1626,44 @@ main .form form .field-avail-panel {
   background-position: center;
 
   background-size: contain;
+
+  z-index: 2;
 }
 
 /* =====================================================
-   HIDE LABEL + INPUT
+   HIDE LABEL
 ===================================================== */
 
-.text-wrapper.field-loan-offer-banner-text label,
-.text-wrapper.field-loan-offer-banner-text input {
+.text-wrapper.field-loan-offer-banner-text label {
 
   display: none !important;
+}
+
+/* =====================================================
+   INPUT AS BANNER TEXT
+===================================================== */
+
+.text-wrapper.field-loan-offer-banner-text input {
+
+  border: none !important;
+
+  background: transparent !important;
+
+  outline: none !important;
+
+  width: 100% !important;
+
+  padding: 0 !important;
+
+  margin: 0 !important;
+
+  font-size: 16px !important;
+
+  font-weight: 700 !important;
+
+  color: #24364b !important;
+
+  pointer-events: none !important;
 }
 
 /* =========================
