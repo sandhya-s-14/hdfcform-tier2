@@ -863,186 +863,17 @@ function getCustomerDetails(globals) {
         if (response.success) {
           const { data } = response;
 
-          /* ================= WAIT FOR REVIEW PAGE RENDER ================= */
-
           setTimeout(() => {
             const review = form.review_page
               .review_accordian;
 
-            /* ================= LOAN DETAILS ================= */
+            /* ================= TEXT TYPE FIELDS ================= */
 
             globals.functions.setProperty(
               review.loan_details.loan_amount,
               {
-                value: data.loan_amount,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.loan_details.emi_amount,
-              {
-                value: data.emi_amount,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.loan_details.tenure,
-              {
-                value: data.tenure,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.loan_details.processing_fee,
-              {
-                value: data.processing_fee,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.loan_details.roi,
-              {
-                value: data.roi,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.loan_details.employer_name,
-              {
-                value: data.employer_name,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.loan_details.schedule_of_charges,
-              {
                 value:
-                data.schedule_of_charges,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.loan_details.type_of_loan,
-              {
-                value: data.type_of_loan,
-              },
-            );
-
-            /* ================= PERSONAL DETAILS ================= */
-
-            globals.functions.setProperty(
-              review.personal_details.full_name,
-              {
-                value: data.full_name,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.personal_details.mobile_no,
-              {
-                value: data.mobile_no,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.personal_details.date_of_birth,
-              {
-                value:
-                data.date_of_birth,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.personal_details.pan,
-              {
-                value: data.pan,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.personal_details.current_address,
-              {
-                value:
-                data.current_address,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.personal_details.residence_type,
-              {
-                value:
-                data.residence_type,
-              },
-            );
-
-            /* ================= SALARY ACCOUNT DETAILS ================= */
-
-            globals.functions.setProperty(
-              review.salary_account_details
-                .salary_account_number,
-              {
-                value:
-                data.salary_account_number,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.salary_account_details
-                .ifsc,
-              {
-                value: data.ifsc,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.salary_account_details
-                .bank_name,
-              {
-                value:
-                data.bank_name,
-              },
-            );
-
-            /* ================= OFFICE ADDRESS ================= */
-
-            globals.functions.setProperty(
-              review.office_address_panel
-                .current_employer_address,
-              {
-                value:
-                data.current_employer_address,
-              },
-            );
-
-            /* ================= REFERENCE DETAILS ================= */
-
-            globals.functions.setProperty(
-              review.reference_details
-                .ref_full_name,
-              {
-                value:
-                data.ref_full_name,
-              },
-            );
-
-            globals.functions.setProperty(
-              review.reference_details
-                .ref_mobile_number,
-              {
-                value:
-                data.ref_mobile_number,
-              },
-            );
-
-            /* ================= EMAIL DETAILS ================= */
-
-            globals.functions.setProperty(
-              review.verify_email_id_panel
-                .primary_email_verification
-                .primary_email_id,
-              {
-                value:
-                data.primary_email_id,
+                data.loan_amount,
               },
             );
 
@@ -1054,6 +885,64 @@ function getCustomerDetails(globals) {
                 data.work_email_id,
               },
             );
+
+            /* ================= INPUT TYPE FIELDS ================= */
+
+            review.loan_details.emi_amount.value = data.emi_amount;
+
+            review.loan_details.tenure.value = data.tenure;
+
+            review.loan_details.processing_fee.value = data.processing_fee;
+
+            review.loan_details.roi.value = data.roi;
+
+            review.loan_details.employer_name.value = data.employer_name;
+
+            review.loan_details.schedule_of_charges.value = data.schedule_of_charges;
+
+            review.loan_details.type_of_loan.value = data.type_of_loan;
+
+            /* ================= PERSONAL DETAILS ================= */
+
+            review.personal_details.full_name.value = data.full_name;
+
+            review.personal_details.mobile_no.value = data.mobile_no;
+
+            review.personal_details.date_of_birth.value = data.date_of_birth;
+
+            review.personal_details.pan.value = data.pan;
+
+            review.personal_details.current_address.value = data.current_address;
+
+            review.personal_details.residence_type.value = data.residence_type;
+
+            /* ================= SALARY ACCOUNT DETAILS ================= */
+
+            review.salary_account_details
+              .salary_account_number.value = data.salary_account_number;
+
+            review.salary_account_details.ifsc.value = data.ifsc;
+
+            review.salary_account_details.bank_name.value = data.bank_name;
+
+            /* ================= OFFICE ADDRESS ================= */
+
+            review.office_address_panel
+              .current_employer_address.value = data.current_employer_address;
+
+            /* ================= REFERENCE DETAILS ================= */
+
+            review.reference_details
+              .ref_full_name.value = data.ref_full_name;
+
+            review.reference_details
+              .ref_mobile_number.value = data.ref_mobile_number;
+
+            /* ================= PRIMARY EMAIL ================= */
+
+            review.verify_email_id_panel
+              .primary_email_verification
+              .primary_email_id.value = data.primary_email_id;
 
             console.log(
               '✅ REVIEW DETAILS POPULATED SUCCESSFULLY',
