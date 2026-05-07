@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-whitespace-before-property */
 /* eslint-disable max-len */
@@ -1072,6 +1073,206 @@ function submitLoanApplication(globals) {
     });
 }
 
+/*= =============================EMAIL-OTP========================================= */
+/**
+ * PERSONAL EMAIL VERIFY
+ * @param {scope} globals
+ */
+function verifyPersonalEmail(globals) {
+  const form = globals.form.customer_details
+    .fullname_personal
+    .personal_details_customer;
+
+  /* ================= FIELDS ================= */
+
+  const emailField = form.personal_email_id;
+
+  const verifyButton = form.personal_email_verify;
+
+  const otpField = form.email_otp_box;
+
+  const submitOtpButton = form.submit_email_otp;
+
+  /* ================= VALUES ================= */
+
+  const email = emailField.value;
+
+  const otp = otpField.value;
+
+  /* ================= GENERATE OTP ================= */
+
+  if (!otp) {
+    if (!email) {
+      alert('Please enter email');
+
+      return;
+    }
+
+    fetch(
+      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-email-otp',
+      {
+
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+
+          email,
+
+        }),
+
+      },
+    )
+
+      .then((response) => response.json())
+
+      .then((result) => {
+        if (result.success) {
+          /* SHOW OTP FIELD */
+
+          globals.functions.setProperty(
+
+            otpField,
+
+            {
+              visible: true,
+            },
+
+          );
+
+          /* SHOW SUBMIT OTP BUTTON */
+
+          globals.functions.setProperty(
+
+            submitOtpButton,
+
+            {
+              visible: true,
+            },
+
+          );
+
+          /* CHANGE VERIFY BUTTON LABEL */
+
+          globals.functions.setProperty(
+
+            verifyButton,
+
+            {
+              label: 'OTP Sent',
+            },
+
+          );
+
+          alert(
+            `OTP: ${result.otp}`,
+          );
+        } else {
+          alert(result.message);
+        }
+      })
+
+      .catch((error) => {
+        console.error(error);
+
+        alert('API Error');
+      });
+  }
+
+  /* ================= VALIDATE OTP ================= */
+
+  else {
+    fetch(
+      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-email-otp',
+      {
+
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+
+          email,
+          otp,
+
+        }),
+
+      },
+    )
+
+      .then((response) => response.json())
+
+      .then((result) => {
+        if (result.success) {
+          /* HIDE OTP FIELD */
+
+          globals.functions.setProperty(
+
+            otpField,
+
+            {
+              visible: false,
+            },
+
+          );
+
+          /* HIDE SUBMIT BUTTON */
+
+          globals.functions.setProperty(
+
+            submitOtpButton,
+
+            {
+              visible: false,
+            },
+
+          );
+
+          /* DISABLE EMAIL FIELD */
+
+          globals.functions.setProperty(
+
+            emailField,
+
+            {
+              enabled: false,
+            },
+
+          );
+
+          /* VERIFIED BUTTON */
+
+          globals.functions.setProperty(
+
+            verifyButton,
+
+            {
+
+              label: '✔ Verified',
+
+              enabled: false,
+
+            },
+
+          );
+        } else {
+          alert('Invalid OTP');
+        }
+      })
+
+      .catch((error) => {
+        console.error(error);
+
+        alert('API Error');
+      });
+  }
+}
+
 export {
   getFullName, days, submitFormArrayToString,
   maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
@@ -1079,5 +1280,5 @@ export {
   createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
   getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
   , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome, populateReviewDetails,
-  submitLoanApplication,
+  submitLoanApplication, verifyPersonalEmail,
 };
