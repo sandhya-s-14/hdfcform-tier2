@@ -868,7 +868,18 @@ function getCustomerDetails(globals) {
 
         /* ================= LOAN DETAILS ================= */
 
-        review.loan_details.loan_amount.value = data.loan_amount;
+        globals.functions.setProperty(
+
+          review.loan_details.loan_amount,
+
+          {
+
+            text:
+      data.loan_amount,
+
+          },
+
+        );
 
         review.loan_details.emi_amount.value = data.emi_amount;
 
