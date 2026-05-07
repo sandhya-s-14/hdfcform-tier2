@@ -852,6 +852,8 @@ function getCustomerDetails(globals) {
       },
     )
 
+      .then((res) => res.json())
+
       .then((response) => {
         console.log(
           '📥 Customer Details Response =>',
@@ -859,205 +861,141 @@ function getCustomerDetails(globals) {
         );
 
         if (response.success) {
-          const data = response;
           setTimeout(() => {
             const review = form.review_page
               .review_accordian;
 
             /* ================= LOAN DETAILS ================= */
 
-            globals.functions.setProperty(
-              review.loan_details.loan_amount,
-              {
-                value:
-                  response.loan_amount,
-              },
-            );
+            review.loan_details.loan_amount.dispatch({
+              type: 'value',
+              payload: response.loan_amount,
+            });
 
-            globals.functions.setProperty(
-              review.loan_details.emi_amount,
-              {
-                value:
-                  response.emi_amount,
-              },
-            );
+            review.loan_details.emi_amount.dispatch({
+              type: 'value',
+              payload: response.emi_amount,
+            });
 
-            globals.functions.setProperty(
-              review.loan_details.tenure,
-              {
-                value:
-                  response.tenure,
-              },
-            );
+            review.loan_details.tenure.dispatch({
+              type: 'value',
+              payload: response.tenure,
+            });
 
-            globals.functions.setProperty(
-              review.loan_details.processing_fee,
-              {
-                value:
-                  response.processing_fee,
-              },
-            );
+            review.loan_details.processing_fee.dispatch({
+              type: 'value',
+              payload: response.processing_fee,
+            });
 
-            globals.functions.setProperty(
-              review.loan_details.roi,
-              {
-                value:
-                  response.roi,
-              },
-            );
+            review.loan_details.roi.dispatch({
+              type: 'value',
+              payload: response.roi,
+            });
 
-            globals.functions.setProperty(
-              review.loan_details.employer_name,
-              {
-                value:
-                  response.employer_name,
-              },
-            );
+            review.loan_details.employer_name.dispatch({
+              type: 'value',
+              payload: response.employer_name,
+            });
 
-            globals.functions.setProperty(
-              review.loan_details.schedule_of_charges,
-              {
-                value:
-                  response.schedule_of_charges,
-              },
-            );
+            review.loan_details.schedule_of_charges.dispatch({
+              type: 'value',
+              payload: response.schedule_of_charges,
+            });
 
-            globals.functions.setProperty(
-              review.loan_details.type_of_loan,
-              {
-                value:
-                  response.type_of_loan,
-              },
-            );
+            review.loan_details.type_of_loan.dispatch({
+              type: 'value',
+              payload: response.type_of_loan,
+            });
 
             /* ================= PERSONAL DETAILS ================= */
 
-            globals.functions.setProperty(
-              review.personal_details.full_name,
-              {
-                value:
-                  response.full_name,
-              },
-            );
+            review.personal_details.full_name.dispatch({
+              type: 'value',
+              payload: response.full_name,
+            });
 
-            globals.functions.setProperty(
-              review.personal_details.mobile_no,
-              {
-                value:
-                  response.mobile_no,
-              },
-            );
+            review.personal_details.mobile_no.dispatch({
+              type: 'value',
+              payload: response.mobile_no,
+            });
 
-            globals.functions.setProperty(
-              review.personal_details.date_of_birth,
-              {
-                value:
-                  response.date_of_birth,
-              },
-            );
+            review.personal_details.date_of_birth.dispatch({
+              type: 'value',
+              payload: response.date_of_birth,
+            });
 
-            globals.functions.setProperty(
-              review.personal_details.pan,
-              {
-                value:
-                  response.pan,
-              },
-            );
+            review.personal_details.pan.dispatch({
+              type: 'value',
+              payload: response.pan,
+            });
 
-            globals.functions.setProperty(
-              review.personal_details.current_address,
-              {
-                value:
-                  response.current_address,
-              },
-            );
+            review.personal_details.current_address.dispatch({
+              type: 'value',
+              payload: response.current_address,
+            });
 
-            globals.functions.setProperty(
-              review.personal_details.residence_type,
-              {
-                value:
-                  response.residence_type,
-              },
-            );
+            review.personal_details.residence_type.dispatch({
+              type: 'value',
+              payload: response.residence_type,
+            });
 
             /* ================= SALARY ACCOUNT DETAILS ================= */
 
-            globals.functions.setProperty(
-              review.salary_account_details
-                .salary_account_number,
-              {
-                value:
-                  response.salary_account_number,
-              },
-            );
+            review.salary_account_details
+              .salary_account_number.dispatch({
+                type: 'value',
+                payload: response.salary_account_number,
+              });
 
-            globals.functions.setProperty(
-              review.salary_account_details.ifsc,
-              {
-                value:
-                  response.ifsc,
-              },
-            );
+            review.salary_account_details
+              .ifsc.dispatch({
+                type: 'value',
+                payload: response.ifsc,
+              });
 
-            globals.functions.setProperty(
-              review.salary_account_details.bank_name,
-              {
-                value:
-                  response.bank_name,
-              },
-            );
+            review.salary_account_details
+              .bank_name.dispatch({
+                type: 'value',
+                payload: response.bank_name,
+              });
 
             /* ================= OFFICE ADDRESS ================= */
 
-            globals.functions.setProperty(
-              review.office_address_panel
-                .current_employer_address,
-              {
-                value:
+            review.office_address_panel
+              .current_employer_address.dispatch({
+                type: 'value',
+                payload:
                   response.current_employer_address,
-              },
-            );
+              });
 
             /* ================= REFERENCE DETAILS ================= */
 
-            globals.functions.setProperty(
-              review.reference_details
-                .ref_full_name,
-              {
-                value:
-                  response.ref_full_name,
-              },
-            );
+            review.reference_details
+              .ref_full_name.dispatch({
+                type: 'value',
+                payload: response.ref_full_name,
+              });
 
-            globals.functions.setProperty(
-              review.reference_details
-                .ref_mobile_number,
-              {
-                value:
-                  response.ref_mobile_number,
-              },
-            );
+            review.reference_details
+              .ref_mobile_number.dispatch({
+                type: 'value',
+                payload: response.ref_mobile_number,
+              });
 
             /* ================= EMAIL DETAILS ================= */
 
-            globals.functions.setProperty(
-              review.verify_email_id_panel
-                .primary_email_verification
-                .primary_email_id,
-              {
-                value:
-                  response.primary_email_id,
-              },
-            );
+            review.verify_email_id_panel
+              .primary_email_verification
+              .primary_email_id.dispatch({
+                type: 'value',
+                payload: response.primary_email_id,
+              });
 
-            globals.functions.setProperty(
-              review.verify_email_id_panel
-                .work_email_id,
-              {
-                value:
-                  response.work_email_id,
-              },
-            );
+            review.verify_email_id_panel
+              .work_email_id.dispatch({
+                type: 'value',
+                payload: response.work_email_id,
+              });
 
             console.log(
               '✅ REVIEW DETAILS POPULATED SUCCESSFULLY',
@@ -1090,7 +1028,6 @@ function getCustomerDetails(globals) {
 
   return 'Fetching customer details...';
 }
-
 /*= =========================SUBMIT API===================================================== */
 /**
  * @param {scope} globals
