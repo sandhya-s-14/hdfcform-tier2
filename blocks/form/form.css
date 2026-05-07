@@ -1600,6 +1600,7 @@ main .form form .field-avail-panel {
     width: 48px !important;
     height: 48px !important;
     background-image: url(https://cdn-icons-png.flaticon.com/512/3135/3135706.png) !important;
+    background-color: transparent !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: contain !important;
