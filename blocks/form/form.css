@@ -1573,43 +1573,82 @@ main .form form .field-avail-panel {
 }
 /*-------------------------------------------------*/
 /* =========================
-   Banner Styling
+   LOAN OFFER BANNER
 ========================= */
+
 .plain-text-wrapper.field-loan-offer-banner-text {
-  background: #e6fbff;
-  border-radius: 16px;
 
-  padding: 16px 20px 16px 60px;
-  margin: 12px 0;
+  background: #e6f7fb !important;
 
-  font-size: 14px;
-  font-weight: 500;
-  color: #2f3a4a;
+  border-radius: 16px !important;
 
-  position: relative;
-  display: flex;
-  align-items: center;
+  padding: 18px 22px 18px 72px !important;
+
+  margin: 14px 0 24px !important;
+
+  min-height: 78px !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  position: relative !important;
+
+  box-sizing: border-box !important;
 }
 
+/* =========================
+   ICON
+========================= */
+
 .plain-text-wrapper.field-loan-offer-banner-text::before {
+
   content: "";
+
   position: absolute;
-  left: 16px;
+
+  left: 20px;
+
   top: 50%;
+
   transform: translateY(-50%);
 
-  width: 32px;
-  height: 32px;
+  width: 38px;
 
-  background: url("https://cdn-icons-png.flaticon.com/512/2331/2331941.png") no-repeat center;
+  height: 38px;
+
+  background: url("https://cdn-icons-png.flaticon.com/512/2331/2331941.png")
+    no-repeat center;
+
   background-size: contain;
 }
 
+/* =========================
+   TEXT
+========================= */
+
 .plain-text-wrapper.field-loan-offer-banner-text p {
-  margin: 0;
-  font-weight: 600;
+
+  margin: 0 !important;
+
+  font-size: 15px !important;
+
+  font-weight: 700 !important;
+
+  color: #24364b !important;
+
+  line-height: 1.5 !important;
 }
 
+/* =========================
+   REMOVE EMPTY INPUT LOOK
+========================= */
+
+.text-wrapper.field-loan-offer-banner-text input,
+.text-wrapper.field-loan-offer-banner-text label {
+
+  display: none !important;
+}
 
 /* =========================
    Legend Styling

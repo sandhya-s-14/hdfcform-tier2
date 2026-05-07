@@ -810,7 +810,7 @@ function updateLoanFromIncome(globals) {
   const offerText = globals.form.offer_page.loan_offer_based_on_declared_income.loan_offer_banner_text;
 
   globals.functions.setProperty(offerText, {
-    value: `You're eligible for ₹${eligibleLoan.toLocaleString('en-IN')}`,
+    value: `You can get a loan up to ₹${eligibleLoan.toLocaleString('en-IN')}`,
   });
 }
 
