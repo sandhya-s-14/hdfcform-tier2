@@ -1274,7 +1274,7 @@ button[name="validate_otp"] {
 ===================================================== */
 
 main .form form .field-loan-offer-based-on-declared-income {
-  grid-column: span 7 !important;
+  grid-column: span 8 !important;
 }
 
 /* =====================================================
@@ -1291,7 +1291,7 @@ main .form form .field-avail-panel {
 
   margin-left: -60px !important;
 
-  margin-top: 110px !important;
+  margin-top: 160px !important;
 
   align-self: start !important;
 }
@@ -1451,11 +1451,11 @@ main .form form .field-avail-panel {
 
   left: 0 !important;
 
-  top: 2px !important;
+  top: 4px !important;
 
-  width: 3px !important;
+  width: 2.5px !important;
 
-  height: 22px !important;
+  height: 45px !important;
 
   background: #f5a028 !important;
 
@@ -1474,7 +1474,7 @@ main .form form .field-avail-panel {
 
   font-weight: 500 !important;
 
-  color: #7c8795 !important;
+  color: #4a4f55 !important;
 
   margin-bottom: 4px !important;
 
