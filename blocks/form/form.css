@@ -1282,18 +1282,12 @@ main .form form .field-loan-offer-based-on-declared-income {
 ===================================================== */
 
 main .form form .field-avail-panel {
-
-  grid-column: span 4 !important;
-
-  width: 100% !important;
-
-  max-width: 300px !important;
-
-  margin-left: -60px !important;
-
-  margin-top: 160px !important;
-
-  align-self: start !important;
+    grid-column: span 4 !important;
+    width: 80% !important;
+    max-width: 300px !important;
+    margin-left: -60px !important;
+    margin-top: 180px !important;
+    align-self: start !important;
 }
 
 /* =====================================================
@@ -1577,13 +1571,23 @@ main .form form .field-avail-panel {
 ===================================================== */
 .text-wrapper.field-loan-offer-banner-text {
     background: #e6f7fb !important;
-    border-radius: 18px !important;
-    /* min-height: 100px !important; */
-    padding: 24px 28px 24px 92px !important;
-    /* margin: 0px 0 0px !important; */
+    border-radius: 28px !important;
+    min-height: 170px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+
+    /* spacing */
+    padding: 32px 40px 32px 120px !important;
+    margin: 0 !important;
+
+    /* layout */
     position: relative !important;
     display: flex !important;
     align-items: center !important;
+
+    /* make it stretch till the card end */
+    grid-column: 1 / -1 !important;
+
     box-sizing: border-box !important;
     overflow: hidden !important;
 }
