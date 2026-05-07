@@ -838,7 +838,7 @@ function getCustomerDetails(globals) {
     /* ================= API CALL ================= */
 
     fetch(
-      'http://localhost:4000/api/hdfc-tier2/customer-details',
+      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/customer-details',
       {
 
         method: 'POST',
