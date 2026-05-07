@@ -865,13 +865,189 @@ function getCustomerDetails(globals) {
             const review = form.review_page
               .review_accordian;
 
-            /* ================= TEXT TYPE FIELDS ================= */
+            /* ================= LOAN DETAILS ================= */
 
             globals.functions.setProperty(
               review.loan_details.loan_amount,
               {
                 value:
                   response.loan_amount,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.loan_details.emi_amount,
+              {
+                value:
+                  response.emi_amount,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.loan_details.tenure,
+              {
+                value:
+                  response.tenure,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.loan_details.processing_fee,
+              {
+                value:
+                  response.processing_fee,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.loan_details.roi,
+              {
+                value:
+                  response.roi,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.loan_details.employer_name,
+              {
+                value:
+                  response.employer_name,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.loan_details.schedule_of_charges,
+              {
+                value:
+                  response.schedule_of_charges,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.loan_details.type_of_loan,
+              {
+                value:
+                  response.type_of_loan,
+              },
+            );
+
+            /* ================= PERSONAL DETAILS ================= */
+
+            globals.functions.setProperty(
+              review.personal_details.full_name,
+              {
+                value:
+                  response.full_name,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.personal_details.mobile_no,
+              {
+                value:
+                  response.mobile_no,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.personal_details.date_of_birth,
+              {
+                value:
+                  response.date_of_birth,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.personal_details.pan,
+              {
+                value:
+                  response.pan,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.personal_details.current_address,
+              {
+                value:
+                  response.current_address,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.personal_details.residence_type,
+              {
+                value:
+                  response.residence_type,
+              },
+            );
+
+            /* ================= SALARY ACCOUNT DETAILS ================= */
+
+            globals.functions.setProperty(
+              review.salary_account_details
+                .salary_account_number,
+              {
+                value:
+                  response.salary_account_number,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.salary_account_details.ifsc,
+              {
+                value:
+                  response.ifsc,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.salary_account_details.bank_name,
+              {
+                value:
+                  response.bank_name,
+              },
+            );
+
+            /* ================= OFFICE ADDRESS ================= */
+
+            globals.functions.setProperty(
+              review.office_address_panel
+                .current_employer_address,
+              {
+                value:
+                  response.current_employer_address,
+              },
+            );
+
+            /* ================= REFERENCE DETAILS ================= */
+
+            globals.functions.setProperty(
+              review.reference_details
+                .ref_full_name,
+              {
+                value:
+                  response.ref_full_name,
+              },
+            );
+
+            globals.functions.setProperty(
+              review.reference_details
+                .ref_mobile_number,
+              {
+                value:
+                  response.ref_mobile_number,
+              },
+            );
+
+            /* ================= EMAIL DETAILS ================= */
+
+            globals.functions.setProperty(
+              review.verify_email_id_panel
+                .primary_email_verification
+                .primary_email_id,
+              {
+                value:
+                  response.primary_email_id,
               },
             );
 
@@ -883,79 +1059,6 @@ function getCustomerDetails(globals) {
                   response.work_email_id,
               },
             );
-
-            /* ================= INPUT TYPE FIELDS ================= */
-
-            review.loan_details
-              .emi_amount.value = response.emi_amount;
-
-            review.loan_details
-              .tenure.value = response.tenure;
-
-            review.loan_details
-              .processing_fee.value = response.processing_fee;
-
-            review.loan_details
-              .roi.value = response.roi;
-
-            review.loan_details
-              .employer_name.value = response.employer_name;
-
-            review.loan_details
-              .schedule_of_charges.value = response.schedule_of_charges;
-
-            review.loan_details
-              .type_of_loan.value = response.type_of_loan;
-
-            /* ================= PERSONAL DETAILS ================= */
-
-            review.personal_details
-              .full_name.value = response.full_name;
-
-            review.personal_details
-              .mobile_no.value = response.mobile_no;
-
-            review.personal_details
-              .date_of_birth.value = response.date_of_birth;
-
-            review.personal_details
-              .pan.value = response.pan;
-
-            review.personal_details
-              .current_address.value = response.current_address;
-
-            review.personal_details
-              .residence_type.value = response.residence_type;
-
-            /* ================= SALARY ACCOUNT DETAILS ================= */
-
-            review.salary_account_details
-              .salary_account_number.value = response.salary_account_number;
-
-            review.salary_account_details
-              .ifsc.value = response.ifsc;
-
-            review.salary_account_details
-              .bank_name.value = response.bank_name;
-
-            /* ================= OFFICE ADDRESS ================= */
-
-            review.office_address_panel
-              .current_employer_address.value = response.current_employer_address;
-
-            /* ================= REFERENCE DETAILS ================= */
-
-            review.reference_details
-              .ref_full_name.value = response.ref_full_name;
-
-            review.reference_details
-              .ref_mobile_number.value = response.ref_mobile_number;
-
-            /* ================= PRIMARY EMAIL ================= */
-
-            review.verify_email_id_panel
-              .primary_email_verification
-              .primary_email_id.value = response.primary_email_id;
 
             console.log(
               '✅ REVIEW DETAILS POPULATED SUCCESSFULLY',
