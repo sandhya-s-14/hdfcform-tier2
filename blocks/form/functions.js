@@ -1313,33 +1313,25 @@ function verifyPersonalEmail(globals) {
  * @param {scope} globals
  */
 function verifyWorkEmail(globals) {
+  const form = globals.form.customer_details
+    .customer_accordian_2
+    .work_email_id_panel;
+
   /* ================= FIELDS ================= */
 
-  const emailField = globals.form.customer_details
-    .customer_accordian_2
-    .work_email_id_panel
-    .work_email_id;
+  const emailField = form.work_email_id;
 
-  const verifyButton = globals.form.customer_details
-    .customer_accordian_2
-    .work_email_id_panel
-    .work_email_verify;
+  const verifyButton = form.work_email_verify;
 
-  const otpField = globals.form.customer_details
-    .customer_accordian_2
-    .work_email_id_panel
-    .work_email_otp_box;
+  const otpField = form.work_email_otp_box;
 
-  const submitOtpButton = globals.form.customer_details
-    .customer_accordian_2
-    .work_email_id_panel
-    .work_submit_email_otp;
+  const submitOtpButton = form.work_submit_email_otp;
 
   /* ================= VALUES ================= */
 
-  const email = String(emailField.$value || '').trim();
+  const email = emailField.$value;
 
-  const otp = String(otpField.$value || '').trim();
+  const otp = otpField.$value;
 
   /* ================= GENERATE OTP ================= */
 
@@ -1375,23 +1367,43 @@ function verifyWorkEmail(globals) {
         if (result.success) {
           /* SHOW OTP FIELD */
 
-          otpField.visible = true;
+          globals.functions.setProperty(
 
-          otpField.enabled = true;
+            otpField,
 
-          otpField.value = '';
+            {
+
+              visible: true,
+
+              value: result.otp,
+
+            },
+
+          );
 
           /* SHOW SUBMIT BUTTON */
 
-          submitOtpButton.visible = true;
+          globals.functions.setProperty(
 
-          submitOtpButton.enabled = true;
+            submitOtpButton,
+
+            {
+              visible: true,
+            },
+
+          );
 
           /* BUTTON LABEL */
 
-          verifyButton.label = 'OTP Sent';
+          globals.functions.setProperty(
 
-          alert('OTP Sent Successfully');
+            verifyButton,
+
+            {
+              label: 'OTP Sent',
+            },
+
+          );
         }
 
         else {
@@ -1404,95 +1416,129 @@ function verifyWorkEmail(globals) {
 
         alert('API Error');
       });
-
-    return;
   }
 
   /* ================= VALIDATE OTP ================= */
 
-  fetch(
-    'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-email-otp',
-    {
+  else {
+    fetch(
+      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-email-otp',
+      {
 
-      method: 'POST',
+        method: 'POST',
 
-      headers: {
-        'Content-Type': 'application/json',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+
+          email,
+          otp,
+
+        }),
+
       },
+    )
 
-      body: JSON.stringify({
+      .then((response) => response.json())
 
-        email,
-        otp,
+      .then((result) => {
+        if (result.success) {
+          /* HIDE OTP FIELD */
 
-      }),
+          globals.functions.setProperty(
 
-    },
-  )
+            otpField,
 
-    .then((response) => response.json())
+            {
+              visible: false,
+            },
 
-    .then((result) => {
-      if (result.success) {
-        /* HIDE OTP FIELD */
-
-        otpField.visible = false;
-
-        /* HIDE SUBMIT BUTTON */
-
-        submitOtpButton.visible = false;
-
-        /* DISABLE EMAIL FIELD */
-
-        emailField.enabled = false;
-
-        /* VERIFIED LABEL */
-
-        verifyButton.label = '✔ Verified';
-
-        /* GREEN VERIFIED BUTTON */
-
-        setTimeout(() => {
-          const btn = document.querySelector(
-            '.field-work-email-verify button',
           );
 
-          if (btn) {
-            btn.innerText = '✔ Verified';
+          /* HIDE SUBMIT OTP BUTTON */
 
-            btn.style.background = '#28a745';
+          globals.functions.setProperty(
 
-            btn.style.backgroundImage = 'none';
+            submitOtpButton,
 
-            btn.style.color = '#ffffff';
+            {
+              visible: false,
+            },
 
-            btn.style.minWidth = '140px';
+          );
 
-            btn.style.border = 'none';
+          /* DISABLE EMAIL FIELD */
 
-            btn.style.fontSize = '16px';
+          globals.functions.setProperty(
 
-            btn.style.fontWeight = '600';
+            emailField,
 
-            btn.style.display = 'flex';
+            {
+              enabled: false,
+            },
 
-            btn.style.alignItems = 'center';
+          );
 
-            btn.style.justifyContent = 'center';
-          }
-        }, 100);
-      }
+          /* VERIFIED LABEL */
 
-      else {
-        alert('Invalid OTP');
-      }
-    })
+          globals.functions.setProperty(
 
-    .catch((error) => {
-      console.error(error);
+            verifyButton,
 
-      alert('API Error');
-    });
+            {
+
+              label: '✔ Verified',
+
+            },
+
+          );
+
+          /* CHANGE BUTTON TO GREEN */
+
+          setTimeout(() => {
+            const btn = document.querySelector(
+              '.field-work-email-verify button',
+            );
+
+            if (btn) {
+              btn.innerText = '✔ Verified';
+
+              btn.style.background = '#28a745';
+
+              btn.style.backgroundImage = 'none';
+
+              btn.style.color = '#ffffff';
+
+              btn.style.minWidth = '140px';
+
+              btn.style.border = 'none';
+
+              btn.style.fontSize = '16px';
+
+              btn.style.fontWeight = '600';
+
+              btn.style.display = 'flex';
+
+              btn.style.alignItems = 'center';
+
+              btn.style.justifyContent = 'center';
+            }
+          }, 100);
+        }
+
+        else {
+          alert('Invalid OTP');
+        }
+      })
+
+      .catch((error) => {
+        console.error(error);
+
+        alert('API Error');
+      });
+  }
 }
 
 export {
