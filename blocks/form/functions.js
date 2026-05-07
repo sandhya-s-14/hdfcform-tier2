@@ -1131,7 +1131,7 @@ function verifyPersonalEmail(globals) {
 
       .then((result) => {
         if (result.success) {
-          /* SHOW OTP FIELD + AUTO FILL OTP */
+          /* SHOW OTP FIELD */
 
           globals.functions.setProperty(
 
@@ -1147,7 +1147,7 @@ function verifyPersonalEmail(globals) {
 
           );
 
-          /* SHOW SUBMIT OTP BUTTON */
+          /* SHOW SUBMIT BUTTON */
 
           globals.functions.setProperty(
 
@@ -1159,7 +1159,7 @@ function verifyPersonalEmail(globals) {
 
           );
 
-          /* CHANGE VERIFY BUTTON LABEL */
+          /* BUTTON LABEL */
 
           globals.functions.setProperty(
 
@@ -1247,7 +1247,7 @@ function verifyPersonalEmail(globals) {
 
           );
 
-          /* VERIFIED GREEN BUTTON */
+          /* VERIFIED LABEL */
 
           globals.functions.setProperty(
 
@@ -1257,13 +1257,27 @@ function verifyPersonalEmail(globals) {
 
               label: '✔ Verified',
 
-              enabled: true,
-
-              visible: true,
-
             },
 
           );
+
+          /* CHANGE BUTTON TO GREEN */
+
+          setTimeout(() => {
+            const btn = document.querySelector(
+              '.field-personal-email-verify button',
+            );
+
+            if (btn) {
+              btn.style.backgroundColor = '#28a745';
+
+              btn.style.color = '#ffffff';
+
+              btn.style.minWidth = '140px';
+
+              btn.style.border = 'none';
+            }
+          }, 100);
         }
 
         else {
