@@ -1269,13 +1269,17 @@ button[name="validate_otp"] {
 }
 
 /*----------------------------Offerpage-------------------------------------------*/
-/* ---------- LEFT ---------- */
+/* =====================================================
+   LEFT SECTION
+===================================================== */
 
 main .form form .field-loan-offer-based-on-declared-income {
   grid-column: span 7 !important;
 }
 
-/* ---------- RIGHT CARD SIZE ---------- */
+/* =====================================================
+   RIGHT CARD POSITION
+===================================================== */
 
 main .form form .field-avail-panel {
 
@@ -1283,63 +1287,81 @@ main .form form .field-avail-panel {
 
   width: 100% !important;
 
-  max-width: 290px !important;
+  max-width: 300px !important;
 
-  margin-left: -100px !important;
+  margin-left: -60px !important;
 
-  margin-top: 160px !important;
+  margin-top: 120px !important;
 
-  max-height: 390px !important;
+  align-self: start !important;
 }
 
-/* ---------- CARD ---------- */
+/* =====================================================
+   CARD
+===================================================== */
 
 .field-avail-panel {
 
-  background: #fff3e3 !important;
+  background: #f6f0e3 !important;
 
   border-radius: 18px !important;
 
-  padding: 14px 14px 0 !important;
-
-  margin-top: 10px !important;
-
   overflow: hidden !important;
+
+  padding: 18px 18px 0 !important;
 
   font-family: Arial, sans-serif !important;
 
   box-sizing: border-box !important;
 }
 
-/* ---------- HEADER ---------- */
+/* =====================================================
+   HEADER
+===================================================== */
 
 .field-avail-input {
 
   position: relative !important;
 
-  padding-bottom: 12px !important;
+  padding-bottom: 14px !important;
 
-  margin-bottom: 12px !important;
+  margin-bottom: 18px !important;
 }
 
-/* ---------- HEADER LABEL ---------- */
+/* REMOVE BLUE LINES */
+
+.field-avail-input::before,
+.field-avail-input::after {
+
+  display: none !important;
+
+  content: none !important;
+}
+
+/* =====================================================
+   HEADER LABEL
+===================================================== */
 
 .field-avail-input label {
 
   display: block !important;
 
-  font-size: 15px !important;
+  font-size: 13px !important;
 
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 
-  color: #000 !important;
+  color: #1b2738 !important;
+
+  margin-bottom: 8px !important;
 
   padding: 0 !important;
 
-  margin-bottom: 4px !important;
+  line-height: 1.4 !important;
 }
 
-/* ---------- HEADER VALUE ---------- */
+/* =====================================================
+   HEADER VALUE
+===================================================== */
 
 .field-avail-input input {
 
@@ -1349,54 +1371,38 @@ main .form form .field-avail-panel {
 
   outline: none !important;
 
-  font-size: 22px !important;
-
-  font-weight: 700 !important;
-
-  color: #1b2738 !important;
-
-  margin-top: 2px !important;
-
   padding: 0 !important;
 
+  margin: 0 !important;
+
   width: 100% !important;
+
+  font-size: 24px !important;
+
+  font-weight: 800 !important;
+
+  color: #0d2240 !important;
+
+  line-height: 1.2 !important;
 }
 
-/* ---------- DOTTED DIVIDER ---------- */
+/* =====================================================
+   DOTTED DIVIDER
+===================================================== */
 
-.field-avail-input::after {
+.field-avail-input {
 
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-
-  bottom: 0;
-
-  width: 100%;
-
-  height: 1px;
-
-  background: repeating-linear-gradient(
-    to right,
-    #d8cbb8,
-    #d8cbb8 4px,
-    transparent 4px,
-    transparent 8px
-  );
+  border-bottom: 1px dashed #d9cdbd !important;
 }
 
-/* ---------- EMI + ROI ---------- */
+/* =====================================================
+   EMI + ROI ROW
+===================================================== */
 
 .field-emi-amount,
 .field-roi {
 
   width: 48% !important;
-
-  position: relative !important;
-
-  padding-left: 10px !important;
 
   display: inline-flex !important;
 
@@ -1404,10 +1410,18 @@ main .form form .field-avail-panel {
 
   vertical-align: top !important;
 
+  position: relative !important;
+
+  padding-left: 12px !important;
+
+  margin-bottom: 24px !important;
+
   box-sizing: border-box !important;
 }
 
-/* ---------- TAX ---------- */
+/* =====================================================
+   TAX
+===================================================== */
 
 .field-tax {
 
@@ -1415,70 +1429,20 @@ main .form form .field-avail-panel {
 
   position: relative !important;
 
-  padding-left: 10px !important;
+  padding-left: 12px !important;
 
-  margin-top: 8px !important;
+  margin-bottom: 20px !important;
+
+  box-sizing: border-box !important;
 
   display: flex !important;
 
   flex-direction: column !important;
-
-  box-sizing: border-box !important;
 }
 
-/* ---------- LABEL ---------- */
-
-.field-emi-amount label,
-.field-roi label,
-.field-tax label {
-
-  font-size: 11px !important;
-
-  font-weight: 500 !important;
-
-  color: #8a8a8a !important;
-
-  margin-bottom: 2px !important;
-
-  white-space: nowrap !important;
-}
-
-/* ---------- VALUES ---------- */
-
-.field-emi-amount input,
-.field-roi input,
-.field-tax input {
-
-  border: none !important;
-
-  background: transparent !important;
-
-  outline: none !important;
-
-  font-size: 13px !important;
-
-  font-weight: 600 !important;
-
-  color: #333 !important;
-
-  padding: 0 !important;
-
-  margin-top: 2px !important;
-
-  width: 100% !important;
-
-  pointer-events: auto !important;
-
-  cursor: text !important;
-
-  white-space: normal !important;
-
-  word-break: break-word !important;
-
-  overflow: visible !important;
-}
-
-/* ---------- ORANGE LINES ---------- */
+/* =====================================================
+   ORANGE LINE
+===================================================== */
 
 .field-emi-amount::before,
 .field-roi::before,
@@ -1490,37 +1454,93 @@ main .form form .field-avail-panel {
 
   left: 0 !important;
 
-  top: 4px !important;
+  top: 2px !important;
 
   width: 3px !important;
 
-  height: 18px !important;
+  height: 28px !important;
 
-  background: #f7941d !important;
+  background: #f5a028 !important;
+
+  border-radius: 2px !important;
 }
 
-/* ---------- FOOTER ---------- */
+/* =====================================================
+   LABELS
+===================================================== */
 
-.field-avail-panel .plain-text-wrapper {
-
-  background: #fba741 !important;
-
-  color: #fff !important;
-
-  padding: 10px 15px 14px 30px !important;
-
-  margin: 12px -14px 0 !important;
-
-  border-radius: 0 0 18px 18px !important;
+.field-emi-amount label,
+.field-roi label,
+.field-tax label {
 
   font-size: 11px !important;
 
-  line-height: 1.4 !important;
+  font-weight: 500 !important;
 
-  position: relative !important;
+  color: #7c8795 !important;
+
+  margin-bottom: 6px !important;
+
+  white-space: nowrap !important;
 }
 
-/* ---------- FOOTER ICON ---------- */
+/* =====================================================
+   VALUES
+===================================================== */
+
+.field-emi-amount input,
+.field-roi input,
+.field-tax input {
+
+  border: none !important;
+
+  background: transparent !important;
+
+  outline: none !important;
+
+  padding: 0 !important;
+
+  margin: 0 !important;
+
+  width: 100% !important;
+
+  font-size: 13px !important;
+
+  font-weight: 700 !important;
+
+  color: #0f213d !important;
+
+  pointer-events: auto !important;
+
+  cursor: text !important;
+}
+
+/* =====================================================
+   DISCLAIMER
+===================================================== */
+
+.field-avail-panel .plain-text-wrapper {
+
+  background: #f6a232 !important;
+
+  color: #fff !important;
+
+  margin: 0 -18px !important;
+
+  padding: 12px 16px 12px 40px !important;
+
+  border-radius: 0 0 18px 18px !important;
+
+  position: relative !important;
+
+  font-size: 10px !important;
+
+  line-height: 1.5 !important;
+}
+
+/* =====================================================
+   DISCLAIMER ICON
+===================================================== */
 
 .field-avail-panel .plain-text-wrapper::before {
 
@@ -1528,15 +1548,15 @@ main .form form .field-avail-panel {
 
   position: absolute;
 
-  left: 12px;
+  left: 14px;
 
-  top: 25%;
+  top: 50%;
 
-  transform: translateY(-25%);
+  transform: translateY(-50%);
 
-  width: 16px;
+  width: 14px;
 
-  height: 16px;
+  height: 14px;
 
   border: 1px solid #fff;
 
@@ -1548,13 +1568,12 @@ main .form form .field-avail-panel {
 
   justify-content: center;
 
-  font-size: 10px;
+  font-size: 9px;
 
-  font-weight: bold;
+  font-weight: 700;
 
   color: #fff;
 }
-
 /*-------------------------------------------------*/
 /* =========================
    Banner Styling
