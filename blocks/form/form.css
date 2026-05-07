@@ -2303,4 +2303,112 @@ main .form .field-plain-text p p {
 }
 
 
-/*-----------------------verify button-------------------------*/
+/*-----------------------minor css-------------------------*/
+.field-pan-middle-name .field-description {
+    margin-top: 8px;
+    line-height: 1.5;
+    font-size: 14px;
+    color: #555;
+    display: block;
+    text-wrap: nowarp;
+}
+
+/* ================= EMAIL DOMAIN CHIPS ================= */
+
+.field-personal-email-domains p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* ================= CHIP STYLE ================= */
+
+.field-personal-email-domains p::before {
+    display: none;
+}
+
+.field-personal-email-domains p span,
+.field-personal-email-domains p {
+    font-size: 13px;
+}
+
+/* ================= INDIVIDUAL DOMAIN TAGS ================= */
+
+.field-personal-email-domains p {
+    color: transparent;
+}
+
+.field-personal-email-domains p::after {
+    content: "";
+}
+
+/* ================= DOMAIN BUTTONS ================= */
+
+.field-personal-email-domains p {
+    white-space: normal;
+}
+
+.field-personal-email-domains p {
+    line-height: normal;
+}
+
+/* ================= CREATE CHIP LOOK ================= */
+
+.field-personal-email-domains p {
+    display: flex;
+    gap: 10px;
+}
+
+.field-personal-email-domains p {
+    font-size: 0;
+}
+
+.field-personal-email-domains p::before {
+    content: "@gmail.com";
+    font-size: 12px;
+    color: #4f46e5;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+.field-personal-email-domains p::after {
+    content: "@outlook.com   @yahoo.com";
+    font-size: 12px;
+    color: #4f46e5;
+    background: transparent;
+    white-space: pre;
+}
+
+/* ================= WORK EMAIL NOTE ================= */
+
+.field-work-email-note p {
+
+    background: #f5f7ff;
+    border: 1px solid #dbe4ff;
+    color: #4a5fc1;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    margin-top: 12px;
+
+    display: inline-block;
+
+    line-height: 1.5;
+}
+
+/* ================= OPTIONAL ICON STYLE ================= */
+
+.field-work-email-note p::before {
+
+    content: "ℹ ";
+    font-size: 14px;
+
+}
