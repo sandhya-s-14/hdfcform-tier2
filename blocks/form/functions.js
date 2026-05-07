@@ -819,13 +819,13 @@ function updateLoanFromIncome(globals) {
  * @param {scope} globals
  */
 function getCustomerDetails(globals) {
-  const { form } = globals;
-
   console.log(
     '🔥 getCustomerDetails triggered',
   );
 
   try {
+    const { form } = globals;
+
     /* ================= MANUAL PAYLOAD ================= */
 
     const payload = {
@@ -929,13 +929,12 @@ function getCustomerDetails(globals) {
         const { data } = response;
 
         setTimeout(() => {
-          const review = form.review_page
-            .review_accordian;
-
           /* ================= LOAN DETAILS ================= */
 
           globals.functions.setProperty(
-            review.loan_details.loan_amount,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.loan_amount,
             {
               value:
                 data.loan_amount,
@@ -943,8 +942,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.loan_details
-              .emi_amount_review,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.emi_amount_review,
             {
               value:
                 data.emi_amount,
@@ -952,7 +952,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.loan_details.tenure,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.tenure,
             {
               value:
                 data.tenure,
@@ -960,7 +962,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.loan_details.processing_fee,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.processing_fee,
             {
               value:
                 data.processing_fee,
@@ -968,7 +972,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.loan_details.roi_review,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.roi_review,
             {
               value:
                 data.roi,
@@ -976,7 +982,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.loan_details.employer_name,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.employer_name,
             {
               value:
                 data.employer_name,
@@ -984,8 +992,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.loan_details
-              .schedule_of_charges,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.schedule_of_charges,
             {
               value:
                 data.schedule_of_charges,
@@ -993,7 +1002,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.loan_details.type_of_loan,
+            globals.form.review_page
+              .review_accordian
+              .loan_details.type_of_loan,
             {
               value:
                 data.type_of_loan,
@@ -1003,7 +1014,9 @@ function getCustomerDetails(globals) {
           /* ================= PERSONAL DETAILS ================= */
 
           globals.functions.setProperty(
-            review.personal_details.full_name,
+            globals.form.review_page
+              .review_accordian
+              .personal_details.full_name,
             {
               value:
                 data.full_name,
@@ -1011,8 +1024,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.personal_details
-              .mobile_no_review,
+            globals.form.review_page
+              .review_accordian
+              .personal_details.mobile_no_review,
             {
               value:
                 data.mobile_no,
@@ -1020,8 +1034,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.personal_details
-              .date_of_birth,
+            globals.form.review_page
+              .review_accordian
+              .personal_details.date_of_birth,
             {
               value:
                 data.date_of_birth,
@@ -1029,7 +1044,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.personal_details.pan,
+            globals.form.review_page
+              .review_accordian
+              .personal_details.pan,
             {
               value:
                 data.pan,
@@ -1037,8 +1054,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.personal_details
-              .current_address,
+            globals.form.review_page
+              .review_accordian
+              .personal_details.current_address,
             {
               value:
                 data.current_address,
@@ -1046,8 +1064,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.personal_details
-              .residence_type,
+            globals.form.review_page
+              .review_accordian
+              .personal_details.residence_type,
             {
               value:
                 data.residence_type,
@@ -1057,7 +1076,9 @@ function getCustomerDetails(globals) {
           /* ================= SALARY ACCOUNT DETAILS ================= */
 
           globals.functions.setProperty(
-            review.salary_account_details
+            globals.form.review_page
+              .review_accordian
+              .salary_account_details
               .salary_account_number,
             {
               value:
@@ -1066,8 +1087,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.salary_account_details
-              .ifsc,
+            globals.form.review_page
+              .review_accordian
+              .salary_account_details.ifsc,
             {
               value:
                 data.ifsc,
@@ -1075,8 +1097,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.salary_account_details
-              .bank_name,
+            globals.form.review_page
+              .review_accordian
+              .salary_account_details.bank_name,
             {
               value:
                 data.bank_name,
@@ -1086,7 +1109,9 @@ function getCustomerDetails(globals) {
           /* ================= OFFICE ADDRESS ================= */
 
           globals.functions.setProperty(
-            review.office_address_panel
+            globals.form.review_page
+              .review_accordian
+              .office_address_panel
               .current_employer_address,
             {
               value:
@@ -1097,7 +1122,9 @@ function getCustomerDetails(globals) {
           /* ================= REFERENCE DETAILS ================= */
 
           globals.functions.setProperty(
-            review.reference_details
+            globals.form.review_page
+              .review_accordian
+              .reference_details
               .ref_full_name,
             {
               value:
@@ -1106,7 +1133,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.reference_details
+            globals.form.review_page
+              .review_accordian
+              .reference_details
               .ref_mobile_number,
             {
               value:
@@ -1117,7 +1146,9 @@ function getCustomerDetails(globals) {
           /* ================= EMAIL DETAILS ================= */
 
           globals.functions.setProperty(
-            review.verify_email_id_panel
+            globals.form.review_page
+              .review_accordian
+              .verify_email_id_panel
               .primary_email_verification
               .primary_email_id,
             {
@@ -1127,7 +1158,9 @@ function getCustomerDetails(globals) {
           );
 
           globals.functions.setProperty(
-            review.verify_email_id_panel
+            globals.form.review_page
+              .review_accordian
+              .verify_email_id_panel
               .work_email_verification
               .work_email_id,
             {
@@ -1139,7 +1172,7 @@ function getCustomerDetails(globals) {
           console.log(
             '✅ REVIEW DETAILS POPULATED SUCCESSFULLY',
           );
-        }, 1000);
+        }, 1500);
       })
 
       .catch((err) => {
