@@ -1095,9 +1095,9 @@ function verifyPersonalEmail(globals) {
 
   /* ================= VALUES ================= */
 
-  const email = emailField.value;
+  const email = emailField.$value;
 
-  const otp = otpField.value;
+  const otp = otpField.$value;
 
   /* ================= GENERATE OTP ================= */
 
