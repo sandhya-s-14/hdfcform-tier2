@@ -1247,7 +1247,7 @@ function verifyPersonalEmail(globals) {
 
           );
 
-          /* VERIFIED BUTTON */
+          /* VERIFIED GREEN BUTTON */
 
           globals.functions.setProperty(
 
@@ -1258,6 +1258,18 @@ function verifyPersonalEmail(globals) {
               label: '✔ Verified',
 
               enabled: false,
+
+              visible: true,
+
+              properties: {
+
+                'afs:style': `
+                  background-color: #28a745;
+                  color: white;
+                  border-radius: 8px;
+                `,
+
+              },
 
             },
 
