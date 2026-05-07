@@ -1307,6 +1307,239 @@ function verifyPersonalEmail(globals) {
   }
 }
 
+/* ----------------------------------WORK EMAIL----------------------------------------*/
+
+/**
+ * WORK EMAIL VERIFY
+ * @param {scope} globals
+ */
+function verifyWorkEmail(globals) {
+  const form = globals.form.customer_details
+    .customer_accordian_2
+    .work_email_id_panel;
+
+  /* ================= FIELDS ================= */
+
+  const emailField = form.work_email_id;
+
+  const verifyButton = form.work_email_verify;
+
+  const otpField = form.work_email_otp_box;
+
+  const submitOtpButton = form.work_submit_email_otp;
+
+  /* ================= VALUES ================= */
+
+  const email = emailField.$value;
+
+  const otp = otpField.$value;
+
+  /* ================= GENERATE OTP ================= */
+
+  if (!otp) {
+    if (!email) {
+      alert('Please enter work email');
+
+      return;
+    }
+
+    fetch(
+      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/generate-email-otp',
+      {
+
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+
+          email,
+
+        }),
+
+      },
+    )
+
+      .then((response) => response.json())
+
+      .then((result) => {
+        if (result.success) {
+          /* SHOW OTP FIELD */
+
+          globals.functions.setProperty(
+
+            otpField,
+
+            {
+
+              visible: true,
+
+            },
+
+          );
+
+          /* SHOW SUBMIT BUTTON */
+
+          globals.functions.setProperty(
+
+            submitOtpButton,
+
+            {
+              visible: true,
+            },
+
+          );
+
+          /* BUTTON LABEL */
+
+          globals.functions.setProperty(
+
+            verifyButton,
+
+            {
+              label: 'OTP Sent',
+            },
+
+          );
+        }
+
+        else {
+          alert(result.message);
+        }
+      })
+
+      .catch((error) => {
+        console.error(error);
+
+        alert('API Error');
+      });
+  }
+
+  /* ================= VALIDATE OTP ================= */
+
+  else {
+    fetch(
+      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-email-otp',
+      {
+
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({
+
+          email,
+          otp,
+
+        }),
+
+      },
+    )
+
+      .then((response) => response.json())
+
+      .then((result) => {
+        if (result.success) {
+          /* HIDE OTP FIELD */
+
+          globals.functions.setProperty(
+
+            otpField,
+
+            {
+              visible: false,
+            },
+
+          );
+
+          /* HIDE SUBMIT OTP BUTTON */
+
+          globals.functions.setProperty(
+
+            submitOtpButton,
+
+            {
+              visible: false,
+            },
+
+          );
+
+          /* DISABLE EMAIL FIELD */
+
+          globals.functions.setProperty(
+
+            emailField,
+
+            {
+              enabled: false,
+            },
+
+          );
+
+          /* VERIFIED LABEL */
+
+          globals.functions.setProperty(
+
+            verifyButton,
+
+            {
+
+              label: '✔ Verified',
+
+            },
+
+          );
+
+          /* CHANGE BUTTON TO GREEN */
+
+          setTimeout(() => {
+            const btn = document.querySelector(
+              '.field-work-email-verify button',
+            );
+
+            if (btn) {
+              btn.innerText = '✔ Verified';
+
+              btn.style.background = '#28a745';
+
+              btn.style.backgroundImage = 'none';
+
+              btn.style.color = '#ffffff';
+
+              btn.style.minWidth = '140px';
+
+              btn.style.border = 'none';
+
+              btn.style.fontSize = '16px';
+
+              btn.style.fontWeight = '600';
+
+              btn.style.display = 'flex';
+
+              btn.style.alignItems = 'center';
+
+              btn.style.justifyContent = 'center';
+            }
+          }, 100);
+        }
+
+        else {
+          alert('Invalid OTP');
+        }
+      })
+
+      .catch((error) => {
+        console.error(error);
+
+        alert('API Error');
+      });
+  }
+}
+
 export {
   getFullName, days, submitFormArrayToString,
   maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
