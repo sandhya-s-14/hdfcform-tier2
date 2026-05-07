@@ -868,77 +868,70 @@ function getCustomerDetails(globals) {
 
         /* ================= LOAN DETAILS ================= */
 
-        globals.functions.setProperty(
+        review.loan_details.loan_amount.text = data.loan_amount;
 
-          review.loan_details.loan_amount,
+        review.loan_details.emi_amount.text = data.emi_amount;
 
-          {
+        review.loan_details.tenure.text = data.tenure;
 
-            text:
-      data.loan_amount,
+        review.loan_details.processing_fee.text = data.processing_fee;
 
-          },
+        review.loan_details.roi.text = data.roi;
 
-        );
+        review.loan_details.employer_name.text = data.employer_name;
 
-        review.loan_details.emi_amount.value = data.emi_amount;
+        review.loan_details.schedule_of_charges.text = data.schedule_of_charges;
 
-        review.loan_details.tenure.value = data.tenure;
-
-        review.loan_details.processing_fee.value = data.processing_fee;
-
-        review.loan_details.roi.value = data.roi;
-
-        review.loan_details.employer_name.value = data.employer_name;
-
-        review.loan_details.schedule_of_charges.value = data.schedule_of_charges;
-
-        review.loan_details.type_of_loan.value = data.type_of_loan;
+        review.loan_details.type_of_loan.text = data.type_of_loan;
 
         /* ================= PERSONAL DETAILS ================= */
 
-        review.personal_details.full_name.value = data.full_name;
+        review.personal_details.full_name.text = data.full_name;
 
-        review.personal_details.mobile_no.value = data.mobile_no;
+        review.personal_details.mobile_no.text = data.mobile_no;
 
-        review.personal_details.date_of_birth.value = data.date_of_birth;
+        review.personal_details.date_of_birth.text = data.date_of_birth;
 
-        review.personal_details.pan.value = data.pan;
+        review.personal_details.pan.text = data.pan;
 
-        review.personal_details.current_address.value = data.current_address;
+        review.personal_details.current_address.text = data.current_address;
 
-        review.personal_details.residence_type.value = data.residence_type;
+        review.personal_details.residence_type.text = data.residence_type;
 
         /* ================= SALARY ACCOUNT DETAILS ================= */
 
         review.salary_account_details
-          .salary_account_number.value = data.salary_account_number;
+          .salary_account_number.text = data.salary_account_number;
 
-        review.salary_account_details.ifsc.value = data.ifsc;
+        review.salary_account_details.ifsc.text = data.ifsc;
 
-        review.salary_account_details.bank_name.value = data.bank_name;
+        review.salary_account_details.bank_name.text = data.bank_name;
 
         /* ================= OFFICE ADDRESS ================= */
 
         review.office_address_panel
-          .current_employer_address.value = data.current_employer_address;
+          .current_employer_address.text = data.current_employer_address;
 
         /* ================= REFERENCE DETAILS ================= */
 
         review.reference_details
-          .ref_full_name.value = data.ref_full_name;
+          .ref_full_name.text = data.ref_full_name;
 
         review.reference_details
-          .ref_mobile_number.value = data.ref_mobile_number;
+          .ref_mobile_number.text = data.ref_mobile_number;
 
         /* ================= EMAIL DETAILS ================= */
 
         review.verify_email_id_panel
           .primary_email_verification
-          .primary_email_id.value = data.primary_email_id;
+          .primary_email_id.text = data.primary_email_id;
 
         review.verify_email_id_panel
-          .work_email_id.value = data.work_email_id;
+          .work_email_id.text = data.work_email_id;
+
+        console.log(
+          'REVIEW DETAILS POPULATED SUCCESSFULLY',
+        );
       })
 
       .catch((error) => {
