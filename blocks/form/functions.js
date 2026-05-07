@@ -1622,6 +1622,201 @@ function verifyWorkEmail(globals) {
   }
 }
 
+/**
+ * @param {scope} globals
+ */
+function populateReviewDetails(globals) {
+  const data = globals.functions.exportData();
+
+  const review = globals.form.review_page.review_accordian;
+
+  /* ================= LOAN DETAILS ================= */
+
+  globals.functions.setProperty(
+    review.loan_details.loan_amount,
+    {
+      value:
+        `₹${Number(data.loan_amount_slider || 0)
+          .toLocaleString('en-IN')}`,
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.emi_amount,
+    {
+      value: data.emi_amount || '',
+    },
+  );
+
+  const tenureValue = globals.form.offer_page
+    .loan_offer_based_on_declared_income
+    .loan_tenture_slider
+    ._data.$_value;
+
+  globals.functions.setProperty(
+    review.loan_details.tenure,
+    {
+      value: `${tenureValue || 84} months`,
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.processing_fee,
+    {
+      value: '₹4,000',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.roi,
+    {
+      value: '10.97%',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.employer_name,
+    {
+      value:
+        data.enter_employer_company_name || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.schedule_of_charges,
+    {
+      value: '₹199 + GST',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.loan_details.type_of_loan,
+    {
+      value:
+        data.select_loan_type || '',
+    },
+  );
+
+  /* ================= PERSONAL DETAILS ================= */
+
+  globals.functions.setProperty(
+    review.personal_details.full_name,
+    {
+      value:
+        `${data.pan_first_name || ''} ${data.pan_last_name || ''}`,
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.mobile_no,
+    {
+      value:
+        data.mobile_no || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.date_of_birth,
+    {
+      value:
+        data.dob_firstpage || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.pan,
+    {
+      value:
+        data.pan_number
+        || data.pan_firstpage
+        || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.current_address,
+    {
+      value:
+        data.address_as_per_aadhaar_records || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.personal_details.residence_type,
+    {
+      value: 'Owned by Parents',
+    },
+  );
+
+  /* ================= SALARY ACCOUNT DETAILS ================= */
+
+  globals.functions.setProperty(
+    review.salary_account_details.salary_account_number,
+    {
+      value: '12345678901',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.salary_account_details.ifsc,
+    {
+      value: 'ICIC0000001',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.salary_account_details.bank_name,
+    {
+      value: 'ICICI Bank',
+    },
+  );
+
+  /* ================= OFFICE ADDRESS ================= */
+
+  globals.functions.setProperty(
+    review.office_address_panel.current_employer_address,
+    {
+      value: 'Adobe Systems India Pvt. Ltd. Salarpuria Sattva Knowledge Court,Bellandur,Bengaluru,Karnataka - 560103',
+    },
+  );
+
+  /* ================= REFERENCE DETAILS ================= */
+
+  globals.functions.setProperty(
+    review.reference_details.ref_full_name,
+    {
+      value: 'Sujith Pillai',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.reference_details.ref_mobile_number,
+    {
+      value: '9876543210',
+    },
+  );
+
+  /* ================= EMAIL DETAILS ================= */
+
+  globals.functions.setProperty(
+    review.verify_email_id_panel
+      .primary_email_verification
+      .primary_email_id,
+    {
+      value:
+      data.personal_email_id || '',
+    },
+  );
+
+  globals.functions.setProperty(
+    review.verify_email_id_panel.work_email_id,
+    {
+      value:
+      data.work_email_id || '',
+    },
+  );
+}
+
 export {
   getFullName, days, submitFormArrayToString,
   maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
@@ -1629,5 +1824,5 @@ export {
   createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
   getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
   , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome, getCustomerDetails,
-  submitLoanApplication, verifyPersonalEmail, verifyWorkEmail,
+  submitLoanApplication, verifyPersonalEmail, verifyWorkEmail, populateReviewDetails,
 };
