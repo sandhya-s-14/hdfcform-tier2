@@ -993,13 +993,14 @@ function populateReviewDetails(globals) {
 
     /* ================= EMAIL DETAILS ================= */
 
+    console.log('personal email =>', data.personal_email_id);
+
     globals.functions.setProperty(
       review.verify_email_id_panel
         .primary_email_verification
         .primary_email_id,
       {
-        value:
-          data.personal_email_id || '',
+        value: data.personal_email_id || '',
       },
     );
 
@@ -1062,6 +1063,13 @@ function submitLoanApplication(globals) {
           },
         );
 
+        /* ================= GENERATE APPLICATION NUMBER ================= */
+
+        const applicationNumber = `HDFC${
+          Math.floor(
+            100000 + Math.random() * 900000,
+          )}`;
+
         /* ================= APPLICATION NUMBER ================= */
 
         globals.functions.setProperty(
@@ -1070,18 +1078,19 @@ function submitLoanApplication(globals) {
             .loan_application_details
             .loan_application_number,
           {
-            value:
-              result.applicationId || '',
+            value: applicationNumber,
           },
         );
       }
     })
 
     .catch((error) => {
-      console.error('FULL ERROR', error);
+      console.error(
+        'FULL ERROR',
+        error,
+      );
     });
 }
-
 /*= =============================EMAIL-OTP========================================= */
 /**
  * PERSONAL EMAIL VERIFY
