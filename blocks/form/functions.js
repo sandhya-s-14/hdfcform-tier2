@@ -1547,5 +1547,5 @@ export {
   createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
   getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
   , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome, populateReviewDetails,
-  submitLoanApplication, verifyPersonalEmail,
+  submitLoanApplication, verifyPersonalEmail, verifyWorkEmail,
 };
