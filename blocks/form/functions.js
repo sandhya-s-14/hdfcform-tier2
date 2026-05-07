@@ -818,198 +818,139 @@ function updateLoanFromIncome(globals) {
 /**
  * @param {scope} globals
  */
-function populateReviewDetails(globals) {
-  const data = globals.functions.exportData();
+function getCustomerDetails(globals) {
+  try {
+    /* ================= EXPORT FORM DATA ================= */
 
-  const review = globals.form.review_page.review_accordian;
+    const payload = globals.functions.exportData();
 
-  /* ================= LOAN DETAILS ================= */
+    console.log(
+      'REQUEST PAYLOAD =>',
+      payload,
+    );
 
-  globals.functions.setProperty(
-    review.loan_details.loan_amount,
-    {
-      value:
-        `₹${Number(data.loan_amount_slider || 0)
-          .toLocaleString('en-IN')}`,
-    },
-  );
+    /* ================= API CALL ================= */
 
-  globals.functions.setProperty(
-    review.loan_details.emi_amount,
-    {
-      value: data.emi_amount || '',
-    },
-  );
+    fetch(
 
-  const tenureValue = globals.form.offer_page
-    .loan_offer_based_on_declared_income
-    .loan_tenture_slider
-    ._data.$_value;
+      'http://localhost:4000/api/hdfc-tier2/customer-details',
 
-  globals.functions.setProperty(
-    review.loan_details.tenure,
-    {
-      value: `${tenureValue || 84} months`,
-    },
-  );
+      {
 
-  globals.functions.setProperty(
-    review.loan_details.processing_fee,
-    {
-      value: '₹4,000',
-    },
-  );
+        method: 'POST',
 
-  globals.functions.setProperty(
-    review.loan_details.roi,
-    {
-      value: '10.97%',
-    },
-  );
+        headers: {
+          'Content-Type': 'application/json',
+        },
 
-  globals.functions.setProperty(
-    review.loan_details.employer_name,
-    {
-      value:
-        data.enter_employer_company_name || '',
-    },
-  );
+        body: JSON.stringify(payload),
 
-  globals.functions.setProperty(
-    review.loan_details.schedule_of_charges,
-    {
-      value: '₹199 + GST',
-    },
-  );
+      },
 
-  globals.functions.setProperty(
-    review.loan_details.type_of_loan,
-    {
-      value:
-        data.select_loan_type || '',
-    },
-  );
+    )
 
-  /* ================= PERSONAL DETAILS ================= */
+      .then((response) => response.json())
 
-  globals.functions.setProperty(
-    review.personal_details.full_name,
-    {
-      value:
-        `${data.pan_first_name || ''} ${data.pan_last_name || ''}`,
-    },
-  );
+      .then((result) => {
+        console.log(
+          'API RESPONSE =>',
+          result,
+        );
 
-  globals.functions.setProperty(
-    review.personal_details.mobile_no,
-    {
-      value:
-        data.mobile_no || '',
-    },
-  );
+        /* ================= RESPONSE DATA ================= */
 
-  globals.functions.setProperty(
-    review.personal_details.date_of_birth,
-    {
-      value:
-        data.dob_firstpage || '',
-    },
-  );
+        const { data } = result;
 
-  globals.functions.setProperty(
-    review.personal_details.pan,
-    {
-      value:
-        data.pan_number
-        || data.pan_firstpage
-        || '',
-    },
-  );
+        /* ================= REVIEW PANEL ================= */
 
-  globals.functions.setProperty(
-    review.personal_details.current_address,
-    {
-      value:
-        data.address_as_per_aadhaar_records || '',
-    },
-  );
+        const review = globals.form.review_page
+          .review_accordian;
 
-  globals.functions.setProperty(
-    review.personal_details.residence_type,
-    {
-      value: 'Owned by Parents',
-    },
-  );
+        /* ================= LOAN DETAILS ================= */
 
-  /* ================= SALARY ACCOUNT DETAILS ================= */
+        review.loan_details.loan_amount.value = data.loan_amount;
 
-  globals.functions.setProperty(
-    review.salary_account_details.salary_account_number,
-    {
-      value: '12345678901',
-    },
-  );
+        review.loan_details.emi_amount.value = data.emi_amount;
 
-  globals.functions.setProperty(
-    review.salary_account_details.ifsc,
-    {
-      value: 'ICIC0000001',
-    },
-  );
+        review.loan_details.tenure.value = data.tenure;
 
-  globals.functions.setProperty(
-    review.salary_account_details.bank_name,
-    {
-      value: 'ICICI Bank',
-    },
-  );
+        review.loan_details.processing_fee.value = data.processing_fee;
 
-  /* ================= OFFICE ADDRESS ================= */
+        review.loan_details.roi.value = data.roi;
 
-  globals.functions.setProperty(
-    review.office_address_panel.current_employer_address,
-    {
-      value: 'Adobe Systems India Pvt. Ltd. Salarpuria Sattva Knowledge Court,Bellandur,Bengaluru,Karnataka - 560103',
-    },
-  );
+        review.loan_details.employer_name.value = data.employer_name;
 
-  /* ================= REFERENCE DETAILS ================= */
+        review.loan_details.schedule_of_charges.value = data.schedule_of_charges;
 
-  globals.functions.setProperty(
-    review.reference_details.ref_full_name,
-    {
-      value: 'Sujith Pillai',
-    },
-  );
+        review.loan_details.type_of_loan.value = data.type_of_loan;
 
-  globals.functions.setProperty(
-    review.reference_details.ref_mobile_number,
-    {
-      value: '9876543210',
-    },
-  );
+        /* ================= PERSONAL DETAILS ================= */
 
-  /* ================= EMAIL DETAILS ================= */
+        review.personal_details.full_name.value = data.full_name;
 
-  globals.functions.setProperty(
-    review.verify_email_id_panel
-      .primary_email_verification
-      .primary_email_id,
-    {
-      value:
-      data.personal_email_id || '',
-    },
-  );
+        review.personal_details.mobile_no.value = data.mobile_no;
 
-  globals.functions.setProperty(
-    review.verify_email_id_panel.work_email_id,
-    {
-      value:
-      data.work_email_id || '',
-    },
-  );
+        review.personal_details.date_of_birth.value = data.date_of_birth;
+
+        review.personal_details.pan.value = data.pan;
+
+        review.personal_details.current_address.value = data.current_address;
+
+        review.personal_details.residence_type.value = data.residence_type;
+
+        /* ================= SALARY ACCOUNT DETAILS ================= */
+
+        review.salary_account_details
+          .salary_account_number.value = data.salary_account_number;
+
+        review.salary_account_details.ifsc.value = data.ifsc;
+
+        review.salary_account_details.bank_name.value = data.bank_name;
+
+        /* ================= OFFICE ADDRESS ================= */
+
+        review.office_address_panel
+          .current_employer_address.value = data.current_employer_address;
+
+        /* ================= REFERENCE DETAILS ================= */
+
+        review.reference_details
+          .ref_full_name.value = data.ref_full_name;
+
+        review.reference_details
+          .ref_mobile_number.value = data.ref_mobile_number;
+
+        /* ================= EMAIL DETAILS ================= */
+
+        review.verify_email_id_panel
+          .primary_email_verification
+          .primary_email_id.value = data.primary_email_id;
+
+        review.verify_email_id_panel
+          .work_email_id.value = data.work_email_id;
+      })
+
+      .catch((error) => {
+        console.error(
+
+          'Customer Details API Failed =>',
+
+          error,
+
+        );
+      });
+  }
+
+  catch (error) {
+    console.error(
+
+      'Function Failed =>',
+
+      error,
+
+    );
+  }
 }
-
 /*= =========================SUBMIT API===================================================== */
 /**
  * @param {scope} globals
@@ -1547,6 +1488,6 @@ export {
   debugForm, getBankLogo,
   createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
   getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
-  , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome, populateReviewDetails,
+  , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome, getCustomerDetails,
   submitLoanApplication, verifyPersonalEmail, verifyWorkEmail,
 };
