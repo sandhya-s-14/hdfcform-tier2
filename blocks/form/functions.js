@@ -1308,31 +1308,38 @@ function verifyPersonalEmail(globals) {
 }
 
 /* ----------------------------------WORK EMAIL----------------------------------------*/
-
 /**
  * WORK EMAIL VERIFY
  * @param {scope} globals
  */
 function verifyWorkEmail(globals) {
-  const form = globals.form.customer_details
-    .customer_accordian_2
-    .work_email_id_panel;
-
   /* ================= FIELDS ================= */
 
-  const emailField = form.work_email_id;
+  const emailField = globals.form.customer_details
+    .customer_accordian_2
+    .work_email_id_panel
+    .work_email_id;
 
-  const verifyButton = form.work_email_verify;
+  const verifyButton = globals.form.customer_details
+    .customer_accordian_2
+    .work_email_id_panel
+    .work_email_verify;
 
-  const otpField = form.work_email_otp_box;
+  const otpField = globals.form.customer_details
+    .customer_accordian_2
+    .work_email_id_panel
+    .work_email_otp_box;
 
-  const submitOtpButton = form.work_submit_email_otp;
+  const submitOtpButton = globals.form.customer_details
+    .customer_accordian_2
+    .work_email_id_panel
+    .work_submit_email_otp;
 
   /* ================= VALUES ================= */
 
-  const email = emailField.$value;
+  const email = String(emailField.$value || '').trim();
 
-  const otp = otpField.$value;
+  const otp = String(otpField.$value || '').trim();
 
   /* ================= GENERATE OTP ================= */
 
@@ -1375,6 +1382,8 @@ function verifyWorkEmail(globals) {
             {
 
               visible: true,
+              enabled: true,
+              value: '',
 
             },
 
@@ -1387,7 +1396,10 @@ function verifyWorkEmail(globals) {
             submitOtpButton,
 
             {
+
               visible: true,
+              enabled: true,
+
             },
 
           );
@@ -1403,6 +1415,8 @@ function verifyWorkEmail(globals) {
             },
 
           );
+
+          alert('OTP Sent Successfully');
         }
 
         else {
@@ -1415,129 +1429,129 @@ function verifyWorkEmail(globals) {
 
         alert('API Error');
       });
+
+    return;
   }
 
   /* ================= VALIDATE OTP ================= */
 
-  else {
-    fetch(
-      'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-email-otp',
-      {
+  fetch(
+    'https://lugged-delay-rift.ngrok-free.dev/api/hdfc-tier2/validate-email-otp',
+    {
 
-        method: 'POST',
+      method: 'POST',
 
-        headers: {
-          'Content-Type': 'application/json',
-        },
-
-        body: JSON.stringify({
-
-          email,
-          otp,
-
-        }),
-
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
 
-      .then((response) => response.json())
+      body: JSON.stringify({
 
-      .then((result) => {
-        if (result.success) {
-          /* HIDE OTP FIELD */
+        email,
+        otp,
 
-          globals.functions.setProperty(
+      }),
 
-            otpField,
+    },
+  )
 
-            {
-              visible: false,
-            },
+    .then((response) => response.json())
 
+    .then((result) => {
+      if (result.success) {
+        /* HIDE OTP FIELD */
+
+        globals.functions.setProperty(
+
+          otpField,
+
+          {
+            visible: false,
+          },
+
+        );
+
+        /* HIDE SUBMIT BUTTON */
+
+        globals.functions.setProperty(
+
+          submitOtpButton,
+
+          {
+            visible: false,
+          },
+
+        );
+
+        /* DISABLE EMAIL FIELD */
+
+        globals.functions.setProperty(
+
+          emailField,
+
+          {
+            enabled: false,
+          },
+
+        );
+
+        /* VERIFIED LABEL */
+
+        globals.functions.setProperty(
+
+          verifyButton,
+
+          {
+
+            label: '✔ Verified',
+
+          },
+
+        );
+
+        /* GREEN VERIFIED BUTTON */
+
+        setTimeout(() => {
+          const btn = document.querySelector(
+            '.field-work-email-verify button',
           );
 
-          /* HIDE SUBMIT OTP BUTTON */
+          if (btn) {
+            btn.innerText = '✔ Verified';
 
-          globals.functions.setProperty(
+            btn.style.background = '#28a745';
 
-            submitOtpButton,
+            btn.style.backgroundImage = 'none';
 
-            {
-              visible: false,
-            },
+            btn.style.color = '#ffffff';
 
-          );
+            btn.style.minWidth = '140px';
 
-          /* DISABLE EMAIL FIELD */
+            btn.style.border = 'none';
 
-          globals.functions.setProperty(
+            btn.style.fontSize = '16px';
 
-            emailField,
+            btn.style.fontWeight = '600';
 
-            {
-              enabled: false,
-            },
+            btn.style.display = 'flex';
 
-          );
+            btn.style.alignItems = 'center';
 
-          /* VERIFIED LABEL */
+            btn.style.justifyContent = 'center';
+          }
+        }, 100);
+      }
 
-          globals.functions.setProperty(
+      else {
+        alert('Invalid OTP');
+      }
+    })
 
-            verifyButton,
+    .catch((error) => {
+      console.error(error);
 
-            {
-
-              label: '✔ Verified',
-
-            },
-
-          );
-
-          /* CHANGE BUTTON TO GREEN */
-
-          setTimeout(() => {
-            const btn = document.querySelector(
-              '.field-work-email-verify button',
-            );
-
-            if (btn) {
-              btn.innerText = '✔ Verified';
-
-              btn.style.background = '#28a745';
-
-              btn.style.backgroundImage = 'none';
-
-              btn.style.color = '#ffffff';
-
-              btn.style.minWidth = '140px';
-
-              btn.style.border = 'none';
-
-              btn.style.fontSize = '16px';
-
-              btn.style.fontWeight = '600';
-
-              btn.style.display = 'flex';
-
-              btn.style.alignItems = 'center';
-
-              btn.style.justifyContent = 'center';
-            }
-          }, 100);
-        }
-
-        else {
-          alert('Invalid OTP');
-        }
-      })
-
-      .catch((error) => {
-        console.error(error);
-
-        alert('API Error');
-      });
-  }
+      alert('API Error');
+    });
 }
 
 export {
