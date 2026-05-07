@@ -1375,46 +1375,21 @@ function verifyWorkEmail(globals) {
         if (result.success) {
           /* SHOW OTP FIELD */
 
-          globals.functions.setProperty(
+          otpField.visible = true;
 
-            otpField,
+          otpField.enabled = true;
 
-            {
-
-              visible: true,
-              enabled: true,
-              value: '',
-
-            },
-
-          );
+          otpField.value = '';
 
           /* SHOW SUBMIT BUTTON */
 
-          globals.functions.setProperty(
+          submitOtpButton.visible = true;
 
-            submitOtpButton,
-
-            {
-
-              visible: true,
-              enabled: true,
-
-            },
-
-          );
+          submitOtpButton.enabled = true;
 
           /* BUTTON LABEL */
 
-          globals.functions.setProperty(
-
-            verifyButton,
-
-            {
-              label: 'OTP Sent',
-            },
-
-          );
+          verifyButton.label = 'OTP Sent';
 
           alert('OTP Sent Successfully');
         }
@@ -1461,53 +1436,19 @@ function verifyWorkEmail(globals) {
       if (result.success) {
         /* HIDE OTP FIELD */
 
-        globals.functions.setProperty(
-
-          otpField,
-
-          {
-            visible: false,
-          },
-
-        );
+        otpField.visible = false;
 
         /* HIDE SUBMIT BUTTON */
 
-        globals.functions.setProperty(
-
-          submitOtpButton,
-
-          {
-            visible: false,
-          },
-
-        );
+        submitOtpButton.visible = false;
 
         /* DISABLE EMAIL FIELD */
 
-        globals.functions.setProperty(
-
-          emailField,
-
-          {
-            enabled: false,
-          },
-
-        );
+        emailField.enabled = false;
 
         /* VERIFIED LABEL */
 
-        globals.functions.setProperty(
-
-          verifyButton,
-
-          {
-
-            label: '✔ Verified',
-
-          },
-
-        );
+        verifyButton.label = '✔ Verified';
 
         /* GREEN VERIFIED BUTTON */
 
