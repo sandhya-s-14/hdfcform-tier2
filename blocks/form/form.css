@@ -2184,6 +2184,24 @@ main .form .field-plain-text p p {
 /*-----------------------verify button-------------------------*/
 .field-personal-email-verify button {
 
+  min-width: 140px !important;
+
+  background: #28a745 !important;
+
+  background-color: #28a745 !important;
+
+  color: white !important;
+
+  font-weight: 600 !important;
+
+  border: none !important;
+
+}
+
+.field-personal-email-verify button:hover {
+
+  background: #28a745 !important;
+
   background-color: #28a745 !important;
 
   color: white !important;
