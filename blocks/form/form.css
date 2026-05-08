@@ -2424,28 +2424,14 @@ main .form .field-plain-text p p {
 
 /* ================= REMOVE LIGHT INPUT BORDER IN REVIEW PAGE ================= */
 /* ================= FORCE REMOVE REVIEW INPUT BORDER ================= */
+/* Only for AEM EDS Review Page */
 
-.review_page .review_accordian .text-wrapper input,
-.review_page .review_accordian .date-wrapper input {
-
-    border: 0 !important;
-
-    border-radius: 0 !important;
-
-    background: transparent !important;
-
-    box-shadow: none !important;
-
-    outline: none !important;
-
-    padding: 0 !important;
-
-    height: auto !important;
-}
-
-.review_page .review_accordian input {
-
-    -webkit-appearance: none !important;
-
-    appearance: none !important;
+.field-review-accordion 
+.field-primary-email-id 
+.field-label::after {
+    content: " ✔ Verified";
+    color: #1fa43b;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 8px;
 }
