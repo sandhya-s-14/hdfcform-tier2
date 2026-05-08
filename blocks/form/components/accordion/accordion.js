@@ -26,3 +26,20 @@ export default function decorate(panel) {
   });
   return panel;
 }
+
+/* ============================suggestion =============================== */
+const domains = ['gmail.com', 'outlook.com', 'yahoo.com'];
+
+const wrapper = document.querySelector(
+  '.field-personal-email-domains',
+);
+
+wrapper.innerHTML = '';
+
+domains.forEach((domain) => {
+  const chip = document.createElement('span');
+
+  chip.textContent = domain;
+
+  wrapper.appendChild(chip);
+});
