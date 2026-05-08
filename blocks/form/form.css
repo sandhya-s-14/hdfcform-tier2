@@ -2366,20 +2366,19 @@ label.field-label::after {
 
 
 /*======================== button empty ==================================*/
+/* Hide empty verify button */
 .button-wrapper button:empty {
     display: none !important;
 }
 
-/* If button has no text */
+/* Extra safe handling */
 .button-wrapper button:not(:has(span)):empty {
     display: none !important;
 }
 
-/* Optional safer fix */
+/* Personal section fix */
 .field-personal-details-customer .button-wrapper:has(button:empty) {
-    display: none !important;
-}
-
-.hide-verify-btn .button-wrapper {
-    display: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
