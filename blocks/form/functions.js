@@ -992,15 +992,13 @@ function populateReviewDetails(globals) {
     );
 
     /* ================= EMAIL DETAILS ================= */
-
-    console.log('personal email =>', data.personal_email_id);
-
     globals.functions.setProperty(
       review.verify_email_id_panel
         .primary_email_verification
         .primary_email_id,
       {
-        value: data.personal_email_id || '',
+        value:
+      data.personal_email_id || '',
       },
     );
 
@@ -1008,11 +1006,9 @@ function populateReviewDetails(globals) {
       review.verify_email_id_panel.work_email_id,
       {
         value:
-          data.work_email_id || '',
+      data.work_email_id || '',
       },
     );
-
-    console.log('Review details populated successfully');
   } catch (err) {
     console.error(
       'populateReviewDetails ERROR =>',
