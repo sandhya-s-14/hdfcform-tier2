@@ -993,9 +993,12 @@ function populateReviewDetails(globals) {
 
     /* ================= EMAIL DETAILS ================= */
     globals.functions.setProperty(
-      review.verify_email_id_panel.primary_email_id,
+      review.verify_email_id_panel
+        .primary_email_verification
+        .primary_email_id,
       {
-        value: data.personal_email_id || '',
+        value:
+      data.personal_email_id || 'sandhya123@gmail.com',
       },
     );
 
