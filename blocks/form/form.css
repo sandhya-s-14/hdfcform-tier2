@@ -2382,3 +2382,34 @@ label.field-label::after {
     margin: 0 !important;
     padding: 0 !important;
 }
+
+/* =============================== Image ========================================*/
+/* Banner container */
+.image-wrapper.field-generate-image.field-wrapper {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Picture tag */
+.image-wrapper.field-generate-image.field-wrapper picture {
+    display: block;
+    width: 100%;
+}
+
+/* Actual image */
+.image-wrapper.field-generate-image.field-wrapper img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    object-fit: cover;
+}
+
+/* Override existing global style */
+main img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto;
+}
