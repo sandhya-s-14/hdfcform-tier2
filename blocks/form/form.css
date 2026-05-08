@@ -2384,32 +2384,37 @@ label.field-label::after {
 }
 
 /* =============================== Image ========================================*/
-/* Banner container */
-.image-wrapper.field-generate-image.field-wrapper {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-}
-
-/* Picture tag */
-.image-wrapper.field-generate-image.field-wrapper picture {
-    display: block;
-    width: 100%;
-}
-
-/* Actual image */
-.image-wrapper.field-generate-image.field-wrapper img {
+/* Remove parent spacing */
+.form-wrapper,
+.form.block,
+main,
+.cmp-container {
     width: 100% !important;
     max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Banner wrapper */
+.image-wrapper.field-generate-image.field-wrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw);
+    overflow: hidden;
+    padding: 0 !important;
+}
+
+/* Banner image */
+.image-wrapper.field-generate-image.field-wrapper img {
+    width: 100vw !important;
+    max-width: 100vw !important;
     height: auto !important;
     display: block;
     object-fit: cover;
 }
 
-/* Override existing global style */
+/* Override existing styles */
 main img {
     width: 100% !important;
     max-width: 100% !important;
-    height: auto;
 }
