@@ -2426,12 +2426,14 @@ main .form .field-plain-text p p {
 /* ================= FORCE REMOVE REVIEW INPUT BORDER ================= */
 /* Only for AEM EDS Review Page */
 
-.field-review-accordion 
+/* Review page only */
+
+.field-verify-email-id-panel 
 .field-primary-email-id 
-.field-label::after {
-    content: " ✔ Verified";
-    color: #1fa43b;
-    font-size: 13px;
-    font-weight: 600;
-    margin-left: 8px;
+label.field-label::after {
+    content: " ✔ Verified" !important;
+    color: #16a34a !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-left: 8px !important;
 }
