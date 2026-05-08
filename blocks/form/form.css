@@ -766,13 +766,13 @@ main .form form .checkbox-group-wrapper.horizontal .field-description {
     margin-top: 0.5rem;
 }
 
-main div.form-wrapper {
+/*main div.form-wrapper {
     background: white;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
     margin-top: 30px;
-}
+}*/
 
 /* Responsive adjustments for mobile */
 @media (width <= 599px) {
