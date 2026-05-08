@@ -1,3 +1,5 @@
+/* ================= BASE FOOTER ================= */
+
 footer {
   background-color: var(--light-color);
   font-size: var(--body-font-size-xs);
@@ -17,4 +19,77 @@ footer .footer p {
   footer .footer > div {
     padding: 40px 32px 24px;
   }
+}
+
+/*-----------------------------------------------------------------------*/
+/* ================= FORM SPACING FIX ================= */
+main,
+.form-block,
+.root {
+  min-height: calc(100vh - 50px);
+}
+
+/* Only prevent overlap (not push too much) */
+.form-block {
+  padding-bottom: 55px; /* match footer height */
+  box-sizing: border-box;
+}
+
+/* Add slight natural gap above footer */
+main {
+  margin-bottom: 20px; /* controls how "down" footer feels */
+}
+
+/* ================= FIXED FOOTER ================= */
+
+footer {
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+  margin: 0;
+}
+
+/* ================= FOOTER STYLE ================= */
+
+footer .footer {
+  background: #03164a;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.6;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 50px;  
+}
+
+/* ================= INNER CONTENT ================= */
+
+footer .footer > div {
+  width: 100%;
+  max-width: none;
+  padding: 0 16px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ================= TEXT ================= */
+
+footer .footer:empty::before {
+  content: "© Copyright HDFC Bank Ltd.";
+}
+
+footer .footer,
+footer .footer * {
+  color: #fff;
+  font-size: 12px;
+  margin: 0;
 }
