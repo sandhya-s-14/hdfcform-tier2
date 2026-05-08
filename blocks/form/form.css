@@ -799,9 +799,11 @@ main .form form select[multiple] {
 /* 🔹 GLOBAL FONT                */
 /* ============================= */
 main .form form {
-  font-family: Roboto, Arial, sans-serif !important;
-  font-size: 14px !important;
-  color: #333 !important;
+    font-family: Roboto, Arial, sans-serif !important;
+    font-size: 14px !important;
+    color: #333 !important;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
 }
 
 
@@ -929,6 +931,7 @@ main .form form .radio-group-wrapper.horizontal {
     align-items: center;
     flex-wrap: nowrap !important;   /* 🚫 stop wrapping */
     gap: 30px;   /* adjust spacing */
+    margin-left: -70px;
 }
 
 /* 🔥 Keep radio + text in one line */
