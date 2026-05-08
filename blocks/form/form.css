@@ -2313,101 +2313,6 @@ main .form .field-plain-text p p {
     text-wrap: nowarp;
 }
 
-/* ================= EMAIL DOMAIN CHIPS ================= */
-
-.field-personal-email-domains p {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-/* ================= CHIP STYLE ================= */
-
-.field-personal-email-domains p::before {
-    display: none;
-}
-
-.field-personal-email-domains p span,
-.field-personal-email-domains p {
-    font-size: 13px;
-}
-
-/* ================= INDIVIDUAL DOMAIN TAGS ================= */
-
-.field-personal-email-domains p {
-    color: transparent;
-}
-
-.field-personal-email-domains p::after {
-    content: "";
-}
-
-/* ================= DOMAIN BUTTONS ================= */
-
-.field-personal-email-domains p {
-    white-space: normal;
-}
-
-.field-personal-email-domains p {
-    line-height: normal;
-}
-
-/* ================= CREATE CHIP LOOK ================= */
-.field-personal-email-domains p {
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-
-    font-size: 0;
-}
-
-.field-personal-email-domains p::after {
-
-    content: " @gmail.com";
-
-    white-space: pre;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    color: #4f46e5;
-
-    border: 1px solid #4f46e5;
-    border-radius: 8px;
-
-    padding: 8px 14px;
-
-    background: white;
-
-    line-height: 2.8;
-    margin-top: -10px !important;
-    margin-left: -12px !important;
-}
-
-.field-personal-email-domains p::after {
-
-    content: " @yahoo.com";
-
-    white-space: pre;
-
-    font-size: 12px;
-    font-weight: 600;
-
-    color: #4f46e5;
-
-    border: 1px solid #4f46e5;
-    border-radius: 8px;
-
-    padding: 8px 14px;
-
-    background: white;
-
-    line-height: 2.8;
-    margin-top: -10px !important;
-    margin-left: -12px !important;
-}
 /* ================= WORK EMAIL NOTE ================= */
 
 .field-work-email-note p {
@@ -2422,7 +2327,6 @@ main .form .field-plain-text p p {
     line-height: 1.5;
 }
 
-/* ================= REMOVE LIGHT INPUT BORDER IN REVIEW PAGE ================= */
 /* ================= FORCE REMOVE REVIEW INPUT BORDER ================= */
 /* Only for AEM EDS Review Page */
 
