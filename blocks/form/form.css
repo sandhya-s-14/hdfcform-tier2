@@ -2351,3 +2351,35 @@ label.field-label::after {
     font-weight: 600 !important;
     margin-left: 8px !important;
 }
+
+/* Based on your actual inspect classes */
+
+.plain-text-wrapper.field-personal-email-domains {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+/* Each domain chip */
+.plain-text-wrapper.field-personal-email-domains p {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  border: 1px solid #8ea2ff;
+  border-radius: 14px;
+  background: #fff;
+  color: #5b6fff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  width: fit-content;
+}
+
+/* spacing below input */
+.email-wrapper.field-personal-email-id input {
+  margin-bottom: 6px;
+}
