@@ -940,11 +940,14 @@ main .form form .radio-wrapper {
 }
 
 /* 🔥 Prevent label text from breaking */
+
 main .form form .radio-wrapper label {
     white-space: nowrap;
-    color: #374151;
+    color: #141415;
+    margin-top: 4px;
+    font-size: 14px;
+    /* font-weight: 530; */
 }
-
 
 /* ============================= */
 /* 🔹 SOURCE OF INCOME           */
@@ -2359,4 +2362,24 @@ label.field-label::after {
   font-weight: 500;
   padding-left: 18px;
   height: 44px;
+}
+
+
+/*======================== button empty ==================================*/
+.button-wrapper button:empty {
+    display: none !important;
+}
+
+/* If button has no text */
+.button-wrapper button:not(:has(span)):empty {
+    display: none !important;
+}
+
+/* Optional safer fix */
+.field-personal-details-customer .button-wrapper:has(button:empty) {
+    display: none !important;
+}
+
+.hide-verify-btn .button-wrapper {
+    display: none !important;
 }
