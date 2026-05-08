@@ -2437,3 +2437,13 @@ label.field-label::after {
     font-weight: 600 !important;
     margin-left: 8px !important;
 }
+
+.field-verify-email-id-panel 
+.field-work-email-id 
+label.field-label::after {
+    content: " ✔ Verified" !important;
+    color: #16a34a !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-left: 8px !important;
+}
