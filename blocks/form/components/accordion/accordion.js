@@ -23,13 +23,19 @@ function styleEmailDomains(panel) {
 
   if (!domainWrapper) return;
 
-  // Avoid duplicate chips
+  // Prevent duplicate chips
   if (domainWrapper.querySelector('.email-chip')) return;
 
-  const domains = domainWrapper.textContent
-    .trim()
-    .split(' ');
+  const text = domainWrapper.textContent.trim();
 
+  // Extract domains properly
+  const domains = text.match(
+    /gmail\.com|outlook\.com|yahoo\.com/g,
+  );
+
+  if (!domains) return;
+
+  // Clear existing text
   domainWrapper.innerHTML = '';
 
   domains.forEach((domain) => {
@@ -43,6 +49,8 @@ function styleEmailDomains(panel) {
   });
 }
 
+/* ===== MAIN ===== */
+
 export default function decorate(panel) {
   panel.classList.add('accordion');
 
@@ -55,8 +63,9 @@ export default function decorate(panel) {
 
     legend?.classList.add('accordion-legend');
 
+    // Collapse all except first
     if (index !== 0) {
-      tab.classList.toggle('accordion-collapse');
+      tab.classList.add('accordion-collapse');
     }
 
     legend?.addEventListener('click', () => {
@@ -64,7 +73,7 @@ export default function decorate(panel) {
     });
   });
 
-  // Add here
+  // Wait for AEM render
   setTimeout(() => {
     styleEmailDomains(panel);
   }, 300);
