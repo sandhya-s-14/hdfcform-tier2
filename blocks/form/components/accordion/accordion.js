@@ -28,7 +28,7 @@ function styleEmailDomains(panel) {
 
   const text = domainWrapper.textContent.trim();
 
-  // Extract domains properly
+  // Split properly from continuous text
   const domains = text.match(
     /gmail\.com|outlook\.com|yahoo\.com/g,
   );

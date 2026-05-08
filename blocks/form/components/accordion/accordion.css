@@ -644,18 +644,14 @@ border-radius: 0 !important;
 
 /* ========================Suggestions ================================*/
 * Based on your actual inspect classes */
-
-/* Wrapper */
-.plain-text-wrapper.field-personal-email-domains {
+.field-personal-email-domains p {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin: 0;
 }
 
-/* Separate chips */
-.plain-text-wrapper.field-personal-email-domains p {
-  margin: 0;
+.field-personal-email-domains .email-chip {
   padding: 4px 10px;
   border: 1px solid #8ea2ff;
   border-radius: 16px;
@@ -663,8 +659,6 @@ border-radius: 0 !important;
   color: #5b6fff;
   font-size: 11px;
   font-weight: 500;
-  line-height: 1.2;
-  width: fit-content;
   display: inline-flex;
   align-items: center;
 }
