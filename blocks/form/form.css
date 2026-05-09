@@ -802,6 +802,7 @@ main .form form {
     font-family: Roboto, Arial, sans-serif !important;
     font-size: 14px !important;
     color: #333 !important;
+    margin-top: 40px !important;
     padding-left: 50px !important;
     padding-right: 50px !important;
 }
@@ -1151,9 +1152,9 @@ main .form form .radio-wrapper label {
 
 /* TEXT */
 .field-essentials-for-the-journey p {
-  font-size: 13px;
-  color: #2563eb;
-  margin: 0;
+  font-size: 13px !important;
+  color: #2563eb !important;
+  margin: 0 !important;
 }
 
 /* ICON BASE */
