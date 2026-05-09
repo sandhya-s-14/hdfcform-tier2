@@ -2388,18 +2388,20 @@ label.field-label::after {
 }
 
 /* =============================== Image ========================================*/
-/* Remove top gap */
+/* Remove top white gap */
 .image-wrapper.field-generate-image.field-wrapper {
-    margin-top: -16px !important;
+    margin-top: -14px !important;
     padding-top: 0 !important;
+    line-height: 0 !important;
 }
 
-/* Remove parent spacing */
+/* Remove spacing from parent containers */
 main,
 .form-wrapper,
 .form.block,
 .cmp-container,
-.section {
+.section,
+.adaptiveform-container {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
