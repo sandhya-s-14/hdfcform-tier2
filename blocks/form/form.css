@@ -930,7 +930,6 @@ main .form form .radio-group-wrapper.horizontal {
     align-items: center;
     flex-wrap: nowrap !important;   /* 🚫 stop wrapping */
     gap: 30px;   /* adjust spacing */
-    margin-left: -70px;
 }
 
 /* 🔥 Keep radio + text in one line */
@@ -2411,6 +2410,16 @@ main,
     height: auto !important;
     display: block;
     object-fit: cover;
-    margin-top: -30px;
+    margin-top: -42px;
     margin-left: -80px;
+}
+
+/* Only for this specific radio button panel */
+#radiobutton-ad3973a240 .radio-group-wrapper.horizontal {
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: center;
+    gap: 30px;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
 }
