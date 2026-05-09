@@ -2451,7 +2451,7 @@ main,
     max-width:100%;
 
     display:block;
-    margin:0 auto 30px auto;
+    margin: 50px auto 50px auto;
 }
 
 
@@ -2468,23 +2468,16 @@ main,
 
 /* ================= TITLE ================= */
 
-.field-oops-something-went-wrong-text b{
-
-    display:block;
-
-    font-size:64px;
-    font-weight:800;
-
-    color:#062b66;
-
-    line-height:1.1;
-
-    margin-bottom:24px;
-
-    font-family:
-      Arial,
-      Helvetica,
-      sans-serif;
+.field-oops-something-went-wrong-text b {
+    display: block;
+    font-size: 34px;
+    font-weight: 800;
+    color: #062b66;
+    line-height: 1.1;
+    margin-top: -30px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 290px;
+    text-wrap: nowrap;
 }
 
 
