@@ -2415,11 +2415,8 @@ main,
 }
 
 /* Only for this specific radio button panel */
-#radiobutton-ad3973a240 .radio-group-wrapper.horizontal {
-    display: flex;
+.field-generate-otp .field-id-type.radio-group-wrapper.horizontal {
     justify-content: flex-start !important;
-    align-items: center;
-    gap: 30px;
     margin-left: 0 !important;
     padding-left: 0 !important;
 }
