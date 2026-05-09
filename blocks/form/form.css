@@ -802,9 +802,6 @@ main .form form {
     font-family: Roboto, Arial, sans-serif !important;
     font-size: 14px !important;
     color: #333 !important;
-    margin-top: 40px !important;
-    padding-left: 50px !important;
-    padding-right: 50px !important;
 }
 
 
@@ -2413,4 +2410,5 @@ main,
     height: auto !important;
     display: block;
     object-fit: cover;
+    margin-left: -80px;
 }
