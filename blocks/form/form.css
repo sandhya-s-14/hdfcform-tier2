@@ -2417,6 +2417,186 @@ main,
 /* Only for this specific radio button panel */
 .field-generate-otp .field-id-type.radio-group-wrapper.horizontal {
     justify-content: flex-start !important;
-    margin-left: 0 !important;
+    margin-left: 380px !important;
     padding-left: 0 !important;
+}
+
+
+/* ============================== Error Page ======================================*/
+/* ================= MAIN ERROR PANEL ================= */
+
+.field-error-message-panel{
+    
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    background:#f7f8fc;
+
+    padding:40px 20px;
+
+    box-sizing:border-box;
+}
+
+
+/* ================= IMAGE ================= */
+
+.field-error-image img{
+
+    width:420px;
+    max-width:100%;
+
+    display:block;
+    margin:0 auto 30px auto;
+}
+
+
+/* ================= TEXT CONTAINER ================= */
+
+.field-oops-something-went-wrong-text{
+
+    text-align:center;
+    max-width:700px;
+
+    margin:auto;
+}
+
+
+/* ================= TITLE ================= */
+
+.field-oops-something-went-wrong-text b{
+
+    display:block;
+
+    font-size:64px;
+    font-weight:800;
+
+    color:#062b66;
+
+    line-height:1.1;
+
+    margin-bottom:24px;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+}
+
+
+/* ================= DESCRIPTION ================= */
+
+.field-oops-something-went-wrong-text p{
+
+    font-size:32px;
+
+    line-height:1.5;
+
+    color:#6b7280;
+
+    margin:0;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+}
+
+
+/* ================= RETRY BUTTON WRAPPER ================= */
+
+.field-retry-button{
+
+    margin-top:50px;
+}
+
+
+/* ================= BUTTON ================= */
+
+.field-retry-button .button{
+
+    width:340px;
+    height:90px;
+
+    border:none;
+    border-radius:18px;
+
+    background:
+      linear-gradient(
+        180deg,
+        #0b57ff 0%,
+        #003fd9 100%
+      );
+
+    color:#ffffff;
+
+    font-size:42px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:
+      0 10px 25px rgba(0,0,0,0.15);
+
+    transition:0.3s ease;
+
+    position:relative;
+}
+
+
+/* ================= HOVER ================= */
+
+.field-retry-button .button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+      0 14px 30px rgba(0,0,0,0.18);
+}
+
+
+/* ================= RETRY ICON ================= */
+
+.field-retry-button .button::before{
+
+    content:"↻";
+
+    font-size:42px;
+
+    margin-right:14px;
+
+    display:inline-block;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width:768px){
+
+    .field-error-image img{
+
+        width:260px;
+    }
+
+    .field-oops-something-went-wrong-text b{
+
+        font-size:38px;
+    }
+
+    .field-oops-something-went-wrong-text p{
+
+        font-size:22px;
+    }
+
+    .field-retry-button .button{
+
+        width:250px;
+        height:70px;
+
+        font-size:28px;
+    }
 }
