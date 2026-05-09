@@ -2455,17 +2455,6 @@ main,
 }
 
 
-/* ================= TEXT CONTAINER ================= */
-
-.field-oops-something-went-wrong-text{
-
-    text-align:center;
-    max-width:700px;
-
-    margin:auto;
-}
-
-
 /* ================= TITLE ================= */
 
 .field-oops-something-went-wrong-text b {
@@ -2500,11 +2489,11 @@ main,
 }
 
 
-/* ================= RETRY BUTTON WRAPPER ================= */
+/* ================= BUTTON WRAPPER ================= */
 
 .field-retry-button{
 
-    margin-top:50px;
+    margin-top:28px;
 }
 
 
@@ -2512,11 +2501,11 @@ main,
 
 .field-retry-button .button{
 
-    width:340px;
-    height:90px;
+    width:180px;
+    height:52px;
 
     border:none;
-    border-radius:18px;
+    border-radius:10px;
 
     background:
       linear-gradient(
@@ -2527,28 +2516,23 @@ main,
 
     color:#ffffff;
 
-    font-size:42px;
+    font-size:18px;
     font-weight:600;
 
     cursor:pointer;
 
     box-shadow:
-      0 10px 25px rgba(0,0,0,0.15);
+      0 6px 14px rgba(0,0,0,0.12);
 
     transition:0.3s ease;
-
-    position:relative;
 }
 
 
-/* ================= HOVER ================= */
+/* ================= BUTTON HOVER ================= */
 
 .field-retry-button .button:hover{
 
-    transform:translateY(-2px);
-
-    box-shadow:
-      0 14px 30px rgba(0,0,0,0.18);
+    transform:translateY(-1px);
 }
 
 
@@ -2558,11 +2542,9 @@ main,
 
     content:"↻";
 
-    font-size:42px;
+    font-size:20px;
 
-    margin-right:14px;
-
-    display:inline-block;
+    margin-right:8px;
 }
 
 
