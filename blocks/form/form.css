@@ -2410,5 +2410,6 @@ main,
     height: auto !important;
     display: block;
     object-fit: cover;
+    margin-top: -30px;
     margin-left: -80px;
 }
