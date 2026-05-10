@@ -27,7 +27,7 @@ function formatMonths(value) {
   return `${value} months`;
 }
 
-/* ===== CLICK ===== */
+/* ===== CLICK SUPPORT ===== */
 function enableTrackClick(wrapper, input) {
   wrapper.addEventListener('click', (e) => {
     if (e.target === input) return;
@@ -72,7 +72,7 @@ export default function decorate(fieldDiv) {
 
     input.step = 1000;
 
-    input.value = window.maxEligibleLoan;
+    input.value = input.max;
   } else {
     /*
      * ===== TENURE =====
@@ -148,6 +148,10 @@ export default function decorate(fieldDiv) {
           ? '50K'
           : `${val / 100000}L`;
 
+        /*
+         * fixed visual positions
+         */
+
         const percent = (
           (val - 50000)
           / (1500000 - 50000)
@@ -166,6 +170,10 @@ export default function decorate(fieldDiv) {
         labels.appendChild(span);
       });
     } else {
+      /*
+       * ===== TENURE =====
+       */
+
       TENURE_STEPS.forEach((val, i) => {
         const span = document.createElement('span');
 
@@ -193,6 +201,22 @@ export default function decorate(fieldDiv) {
    */
 
   function updateUI() {
+    /*
+     * IMPORTANT
+     * dynamically sync slider max
+     */
+
+    if (type === 'loan') {
+      input.max = window.maxEligibleLoan;
+
+      if (
+        Number(input.value)
+        > window.maxEligibleLoan
+      ) {
+        input.value = window.maxEligibleLoan;
+      }
+    }
+
     buildLabels();
 
     let actualValue;
@@ -206,11 +230,13 @@ export default function decorate(fieldDiv) {
     if (type === 'loan') {
       actualValue = Number(input.value);
 
-      if (actualValue > window.maxEligibleLoan) {
-        actualValue = window.maxEligibleLoan;
+      /*
+       * smooth values
+       */
 
-        input.value = actualValue;
-      }
+      actualValue = (
+        Math.round(actualValue / 1000) * 1000
+      );
 
       percent = (
         (actualValue - 50000)
@@ -240,7 +266,7 @@ export default function decorate(fieldDiv) {
     );
 
     /*
-     * ===== VALUE =====
+     * ===== VALUE BOX =====
      */
 
     valueBox.innerText = type === 'loan'
@@ -273,6 +299,8 @@ export default function decorate(fieldDiv) {
    */
 
   input.addEventListener('input', updateUI);
+
+  input.addEventListener('change', updateUI);
 
   enableTrackClick(wrapper, input);
 
