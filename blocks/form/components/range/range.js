@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
-/* eslint-disable no-underscore-dangle */
 
-/* ===== GLOBAL LIMIT ===== */
+/* ===== GLOBAL ===== */
 window.maxEligibleLoan = 1500000;
 
 /* ===== LOAN LABELS ===== */
@@ -25,7 +24,7 @@ function formatINR(value) {
 }
 
 function formatMonths(value) {
-  return `${Math.round(value)} months`;
+  return `${value} months`;
 }
 
 /* ===== CLICK ===== */
@@ -37,7 +36,10 @@ function enableTrackClick(wrapper, input) {
 
     const percent = (e.clientX - rect.left) / rect.width;
 
-    input.value = percent * 100;
+    const min = Number(input.min);
+    const max = Number(input.max);
+
+    input.value = min + ((max - min) * percent);
 
     input.dispatchEvent(
       new Event('input', { bubbles: true }),
@@ -58,45 +60,34 @@ export default function decorate(fieldDiv) {
   const type = isLoan ? 'loan' : 'tenure';
 
   /*
-   * ===== NORMALIZED RANGE =====
-   */
-
-  input.type = 'range';
-
-  input.min = 0;
-
-  input.max = 100;
-
-  input.step = 0.1;
-
-  /*
-   * ===== DEFAULT =====
+   * ===== LOAN =====
    */
 
   if (type === 'loan') {
-    input.value = (
-      (window.maxEligibleLoan - 50000)
-      / (1500000 - 50000)
-    ) * 100;
+    input.type = 'range';
+
+    input.min = 50000;
+
+    input.max = window.maxEligibleLoan;
+
+    input.step = 1000;
+
+    input.value = window.maxEligibleLoan;
   } else {
-    input.value = 100;
+    /*
+     * ===== TENURE =====
+     */
+
+    input.type = 'range';
+
+    input.min = 0;
+
+    input.max = TENURE_STEPS.length - 1;
+
+    input.step = 1;
+
+    input.value = TENURE_STEPS.length - 1;
   }
-
-  const originalDescriptor = Object.getOwnPropertyDescriptor(
-    HTMLInputElement.prototype,
-    'value',
-  );
-
-  Object.defineProperty(input, 'value', {
-    get() {
-      return this._actualValue
-        ?? originalDescriptor.get.call(this);
-    },
-
-    set(val) {
-      originalDescriptor.set.call(this, val);
-    },
-  });
 
   /*
    * ===== HIDDEN =====
@@ -165,12 +156,7 @@ export default function decorate(fieldDiv) {
         span.style.left = `${percent}%`;
 
         span.onclick = () => {
-          const sliderPercent = (
-            (val - 50000)
-            / (1500000 - 50000)
-          ) * 100;
-
-          input.value = sliderPercent;
+          input.value = val;
 
           input.dispatchEvent(
             new Event('input', { bubbles: true }),
@@ -190,9 +176,7 @@ export default function decorate(fieldDiv) {
         ) * 100}%`;
 
         span.onclick = () => {
-          input.value = (
-            i / (TENURE_STEPS.length - 1)
-          ) * 100;
+          input.value = i;
 
           input.dispatchEvent(
             new Event('input', { bubbles: true }),
@@ -205,48 +189,45 @@ export default function decorate(fieldDiv) {
   }
 
   /*
-   * ===== UPDATE UI =====
+   * ===== UPDATE =====
    */
 
   function updateUI() {
     buildLabels();
 
-    const sliderPercent = Number(
-      originalDescriptor.get.call(input),
-    );
-
     let actualValue;
+
+    let percent;
 
     /*
      * ===== LOAN =====
      */
 
     if (type === 'loan') {
-      actualValue = 50000 + (
-        ((window.maxEligibleLoan - 50000)
-        * sliderPercent) / 100
-      );
-
-      /*
-       * smooth values
-       */
-
-      actualValue = Math.round(actualValue / 1000) * 1000;
+      actualValue = Number(input.value);
 
       if (actualValue > window.maxEligibleLoan) {
         actualValue = window.maxEligibleLoan;
+
+        input.value = actualValue;
       }
+
+      percent = (
+        (actualValue - 50000)
+        / (1500000 - 50000)
+      ) * 100;
     } else {
       /*
        * ===== TENURE =====
        */
 
-      const index = Math.round(
-        ((TENURE_STEPS.length - 1)
-        * sliderPercent) / 100,
-      );
+      const index = Number(input.value);
 
       actualValue = TENURE_STEPS[index];
+
+      percent = (
+        index / (TENURE_STEPS.length - 1)
+      ) * 100;
     }
 
     /*
@@ -255,7 +236,7 @@ export default function decorate(fieldDiv) {
 
     wrapper.style.setProperty(
       '--percent',
-      sliderPercent,
+      percent,
     );
 
     /*
@@ -266,13 +247,11 @@ export default function decorate(fieldDiv) {
       ? formatINR(actualValue)
       : formatMonths(actualValue);
 
-    valueBox.style.left = `calc(${sliderPercent}% - 20px)`;
+    valueBox.style.left = `calc(${percent}% - 20px)`;
 
     /*
      * ===== STORE =====
      */
-
-    input._actualValue = actualValue;
 
     hidden.value = actualValue;
 
