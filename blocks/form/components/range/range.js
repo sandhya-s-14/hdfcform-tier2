@@ -12,6 +12,7 @@ const LOAN_LABELS = [
   600000,
   800000,
   1000000,
+  1200000,
   1500000,
 ];
 
@@ -73,8 +74,7 @@ export default function decorate(fieldDiv) {
     input.step = 1000;
 
     /*
-     * temporary
-     * will auto-reset on first updateUI()
+     * initial temporary value
      */
     input.value = 50000;
   } else {
@@ -94,7 +94,7 @@ export default function decorate(fieldDiv) {
   }
 
   /*
-   * ===== HIDDEN =====
+   * ===== HIDDEN FIELD =====
    */
 
   const hidden = document.createElement('input');
@@ -156,7 +156,7 @@ export default function decorate(fieldDiv) {
           : `${val / 100000}L`;
 
         /*
-         * dynamic label spacing
+         * dynamic label positions
          */
         const percent = (
           (val - 50000)
@@ -166,7 +166,7 @@ export default function decorate(fieldDiv) {
         span.style.left = `${percent}%`;
 
         /*
-         * click label
+         * click support
          */
         span.onclick = () => {
           input.value = val;
@@ -206,23 +206,28 @@ export default function decorate(fieldDiv) {
   }
 
   /*
-   * ===== UPDATE =====
+   * ===== UPDATE UI =====
    */
 
   function updateUI() {
     /*
-     * ===== SYNC MAX =====
+     * ===== LOAN =====
      */
 
     if (type === 'loan') {
+      /*
+       * sync latest eligibility
+       */
       input.max = window.maxEligibleLoan;
 
       /*
-       * FIRST LOAD
-       * auto set to max eligibility
+       * auto set initial value
+       * once eligibility arrives
        */
-
-      if (!input.dataset.initialized) {
+      if (
+        !input.dataset.initialized
+        || Number(input.value) === 50000
+      ) {
         input.value = window.maxEligibleLoan;
 
         input.dataset.initialized = 'true';
@@ -231,7 +236,6 @@ export default function decorate(fieldDiv) {
       /*
        * hard cap
        */
-
       if (
         Number(input.value)
         > window.maxEligibleLoan
@@ -254,17 +258,15 @@ export default function decorate(fieldDiv) {
       actualValue = Number(input.value);
 
       /*
-       * smooth values
+       * smooth steps
        */
-
       actualValue = (
         Math.round(actualValue / 1000) * 1000
       );
 
       /*
-       * dynamic progress
+       * dynamic fill %
        */
-
       percent = (
         (actualValue - 50000)
         / (window.maxEligibleLoan - 50000)
@@ -284,7 +286,7 @@ export default function decorate(fieldDiv) {
     }
 
     /*
-     * ===== VISUAL =====
+     * ===== TRACK FILL =====
      */
 
     wrapper.style.setProperty(
