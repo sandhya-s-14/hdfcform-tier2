@@ -763,51 +763,96 @@ function updateLoanFromIncome(globals) {
   const income = Number(data.monthly_net_income_salary || 0);
   if (!income) return;
 
+  /* ===== LOAN STEPS ===== */
+  const allSteps = [
+    50000,
+    200000,
+    400000,
+    600000,
+    800000,
+    1000000,
+    1500000,
+  ];
+
+  /* ===== ELIGIBILITY ===== */
   let eligibleLoan = income * 20;
+
+  /* cap at 15L */
   eligibleLoan = Math.min(eligibleLoan, 1500000);
 
-  /* ✅ STORE LIMIT ONLY */
+  /* ===== SNAP TO NEAREST STEP ===== */
+  eligibleLoan = allSteps.reduce((prev, curr) => (
+    Math.abs(curr - eligibleLoan) < Math.abs(prev - eligibleLoan)
+      ? curr
+      : prev
+  ));
+
+  /* ===== STORE GLOBAL LIMIT ===== */
   window.maxEligibleLoan = eligibleLoan;
 
-  /* ❌ DO NOT RESET VALUE ALWAYS */
+  /* ===== CURRENT VALUE ===== */
   const currentLoan = Number(data.loan_amount_slider || 0);
 
+  /*
+   * update only if:
+   * - no value selected
+   * - OR selected value exceeds eligibility
+   */
   if (!currentLoan || currentLoan > eligibleLoan) {
-    const loanSlider = globals.form.offer_page.loan_offer_based_on_declared_income.loan_amount_slider;
+    const loanSlider = globals.form.offer_page
+      .loan_offer_based_on_declared_income
+      .loan_amount_slider;
 
+    /* ===== UPDATE FORM VALUE ===== */
     globals.functions.setProperty(loanSlider, {
       value: eligibleLoan,
     });
 
-    /* ✅ MOVE SLIDER ONLY ONCE */
+    /* ===== MOVE RANGE SLIDER ===== */
     setTimeout(() => {
       const allSliders = document.querySelectorAll('input[type="range"]');
 
       let loanSliderEl = null;
 
-      /* 🔥 find ONLY loan slider (not tenure) */
+      /* find ONLY loan slider */
       allSliders.forEach((slider) => {
         const labels = slider.parentElement?.querySelector('.range-labels');
 
         if (labels && labels.innerText.includes('L')) {
-          loanSliderEl = slider; // this is loan
+          loanSliderEl = slider;
         }
       });
 
       if (!loanSliderEl) return;
 
-      const steps = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+      /* ===== DYNAMIC STEPS ===== */
+      const steps = allSteps.filter(
+        (val) => val <= window.maxEligibleLoan,
+      );
 
-      let index = steps.findIndex((val) => val >= eligibleLoan);
-      if (index === -1) index = steps.length - 1;
+      /* ===== FIND INDEX ===== */
+      let index = steps.findIndex(
+        (val) => val >= eligibleLoan,
+      );
 
+      if (index === -1) {
+        index = steps.length - 1;
+      }
+
+      /* ===== UPDATE SLIDER ===== */
+      loanSliderEl.max = steps.length - 1;
       loanSliderEl.value = index;
-      loanSliderEl.dispatchEvent(new Event('input', { bubbles: true }));
+
+      loanSliderEl.dispatchEvent(
+        new Event('input', { bubbles: true }),
+      );
     }, 200);
   }
 
-  /* ✅ ONLY UPDATE TEXT */
-  const offerText = globals.form.offer_page.loan_offer_based_on_declared_income.loan_offer_banner_text;
+  /* ===== UPDATE BANNER TEXT ===== */
+  const offerText = globals.form.offer_page
+    .loan_offer_based_on_declared_income
+    .loan_offer_banner_text;
 
   globals.functions.setProperty(offerText, {
     value: `You can get a loan up to ₹${eligibleLoan.toLocaleString('en-IN')}`,

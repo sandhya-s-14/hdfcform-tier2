@@ -6,7 +6,16 @@
 window.maxEligibleLoan = 1500000;
 
 /* ===== Steps ===== */
-const LOAN_STEPS = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+const LOAN_STEPS = [
+  50000,
+  200000,
+  400000,
+  600000,
+  800000,
+  1000000,
+  1500000,
+];
+
 const TENURE_STEPS = [12, 24, 36, 48, 60, 72, 84];
 
 /* ===== Format ===== */
@@ -45,6 +54,7 @@ function enableTrackClick(wrapper, input) {
     const percent = (e.clientX - rect.left) / rect.width;
 
     input.value = percent * (input.max - input.min);
+
     input.dispatchEvent(new Event('input', { bubbles: true }));
   });
 }
@@ -52,25 +62,34 @@ function enableTrackClick(wrapper, input) {
 /* ===== MAIN ===== */
 export default function decorate(fieldDiv) {
   const input = fieldDiv.querySelector('input');
+
   if (!input) return fieldDiv;
 
   const originalName = input.getAttribute('name');
 
   const isLoan = Number(input.getAttribute('max')) > 100000;
+
   const type = isLoan ? 'loan' : 'tenure';
 
-  const stepsArray = isLoan ? LOAN_STEPS : TENURE_STEPS;
+  /* ===== DYNAMIC LOAN STEPS ===== */
+  const dynamicLoanSteps = LOAN_STEPS.filter(
+    (val) => val <= window.maxEligibleLoan,
+  );
+
+  const stepsArray = isLoan
+    ? dynamicLoanSteps
+    : TENURE_STEPS;
 
   input.type = 'range';
   input.min = 0;
   input.max = stepsArray.length - 1;
   input.step = 0.01;
 
-  /* ✅ DEFAULT VALUES */
+  /* ===== DEFAULT VALUES ===== */
   if (type === 'tenure') {
-    input.value = stepsArray.length - 1; // 👉 84 months
+    input.value = stepsArray.length - 1;
   } else {
-    input.value = stepsArray.length - 1; // temporary, will be overridden by eligibility
+    input.value = stepsArray.length - 1;
   }
 
   const originalDescriptor = Object.getOwnPropertyDescriptor(
@@ -82,6 +101,7 @@ export default function decorate(fieldDiv) {
     get() {
       return this._actualValue ?? originalDescriptor.get.call(this);
     },
+
     set(val) {
       originalDescriptor.set.call(this, val);
       this._index = Number(val);
@@ -89,21 +109,27 @@ export default function decorate(fieldDiv) {
   });
 
   const hidden = document.createElement('input');
+
   hidden.type = 'hidden';
   hidden.name = originalName;
 
   input.removeAttribute('name');
 
   const wrapper = document.createElement('div');
+
   wrapper.className = 'range-widget-wrapper decorated';
 
   input.after(wrapper);
 
   const valueBox = document.createElement('div');
+
   valueBox.className = 'loan-value-box';
+
   wrapper.appendChild(valueBox);
 
+  /* ===== LABELS ===== */
   const labels = document.createElement('div');
+
   labels.className = 'range-labels';
 
   stepsArray.forEach((val, i) => {
@@ -117,49 +143,56 @@ export default function decorate(fieldDiv) {
 
     span.onclick = () => {
       input.value = i;
-      input.dispatchEvent(new Event('input', { bubbles: true }));
+
+      input.dispatchEvent(
+        new Event('input', { bubbles: true }),
+      );
     };
 
     labels.appendChild(span);
   });
 
+  /* ===== UPDATE UI ===== */
   function updateUI() {
     let index = Number(originalDescriptor.get.call(input));
 
-    /* 🔥 LOAN ONLY → SNAP + LIMIT */
+    /* ===== LOAN ONLY ===== */
     if (type === 'loan') {
       index = Math.floor(index);
 
-      if (window.maxEligibleLoan) {
-        const maxIndex = stepsArray.findIndex(
-          (val) => val >= window.maxEligibleLoan,
-        );
+      const maxIndex = stepsArray.length - 1;
 
-        if (maxIndex !== -1 && index > maxIndex) {
-          index = maxIndex;
-        }
+      if (index > maxIndex) {
+        index = maxIndex;
       }
 
-      /* ✅ ONLY LOAN FORCES POSITION */
       originalDescriptor.set.call(input, index);
     }
 
-    /* 🔥 VALUE */
     let actualValue;
 
+    /* ===== LOAN ===== */
     if (type === 'loan') {
-    /* discrete */
       actualValue = stepsArray[index];
     } else {
-    /* ✅ smooth tenure */
-      const rawValue = getActualValue(index, stepsArray);
+      /* ===== TENURE ===== */
+      const rawValue = getActualValue(
+        index,
+        stepsArray,
+      );
+
       actualValue = normalizeValue(rawValue, type);
     }
 
-    /* ✅ UI POSITION (ALWAYS FULL RANGE) */
-    const percent = (index / (stepsArray.length - 1)) * 100;
+    /* ===== POSITION ===== */
+    const percent = (
+      index / (stepsArray.length - 1)
+    ) * 100;
 
-    wrapper.style.setProperty('--percent', percent);
+    wrapper.style.setProperty(
+      '--percent',
+      percent,
+    );
 
     valueBox.innerText = type === 'loan'
       ? formatINR(actualValue)
@@ -168,9 +201,12 @@ export default function decorate(fieldDiv) {
     valueBox.style.left = `calc(${percent}% - 20px)`;
 
     input._actualValue = actualValue;
+
     hidden.value = actualValue;
 
-    hidden.dispatchEvent(new Event('change', { bubbles: true }));
+    hidden.dispatchEvent(
+      new Event('change', { bubbles: true }),
+    );
   }
 
   wrapper.appendChild(input);
@@ -178,16 +214,25 @@ export default function decorate(fieldDiv) {
   wrapper.appendChild(labels);
 
   input.addEventListener('input', updateUI);
+
   enableTrackClick(wrapper, input);
 
-  /* ✅ INITIAL LOAD */
+  /* ===== INITIAL LOAD ===== */
   requestAnimationFrame(() => {
-    const current = Number(originalDescriptor.get.call(input));
+    const current = Number(
+      originalDescriptor.get.call(input),
+    );
 
-    /* ✅ ONLY SET DEFAULT IF AEM HAS NOT SET ANYTHING */
-    if (type === 'tenure' && (!current || current === 0)) {
-      const defaultIndex = stepsArray.length - 1; // 84
-      originalDescriptor.set.call(input, defaultIndex);
+    if (
+      type === 'tenure'
+      && (!current || current === 0)
+    ) {
+      const defaultIndex = stepsArray.length - 1;
+
+      originalDescriptor.set.call(
+        input,
+        defaultIndex,
+      );
     }
 
     updateUI();
