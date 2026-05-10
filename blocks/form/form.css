@@ -2426,20 +2426,26 @@ main,
 /* ================= MAIN ERROR PANEL ================= */
 
 .field-error-message-panel{
-    
-    width:100%;
-    min-height:100vh;
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+    width:100%;
 
     background:#f7f8fc;
 
     padding:40px 20px;
 
     box-sizing:border-box;
+
+    text-align:center;
+
+    display:none;
+}
+
+
+/* ================= INNER CONTAINER ================= */
+
+.field-error-message-panel.active{
+
+    display:block;
 }
 
 
@@ -2447,26 +2453,46 @@ main,
 
 .field-error-image img{
 
-    width:420px;
+    width:320px;
+
     max-width:100%;
 
     display:block;
-    margin: 50px auto 50px auto;
+
+    margin:40px auto 30px auto;
+}
+
+
+/* ================= TEXT WRAPPER ================= */
+
+.field-oops-something-went-wrong-text{
+
+    max-width:700px;
+
+    margin:0 auto;
 }
 
 
 /* ================= TITLE ================= */
 
-.field-oops-something-went-wrong-text b {
-    display: block;
-    font-size: 34px;
-    font-weight: 800;
-    color: #062b66;
-    line-height: 1.1;
-    margin-top: -30px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-left: 290px;
-    text-wrap: nowrap;
+.field-oops-something-went-wrong-text b{
+
+    display:block;
+
+    font-size:42px;
+
+    font-weight:800;
+
+    color:#062b66;
+
+    line-height:1.2;
+
+    margin-bottom:20px;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
 }
 
 
@@ -2474,9 +2500,9 @@ main,
 
 .field-oops-something-went-wrong-text p{
 
-    font-size:32px;
+    font-size:24px;
 
-    line-height:1.5;
+    line-height:1.6;
 
     color:#6b7280;
 
@@ -2493,7 +2519,7 @@ main,
 
 .field-retry-button{
 
-    margin-top:28px;
+    margin-top:40px;
 }
 
 
@@ -2502,9 +2528,11 @@ main,
 .field-retry-button .button{
 
     width:180px;
+
     height:52px;
 
     border:none;
+
     border-radius:10px;
 
     background:
@@ -2517,6 +2545,7 @@ main,
     color:#ffffff;
 
     font-size:18px;
+
     font-weight:600;
 
     cursor:pointer;
@@ -2554,24 +2583,25 @@ main,
 
     .field-error-image img{
 
-        width:260px;
+        width:220px;
     }
 
     .field-oops-something-went-wrong-text b{
 
-        font-size:38px;
+        font-size:28px;
     }
 
     .field-oops-something-went-wrong-text p{
 
-        font-size:22px;
+        font-size:18px;
     }
 
     .field-retry-button .button{
 
-        width:250px;
-        height:70px;
+        width:160px;
 
-        font-size:28px;
+        height:48px;
+
+        font-size:16px;
     }
 }
