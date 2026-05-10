@@ -72,7 +72,7 @@ export default function decorate(fieldDiv) {
 
     input.step = 1000;
 
-    input.value = input.max;
+    input.value = window.maxEligibleLoan;
   } else {
     /*
      * ===== TENURE =====
@@ -140,6 +140,9 @@ export default function decorate(fieldDiv) {
 
     if (type === 'loan') {
       LOAN_LABELS.forEach((val) => {
+        /*
+         * hide labels above eligibility
+         */
         if (val > window.maxEligibleLoan) return;
 
         const span = document.createElement('span');
@@ -149,15 +152,19 @@ export default function decorate(fieldDiv) {
           : `${val / 100000}L`;
 
         /*
-         * fixed visual positions
+         * DYNAMIC POSITION
          */
 
         const percent = (
           (val - 50000)
-          / (1500000 - 50000)
+          / (window.maxEligibleLoan - 50000)
         ) * 100;
 
         span.style.left = `${percent}%`;
+
+        /*
+         * CLICK LABEL
+         */
 
         span.onclick = () => {
           input.value = val;
@@ -238,9 +245,13 @@ export default function decorate(fieldDiv) {
         Math.round(actualValue / 1000) * 1000
       );
 
+      /*
+       * DYNAMIC PERCENT
+       */
+
       percent = (
         (actualValue - 50000)
-        / (1500000 - 50000)
+        / (window.maxEligibleLoan - 50000)
       ) * 100;
     } else {
       /*
@@ -266,7 +277,7 @@ export default function decorate(fieldDiv) {
     );
 
     /*
-     * ===== VALUE BOX =====
+     * ===== VALUE =====
      */
 
     valueBox.innerText = type === 'loan'
