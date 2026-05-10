@@ -14,7 +14,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 .number-wrapper .range-widget-wrapper.decorated {
   position: relative;
 
-  padding: 12px 0 32px;
+  padding: 12px 0 28px;
 
   margin-top: 28px;
 
@@ -106,7 +106,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   color: transparent;
 }
 
-/* ===== PERFECTLY CENTERED BLUE THUMB ===== */
+/* ===== PERFECT BLUE THUMB ===== */
 .number-wrapper input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -157,7 +157,7 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
 
   margin-left: 11px;
 
-  margin-top: 10px;
+  margin-top: -6px;
 
   height: 20px;
 
