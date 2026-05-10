@@ -51,11 +51,14 @@ function enableTrackClick(wrapper, input) {
     if (e.target === input) return;
 
     const rect = input.getBoundingClientRect();
+
     const percent = (e.clientX - rect.left) / rect.width;
 
     input.value = percent * (input.max - input.min);
 
-    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(
+      new Event('input', { bubbles: true }),
+    );
   });
 }
 
@@ -71,21 +74,20 @@ export default function decorate(fieldDiv) {
 
   const type = isLoan ? 'loan' : 'tenure';
 
-  /* ===== DYNAMIC LOAN STEPS ===== */
-  const dynamicLoanSteps = LOAN_STEPS.filter(
-    (val) => val <= window.maxEligibleLoan,
-  );
-
-  const stepsArray = isLoan
-    ? dynamicLoanSteps
+  /* ===== DYNAMIC ===== */
+  let stepsArray = isLoan
+    ? LOAN_STEPS
     : TENURE_STEPS;
 
   input.type = 'range';
+
   input.min = 0;
+
   input.max = stepsArray.length - 1;
+
   input.step = 0.01;
 
-  /* ===== DEFAULT VALUES ===== */
+  /* ===== DEFAULT ===== */
   if (type === 'tenure') {
     input.value = stepsArray.length - 1;
   } else {
@@ -99,64 +101,92 @@ export default function decorate(fieldDiv) {
 
   Object.defineProperty(input, 'value', {
     get() {
-      return this._actualValue ?? originalDescriptor.get.call(this);
+      return this._actualValue
+        ?? originalDescriptor.get.call(this);
     },
 
     set(val) {
       originalDescriptor.set.call(this, val);
+
       this._index = Number(val);
     },
   });
 
+  /* ===== Hidden Input ===== */
   const hidden = document.createElement('input');
 
   hidden.type = 'hidden';
+
   hidden.name = originalName;
 
   input.removeAttribute('name');
 
+  /* ===== Wrapper ===== */
   const wrapper = document.createElement('div');
 
   wrapper.className = 'range-widget-wrapper decorated';
 
   input.after(wrapper);
 
+  /* ===== Value Box ===== */
   const valueBox = document.createElement('div');
 
   valueBox.className = 'loan-value-box';
 
   wrapper.appendChild(valueBox);
 
-  /* ===== LABELS ===== */
+  /* ===== Labels ===== */
   const labels = document.createElement('div');
 
   labels.className = 'range-labels';
 
-  stepsArray.forEach((val, i) => {
-    const span = document.createElement('span');
+  wrapper.appendChild(labels);
 
-    span.innerText = type === 'loan'
-      ? (val === 50000 ? '50K' : `${val / 100000}L`)
-      : `${val}m`;
+  /* ===== LABEL BUILDER ===== */
+  function buildLabels() {
+    labels.innerHTML = '';
 
-    span.style.left = `${(i / (stepsArray.length - 1)) * 100}%`;
+    stepsArray.forEach((val, i) => {
+      const span = document.createElement('span');
 
-    span.onclick = () => {
-      input.value = i;
+      span.innerText = type === 'loan'
+        ? (val === 50000 ? '50K' : `${val / 100000}L`)
+        : `${val}m`;
 
-      input.dispatchEvent(
-        new Event('input', { bubbles: true }),
-      );
-    };
+      span.style.left = `${(
+        i / (stepsArray.length - 1)
+      ) * 100}%`;
 
-    labels.appendChild(span);
-  });
+      span.onclick = () => {
+        input.value = i;
+
+        input.dispatchEvent(
+          new Event('input', { bubbles: true }),
+        );
+      };
+
+      labels.appendChild(span);
+    });
+  }
 
   /* ===== UPDATE UI ===== */
   function updateUI() {
-    let index = Number(originalDescriptor.get.call(input));
+    /* ===== DYNAMIC LOAN STEPS ===== */
+    if (type === 'loan') {
+      stepsArray = LOAN_STEPS.filter(
+        (val) => val <= window.maxEligibleLoan,
+      );
 
-    /* ===== LOAN ONLY ===== */
+      input.max = stepsArray.length - 1;
+
+      buildLabels();
+    }
+
+    let index = Number(
+      originalDescriptor.get.call(input),
+    );
+
+    /* ===== LOAN ===== */
     if (type === 'loan') {
       index = Math.floor(index);
 
@@ -171,11 +201,10 @@ export default function decorate(fieldDiv) {
 
     let actualValue;
 
-    /* ===== LOAN ===== */
+    /* ===== VALUE ===== */
     if (type === 'loan') {
       actualValue = stepsArray[index];
     } else {
-      /* ===== TENURE ===== */
       const rawValue = getActualValue(
         index,
         stepsArray,
@@ -209,15 +238,17 @@ export default function decorate(fieldDiv) {
     );
   }
 
+  /* ===== APPEND ===== */
   wrapper.appendChild(input);
-  wrapper.appendChild(hidden);
-  wrapper.appendChild(labels);
 
+  wrapper.appendChild(hidden);
+
+  /* ===== EVENTS ===== */
   input.addEventListener('input', updateUI);
 
   enableTrackClick(wrapper, input);
 
-  /* ===== INITIAL LOAD ===== */
+  /* ===== INITIAL ===== */
   requestAnimationFrame(() => {
     const current = Number(
       originalDescriptor.get.call(input),
