@@ -5,8 +5,8 @@
 /* ===== GLOBAL LIMIT ===== */
 window.maxEligibleLoan = 1500000;
 
-/* ===== Steps ===== */
-const LOAN_STEPS = [
+/* ===== LABEL STEPS ONLY ===== */
+const LOAN_LABELS = [
   50000,
   200000,
   400000,
@@ -16,9 +16,10 @@ const LOAN_STEPS = [
   1500000,
 ];
 
+/* ===== TENURE FIXED STEPS ===== */
 const TENURE_STEPS = [12, 24, 36, 48, 60, 72, 84];
 
-/* ===== Format ===== */
+/* ===== FORMAT ===== */
 function formatINR(value) {
   return `₹${Number(value).toLocaleString('en-IN')}`;
 }
@@ -27,25 +28,7 @@ function formatMonths(value) {
   return `${Math.round(value)} months`;
 }
 
-/* ===== Interpolation ===== */
-function getActualValue(index, stepsArray) {
-  const lower = Math.floor(index);
-  const upper = Math.ceil(index);
-
-  if (lower === upper) return stepsArray[lower];
-
-  return stepsArray[lower]
-    + (stepsArray[upper] - stepsArray[lower]) * (index - lower);
-}
-
-/* ===== Normalize ===== */
-function normalizeValue(value, type) {
-  return type === 'loan'
-    ? Math.round(value / 1000) * 1000
-    : Math.round(value);
-}
-
-/* ===== Click Support ===== */
+/* ===== CLICK SUPPORT ===== */
 function enableTrackClick(wrapper, input) {
   wrapper.addEventListener('click', (e) => {
     if (e.target === input) return;
@@ -54,7 +37,10 @@ function enableTrackClick(wrapper, input) {
 
     const percent = (e.clientX - rect.left) / rect.width;
 
-    input.value = percent * (input.max - input.min);
+    const min = Number(input.min);
+    const max = Number(input.max);
+
+    input.value = min + ((max - min) * percent);
 
     input.dispatchEvent(
       new Event('input', { bubbles: true }),
@@ -74,25 +60,36 @@ export default function decorate(fieldDiv) {
 
   const type = isLoan ? 'loan' : 'tenure';
 
-  /* ===== DYNAMIC ===== */
-  let stepsArray = isLoan
-    ? LOAN_STEPS
-    : TENURE_STEPS;
+  /* ===== RANGE CONFIG ===== */
+  if (type === 'loan') {
+    /*
+     * REAL CONTINUOUS SLIDER
+     * user can select:
+     * 10L, 11L, 12L, 13L...
+     */
+
+    input.min = 50000;
+
+    input.max = window.maxEligibleLoan;
+
+    input.step = 1000;
+
+    input.value = window.maxEligibleLoan;
+  } else {
+    /*
+     * TENURE FIXED LABELS
+     */
+
+    input.min = 0;
+
+    input.max = TENURE_STEPS.length - 1;
+
+    input.step = 1;
+
+    input.value = TENURE_STEPS.length - 1;
+  }
 
   input.type = 'range';
-
-  input.min = 0;
-
-  input.max = stepsArray.length - 1;
-
-  input.step = 0.01;
-
-  /* ===== DEFAULT ===== */
-  if (type === 'tenure') {
-    input.value = stepsArray.length - 1;
-  } else {
-    input.value = stepsArray.length - 1;
-  }
 
   const originalDescriptor = Object.getOwnPropertyDescriptor(
     HTMLInputElement.prototype,
@@ -107,12 +104,10 @@ export default function decorate(fieldDiv) {
 
     set(val) {
       originalDescriptor.set.call(this, val);
-
-      this._index = Number(val);
     },
   });
 
-  /* ===== Hidden Input ===== */
+  /* ===== HIDDEN ===== */
   const hidden = document.createElement('input');
 
   hidden.type = 'hidden';
@@ -121,113 +116,178 @@ export default function decorate(fieldDiv) {
 
   input.removeAttribute('name');
 
-  /* ===== Wrapper ===== */
+  /* ===== WRAPPER ===== */
   const wrapper = document.createElement('div');
 
   wrapper.className = 'range-widget-wrapper decorated';
 
   input.after(wrapper);
 
-  /* ===== Value Box ===== */
+  /* ===== VALUE BOX ===== */
   const valueBox = document.createElement('div');
 
   valueBox.className = 'loan-value-box';
 
   wrapper.appendChild(valueBox);
 
-  /* ===== Labels ===== */
+  /* ===== LABELS ===== */
   const labels = document.createElement('div');
 
   labels.className = 'range-labels';
 
   wrapper.appendChild(labels);
 
-  /* ===== LABEL BUILDER ===== */
+  /* ===== BUILD LABELS ===== */
   function buildLabels() {
     labels.innerHTML = '';
 
-    stepsArray.forEach((val, i) => {
-      const span = document.createElement('span');
+    /*
+     * ===== LOAN LABELS =====
+     * fixed visual labels only
+     */
+    if (type === 'loan') {
+      LOAN_LABELS.forEach((val) => {
+        /*
+         * hide labels beyond eligibility
+         */
+        if (val > window.maxEligibleLoan) return;
 
-      span.innerText = type === 'loan'
-        ? (val === 50000 ? '50K' : `${val / 100000}L`)
-        : `${val}m`;
+        const span = document.createElement('span');
 
-      span.style.left = `${(
-        i / (stepsArray.length - 1)
-      ) * 100}%`;
+        span.innerText = val === 50000
+          ? '50K'
+          : `${val / 100000}L`;
 
-      span.onclick = () => {
-        input.value = i;
+        /*
+         * FIXED POSITION
+         * keeps spacing beautiful
+         */
+        const percent = (
+          (val - 50000)
+          / (1500000 - 50000)
+        ) * 100;
 
-        input.dispatchEvent(
-          new Event('input', { bubbles: true }),
-        );
-      };
+        span.style.left = `${percent}%`;
 
-      labels.appendChild(span);
-    });
+        /*
+         * click label
+         */
+        span.onclick = () => {
+          input.value = val;
+
+          input.dispatchEvent(
+            new Event('input', { bubbles: true }),
+          );
+        };
+
+        labels.appendChild(span);
+      });
+    } else {
+      /*
+       * ===== TENURE LABELS =====
+       */
+
+      TENURE_STEPS.forEach((val, i) => {
+        const span = document.createElement('span');
+
+        span.innerText = `${val}m`;
+
+        span.style.left = `${(
+          i / (TENURE_STEPS.length - 1)
+        ) * 100}%`;
+
+        span.onclick = () => {
+          input.value = i;
+
+          input.dispatchEvent(
+            new Event('input', { bubbles: true }),
+          );
+        };
+
+        labels.appendChild(span);
+      });
+    }
   }
 
   /* ===== UPDATE UI ===== */
   function updateUI() {
-    /* ===== DYNAMIC LOAN STEPS ===== */
-    if (type === 'loan') {
-      stepsArray = LOAN_STEPS.filter(
-        (val) => val <= window.maxEligibleLoan,
-      );
-
-      input.max = stepsArray.length - 1;
-
-      buildLabels();
-    }
-
-    let index = Number(
-      originalDescriptor.get.call(input),
-    );
-
-    /* ===== LOAN ===== */
-    if (type === 'loan') {
-      index = Math.floor(index);
-
-      const maxIndex = stepsArray.length - 1;
-
-      if (index > maxIndex) {
-        index = maxIndex;
-      }
-
-      originalDescriptor.set.call(input, index);
-    }
+    buildLabels();
 
     let actualValue;
 
-    /* ===== VALUE ===== */
+    /*
+     * ===== LOAN =====
+     * smooth continuous values
+     */
     if (type === 'loan') {
-      actualValue = stepsArray[index];
-    } else {
-      const rawValue = getActualValue(
-        index,
-        stepsArray,
+      actualValue = Number(
+        originalDescriptor.get.call(input),
       );
 
-      actualValue = normalizeValue(rawValue, type);
+      /*
+       * hard cap
+       */
+      if (actualValue > window.maxEligibleLoan) {
+        actualValue = window.maxEligibleLoan;
+
+        originalDescriptor.set.call(
+          input,
+          actualValue,
+        );
+      }
+    } else {
+      /*
+       * ===== TENURE =====
+       * fixed steps only
+       */
+
+      let index = Number(
+        originalDescriptor.get.call(input),
+      );
+
+      index = Math.round(index);
+
+      originalDescriptor.set.call(input, index);
+
+      actualValue = TENURE_STEPS[index];
     }
 
-    /* ===== POSITION ===== */
-    const percent = (
-      index / (stepsArray.length - 1)
-    ) * 100;
+    /*
+     * ===== PERCENT =====
+     */
+
+    let percent;
+
+    if (type === 'loan') {
+      percent = (
+        (actualValue - 50000)
+        / (1500000 - 50000)
+      ) * 100;
+    } else {
+      percent = (
+        Number(originalDescriptor.get.call(input))
+        / (TENURE_STEPS.length - 1)
+      ) * 100;
+    }
 
     wrapper.style.setProperty(
       '--percent',
       percent,
     );
 
+    /*
+     * ===== VALUE BOX =====
+     */
+
     valueBox.innerText = type === 'loan'
       ? formatINR(actualValue)
       : formatMonths(actualValue);
 
     valueBox.style.left = `calc(${percent}% - 20px)`;
+
+    /*
+     * ===== STORE =====
+     */
 
     input._actualValue = actualValue;
 
@@ -250,22 +310,6 @@ export default function decorate(fieldDiv) {
 
   /* ===== INITIAL ===== */
   requestAnimationFrame(() => {
-    const current = Number(
-      originalDescriptor.get.call(input),
-    );
-
-    if (
-      type === 'tenure'
-      && (!current || current === 0)
-    ) {
-      const defaultIndex = stepsArray.length - 1;
-
-      originalDescriptor.set.call(
-        input,
-        defaultIndex,
-      );
-    }
-
     updateUI();
   });
 
