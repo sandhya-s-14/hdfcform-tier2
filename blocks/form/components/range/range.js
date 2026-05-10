@@ -72,7 +72,11 @@ export default function decorate(fieldDiv) {
 
     input.step = 1000;
 
-    input.value = window.maxEligibleLoan;
+    /*
+     * temporary
+     * will auto-reset on first updateUI()
+     */
+    input.value = 50000;
   } else {
     /*
      * ===== TENURE =====
@@ -152,9 +156,8 @@ export default function decorate(fieldDiv) {
           : `${val / 100000}L`;
 
         /*
-         * DYNAMIC POSITION
+         * dynamic label spacing
          */
-
         const percent = (
           (val - 50000)
           / (window.maxEligibleLoan - 50000)
@@ -163,9 +166,8 @@ export default function decorate(fieldDiv) {
         span.style.left = `${percent}%`;
 
         /*
-         * CLICK LABEL
+         * click label
          */
-
         span.onclick = () => {
           input.value = val;
 
@@ -209,12 +211,26 @@ export default function decorate(fieldDiv) {
 
   function updateUI() {
     /*
-     * IMPORTANT
-     * dynamically sync slider max
+     * ===== SYNC MAX =====
      */
 
     if (type === 'loan') {
       input.max = window.maxEligibleLoan;
+
+      /*
+       * FIRST LOAD
+       * auto set to max eligibility
+       */
+
+      if (!input.dataset.initialized) {
+        input.value = window.maxEligibleLoan;
+
+        input.dataset.initialized = 'true';
+      }
+
+      /*
+       * hard cap
+       */
 
       if (
         Number(input.value)
@@ -246,7 +262,7 @@ export default function decorate(fieldDiv) {
       );
 
       /*
-       * DYNAMIC PERCENT
+       * dynamic progress
        */
 
       percent = (
@@ -277,7 +293,7 @@ export default function decorate(fieldDiv) {
     );
 
     /*
-     * ===== VALUE =====
+     * ===== VALUE BOX =====
      */
 
     valueBox.innerText = type === 'loan'
