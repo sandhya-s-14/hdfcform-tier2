@@ -1,13 +1,11 @@
 /* ===== RESET AEM DEFAULT RANGE ===== */
 main .form .range-widget-wrapper.decorated input[type="range"] {
-  background: transparent !important;
-  background-image: none !important;
-
-  height: 22px !important;
-
-  margin: 0;
-  padding: 0;
-  border: none;
+    background: transparent !important;
+    background-image: none !important;
+    height: 94px !important;
+    margin-top: -100px;
+    padding: 0;
+    border: none;
 }
 
 /* ===== WRAPPER ===== */
@@ -98,57 +96,49 @@ main .form .range-widget-wrapper.decorated input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
 
-  width: 22px;
-  height: 22px;
+  width: 14px;
+  height: 14px;
 
   border-radius: 50%;
 
   background: #2447d5;
 
-  border: 3px solid #ffffff;
+  border: 2px solid #ffffff;
 
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 
   cursor: pointer;
 
-  margin-top: -9px;
+  margin-top: -5px;
 
   position: relative;
   z-index: 3;
 }
 
-/* ===== FIREFOX ===== */
+/* Firefox */
 .number-wrapper input[type="range"]::-moz-range-thumb {
-  width: 22px;
-  height: 22px;
+  width: 14px;
+  height: 14px;
 
   border-radius: 50%;
 
   background: #2447d5;
 
-  border: 3px solid #ffffff;
+  border: 2px solid #ffffff;
 
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 
   cursor: pointer;
-
-  position: relative;
-  z-index: 3;
 }
 
 /* ===== LABELS BELOW SLIDER ===== */
 .range-labels {
-  position: relative;
-
-  width: calc(100% - 22px);
-
-  margin-left: 11px;
-
-  margin-top: 18px; /* pushes labels BELOW slider */
-
-  height: 20px;
-
-  pointer-events: none;
+    position: relative;
+    width: calc(100% - 22px);
+    margin-left: 11px;
+    margin-top: 24px;
+    height: 20px;
+    pointer-events: none;
 }
 
 /* ===== LABEL TEXT ===== */
