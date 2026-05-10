@@ -2423,7 +2423,7 @@ main,
 
 
 /* ============================== Error Page ======================================*/
-/* ================= MAIN ERROR PANEL ================= */
+/* ================= ERROR PAGE ================= */
 
 .field-error-message-panel{
 
@@ -2436,16 +2436,6 @@ main,
     box-sizing:border-box;
 
     text-align:center;
-
-    display:none;
-}
-
-
-/* ================= INNER CONTAINER ================= */
-
-.field-error-message-panel.active{
-
-    display:block;
 }
 
 
@@ -2463,7 +2453,7 @@ main,
 }
 
 
-/* ================= TEXT WRAPPER ================= */
+/* ================= TEXT ================= */
 
 .field-oops-something-went-wrong-text{
 
@@ -2488,11 +2478,6 @@ main,
     line-height:1.2;
 
     margin-bottom:20px;
-
-    font-family:
-      Arial,
-      Helvetica,
-      sans-serif;
 }
 
 
@@ -2507,23 +2492,15 @@ main,
     color:#6b7280;
 
     margin:0;
-
-    font-family:
-      Arial,
-      Helvetica,
-      sans-serif;
 }
 
 
-/* ================= BUTTON WRAPPER ================= */
+/* ================= BUTTON ================= */
 
 .field-retry-button{
 
     margin-top:40px;
 }
-
-
-/* ================= BUTTON ================= */
 
 .field-retry-button .button{
 
@@ -2549,59 +2526,4 @@ main,
     font-weight:600;
 
     cursor:pointer;
-
-    box-shadow:
-      0 6px 14px rgba(0,0,0,0.12);
-
-    transition:0.3s ease;
-}
-
-
-/* ================= BUTTON HOVER ================= */
-
-.field-retry-button .button:hover{
-
-    transform:translateY(-1px);
-}
-
-
-/* ================= RETRY ICON ================= */
-
-.field-retry-button .button::before{
-
-    content:"↻";
-
-    font-size:20px;
-
-    margin-right:8px;
-}
-
-
-/* ================= MOBILE ================= */
-
-@media (max-width:768px){
-
-    .field-error-image img{
-
-        width:220px;
-    }
-
-    .field-oops-something-went-wrong-text b{
-
-        font-size:28px;
-    }
-
-    .field-oops-something-went-wrong-text p{
-
-        font-size:18px;
-    }
-
-    .field-retry-button .button{
-
-        width:160px;
-
-        height:48px;
-
-        font-size:16px;
-    }
 }
