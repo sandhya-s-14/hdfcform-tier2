@@ -1600,6 +1600,20 @@ function verifyWorkEmail(globals) {
   }
 }
 
+/*= =============================RESET=================================== */
+function restartApplication() {
+  // Clear existing form/session data
+  sessionStorage.clear();
+  localStorage.clear();
+
+  // Redirect to fresh form start page
+  window.location.replace(
+    `/content/forms/af/s-eds-forms/hdfc_forms_sandy/hdfc-sandy-capstone-tier2.html?reset=${
+      Date.now()
+    }#generate_otp`,
+  );
+}
+
 export {
   getFullName, days, submitFormArrayToString,
   maskMobileNumber, startOtpTimer, resendOtp, stopOtpTimer, initOtp,
@@ -1607,5 +1621,5 @@ export {
   createBankItem, updateActiveBank, createOtherBankDropdown, initBankSelection, observeBankField,
   getLoanAmountValue, getTenureValue, loanAmount, emi, roi, tax, generateOTP
   , validateOTP, handleResendOtp, runOtpCountdown, updateLoanFromIncome, populateReviewDetails,
-  submitLoanApplication, verifyPersonalEmail, verifyWorkEmail,
+  submitLoanApplication, verifyPersonalEmail, verifyWorkEmail, restartApplication,
 };
